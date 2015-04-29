@@ -1,8 +1,15 @@
 var express = require('express');
 var app = module.exports = express();
 var path = require('path');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
 require('./server/routes');
 
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.use(express.static(__dirname + '/client'));
 
 
 app.use(function(req, res, next) {
