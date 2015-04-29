@@ -7,12 +7,17 @@
   },
   "dependencies": {
     "body-parser": "~1.12.0",
-    "express": "~4.12.2",
+    "bookshelf": "^0.7.9",
+    "express": "^4.12.3",
+    "knex": "^0.7.6",
+    "lodash": "^3.7.0",
     "morgan": "~1.5.1",
+    "mysql": "^2.6.2",
     "passport": "^0.2.1",
     "passport-facebook": "^2.0.0",
     "passport-oauth": "^1.0.0",
-    "serve-favicon": "~2.2.0"
+    "serve-favicon": "~2.2.0",
+    "when": "^3.7.3"
   },
   "devDependencies": {
     "chai": "^1.9.1",
