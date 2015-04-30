@@ -54,15 +54,31 @@ var eventTable = function (eventTable) {
   eventTable.increments('id').primary();
   eventTable.integer('eventID');
   eventTable.text('eventInfo');
-}
+  eventTable.timestamps();
+};
 
 var userEventJointTable=function(userEventJointTable) {
-  userEventJointTable.increment('id').primary();
+  userEventJointTable.increments('id').primary();
   userEventJointTable.integer('userID');
   userEventJointTable.integer('eventID');
-}
+  userEventJointTable.timestamps();
+};
 
-var 
+var commentTable=function(commentTable) {
+  commentTable.increments('id').primary();
+  commentTable.integer('userID');
+  commentTable.integer('eventID');
+  commentTable.text('commentText');
+  commentTable.timestamps();
+};
+
+var tagTable=function(tagTable) {
+  tagTable.increments('id').primary();
+  tagTable.integer('userID');
+  tagTable.integer('eventID');
+  tagTable.string('tagName');
+  tagTable.timestamps();
+};
 
 // this executes the schema operation:
 DB.schema.hasTable('users').then(function(exists) {
@@ -89,8 +105,26 @@ DB.schema.hasTable('usereventjoint').then(function(exists) {
   }
 });
 
+DB.schema.hasTable('comments').then(function(exists) {
+  if (! exists) {
+    DB.schema.createTable('comments', commentTable).then(function () {
+      console.log('comments Table is Created!');
+    });
+  }
+});
 
-/*
+DB.schema.hasTable('tags').then(function(exists) {
+  if (! exists) {
+    DB.schema.createTable('tags', tagTable).then(function () {
+      console.log('tags Table is Created!');
+    });
+  }
+});
+
+
+
+
+/* example insertion
 DB('movies')
    .insert({title: "The Artist", year: 2010})
    .then(function() { console.log("added"); })
