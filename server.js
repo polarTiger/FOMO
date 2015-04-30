@@ -120,10 +120,6 @@ DB.schema.hasTable('tags').then(function(exists) {
 
 
 /* example insertion
-=======
-
-/*
->>>>>>> 7130750269a0360a5f2e18e9feca310f1a5367f0
 DB('movies')
    .insert({title: "The Artist", year: 2010})
    .then(function() { console.log("added"); })
