@@ -8,11 +8,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
 
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-  <script src="app.js"></script>
-
 </head>
 
 <body>
@@ -26,8 +21,8 @@
       <span class="col-md-1"></span>
       <!--CONTENT AREA-->
       <span class="col-md-10">
- 
 
+        <h1>WELCOME TO FOMO!</h1>
         <div class="row" ui-view="secondary-content">
 
         </div>
@@ -39,5 +34,14 @@
   </div>
 
     <div ui-view="main-content"></div>
+
+    <div ui-view></div>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="controllers/EventController.js"></script>
+    <script src="controllers/signupController.js"></script>
+    <script src="services/EventService.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
