@@ -82,15 +82,7 @@ var tagTable=function(tagTable) {
   tagTable.timestamps();
 };
 
-}
 
-var userEventJointTable=function(userEventJointTable) {
-  userEventJointTable.increment('id').primary();
-  userEventJointTable.integer('userID');
-  userEventJointTable.integer('eventID');
-}
-
-var 
 
 
 // this executes the schema operation:
