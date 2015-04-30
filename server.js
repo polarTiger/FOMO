@@ -1,4 +1,9 @@
+var express=require('express');
+var app=express();
+var Bookshelf = require('bookshelf');
+var Knex=require('knex');
 
+<<<<<<< HEAD
 var express = require('express');
 var app = module.exports = express();
 var path = require('path');
@@ -28,6 +33,8 @@ var server = app.listen(3001, function () {
 
 
 
+=======
+>>>>>>> 7130750269a0360a5f2e18e9feca310f1a5367f0
 var DB = Knex.initialize({
     client: 'mysql',
     connection: {
@@ -54,6 +61,7 @@ var eventTable = function (eventTable) {
   eventTable.increments('id').primary();
   eventTable.integer('eventID');
   eventTable.text('eventInfo');
+<<<<<<< HEAD
   eventTable.timestamps();
 };
 
@@ -79,6 +87,17 @@ var tagTable=function(tagTable) {
   tagTable.string('tagName');
   tagTable.timestamps();
 };
+=======
+}
+
+var userEventJointTable=function(userEventJointTable) {
+  userEventJointTable.increment('id').primary();
+  userEventJointTable.integer('userID');
+  userEventJointTable.integer('eventID');
+}
+
+var 
+>>>>>>> 7130750269a0360a5f2e18e9feca310f1a5367f0
 
 // this executes the schema operation:
 DB.schema.hasTable('users').then(function(exists) {
@@ -105,6 +124,7 @@ DB.schema.hasTable('usereventjoint').then(function(exists) {
   }
 });
 
+<<<<<<< HEAD
 DB.schema.hasTable('comments').then(function(exists) {
   if (! exists) {
     DB.schema.createTable('comments', commentTable).then(function () {
@@ -125,9 +145,16 @@ DB.schema.hasTable('tags').then(function(exists) {
 
 
 /* example insertion
+=======
+
+/*
+>>>>>>> 7130750269a0360a5f2e18e9feca310f1a5367f0
 DB('movies')
    .insert({title: "The Artist", year: 2010})
    .then(function() { console.log("added"); })
    .catch(function(err) { console.log(err) });
 */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7130750269a0360a5f2e18e9feca310f1a5367f0
