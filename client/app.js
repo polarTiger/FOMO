@@ -8,18 +8,26 @@ angular.module('fomo', ['ui.router'])
   $stateProvider
     .state('home', {
       url: '/home',
-      templateUrl: './views/mainPageView.html',
-      controller: 'mainPageController'
+      templateUrl: './views/mainPageView.html'
     })
     .state('signin', {
       url: '/signin',
-      templateUrl: './views/signinView.html',
-      controller: 'SigninController'
+      views: {
+        'main-content': {
+          templateUrl: './views/signinView.html',
+          controller: 'SigninController'
+          
+        }
+      }
     })
     .state('signup', {
       url: '/signup',
-      templateUrl: './views/signupView.html',
-      controller: 'SignupController'
+      views: {
+        'main-content': {
+          templateUrl: './views/signupView.html'
+          
+        }
+      }
     })
     .state('user', {
       url: '/user/:userId',
