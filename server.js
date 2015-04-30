@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var Bookshelf = require('bookshelf');
 var Knex=require('knex');
+var DB=require('./db/dbConfig');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -28,18 +29,6 @@ var server = app.listen(3001, function () {
 });
 
 
-
-
-var DB = Knex.initialize({
-    client: 'mysql',
-    connection: {
-        host     : '127.0.0.1',
-        user     : 'root',
-        password : 'password',
-        database : 'myapp_test',
-        charset  : 'utf8'
-  }
-});
 
 
 
