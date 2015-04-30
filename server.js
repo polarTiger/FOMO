@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var Bookshelf = require('bookshelf');
 var Knex=require('knex');
-var DB=require('./db/dbConfig');
+var DB=require('./server/db/dbConfig');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
