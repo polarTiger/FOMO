@@ -1,7 +1,17 @@
 angular.module('fomo.event', [])
 
-.controller('EventController', ['$scope', function($scope) {
+.controller('EventController', ['$scope', 'EventService', function($scope, EventService) {
+
+  $scope.data = {};
   $scope.splash = 'EVENT HEADER';
-  console.log('EVENT_CONTROLLER called');
+
+  $scope.getEvent = function() {
+    EventService.getEvent('abc123')
+    .then(function(data) {
+      // console.log("DATA from GETEVENT: ", data);
+      // $scope.data.links = data;
+      console.log('CONTROLLER: RESULTS FROM EVENTS:', data);
+    })
+  }
 }]);
 
