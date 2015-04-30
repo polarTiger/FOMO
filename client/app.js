@@ -1,6 +1,5 @@
-angular.module('fomo', ['ui.router', 'fomo.event', 'fomo.eventservice'])
 
-
+angular.module('fomo', ['ui.router', 'fomo.event', 'fomo.addEvent', 'fomo.eventservice'])
   .config(function($stateProvider, $urlRouterProvider) {
   // If an unknown route is entered, it redirects to the home page.
   $urlRouterProvider.otherwise('/home');
@@ -25,7 +24,6 @@ angular.module('fomo', ['ui.router', 'fomo.event', 'fomo.eventservice'])
       views: {
         'main-content': {
           templateUrl: './views/signupView.html'
-
         }
       }
     })
@@ -41,7 +39,7 @@ angular.module('fomo', ['ui.router', 'fomo.event', 'fomo.eventservice'])
     })
     .state('addevent', {
       url: '/addevent',
-      templateUrl: './views/addEvent.html',
+      templateUrl: './views/addEventView.html',
       controller: 'AddController'
     })
 });
