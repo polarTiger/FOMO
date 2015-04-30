@@ -1,4 +1,4 @@
-angular.module('fomo', ['ui.router'])
+angular.module('fomo', ['ui.router', 'fomo.event'])
 
 
   .config(function($stateProvider, $urlRouterProvider) {
@@ -16,7 +16,7 @@ angular.module('fomo', ['ui.router'])
         'main-content': {
           templateUrl: './views/signinView.html',
           controller: 'SigninController'
-          
+
         }
       }
     })
@@ -25,7 +25,7 @@ angular.module('fomo', ['ui.router'])
       views: {
         'main-content': {
           templateUrl: './views/signupView.html'
-          
+
         }
       }
     })
@@ -35,8 +35,8 @@ angular.module('fomo', ['ui.router'])
       controller: 'UserController'
     })
     .state('event', {
-      url: '/event/:eventId',
-      templateUrl: './views/eventId.html',
+      url: '/event',  // change to /event/:eventId
+      templateUrl: './views/eventView.html',
       controller: 'EventController'
     })
     .state('addevent', {
