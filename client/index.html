@@ -7,7 +7,7 @@
   <title>fomo</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/style.css">
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 
@@ -16,29 +16,7 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-fixed-top navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand" id="logo" ui-sref="home">fomo</a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a id="account_link" ui-sref="account">Account</a>
-          </li>
-          <li>
-            <a id="new_event_link" ui-sref="new_event">Add Event</a>
-          </li>
-          <li>
-            <a id="sign_up_link" ui-sref="sign_up">Sign Up</a>
-          </li>
-        </ul>
-      </div>
-    </div><!-- /.container-fluid -->
-  </nav>
+
 
   <!--CONTENT DIV -->
 
@@ -48,13 +26,8 @@
       <span class="col-md-1"></span>
       <!--CONTENT AREA-->
       <span class="col-md-10">
-        <!--MAIN CONTENT SPAN-->
-        <div class="row" ui-view="main-content">
-          <div ng-controller="Events-controller">
-            <event></event>
-          </div>
-        </div>
-        <!--SECONDARY CONTENT SPAN-->
+ 
+
         <div class="row" ui-view="secondary-content">
 
         </div>
@@ -65,5 +38,6 @@
 
   </div>
 
+    <div ui-view="main-content"></div>
 </body>
 </html>
