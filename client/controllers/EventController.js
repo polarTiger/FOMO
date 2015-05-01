@@ -3,8 +3,9 @@ angular.module('fomo.event', [])
 .controller('EventController', ['$scope', 'EventService', function($scope, EventService) {
 
   $scope.data = {};
-  $scope.splash = 'EVENT HEADER';
-  $scope.test = {
+  $scope.eventId = 'abc123'; // replace with actual eventId
+  $scope.subBtn = true; // hides email button on initial load
+  $scope.test = { // test data, take out once database is running
     category: 'concert',
     tags: ['yolo', 'california', 'music festival', 'art'],
     title: "Coachella",
@@ -20,7 +21,7 @@ angular.module('fomo.event', [])
     img: '../images/coachella.js'
   };
   $scope.getEvent = function() {
-    EventService.getEvent('abc123')
+    EventService.getEvent($scope.eventId)
     .then(function(data) {
       // console.log("DATA from GETEVENT: ", data);
       // $scope.data.links = data;
@@ -29,9 +30,17 @@ angular.module('fomo.event', [])
   };
   $scope.notifyMe = function() {
     console.log('NOTIFY_ME');
+    $scope.subBtn = !$scope.subBtn;
   };
-  $scope.editEvent = function() {
+  $scope.editEvent = function() { // to do, beyond MVP
     console.log('EDIT_EVENT');
+  };
+  $scope.addEmail = function() {
+    $scope.email.eventId = $scope.eventId;
+    console.log('EMAIL: ', $scope.email);
+    $scope.subBtn = true;
+    $scope.notifyBtn = true;
+    EventService.submitEmail($scope.email);
   };
 }]);
 

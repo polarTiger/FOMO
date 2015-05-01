@@ -7,8 +7,16 @@
     <p>{{test.info}}</p>
     <a href="{{test.link}}" target="_blank">{{test.link}}</a>
     <p>Tags:<span ng-repeat='tag in test.tags'>{{$first ? ' ' : ', '}}{{tag}}</span></p>
-    <button ng-click="editEvent()" type="submit" class="btn btn-default navbar-btn">Edit Event</button>
-    <button ng-click="notifyMe()" notype="submit" class="btn btn-default navbar-btn">Notify Me!</button>
+<!-- http://stackoverflow.com/questions/26926345/angularjs-ng-repeat-add-comma-separated-and-and-before-last-item -->
+<!--     <button ng-click="editEvent()" type="submit" class="btn btn-default navbar-btn">Edit Event</button> -->
+    <button class="btn btn-default navbar-btn" ng-hide="notifyBtn" class="ng-hide" ng-click="notifyMe()" notype="submit" >Notify Me!</button>
+    <form ng-hide="subBtn" class="ng-hide" name="emailForm" ng-submit='addEmail()' novalidate>
+<!-- https://docs.angularjs.org/api/ng/directive/ngHide -->
+        <input name='email' type='email'
+        ng-model='email.email' placeholder='Give us your email' required
+        ng-class="{'error': emailForm.$invalid && emailForm.$dirty}"/>
+        <button class="btn" ng-disabled='emailForm.$invalid'>Submit</button>
+    </form>
   </span>
 
 </div>
