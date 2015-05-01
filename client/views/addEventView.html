@@ -1,13 +1,15 @@
-<div class="col-lg-11 col-centered">
+<div class="form-block col-md-4">
   <div >
-    <form novalidate class="form-block" role="form">
+    <form novalidate name="eventForm" class="form-block" role="form">
       <label for="inputEventName">Event Name:</label> 
       <div class="form-group">
-        <input type="text" ng-model="event.name" />
+        <input type="text" name="name" ng-model="event.name" ng-required="true"/>
+        <p ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" >Please enter the name of the dish you're reviewing.</p>
       </div>
       <label for="inputInfo">Info:</label> 
       <div class="form-group ">
-        <textarea name="info" ng-model="event.info" ></textarea>
+        <textarea name="info" ng-model="event.info" ng-minlength="2" ng-required="true"></textarea>
+        <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter the name of the dish you're reviewing.</p>
       </div>
       <label for="linkInfo">Link</label>
       <div class="form-group">
@@ -23,7 +25,7 @@
         <select ng-model="event.category">
           <option ng-repeat="category in event.categories">{{category}}</option>
         </select>
-        <input type="submit" class="btn btn-primary" ng-click="submitEvent()">
+        <input type="submit" ng-disabled="eventForm.$invalid"class="btn btn-primary" ng-click="submitEvent()">
       </div>
     </form>
   </div>

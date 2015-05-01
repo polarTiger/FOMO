@@ -8,7 +8,7 @@ angular.module('fomo.addeventservice', [])
         $log.log('success');
       }).
       error(function(data, status, headers, config) {
-          $log.log('fail');
+        $log.log('fail');
       });
   };
 
