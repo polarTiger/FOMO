@@ -1,7 +1,14 @@
 
-<div data-ng-init="getEvent()" class="col-md-12">
+<div data-ng-init="getEvent()" class="col-md-12" id='event-container'>
   <span class="col-md-10">
-    <h1>{{splash}}</h1>
-    <h2>Event Info</h2>
+    <img src="http://blogs-images.forbes.com/hughmcintyre/files/2015/01/coachella-logo-big.jpg"/>
+    <h1>{{test.title}}</h1>
+    <h3>{{test.date}}</h3>
+    <h3>{{test.link}}</h3>
+    <p>{{test.info}}</p>
+    <a href="{{test.link}}" target="_blank">{{test.link}}</a>
+    <br>
+    <button type="submit" class="btn btn-default navbar-btn">Notify Me!</button>
   </span>
+
 </div>
