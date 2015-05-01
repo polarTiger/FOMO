@@ -1,4 +1,4 @@
-angular.module('fomo', ['ui.router', 'fomo.event'])
+angular.module('fomo', ['ui.router', 'fomo.event', 'fomo.eventservice'])
 
 
   .config(function($stateProvider, $urlRouterProvider) {
