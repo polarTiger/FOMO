@@ -3,11 +3,11 @@ var eventController = require('./eventController.js');
 
 module.exports = function (app) {
 
-  app.get('/event/:id', eventController.eventPlaceHolder);
+  app.get('/event/:id', eventController.getEvent);
 
   app.post('/triggerevent', eventController.eventPlaceHolder);
 
-  app.post('/addevent', eventController.eventPlaceHolder);
+  app.post('/addevent', eventController.addEvent);
 
   app.post('/triggerevent', eventController.eventPlaceHolder);
 
