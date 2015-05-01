@@ -4,11 +4,11 @@
     <img src="http://blogs-images.forbes.com/hughmcintyre/files/2015/01/coachella-logo-big.jpg"/>
     <h1>{{test.title}}</h1>
     <h3>{{test.date}}</h3>
-    <h3>{{test.link}}</h3>
     <p>{{test.info}}</p>
     <a href="{{test.link}}" target="_blank">{{test.link}}</a>
-    <br>
-    <button type="submit" class="btn btn-default navbar-btn">Notify Me!</button>
+    <p>Tags:<span ng-repeat='tag in test.tags'>{{$first ? ' ' : ', '}}{{tag}}</span></p>
+    <button ng-click="editEvent()" type="submit" class="btn btn-default navbar-btn">Edit Event</button>
+    <button ng-click="notifyMe()" notype="submit" class="btn btn-default navbar-btn">Notify Me!</button>
   </span>
 
 </div>
