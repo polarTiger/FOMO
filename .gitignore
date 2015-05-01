@@ -2,5 +2,6 @@ node_modules/
 bower_components/
 *.log
 .DS_Store
+server/.DS_Store
 build/
 dist/
