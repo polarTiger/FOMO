@@ -1,20 +1,31 @@
-<div>
-  <form novalidate class="simple-form">
-    <div>
-      Event: 
-      <input type="text" ng-model="event.name" />
-    </div>
-    <div>
-      Info:
-      <input type="text" ng-model="event.info" />
-    </div>
-    <div>
-      <select ng-model="event.category">
-        <option ng-repeat="category in event.categories">{{category}}</option>
-      </select>
-      <input type="submit" ng-click="submitEvent()">
-    </div>
-
-  </form>
+<div class="col-lg-11 col-centered">
+  <div >
+    <form novalidate class="form-block" role="form">
+      <label for="inputEventName">Event Name:</label> 
+      <div class="form-group">
+        <input type="text" ng-model="event.name" />
+      </div>
+      <label for="inputInfo">Info:</label> 
+      <div class="form-group ">
+        <textarea name="info" ng-model="event.info" ></textarea>
+      </div>
+      <label for="linkInfo">Link</label>
+      <div class="form-group">
+        <input type="text" ng-model="event.link" />
+      </div>
+      <label for="dateInfo">Date</label>
+      <div class="form-group">
+     <input type="date" id="add-event-date" name="input" ng-model="event.date"
+         placeholder="yyyy-MM-dd" />
+      </div>
+      <label for="categoryInfo">Category</label>
+      <div class="form-group">
+        <select ng-model="event.category">
+          <option ng-repeat="category in event.categories">{{category}}</option>
+        </select>
+        <input type="submit" class="btn btn-primary" ng-click="submitEvent()">
+      </div>
+    </form>
+  </div>
 </div>
 
