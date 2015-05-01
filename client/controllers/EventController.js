@@ -6,7 +6,7 @@ angular.module('fomo.event', [])
   $scope.splash = 'EVENT HEADER';
   $scope.test = {
     category: 'concert',
-    tags: ['yolo', 'california', 'music'],
+    tags: ['yolo', 'california', 'music festival', 'art'],
     title: "Coachella",
     info: 'The Coachella Valley Music and Arts Festival (commonly referred to as \
       Coachella or the Coachella Festival) is an annual music and arts festival held at the \
@@ -18,7 +18,7 @@ angular.module('fomo.event', [])
     date: '08/07/2015',
     link: 'https://www.coachella.com',
     img: '../images/coachella.js'
-  }
+  };
   $scope.getEvent = function() {
     EventService.getEvent('abc123')
     .then(function(data) {
@@ -26,6 +26,12 @@ angular.module('fomo.event', [])
       // $scope.data.links = data;
       console.log('CONTROLLER: RESULTS FROM EVENTS:', data);
     })
-  }
+  };
+  $scope.notifyMe = function() {
+    console.log('NOTIFY_ME');
+  };
+  $scope.editEvent = function() {
+    console.log('EDIT_EVENT');
+  };
 }]);
 
