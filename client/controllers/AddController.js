@@ -8,7 +8,6 @@ angular.module('fomo.addEvent', [])
     category:categories[0]
   };
   $scope.submitEvent = function(){
-    $log.log($scope.event);
     AddEventService.postEvent($scope.event);
   };
 }]);
