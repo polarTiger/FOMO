@@ -48,18 +48,5 @@ module.exports = {
         client.end();
       });
     });
-
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> [feature]Server Database interaction
 };
-
-
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> [feature]Server Database interaction
