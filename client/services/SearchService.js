@@ -1,6 +1,6 @@
 angular.module('fomo.searchservice', [])
 
-.factory('AddEventService', ['$http', '$log', function($http, $log, $filter) {
+.factory('SearchService', ['$http', '$log', function($http, $log, $filter) {
   var _results = {};
 
   var searchWithQuery = function(query) {
@@ -9,12 +9,6 @@ angular.module('fomo.searchservice', [])
       url: '/api/events/search',
       params: {query: query}
     })
-    .success(function(res) {
-      _results = res.data;
-    })
-    .error({
-      _results = [{}]
-    });
 
   };
 
@@ -24,7 +18,7 @@ angular.module('fomo.searchservice', [])
 
   return {
     searchWithQuery: searchWithQuery,
-    results: results;
+    results: results
   };
 
 }]);
