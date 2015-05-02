@@ -1,7 +1,7 @@
 
-angular.module('fomo', ['ui.router', 'fomo.event', 
+angular.module('fomo', ['ui.router', 'fomo.event',
                       'fomo.addEvent', 'fomo.eventservice',
-                      'fomo.addeventservice'])
+                      'fomo.addeventservice', 'fomo.user', 'fomo.userservice'])
   .config(function($stateProvider, $urlRouterProvider) {
   // If an unknown route is entered, it redirects to the home page.
   $urlRouterProvider.otherwise('/home');
@@ -30,7 +30,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       }
     })
     .state('user', {
-      url: '/user/:userId',
+      url: '/user',
       templateUrl: './views/userView.html',
       controller: 'UserController'
     })
