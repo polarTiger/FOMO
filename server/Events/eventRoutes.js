@@ -14,4 +14,6 @@ module.exports = function (app) {
   app.get('/myevents', eventController.eventPlaceHolder);
 
   app.get('/topevents', eventController.eventPlaceHolder);
+
+  app.get ('/search', eventController.searchEvents);
 };
