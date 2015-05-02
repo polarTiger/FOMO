@@ -6,6 +6,7 @@ bower_components/
 **/.DS_Store
 server/.DS_Store
 
+
 server/dbConfig/dbConfig.js
 ./server/dbConfig/dbConfig.js
 
