@@ -12,13 +12,8 @@ angular.module('fomo.searchservice', [])
 
   };
 
-  var results = function() {
-    return _results;
-  };
-
   return {
     searchWithQuery: searchWithQuery,
-    results: results
   };
 
 }]);

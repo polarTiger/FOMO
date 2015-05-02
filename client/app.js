@@ -39,7 +39,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       controller: 'UserController'
     })
     .state('event', {
-      url: '/event',  // change to /event/:eventId
+      url: '/event/:eventID',  // change to /event/:eventId
       templateUrl: './views/eventView.html',
       controller: 'EventController'
     })
