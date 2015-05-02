@@ -7,7 +7,7 @@ angular.module('fomo.addeventservice', [])
       info: eventObject.info,
       category: eventObject.category,
       link: eventObject.link,
-      date: $filter('date')(eventObject.date, 'yyyy')
+      date: $filter('date')(eventObject.date, 'yyyy-MM-dd')
 
     };
     $log.log(sendObject);
