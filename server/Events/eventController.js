@@ -12,7 +12,7 @@ var getEventFromDB = function(queryString, cb) {
       if(err) {
         return console.error('error running query', err);
       } else {
-        cb(result.rows[0]);
+        cb(result.rows);
       }
       //output: 1 
       client.end();
@@ -32,7 +32,7 @@ module.exports = {
     var queryString = "SELECT * FROM events WHERE id = " + id + ";";
 
     getEventFromDB(queryString, function(rows){
-        res.end(JSON.stringify(rows));
+        res.end(JSON.stringify(rows[0]));
     }); 
   },
 
@@ -40,7 +40,7 @@ module.exports = {
 
     var queryString = "INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
                               +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"');"; 
-    console.log('query ', queryString);
+
     pg.connect(dbUrl, function(err, client, done) {
       if(err) {
         return console.error('error fetching client from pool', err);
@@ -64,7 +64,7 @@ module.exports = {
     var queryString = "SELECT * FROM events WHERE LOWER(event_title) like LOWER('%" + clientQuery + "%');";                
 
     getEventFromDB(queryString, function(rows){
-        res.end(JSON.stringify(rows));
+      res.end(JSON.stringify(rows));
     }); 
   }
 

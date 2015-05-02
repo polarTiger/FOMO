@@ -72,3 +72,7 @@ nav#hmenu ul a:hover{
    color: #FFCC00;
    background-color: #227755;
 }
+
+.column-headings {
+  font-weight: bold
+}
