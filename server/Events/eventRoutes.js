@@ -11,7 +11,7 @@ module.exports = function (app) {
 
   app.post('/triggerevent', eventController.eventPlaceHolder);
 
-  app.get('/myevents', eventController.eventPlaceHolder);
+  app.get('/myevents', eventController.myEvents);
 
   app.get('/topevents', eventController.eventPlaceHolder);
 

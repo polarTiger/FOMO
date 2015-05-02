@@ -1,10 +1,9 @@
 angular.module('fomo.userservice', [])
 
 .factory('UserService', ['$http', function($http) {
-  var getallEvents = function(eventId) {
-    console.log('SERVICE: GET_EVENTS');
-    return $http.get('api/events/event/2')
-    // return $http.get('api/events/event/' + eventId)
+  var getallEvents = function() {
+    console.log('SERVICE: GET_USER_EVENTS');
+    return $http.get('/api/events/myevents')
       .success(function(resp) {
         return resp;
       })
