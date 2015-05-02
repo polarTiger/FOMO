@@ -53,11 +53,55 @@ module.exports = {
         if(err) {
           return console.error('error running query', err);
         }
+
         console.log(result); //KB: Get rid of this 'later'
         res.end();
-        //output: 1 
+
+        client.end();
+      });
+    });
+  },
+
+  searchEvents: function(req, res) {
+    var queryStr = "SELECT * FROM events";
+    console.log('query ', queryStr);
+    pg.connect(dbUrl, function(err, client, done) {
+      if(err) {
+        return console.error('error fetching client from pool', err);
+      }
+      client.query(queryStr, function(err, result) {
+      //call `done()` to release the client back to the pool 
+        done();
+        if(err) {
+          return console.error('error running query', err);
+        }
+
+        console.log(result); //KB: Get rid of this 'later'
+        res.end();
+
         client.end();
       });
     });
   }
+
+
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
