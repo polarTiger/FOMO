@@ -29,6 +29,7 @@ module.exports = {
 
   getEvent: function(req, res) {
     var id = req.url.match(/\d+/)[0];
+
     var queryString = "SELECT * FROM events WHERE id = " + id + ";";
 
     getEventFromDB(queryString, function(rows){
