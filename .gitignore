@@ -3,6 +3,7 @@ bower_components/
 *.log
 .DS_Store
 **.DS_Store
+**/.DS_Store
 server/.DS_Store
 build/
 dist/
