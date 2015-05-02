@@ -31,8 +31,10 @@ module.exports = {
   },
 
   addEvent: function(req, res) {
-    //KB: Currently inserts dummy data
-    var queryStr = "INSERT into events (id, event_info, event_title, event_category) values (2, 'Concert', 'Awesome Concert', 'Music');"; 
+
+    var queryStr = "INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+                              +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"');"; 
+    console.log('query ', queryStr);
     pg.connect(dbUrl, function(err, client, done) {
       if(err) {
         return console.error('error fetching client from pool', err);
@@ -44,6 +46,7 @@ module.exports = {
           return console.error('error running query', err);
         }
         console.log(result); //KB: Get rid of this 'later'
+        res.end();
         //output: 1 
         client.end();
       });

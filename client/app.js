@@ -1,5 +1,7 @@
 
-angular.module('fomo', ['ui.router', 'fomo.event', 'fomo.addEvent', 'fomo.eventservice'])
+angular.module('fomo', ['ui.router', 'fomo.event', 
+                      'fomo.addEvent', 'fomo.eventservice',
+                      'fomo.addeventservice'])
   .config(function($stateProvider, $urlRouterProvider) {
   // If an unknown route is entered, it redirects to the home page.
   $urlRouterProvider.otherwise('/home');
