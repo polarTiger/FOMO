@@ -37,6 +37,7 @@ CREATE TABLE "events" (
   "event_title" TEXT NOT NULL,
   "event_category" TEXT NULL DEFAULT NULL,
   "event_date" DATE NULL DEFAULT NULL,
+  "event_time" TIME NULL DEFAULT NULL,
   "event_image" TEXT NULL DEFAULT NULL,
   PRIMARY KEY ("id")
 );
