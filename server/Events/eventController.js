@@ -24,7 +24,6 @@ module.exports = {
           if(err) {
             return console.error('error running query', err);
           } else {
-            console.log(result.rows[0]); //KB: Get rid of this 'later'
             cb(result.rows[0]);
           }
           //output: 1 
@@ -63,27 +62,31 @@ module.exports = {
   },
 
   searchEvents: function(req, res) {
-    var queryStr = "SELECT * FROM events";
-    console.log('query ', queryStr);
-    pg.connect(dbUrl, function(err, client, done) {
-      if(err) {
-        return console.error('error fetching client from pool', err);
-      }
-      client.query(queryStr, function(err, result) {
-      //call `done()` to release the client back to the pool 
-        done();
+    var clientQuery = req.query.query;
+    var queryStr = "SELECT * FROM events WHERE LOWER(event_title) like LOWER('%" + clientQuery + "%');";                
+    var getEventFromDB = function(cb) {
+      pg.connect(dbUrl, function(err, client, done) {
         if(err) {
-          return console.error('error running query', err);
+          return console.error('error fetching client from pool', err);
         }
-
-        console.log(result); //KB: Get rid of this 'later'
-        res.end();
-
-        client.end();
+        client.query(queryStr, function(err, result) {
+        //call `done()` to release the client back to the pool 
+          done();
+          if(err) {
+            return console.error('error running query', err);
+          } else {
+            cb(result.rows[0]);
+          }
+          //output: 1 
+          client.end();
+        });
       });
-    });
-  }
+    }
 
+    getEventFromDB(function(rows){
+        res.end(JSON.stringify(rows));
+    }); 
+  }
 
 
 };
