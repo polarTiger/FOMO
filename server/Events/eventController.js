@@ -1,7 +1,24 @@
 var pg = require('pg');
 var dbUrl= require('../dbConfig/dbConfig');
 
-
+var getEventFromDB = function(queryString, cb) {
+  pg.connect(dbUrl, function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query(queryString, function(err, result) {
+    //call `done()` to release the client back to the pool 
+      done();
+      if(err) {
+        return console.error('error running query', err);
+      } else {
+        cb(result.rows[0]);
+      }
+      //output: 1 
+      client.end();
+    });
+  });
+}
 
 module.exports = {
 
@@ -12,48 +29,29 @@ module.exports = {
 
   getEvent: function(req, res) {
     var id = req.url.match(/\d+/)[0];
-    var queryStr = "SELECT * FROM events WHERE id = " + id + ";";
-    var getEventFromDB = function(cb) {
-      pg.connect(dbUrl, function(err, client, done) {
-        if(err) {
-          return console.error('error fetching client from pool', err);
-        }
-        client.query(queryStr, function(err, result) {
-        //call `done()` to release the client back to the pool 
-          done();
-          if(err) {
-            return console.error('error running query', err);
-          } else {
-            cb(result.rows[0]);
-          }
-          //output: 1 
-          client.end();
-        });
-      });
-    }
+    var queryString = "SELECT * FROM events WHERE id = " + id + ";";
 
-    getEventFromDB(function(rows){
+    getEventFromDB(queryString, function(rows){
         res.end(JSON.stringify(rows));
     }); 
   },
 
   addEvent: function(req, res) {
 
-    var queryStr = "INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+    var queryString = "INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
                               +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"');"; 
-    console.log('query ', queryStr);
+    console.log('query ', queryString);
     pg.connect(dbUrl, function(err, client, done) {
       if(err) {
         return console.error('error fetching client from pool', err);
       }
-      client.query(queryStr, function(err, result) {
+      client.query(queryString, function(err, result) {
       //call `done()` to release the client back to the pool 
         done();
         if(err) {
           return console.error('error running query', err);
         }
 
-        console.log(result); //KB: Get rid of this 'later'
         res.end();
 
         client.end();
@@ -63,27 +61,9 @@ module.exports = {
 
   searchEvents: function(req, res) {
     var clientQuery = req.query.query;
-    var queryStr = "SELECT * FROM events WHERE LOWER(event_title) like LOWER('%" + clientQuery + "%');";                
-    var getEventFromDB = function(cb) {
-      pg.connect(dbUrl, function(err, client, done) {
-        if(err) {
-          return console.error('error fetching client from pool', err);
-        }
-        client.query(queryStr, function(err, result) {
-        //call `done()` to release the client back to the pool 
-          done();
-          if(err) {
-            return console.error('error running query', err);
-          } else {
-            cb(result.rows[0]);
-          }
-          //output: 1 
-          client.end();
-        });
-      });
-    }
+    var queryString = "SELECT * FROM events WHERE LOWER(event_title) like LOWER('%" + clientQuery + "%');";                
 
-    getEventFromDB(function(rows){
+    getEventFromDB(queryString, function(rows){
         res.end(JSON.stringify(rows));
     }); 
   }
