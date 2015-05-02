@@ -5,5 +5,8 @@ bower_components/
 **.DS_Store
 **/.DS_Store
 server/.DS_Store
+
+server/dbConfig/dbConfig.js
+
 build/
 dist/
