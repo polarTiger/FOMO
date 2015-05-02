@@ -53,11 +53,13 @@ module.exports = {
         if(err) {
           return console.error('error running query', err);
         }
+
         console.log(result); //KB: Get rid of this 'later'
         res.end();
-        //output: 1 
+
         client.end();
       });
     });
   }
+
 };
