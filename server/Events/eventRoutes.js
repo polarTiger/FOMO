@@ -9,7 +9,7 @@ module.exports = function (app) {
 
   app.post('/addevent', eventController.addEvent);
 
-  app.post('/triggerevent', eventController.eventPlaceHolder);
+  app.get('/triggerevent', eventController.triggerEvent);
 
   app.get('/myevents', eventController.myEvents);
 
