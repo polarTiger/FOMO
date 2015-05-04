@@ -7,7 +7,7 @@ module.exports = function (app) {
   app.post('/signin', userController.userPlaceHolder);
 
 
-  app.post('/signup', userController.userPlaceHolder);
+  app.post('/signup', userController.signUpPost);
 
   app.get('/signedin', userController.userPlaceHolder);
 };
