@@ -18,8 +18,8 @@
     
 CREATE TABLE "users" (
   "id" SERIAL NOT NULL,
-  "name" TEXT NOT NULL,
-  "hashed_password" VARCHAR NOT NULL,
+  "username" TEXT NOT NULL,
+  "password" VARCHAR NOT NULL,
   "email" TEXT NULL DEFAULT NULL,
   "timestamp" TIMESTAMP NOT NULL DEFAULT current_timestamp ,
   PRIMARY KEY ("id")
@@ -62,14 +62,14 @@ CREATE TABLE "users_events" (
 ALTER TABLE "users_events" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "users_events" ADD FOREIGN KEY ("event_id") REFERENCES "events" ("id");
 
-INSERT INTO users (name, hashed_password, email) values ('John', '1234', 'some@one.com');
+INSERT INTO users (username, password, email) values ('John', '1234', 'some@one.com');
 INSERT INTO events (event_info, event_title, event_category) values ('test event info', 'event1', 'concert');
 INSERT INTO users_events (user_id, event_id) values (1, 1);
 
-INSERT INTO users (name, hashed_password, email) values ('Jane', '4567', 'jane@doe.com');
+INSERT INTO users (username, password, email) values ('Jane', '4567', 'jane@doe.com');
 INSERT INTO events (event_info, event_title, event_category) values ('test event info 2', 'event2', 'music');
 INSERT INTO users_events (user_id, event_id) values (2, 2);
 
-INSERT INTO users (name, hashed_password, email) values ('Bob', '9999', 'bob@bob.com');
+INSERT INTO users (username, password, email) values ('Bob', '9999', 'bob@bob.com');
 INSERT INTO events (event_info, event_title, event_category) values ('test event info 3', 'event3', 'album');
 INSERT INTO users_events (user_id, event_id) values (3, 3);
