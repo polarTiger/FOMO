@@ -19,7 +19,7 @@ module.exports = {
 
    return usernamePromise.then(function(model) {
       if(model) {
-         res.render('signup', {title: 'signup', errorMessage: 'username already exists'});
+         res.end('user already exist');
       } else {
          //****************************************************//
          // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
