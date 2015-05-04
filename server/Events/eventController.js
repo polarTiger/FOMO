@@ -1,5 +1,6 @@
 var pg = require('pg');
 var dbUrl= require('../dbConfig/dbConfig');
+var nodemailer = require('nodemailer');
 
 var getEventFromDB = function(queryString, cb) {
   pg.connect(dbUrl, function(err, client, done) {
@@ -18,7 +19,34 @@ var getEventFromDB = function(queryString, cb) {
       client.end();
     });
   });
-}
+};
+
+
+var sendEmail = function(emails) {
+  var transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+          user: 'azcardsruleforeversuckitsea@gmail.com',
+          pass: 'bestemailever'
+      }
+  });
+  var mailOptions = {
+      from: 'FOMO <azcardsruleforeversuckitsea@gmail.com>', 
+      to: "" + emails + ", kevinmarkvi@yahoo.com", 
+      subject: 'EVENT TRIGGERED!', 
+      text: 'TEST TRIGGER EMAIL', // plaintext body
+      html: '<b>Team Polar Tiger Rules!</b>' // html body
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+      if(error){ 
+          console.log(error);
+      }else{
+          console.log('Message sent: ' + info.response);
+      }
+  });
+};
+
+
 
 module.exports = {
 
@@ -74,6 +102,19 @@ module.exports = {
 
     getEventFromDB(queryString, function(rows){
       res.end(JSON.stringify(rows));
+    });
+  },
+
+  triggerEvent: function() {
+    console.log("TriggerEvent Function Called");
+    var eventId = 1; //req.body.event_id
+    var queryString = "SELECT email FROM users WHERE id = (SELECT user_id FROM users_events WHERE event_id = '"+ eventId + "');";
+
+    getEventFromDB(queryString, function(emails){
+      //console.log("EMAILS: ", emails);
+      email = emails[0].email;
+      sendEmail(email);
+      //res.end(JSON.stringify(emails));
     });
   }
 
