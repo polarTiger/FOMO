@@ -23,7 +23,7 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
-  app.use(session({secret: 'abcde'}));
+  app.use(session({secret: 'abcde',resave: false, saveUninitialized: true}));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use('/api/users', userRouter); 
