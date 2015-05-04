@@ -4,7 +4,8 @@ angular.module('fomo', ['ui.router', 'fomo.event',
                       'fomo.addeventservice', 'fomo.user', 'fomo.userservice',
                       'fomo.addeventservice', 'fomo.results',
                       'fomo.searchservice',
-                      'fomo.signup'])
+                      'fomo.signup',
+                      'fomo.signin'])
 
   .config(function($stateProvider, $urlRouterProvider) {
   // If an unknown route is entered, it redirects to the home page.
