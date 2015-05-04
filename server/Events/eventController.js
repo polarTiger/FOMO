@@ -38,26 +38,52 @@ module.exports = {
   },
 
   addEvent: function(req, res) {
+    if (!req.body.notifydate) { // event only info, no notification, just insert into events table
 
-    var queryString = "INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
-                              +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"');";
+      var queryString = "INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+                                +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"');";
 
-    pg.connect(dbUrl, function(err, client, done) {
-      if(err) {
-        return console.error('error fetching client from pool', err);
-      }
-      client.query(queryString, function(err, result) {
-      //call `done()` to release the client back to the pool
-        done();
+      pg.connect(dbUrl, function(err, client, done) {
         if(err) {
-          return console.error('error running query', err);
+          return console.error('error fetching client from pool', err);
         }
+        client.query(queryString, function(err, result) {
+        //call `done()` to release the client back to the pool
+          done();
+          if(err) {
+            return console.error('error running query', err);
+          }
 
-        res.end();
+          res.end();
 
-        client.end();
+          client.end();
+        });
       });
-    });
+    }
+    else {
+       // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
+       console.log('insert into events and notifcations');
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"') RETURNING id) INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
+                      +req.body.notifyinfo+"', '"+req.body.notifydate+"', '"+req.body.notifytime+"' FROM first_insert;";
+
+      pg.connect(dbUrl, function(err, client, done) {
+        if(err) {
+          return console.error('error fetching client from pool', err);
+        }
+        client.query(queryString, function(err, result) {
+        //call `done()` to release the client back to the pool
+          done();
+          if(err) {
+            return console.error('error running query', err);
+          }
+
+          res.end();
+
+          client.end();
+        });
+      });
+    }
   },
 
   searchEvents: function(req, res) {
@@ -76,7 +102,6 @@ module.exports = {
       res.end(JSON.stringify(rows));
     });
   }
-
 
 };
 
