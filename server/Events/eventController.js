@@ -86,36 +86,6 @@ module.exports = {
     }
   },
 
-// WITH ins1 AS (
-//    INSERT INTO sample(firstname, lastname)
-//    VALUES ('fai55', 'shaggk')
-//    RETURNING id
-//    )
-// , ins2 AS (
-//    INSERT INTO sample1 (user_id, adddetails)  -- assuming you want to target user_id
-//    SELECT id, 'ss'
-//    FROM   ins1
-//    RETURNING user_id
-//    )
-// INSERT INTO sample2 (user_id, value)          -- same here
-// SELECT id, 'ss - or something else'
-// FROM   ins1;
-
-// with first_insert as (
-//    insert into sample(firstname,lastname)
-//    values('fai55','shaggk')
-//    RETURNING id
-// ),
-// second_insert as (
-//   insert into sample1( id ,adddetails)
-//   values
-//   ( (select id from first_insert), 'ss')
-//   RETURNING user_id
-// )
-// insert into sample2 ( id ,adddetails)
-// values
-// ( (select user_id from first_insert), 'ss');
-
   searchEvents: function(req, res) {
     var clientQuery = req.query.query;
     var queryString = "SELECT * FROM events WHERE LOWER(event_title) like LOWER('%" + clientQuery + "%');";
