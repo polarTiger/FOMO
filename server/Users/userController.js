@@ -1,6 +1,9 @@
 var User = require('./userModel');
 var bcrypt = require('bcrypt-nodejs');
+<<<<<<< HEAD
 var passport = require('../passport/passportConfig');
+=======
+>>>>>>> [feature] implement the signup front end and backend
 
 
 
@@ -19,7 +22,11 @@ module.exports = {
 
    return usernamePromise.then(function(model) {
       if(model) {
+<<<<<<< HEAD
          res.end('already exists');
+=======
+         res.render('signup', {title: 'signup', errorMessage: 'username already exists'});
+>>>>>>> [feature] implement the signup front end and backend
       } else {
          //****************************************************//
          // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
@@ -33,6 +40,7 @@ module.exports = {
          });
 
          signUpUser.save().then(function(model) {
+<<<<<<< HEAD
             res.end();
          });  
       }
@@ -42,5 +50,16 @@ module.exports = {
   signInPost : 
     passport.authenticate('local', { failureRedirect: '/login'})
     
+=======
+            // sign in the newly registered user
+            console.log('here verified sign up');
+            next();
+            //signInPost(req, res, next);
+         });  
+      }
+   });
+  }
+
+>>>>>>> [feature] implement the signup front end and backend
 
 };
