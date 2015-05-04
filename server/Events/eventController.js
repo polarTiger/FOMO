@@ -111,14 +111,10 @@ module.exports = {
     var queryString = "SELECT email FROM users WHERE id = (SELECT user_id FROM users_events WHERE event_id = '"+ eventId + "');";
 
     getEventFromDB(queryString, function(emails){
-      //console.log("EMAILS: ", emails);
       email = emails[0].email;
       sendEmail(email);
-      //res.end(JSON.stringify(emails));
     });
   }
-
-
 };
 
 
