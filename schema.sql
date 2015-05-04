@@ -12,10 +12,10 @@
 
 -- ---
 -- Table 'users'
--- 
+--
 -- ---
 
-    
+
 CREATE TABLE "users" (
   "id" SERIAL NOT NULL,
   "name" TEXT NOT NULL,
@@ -27,10 +27,9 @@ CREATE TABLE "users" (
 
 -- ---
 -- Table 'events'
--- 
+--
 -- ---
 
-    
 CREATE TABLE "events" (
   "id" SERIAL NOT NULL,
   "event_info" TEXT NULL DEFAULT NULL,
@@ -44,10 +43,10 @@ CREATE TABLE "events" (
 
 -- ---
 -- Table 'users_events'
--- 
+--
 -- ---
 
-    
+
 CREATE TABLE "users_events" (
   "id" SERIAL NOT NULL,
   "user_id" INTEGER NULL DEFAULT NULL,
@@ -56,11 +55,27 @@ CREATE TABLE "users_events" (
 );
 
 -- ---
--- Foreign Keys 
+-- Table 'notifications'
+--
+-- ---
+
+CREATE TABLE "notifications" (
+  "id" SERIAL NOT NULL,
+  "event_id" INTEGER NULL DEFAULT NULL,
+  "notification_info" TEXT NULL DEFAULT NULL,
+  "notification_date" DATE NULL DEFAULT NULL,
+  "notification_time" TIME NULL DEFAULT NULL,
+  "fired" BOOLEAN NULL DEFAULT NULL,
+  PRIMARY KEY ("id")
+);
+
+-- ---
+-- Foreign Keys
 -- ---
 
 ALTER TABLE "users_events" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "users_events" ADD FOREIGN KEY ("event_id") REFERENCES "events" ("id");
+ALTER TABLE "notifications" ADD FOREIGN KEY ("event_id") REFERENCES "events" ("id");
 
 INSERT INTO users (name, hashed_password, email) values ('John', '1234', 'some@one.com');
 INSERT INTO events (event_info, event_title, event_category) values ('test event info', 'event1', 'concert');
