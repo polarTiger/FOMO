@@ -3,7 +3,9 @@ angular.module('fomo', ['ui.router', 'fomo.event',
                       'fomo.addEvent', 'fomo.eventservice',
                       'fomo.addeventservice', 'fomo.user', 'fomo.userservice',
                       'fomo.addeventservice', 'fomo.results',
-                      'fomo.searchservice'])
+                      'fomo.searchservice',
+                      'fomo.signup',
+                      'fomo.signin'])
 
   .config(function($stateProvider, $urlRouterProvider) {
   // If an unknown route is entered, it redirects to the home page.
@@ -29,7 +31,8 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       url: '/signup',
       views: {
         'main-content': {
-          templateUrl: './views/signupView.html'
+          templateUrl: './views/signupView.html',
+          controller: 'SignupController'
         }
       }
     })
