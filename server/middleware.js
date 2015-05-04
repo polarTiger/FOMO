@@ -1,13 +1,7 @@
 var morgan = require('morgan'); 
 var bodyParser = require('body-parser');
 var express = require('express');
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-var cookieParser = require('cookie-parser');
->>>>>>> [bug] trouble login
-=======
->>>>>>> [feature] add signup and signin handling from both front end and backend
+
 var session = require('express-session');
 var passport = require('./passport/passportConfig');
 
@@ -23,7 +17,7 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
-  app.use(session({secret: 'abcde',resave: false, saveUninitialized: true}));
+  app.use(session({secret: 'abcde',resave: false, saveUninitialized: false}));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use('/api/users', userRouter); 
