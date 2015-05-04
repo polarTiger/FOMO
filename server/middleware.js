@@ -2,9 +2,12 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var express = require('express');
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 var cookieParser = require('cookie-parser');
 >>>>>>> [bug] trouble login
+=======
+>>>>>>> [feature] add signup and signin handling from both front end and backend
 var session = require('express-session');
 var passport = require('./passport/passportConfig');
 
@@ -17,7 +20,6 @@ module.exports = function (app, express) {
   app.use(express.static(__dirname + '/../client'));
 
   app.use(morgan('dev'));
-  app.use(cookieParser);
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
