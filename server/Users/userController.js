@@ -1,9 +1,13 @@
 var User = require('./userModel');
 var bcrypt = require('bcrypt-nodejs');
 <<<<<<< HEAD
+<<<<<<< HEAD
 var passport = require('../passport/passportConfig');
 =======
 >>>>>>> [feature] implement the signup front end and backend
+=======
+var passport = require('../passport/passportConfig');
+>>>>>>> [bug] trouble login
 
 
 
@@ -58,6 +62,27 @@ module.exports = {
          });  
       }
    });
+  },
+
+  signInPost : function(req, res, next) {
+    console.log('inside signin post');
+     passport.authenticate('local', { successRedirect: '/',
+                            failureRedirect: 'api/users/signup'}, function(err, user, info) {
+        if(err) {
+           return res.end('encountered error during sign in');
+        } 
+
+        if(!user) {
+           return res.end('user does not exist');
+        }
+        return req.logIn(user, function(err) {
+           if(err) {
+              return res.end('encountered error during sign in');
+           } else {
+              return res.redirect('/');
+           }
+        });
+     })(req, res, next);
   }
 
 >>>>>>> [feature] implement the signup front end and backend

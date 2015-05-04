@@ -19,6 +19,7 @@ angular.module('fomo.signup', [])
     $http.post('api/users/signup', userObj).
       success(function(data, status, headers, config) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       //$log.log('success');
     }).
     error(function(data, status, headers, config) {
@@ -29,6 +30,12 @@ angular.module('fomo.signup', [])
     error(function(data, status, headers, config) {
       $log.log('fail');
 >>>>>>> [feature] implement the signup front end and backend
+=======
+      //$log.log('success');
+    }).
+    error(function(data, status, headers, config) {
+      //$log.log('fail');
+>>>>>>> [bug] trouble login
     });
   };
 }]);

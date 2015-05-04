@@ -5,11 +5,16 @@ angular.module('fomo', ['ui.router', 'fomo.event',
                       'fomo.addeventservice', 'fomo.results',
                       'fomo.searchservice',
 <<<<<<< HEAD
+<<<<<<< HEAD
                       'fomo.signup',
                       'fomo.signin'])
 =======
                       'fomo.signup'])
 >>>>>>> [feature] implement the signup front end and backend
+=======
+                      'fomo.signup',
+                      'fomo.signin'])
+>>>>>>> [bug] trouble login
 
   .config(function($stateProvider, $urlRouterProvider) {
   // If an unknown route is entered, it redirects to the home page.
