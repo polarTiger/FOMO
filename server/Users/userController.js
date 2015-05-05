@@ -2,9 +2,6 @@ var User = require('./userModel');
 var bcrypt = require('bcrypt-nodejs');
 var passport = require('../passport/passportConfig');
 
-
-
-
 module.exports = {
 
   userPlaceHolder: function(req, res) {

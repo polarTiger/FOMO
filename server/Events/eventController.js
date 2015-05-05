@@ -2,6 +2,7 @@ var pg = require('pg');
 var dbUrl= require('../dbConfig/dbConfig');
 var nodemailer = require('nodemailer');
 
+
 var getEventFromDB = function(queryString, cb) {
   pg.connect(dbUrl, function(err, client, done) {
     if(err) {
@@ -45,7 +46,6 @@ var sendEmail = function(emails) {
       }
   });
 };
-
 
 
 module.exports = {
