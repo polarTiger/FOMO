@@ -25,11 +25,11 @@ passport.use(new LocalStrategy(function(username, password, done) {
 }));
 
 passport.serializeUser(function(user, done) {
-   done(null, user.username);
+   done(null, user);
 });
 
-passport.deserializeUser(function(username, done) {
-   new User({username: username}).fetch().then(function(user) {
+passport.deserializeUser(function(user, done) {
+   new User({username: user.username}).fetch().then(function(user) {
       done(null, user);
    });
 });
