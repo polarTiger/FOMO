@@ -23,7 +23,7 @@
     <form novalidate name="eventForm" class="form-block" role="form" ng-hide ="modifyEventBtn">
       <label for="inputEventName">Event Name:</label>
       <div class="form-group">
-        <input type="text" name="name" ng-model="event.name" ng-required="true"/>
+        <input type="text" name="name" ng-model="eventData.event_title" ng-required="true"/>
         <p ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" >Please enter the event name.</p>
       </div>
       <label for="inputInfo">Info:</label>
@@ -42,8 +42,8 @@
       </div>
       <label for="categoryInfo">Category</label>
       <div class="form-group">
-        <select ng-model="event.category">
-          <option ng-repeat="category in event.categories">{{category}}</option>
+        <select ng-model="eventData.eventcategories">
+          <option ng-repeat="category in eventData.eventcategories">{{category}}</option>
         </select>
       </div>
       <label for="notificationInfo">Create a Notification</label>

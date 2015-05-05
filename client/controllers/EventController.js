@@ -27,6 +27,10 @@ angular.module('fomo.event', [])
       .success(function(data, status, headers, config) {
       $log.log('success');
       $log.log(data);
+      $scope.eventData=data;
+      $scope.eventData.eventcategories=[$scope.eventData.event_category]
+      //$scope.event.categories.push($scope.eventData.event_category);
+      //$log.log($scope.event);
     })
     .error(function(data, status, headers, config) {
       $log.log('fail');
