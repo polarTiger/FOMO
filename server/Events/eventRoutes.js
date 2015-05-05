@@ -1,6 +1,5 @@
 var eventController = require('./eventController.js');
 
-
 module.exports = function (app) {
 
   app.get('/event/:id', eventController.getEvent);
@@ -17,3 +16,4 @@ module.exports = function (app) {
 
   app.get ('/search', eventController.searchEvents);
 };
+

@@ -109,7 +109,7 @@ module.exports = {
       });
     });
   },
-  
+
   triggerEvent: function() {
     console.log("TriggerEvent Function Called");
     var eventId = 1; //req.body.event_id
@@ -144,6 +144,15 @@ module.exports = {
 
     getEventFromDB(queryString, function(rows){
       res.end(JSON.stringify(rows));
+    });
+  },
+
+
+  editEvent: function(req, res) {
+    console.log("REQUEST>BODY: ", req.body);
+    var queryString = "UPDATE events SET event_info = '" + req.body.event_info + "', event_title = '" + req.body.event_title + "', event_category = '" + req.body.event_category + "', event_date = '" + req.body.event_date + "' WHERE id = '" + req.body.id +"';";
+    getEventFromDB(queryString, function() {
+      res.end();
     });
   }
 };
