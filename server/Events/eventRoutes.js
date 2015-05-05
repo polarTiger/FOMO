@@ -5,8 +5,6 @@ module.exports = function (app) {
 
   app.get('/event/:id', eventController.getEvent);
 
-  app.post('/triggerevent', eventController.eventPlaceHolder);
-
   app.post('/addevent', eventController.addEvent);
 
   app.get('/triggerevent', eventController.triggerEvent);
