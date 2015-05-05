@@ -1,21 +1,21 @@
 <div class="form-block col-md-4">
   <div >
     <form novalidate name="eventForm" class="form-block" role="form">
-      <label for="inputEventName">Event Name:</label> 
+      <label for="inputEventName">Event Name:</label>
       <div class="form-group">
         <input type="text" name="name" ng-model="event.name" ng-required="true"/>
-        <p ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" >Please enter the name of the dish you're reviewing.</p>
+        <p ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" >Please enter the event name.</p>
       </div>
-      <label for="inputInfo">Info:</label> 
+      <label for="inputInfo">Info:</label>
       <div class="form-group ">
         <textarea name="info" ng-model="event.info" ng-minlength="2" ng-required="true"></textarea>
-        <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter the name of the dish you're reviewing.</p>
+        <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter information about the event.</p>
       </div>
       <label for="linkInfo">Link</label>
       <div class="form-group">
         <input type="text" ng-model="event.link" />
       </div>
-      <label for="dateInfo">Date</label>
+      <label for="dateInfo">Event Date</label>
       <div class="form-group">
      <input type="date" id="add-event-date" name="input" ng-model="event.date"
          placeholder="yyyy-MM-dd" />
