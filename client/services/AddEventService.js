@@ -7,7 +7,10 @@ angular.module('fomo.addeventservice', [])
       info: eventObject.info,
       category: eventObject.category,
       link: eventObject.link,
-      date: $filter('date')(eventObject.date, 'yyyy-MM-dd')
+      date: $filter('date')(eventObject.date, 'yyyy-MM-dd'),
+      notifyinfo: eventObject.notifyinfo,
+      notifydate: $filter('date')(eventObject.notifydate, 'yyyy-MM-dd'),
+      notifytime: $filter('date')(eventObject.notifytime, 'HH:mm') // format in military time: https://docs.angularjs.org/api/ng/filter/date
 
     };
     $log.log(sendObject);
