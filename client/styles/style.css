@@ -21,11 +21,11 @@
 nav#hmenu {
   margin: 0;
   padding: .3em 0 .3em 0;
-  background: #5e869a;
-  opacity: .8;
+  background: #90cbe1;
   width: 100%;
   font-family: arial, verdana;
   text-align: center;
+  border-radius: 5px;
   box-shadow: 0 7px 6px -6px #777;
   box-shadow: 0 7px 6px -6px #777;
   box-shadow: 0 7px 6px -6px #777;
