@@ -36,6 +36,16 @@ angular.module('fomo.event', [])
       $log.log('fail');
     });
   };
+
+  $scope.modifyEvent = function() {
+    $http.post('/api/events/editevent/'+$stateParams.eventID, $scope.eventData)
+        .success(function(data, status, headers, config) {
+        $log.log('success');
+      }).
+      error(function(data, status, headers, config) {
+        $log.log('fail');
+      });
+  }
   $scope.addEmail = function() {
     $scope.email.eventId = $scope.eventId;
     console.log('EMAIL: ', $scope.email);

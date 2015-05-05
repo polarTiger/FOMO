@@ -28,16 +28,16 @@
       </div>
       <label for="inputInfo">Info:</label>
       <div class="form-group ">
-        <textarea name="info" ng-model="event.info" ng-minlength="2" ng-required="true"></textarea>
+        <textarea name="info" ng-model="eventData.event_info" ng-minlength="2" ng-required="true"></textarea>
         <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter information about the event.</p>
       </div>
       <label for="linkInfo">Link</label>
       <div class="form-group">
-        <input type="text" ng-model="event.link" />
+        <input type="text" ng-model="eventData.event_link"/>
       </div>
       <label for="dateInfo">Event Date</label>
       <div class="form-group">
-        <input type="date" id="add-event-date" name="input" ng-model="event.date"
+        <input type="date" id="add-event-date" name="input" ng-model="eventData.event_date"
          placeholder="yyyy-MM-dd" />
       </div>
       <label for="categoryInfo">Category</label>
@@ -48,15 +48,15 @@
       </div>
       <label for="notificationInfo">Create a Notification</label>
       <div class="form-group">
-        <textarea name="notifyinfo" ng-model="event.notifyinfo" ng-minlength="2" ng-required="true" placeholder="Describe your notification"></textarea>
+        <textarea name="notifyinfo" ng-model="eventData.notifyinfo" ng-minlength="2" ng-required="true" placeholder="Describe your notification"></textarea>
         <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter information about the notifcation.</p>
       </div>
       <label for="dateInfo">Notification Date & Time</label>
       <div class="form-group">
-        <input type="date" id="add-notify-date" name="input" ng-model="event.notifydate"/>
-        <input type="time" id="add-notify-time" name="input" ng-model="event.notifytime"/>
+        <input type="date" id="add-notify-date" name="input" ng-model="eventData.notifydate"/>
+        <input type="time" id="add-notify-time" name="input" ng-model="eventData.notifytime"/>
       </div>
-        <input type="submit" ng-disabled="eventForm.$invalid"class="btn btn-primary" ng-click="submitEvent()">
+        <input type="submit" ng-disabled="eventForm.$invalid"class="btn btn-primary" ng-click="modifyEvent()">
     </form>
 
   </span>
