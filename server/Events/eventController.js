@@ -122,6 +122,7 @@ module.exports = {
 
 
   searchEvents: function(req, res) {
+
     var clientQuery = req.query.query;
     var queryString = "SELECT * FROM events WHERE LOWER(event_title) like LOWER('%" + clientQuery + "%');";
 
