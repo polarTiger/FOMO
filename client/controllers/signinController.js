@@ -2,6 +2,7 @@ angular.module('fomo.signin', [])
 
 .controller('SigninController', ['$scope', '$http', '$state', '$log', 'UserService', function($scope, $http, $state, $log, UserService) {
 
+
   $scope.signin = function() {
     var userObj = {
       username: $scope.user.username,
@@ -16,7 +17,6 @@ angular.module('fomo.signin', [])
     .error(function(data, status, headers, config) {
       $log.log('fail');
       $state.go('signup');
-
     });
   };
 }]);

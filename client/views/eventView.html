@@ -17,6 +17,48 @@
         ng-class="{'error': emailForm.$invalid && emailForm.$dirty}"/>
         <button class="btn" ng-disabled='emailForm.$invalid'>Submit</button>
     </form>
+
+    <button class="btn btn-default navbar-btn"  class="ng-hide" ng-click="editEvent()" notype="submit" >Modify Me!</button>
+
+    <form novalidate name="eventForm" class="form-block" role="form" ng-hide ="modifyEventBtn">
+      <label for="inputEventName">Event Name:</label>
+      <div class="form-group">
+        <input type="text" name="name" ng-model="eventData.event_title" ng-required="true"/>
+        <p ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" >Please enter the event name.</p>
+      </div>
+      <label for="inputInfo">Info:</label>
+      <div class="form-group ">
+        <textarea name="info" ng-model="eventData.event_info" ng-minlength="2" ng-required="true"></textarea>
+        <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter information about the event.</p>
+      </div>
+      <label for="linkInfo">Link</label>
+      <div class="form-group">
+        <input type="text" ng-model="eventData.event_link"/>
+      </div>
+      <label for="dateInfo">Event Date</label>
+      <div class="form-group">
+        <input type="date" id="add-event-date" name="input" ng-model="eventData.event_date"
+         placeholder="yyyy-MM-dd" />
+      </div>
+      <label for="categoryInfo">Category</label>
+      <div class="form-group">
+        <select ng-model="eventData.eventcategories">
+          <option ng-repeat="category in eventData.eventcategories">{{category}}</option>
+        </select>
+      </div>
+      <label for="notificationInfo">Create a Notification</label>
+      <div class="form-group">
+        <textarea name="notifyinfo" ng-model="eventData.notifyinfo" ng-minlength="2" ng-required="true" placeholder="Describe your notification"></textarea>
+        <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter information about the notifcation.</p>
+      </div>
+      <label for="dateInfo">Notification Date & Time</label>
+      <div class="form-group">
+        <input type="date" id="add-notify-date" name="input" ng-model="eventData.notifydate"/>
+        <input type="time" id="add-notify-time" name="input" ng-model="eventData.notifytime"/>
+      </div>
+        <input type="submit" ng-disabled="eventForm.$invalid"class="btn btn-primary" ng-click="modifyEvent()">
+    </form>
+
   </span>
 
 </div>
