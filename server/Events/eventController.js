@@ -38,52 +38,42 @@ module.exports = {
   },
 
   addEvent: function(req, res) {
-    if (!req.body.notifydate) { // event only info, no notification, just insert into events table
-
+    if (!req.body.notifyinfo && req.body.date) { // event only with date, no notification, just insert into events table
       var queryString = "INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
                                 +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"');";
-
-      pg.connect(dbUrl, function(err, client, done) {
-        if(err) {
-          return console.error('error fetching client from pool', err);
-        }
-        client.query(queryString, function(err, result) {
-        //call `done()` to release the client back to the pool
-          done();
-          if(err) {
-            return console.error('error running query', err);
-          }
-
-          res.end();
-
-          client.end();
-        });
-      });
-    }
-    else {
-       // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
-       console.log('insert into events and notifcations');
+    } else if (!req.body.notifyinfo && !req.body.date) { // event only without event date, set date to null
+      var queryString = "INSERT into events (event_info, event_title, event_category, event_image) values ('"
+                                +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"');";
+    } else if (!req.body.notifydate) { // if notification exists but date is unknown // must have event date!
+      // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
       var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
-                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"') RETURNING id) INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
+                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id) INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
+                      +req.body.notifyinfo+"', '"+req.body.date+"', '"+(req.body.notifytime || '00:01') +"' FROM first_insert;";
+    } else if (!req.body.notifytime) { // if notification exists with date but time is unknown
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id) INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
+                      +req.body.notifyinfo+"', '"+req.body.notifydate+"', '00:01' FROM first_insert;";
+    } else { // insert notifications and events, everything
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id) INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
                       +req.body.notifyinfo+"', '"+req.body.notifydate+"', '"+req.body.notifytime+"' FROM first_insert;";
-
-      pg.connect(dbUrl, function(err, client, done) {
-        if(err) {
-          return console.error('error fetching client from pool', err);
-        }
-        client.query(queryString, function(err, result) {
-        //call `done()` to release the client back to the pool
-          done();
-          if(err) {
-            return console.error('error running query', err);
-          }
-
-          res.end();
-
-          client.end();
-        });
-      });
     }
+    pg.connect(dbUrl, function(err, client, done) {
+      if(err) {
+        return console.error('error fetching client from pool', err);
+      }
+      client.query(queryString, function(err, result) {
+      //call `done()` to release the client back to the pool
+        done();
+        if(err) {
+          return console.error('error running query', err);
+        }
+
+        res.end();
+        client.end();
+
+      });
+    });
   },
 
   searchEvents: function(req, res) {
@@ -102,7 +92,6 @@ module.exports = {
       res.end(JSON.stringify(rows));
     });
   }
-
 };
 
 
