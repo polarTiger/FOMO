@@ -1,9 +1,21 @@
-<div id='signup'>
-  <h1>Sign Up</h1>
-  <form name="signupForm" ng-submit='signup()'>
-    <input type='text' ng-model='user.username'>
-    <input type="password" ng-model='user.password'>
-    <button>Sign Up</button>
-  </form>
-  <a href="#/signin">Already have an account? <strong>Sign In</strong> ...</a>
+<div class="form-block col-md-4">
+  <div id='signup'>
+    <h1>Sign Up</h1>
+    <form novalidate name="signupForm" class="form-block" role="form" ng-submit='signup()'>
+      <label for="username">Username</label>
+      <div class="form-group">
+        <input type="text" ng-model="user.username" />
+      </div>
+      <label for="email">email</label>
+      <div class="form-group">
+        <input type="text" ng-model="user.email" />
+      </div>
+      <label for="password">Password</label>
+      <div class="form-group">
+        <input type="password" ng-model="user.password" />
+      </div>
+      <button>Sign Up</button>
+    </form>
+    <a href="#/signin">Already have an account? <strong>Sign In</strong> ...</a>
+  </div>
 </div>
