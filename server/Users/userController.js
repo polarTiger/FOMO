@@ -27,7 +27,10 @@ module.exports = {
          var password = user.password;
          var hash = bcrypt.hashSync(password);
 
-         var signUpUser = new User({username: user.username, password: hash});
+         var signUpUser = new User({username: user.username,
+          password: hash,
+          email: user.email
+         });
 
          signUpUser.save().then(function(model) {
             res.end();

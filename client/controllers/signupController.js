@@ -12,7 +12,8 @@ angular.module('fomo.signup', [])
   $scope.signup = function() {
     var userObj = {
       username: $scope.user.username,
-      password: $scope.user.password
+      password: $scope.user.password,
+      email: $scope.user.email
     }
 
     $http.post('api/users/signup', userObj).
