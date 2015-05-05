@@ -2,6 +2,7 @@ var pg = require('pg');
 var dbUrl= require('../dbConfig/dbConfig');
 var nodemailer = require('nodemailer');
 
+
 var getEventFromDB = function(queryString, cb) {
   pg.connect(dbUrl, function(err, client, done) {
     if(err) {
@@ -45,7 +46,6 @@ var sendEmail = function(emails) {
       }
   });
 };
-
 
 
 module.exports = {
@@ -109,6 +109,7 @@ module.exports = {
       });
     });
   },
+  
   triggerEvent: function() {
     console.log("TriggerEvent Function Called");
     var eventId = 1; //req.body.event_id
@@ -137,21 +138,6 @@ module.exports = {
     getEventFromDB(queryString, function(rows){
       res.end(JSON.stringify(rows));
     });
-  },
-
-  triggerEvent: function() {
-    console.log("TriggerEvent Function Called");
-    var eventId = 1; //req.body.event_id
-    var queryString = "SELECT email FROM users WHERE id = (SELECT user_id FROM users_events WHERE event_id = '"+ eventId + "');";
-
-    getEventFromDB(queryString, function(emails){
-      email = emails[0].email;
-      sendEmail(email);
-    });
-  },
-
-  editEvent: function() {
-    
   }
 };
 
