@@ -13,7 +13,6 @@ module.exports = function (app) {
 
   app.get('/signedin', userController.userPlaceHolder);
 
-  // app.get('/', function(req, res){res.end()});
 };
 
 

@@ -30,9 +30,7 @@ module.exports = {
          var signUpUser = new User({username: user.username, password: hash});
 
          signUpUser.save().then(function(model) {
-            // sign in the newly registered user
             res.end();
-            //signInPost(req, res, next);
          });  
       }
    });

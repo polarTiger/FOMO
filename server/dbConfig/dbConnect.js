@@ -8,11 +8,4 @@ var knex = require('knex')({
 
 var Bookshelf = require('bookshelf')(knex);
 
-/*
-var DB = Bookshelf.initialize({
-   client: 'pg', 
-   connection: dbUrl
-});
-*/
-
 module.exports = Bookshelf;
