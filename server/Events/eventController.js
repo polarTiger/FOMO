@@ -133,7 +133,10 @@ module.exports = {
   },
 
   myEvents: function(req, res) {
-    var queryString = "SELECT * FROM events;";
+    console.log(req.session);
+    var id = req.session.passport.user.id;
+    var queryString = "SELECT events.event_info, events.event_title, events.event_category FROM events INNER JOIN " + 
+                          "users_events ON events.id = users_events.event_id WHERE users_events.user_id="+id+";";
 
     getEventFromDB(queryString, function(rows){
       res.end(JSON.stringify(rows));
