@@ -1,6 +1,6 @@
 angular.module('fomo.event', [])
 
-.controller('EventController', ['$scope', '$http', '$log','$stateParams', 'EventService', function($scope, $http, $log, $stateParams, EventService) {
+.controller('EventController', ['$scope', '$http', '$log','$stateParams', '$cookies', '$cookieStore','EventService', function($scope, $http, $log, $stateParams, $cookies, $cookieStore, EventService) {
 
   $scope.data = {};
   $scope.eventId = 'abc123'; // replace with actual eventId
@@ -11,6 +11,7 @@ angular.module('fomo.event', [])
     EventService.getEvent($stateParams.eventID)
     .then(function(data) {
       $scope.data = data.data;
+      $log.log('haha, ', $cookies['connect.sid']);
       console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
     })
   };
@@ -45,6 +46,7 @@ angular.module('fomo.event', [])
   $scope.modifyEvent = function() {
     $http.post('/api/events/editevent/'+$stateParams.eventID, $scope.eventData)
         .success(function(data, status, headers, config) {
+        $scope.modifyEventBtn = true;
         $log.log('success');
       }).
       error(function(data, status, headers, config) {
