@@ -19,6 +19,7 @@ angular.module('fomo.event', [])
     $http.post('api/events/subscribe/'+ $stateParams.eventID)
       .success(function(data, status, headers, config) {
         $log.log('success');
+        $scope.data.subscribed = true;
         // $log.log(data);
 
     })

@@ -75,7 +75,22 @@ module.exports = {
     var queryString = "SELECT * FROM events WHERE id = " + id + ";";
 
     getEventFromDB(queryString, function(rows){
-        res.end(JSON.stringify(rows[0]));
+
+      var user_id = req.session.passport.user ? req.session.passport.user.id : 0;
+
+      var queryString = "SELECT * from users_events WHERE event_id=" + id +
+                        "and user_id=" + user_id + ";";
+
+        getEventFromDB(queryString, function(subscribe) {
+
+          console.log("subscribe", subscribe);
+          rows[0].subscribed = (subscribe.length !== 0);
+
+          res.end(JSON.stringify(rows[0]));
+
+        })
+
+
     });
   },
 
@@ -158,7 +173,6 @@ module.exports = {
       res.end(JSON.stringify(rows));
     });
   },
-
 
   editEvent: function(req, res) {
     console.log("REQUEST>BODY: ", req.body);
