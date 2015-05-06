@@ -1,6 +1,6 @@
 angular.module('fomo.signin', [])
 
-.controller('SigninController', ['$scope', '$http', '$state', '$log', 'UserService', function($scope, $http, $state, $log, UserService) {
+.controller('SigninController', ['$scope', '$http', '$state', '$log', '$cookies', '$cookieStore','UserService', function($scope, $http, $state, $log, $cookies, $cookieStore, UserService) {
 
 
   $scope.signin = function() {
@@ -12,6 +12,7 @@ angular.module('fomo.signin', [])
     $http.post('api/users/signin', userObj)
       .success(function(data, status, headers, config) {
         $log.log('success');
+        $cookieStore.put('obj', {username:userObj.username});
         $state.go('home');
     })
     .error(function(data, status, headers, config) {

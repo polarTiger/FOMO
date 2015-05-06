@@ -47,6 +47,20 @@ var sendEmail = function(emails) {
   });
 };
 
+/*
+setInterval(function(){ 
+  var queryString = "SELECT * FROM notifications WHERE id = " + 1 + ";";
+  var d = new Date();
+  getEventFromDB(queryString, function(data){
+    console.log(data);
+    console.log(d);
+    if (data[0].event_date !== null) {
+      console.log(new Date(data[0].event_date)- d);
+    }
+    
+  });
+}, 1000*5); // update every minute
+*/
 
 module.exports = {
 
