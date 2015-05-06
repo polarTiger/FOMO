@@ -135,10 +135,6 @@ module.exports = {
     });
   },
 
-  editEvent: function(req, res) {
-
-  },
-
   myEvents: function(req, res) {
     console.log(req.session);
     var id = req.session.passport.user.id;
