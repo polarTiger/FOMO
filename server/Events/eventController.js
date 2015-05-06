@@ -47,18 +47,6 @@ var sendEmail = function(emails) {
   });
 };
 
-var triggerEvent2 = function() {
-  console.log("TriggerEvent Function Called");
-  var eventId = 1; //req.body.event_id
-  var queryString = "SELECT email FROM users WHERE id = (SELECT user_id FROM users_events WHERE event_id = '"+ eventId + "');";
-
-  getEventFromDB(queryString, function(emails){
-    email = emails[0].email;
-    sendEmail(email);
-    return;
-  });
-};
-
 
 setInterval(function(){ 
   var queryString = "SELECT * FROM notifications WHERE id = " + 1 + ";";
@@ -68,12 +56,8 @@ setInterval(function(){
   
   getEventFromDB(queryString, function(data){
     if (data[0].notification_date !== null) {
-      console.log(data[0]);
 
-      //console.log(date);
      var dbDate= new Date(data[0].notification_date);
-     //console.log('local time: ', JSON.stringify(date).slice(1,11));
-     //console.log('db time: ', JSON.stringify(dbDate).slice(1,11));
      var localTime= JSON.stringify(date).slice(12,17);
      date=JSON.stringify(date).slice(1,11);
      dbDate=JSON.stringify(dbDate).slice(1,11);
@@ -93,18 +77,15 @@ setInterval(function(){
           console.log('now set the trigger to true');
           triggerEvent2();
          });
-  */  
-        //triggerEvent2();
-        getEventFromDB(queryStringTrigger, function(data2){
-          return triggerEvent2();
-        });
+        */  
+        module.exports.triggerEvent();
      }
 
     }
   }
     
   });
-}, 1000*30); // update every 5 seconds
+}, 1000*60); // update every 5 seconds
 
 
 module.exports = {
