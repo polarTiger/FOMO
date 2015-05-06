@@ -1,0 +1,17 @@
+<div class="form-block col-md-4">
+  <div id='signin'>
+    <h1>Sign In</h1>
+    <form novalidate name="signinform" class="form-block" role="form" ng-submit='signin()'>
+      <label for="username">Username</label>
+      <div class="form-group">
+        <input type="text" ng-model="user.username" />
+      </div>
+      <label for="password">Password</label>
+      <div class="form-group">
+        <input type="password" ng-model="user.password" />
+      </div>
+      <button>Sign In</button>
+    </form>
+    <a href="#/signup">Don't have an account? <strong>Sign Up</strong> ...</a>
+  </div>
+</div>

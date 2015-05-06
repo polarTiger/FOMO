@@ -1,0 +1,14 @@
+node_modules/
+bower_components/
+*.log
+.DS_Store
+**.DS_Store
+**/.DS_Store
+server/.DS_Store
+
+
+server/dbConfig/dbConfig.js
+./server/dbConfig/dbConfig.js
+
+build/
+dist/

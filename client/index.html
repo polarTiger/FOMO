@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html ng-app="fomo">
+
+<head>
+  <meta charset="utf-8" />
+  <title>fomo</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Lobster|Rancho' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+
+  <!--CONTENT DIV -->
+  <div class="main-container">
+    <!-- Navigation -->
+    <h1 class='title'>fomo<p class='subtitle'>fear of missing out</p></h1>
+    <nav id="hmenu" class="col-md-12">
+      <ul>
+        <li class="col-md-3"><a href="#/home">home</a></li>
+        <li class="col-md-3"><a href="#/signin">signin</a></li>
+        <li class="col-md-3"><a href="#/user">my events</a></li>
+        <li class="col-md-3"><a href="#/addevent">new event</a></li>
+      </ul>
+    </nav>
+
+    <div class="col-md-12">
+      <!--LEFT SPACER SPAN-->
+      <span class="col-md-1"></span>
+      <!--CONTENT AREA-->
+      <span class="col-md-10">
+
+        <div class="row" ui-view="secondary-content">
+
+        </div>
+      </span>
+      <!--RIGHT SPACER-->
+      <span class="col-md-1"></span>
+    </div>
+
+    </div>
+
+    <div ui-view="main-content"></div>
+
+    <div ui-view></div>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="controllers/EventController.js"></script>
+    <script src="controllers/AddController.js"></script>
+    <script src="controllers/signupController.js"></script>
+    <script src="controllers/ResultsController.js"></script>
+    <script src="services/EventService.js"></script>
+    <script src="services/SearchService.js"></script>
+    <script src="services/AddEventService.js"></script>
+    <script src="services/UserService.js"></script>
+    <script src="services/signupServices.js"></script>
+    <script src="controllers/UserController.js"></script>
+    <script src="controllers/signinController.js"></script>
+    <script src="controllers/signupController.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
