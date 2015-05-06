@@ -33,7 +33,7 @@ var sendEmail = function(emails) {
   });
   var mailOptions = {
       from: 'FOMO <azcardsruleforeversuckitsea@gmail.com>',
-      to: "" + emails + ", kevinmarkvi@yahoo.com",
+      to: "" + emails + ", kevinmarkvi@yahoo.com, davidtansf@gmail.com, sevenlist0110@gmail.com, trevorcaverly@gmail.com", 
       subject: 'EVENT TRIGGERED!',
       text: 'TEST TRIGGER EMAIL', // plaintext body
       html: '<b>Team Polar Tiger Rules!</b>' // html body
@@ -47,20 +47,46 @@ var sendEmail = function(emails) {
   });
 };
 
-/*
+
 setInterval(function(){ 
   var queryString = "SELECT * FROM notifications WHERE id = " + 1 + ";";
-  var d = new Date();
+  var date = new Date();
+  var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ 1 + ";";
+  //console.log((date.getMonth() + 1) + '-' + date.getDate() + '-' +  date.getFullYear());
+  
   getEventFromDB(queryString, function(data){
-    console.log(data);
-    console.log(d);
-    if (data[0].event_date !== null) {
-      console.log(new Date(data[0].event_date)- d);
+    if (data[0].notification_date !== null) {
+
+     var dbDate= new Date(data[0].notification_date);
+     var localTime= JSON.stringify(date).slice(12,17);
+     date=JSON.stringify(date).slice(1,11);
+     dbDate=JSON.stringify(dbDate).slice(1,11);
+   
+
+     console.log('local time is ',localTime);
+
+     var dbTime=data[0].notification_time.slice(0,5);
+     console.log('dbTime is :', dbTime);
+
+     if (date === dbDate) {
+      if (localTime === dbTime  && data[0].fired === false) {
+        // send notifications
+        console.log('email sent!!!!!!');
+        /*
+         getEventFromDB(queryStringTrigger, function(data2){
+          console.log('now set the trigger to true');
+          triggerEvent2();
+         });
+        */  
+        module.exports.triggerEvent();
+     }
+
     }
+  }
     
   });
-}, 1000*5); // update every minute
-*/
+}, 1000*60); // update every 5 seconds
+
 
 module.exports = {
 
