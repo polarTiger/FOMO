@@ -184,7 +184,18 @@ module.exports = {
   subscribe: function(req, res) {
     var event_id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user.id;
-    var queryString = "INSERT INTO users_events (user_id, event_id) VALUES ("+user_id+", "+event_id+ ");";
+    var queryString = "INSERT INTO users_events (user_id, event_id) select "+user_id+ " as user_id, "+event_id+
+                        " as event_id from users_events where (user_id="+user_id+" and event_id="+event_id+ ") having count(*)=0;";
+
+    getEventFromDB(queryString, function() {
+      res.end();
+    });
+  },
+
+  unsubscribe: function(req, res) {
+    var event_id = req.url.match(/\d+/)[0];
+    var user_id = req.session.passport.user.id;
+    var queryString = "DELETE from users_events where user_id="+user_id+" and event_id="+event_id + ";";
     getEventFromDB(queryString, function() {
       res.end();
     });

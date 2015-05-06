@@ -11,6 +11,8 @@
 <!--     <button ng-click="editEvent()" type="submit" class="btn btn-default navbar-btn">Edit Event</button> -->
     <button ng-if="!data.subscribed" class="btn btn-default navbar-btn" ng-hide="notifyBtn" class="ng-hide" ng-click="subscribe()" notype="submit" >Subscribe!</button>
 
+    <button ng-if="data.subscribed" class="btn btn-default navbar-btn" ng-hide="notifyBtn" class="ng-hide" ng-click="unsubscribe()" notype="submit" >Unsubscribe!</button>
+
     <button class="btn btn-default navbar-btn"  class="ng-hide" ng-click="editEvent()" notype="submit" >Modify Me!</button>
 
     <form novalidate name="eventForm" class="form-block" role="form" ng-hide ="modifyEventBtn">

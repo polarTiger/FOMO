@@ -6,6 +6,8 @@ module.exports = function (app) {
 
   app.post('/subscribe/:id', eventController.subscribe);
 
+  app.delete('/unsubscribe/:id', eventController.unsubscribe);
+
   app.post('/addevent', eventController.addEvent);
 
   app.post('/editevent/:id', eventController.editEvent);

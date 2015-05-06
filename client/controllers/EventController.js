@@ -27,6 +27,18 @@ angular.module('fomo.event', [])
       $log.log('fail');
     });
   };
+  $scope.unsubscribe = function() {
+    $http.delete('api/events/unsubscribe/'+ $stateParams.eventID)
+      .success(function(data, status, headers, config) {
+        $log.log('success');
+        $scope.data.subscribed = false;
+        // $log.log(data);
+
+    })
+    .error(function(data, status, headers, config) {
+      $log.log('fail');
+    });
+  };
   $scope.editEvent = function() { // to do, beyond MVP
     console.log('EDIT_EVENT');
     $scope.modifyEventBtn = !$scope.modifyEventBtn;
@@ -49,8 +61,8 @@ angular.module('fomo.event', [])
         .success(function(data, status, headers, config) {
         $scope.modifyEventBtn = true;
         $log.log('success');
-      }).
-      error(function(data, status, headers, config) {
+      })
+        .error(function(data, status, headers, config) {
         $log.log('fail');
       });
   }
