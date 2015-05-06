@@ -1,6 +1,7 @@
 angular.module('fomo.event', [])
 
-.controller('EventController', ['$scope', '$http', '$log','$stateParams', '$cookies', '$cookieStore','EventService', function($scope, $http, $log, $stateParams, $cookies, $cookieStore, EventService) {
+.controller('EventController', ['$scope', '$http', '$log','$state', '$stateParams', '$cookies', '$cookieStore', 'EventService', function($scope, $http, $log, $state, $stateParams, $cookies, $cookieStore, EventService) {
+
 
   $scope.data = {};
   $scope.eventId = 'abc123'; // replace with actual eventId
@@ -19,11 +20,26 @@ angular.module('fomo.event', [])
     $http.post('api/events/subscribe/'+ $stateParams.eventID)
       .success(function(data, status, headers, config) {
         $log.log('success');
+        $scope.data.subscribed = true;
         // $log.log(data);
 
     })
     .error(function(data, status, headers, config) {
       $log.log('fail');
+      $state.go('signup');
+    });
+  };
+  $scope.unsubscribe = function() {
+    $http.delete('api/events/unsubscribe/'+ $stateParams.eventID)
+      .success(function(data, status, headers, config) {
+        $log.log('success');
+        $scope.data.subscribed = false;
+        // $log.log(data);
+
+    })
+    .error(function(data, status, headers, config) {
+      $log.log('fail');
+      $state.go('signup');
     });
   };
   $scope.editEvent = function() { // to do, beyond MVP
@@ -48,8 +64,8 @@ angular.module('fomo.event', [])
         .success(function(data, status, headers, config) {
         $scope.modifyEventBtn = true;
         $log.log('success');
-      }).
-      error(function(data, status, headers, config) {
+      })
+        .error(function(data, status, headers, config) {
         $log.log('fail');
       });
   }

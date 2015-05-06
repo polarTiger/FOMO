@@ -75,7 +75,22 @@ module.exports = {
     var queryString = "SELECT * FROM events WHERE id = " + id + ";";
 
     getEventFromDB(queryString, function(rows){
-        res.end(JSON.stringify(rows[0]));
+
+      var user_id = req.session.passport.user ? req.session.passport.user.id : 0;
+
+      var queryString = "SELECT * from users_events WHERE event_id=" + id +
+                        "and user_id=" + user_id + ";";
+
+        getEventFromDB(queryString, function(subscribe) {
+
+          console.log("subscribe", subscribe);
+          rows[0].subscribed = (subscribe.length !== 0);
+
+          res.end(JSON.stringify(rows[0]));
+
+        })
+
+
     });
   },
 
@@ -84,6 +99,7 @@ module.exports = {
     // Require user to be logged in
     if(!req.session.passport.user) {
       res.send(403);
+      return;
     }
 
     if (!req.body.notifyinfo && req.body.date) { // event only with date, no notification, just insert into events table
@@ -150,6 +166,10 @@ module.exports = {
   },
 
   myEvents: function(req, res) {
+    if(!req.session.passport.user) {
+      res.send(403);
+      return;
+    }
     var id = req.session.passport.user.id;
     var queryString = "SELECT * FROM events INNER JOIN " + 
                           "users_events ON events.id = users_events.event_id WHERE users_events.user_id="+id+";";
@@ -159,7 +179,6 @@ module.exports = {
     });
   },
 
-
   editEvent: function(req, res) {
     console.log("REQUEST>BODY: ", req.body);
     var queryString = "UPDATE events SET event_info = '" + req.body.event_info + "', event_title = '" + req.body.event_title + "', event_category = '" + req.body.event_category + "', event_date = '" + req.body.event_date + "' WHERE id = '" + req.body.id +"';";
@@ -168,9 +187,28 @@ module.exports = {
     });
   },
   subscribe: function(req, res) {
+    if(!req.session.passport.user) {
+      res.send(403);
+      return;
+    }
     var event_id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user.id;
-    var queryString = "INSERT INTO users_events (user_id, event_id) VALUES ("+user_id+", "+event_id+ ");";
+    var queryString = "INSERT INTO users_events (user_id, event_id) select "+user_id+ " as user_id, "+event_id+
+                        " as event_id from users_events where (user_id="+user_id+" and event_id="+event_id+ ") having count(*)=0;";
+
+    getEventFromDB(queryString, function() {
+      res.end();
+    });
+  },
+
+  unsubscribe: function(req, res) {
+    if(!req.session.passport.user) {
+      res.send(403);
+      return;
+    }
+    var event_id = req.url.match(/\d+/)[0];
+    var user_id = req.session.passport.user.id;
+    var queryString = "DELETE from users_events where user_id="+user_id+" and event_id="+event_id + ";";
     getEventFromDB(queryString, function() {
       res.end();
     });
