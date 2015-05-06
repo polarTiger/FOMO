@@ -4,6 +4,8 @@ module.exports = function (app) {
 
   app.get('/event/:id', eventController.getEvent);
 
+  app.post('/subscribe/:id', eventController.subscribe);
+
   app.post('/addevent', eventController.addEvent);
 
   app.post('/editevent/:id', eventController.editEvent);
@@ -15,5 +17,7 @@ module.exports = function (app) {
   app.get('/topevents', eventController.eventPlaceHolder);
 
   app.get ('/search', eventController.searchEvents);
+
+
 };
 

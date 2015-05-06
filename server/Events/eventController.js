@@ -74,7 +74,7 @@ module.exports = {
 
     if (!req.body.notifyinfo && req.body.date) { // event only with date, no notification, just insert into events table
       console.log("OPTION 1");
-      console.log("req.body.notifyinfo", req.body.notifyinfo);
+
       var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
                         +req.session.passport.user.id+"' FROM first_insert;";
@@ -106,7 +106,7 @@ module.exports = {
         }
 
 
-        res.send(result);
+        res.send();
         client.end();
 
       });
@@ -136,9 +136,8 @@ module.exports = {
   },
 
   myEvents: function(req, res) {
-    console.log(req.session);
     var id = req.session.passport.user.id;
-    var queryString = "SELECT events.event_info, events.event_title, events.event_category FROM events INNER JOIN " + 
+    var queryString = "SELECT * FROM events INNER JOIN " + 
                           "users_events ON events.id = users_events.event_id WHERE users_events.user_id="+id+";";
 
     getEventFromDB(queryString, function(rows){
@@ -153,7 +152,15 @@ module.exports = {
     getEventFromDB(queryString, function() {
       res.end();
     });
-  }
+  },
+  subscribe: function(req, res) {
+    var event_id = req.url.match(/\d+/)[0];
+    var user_id = req.session.passport.user.id;
+    var queryString = "INSERT INTO users_events (user_id, event_id) VALUES ("+user_id+", "+event_id+ ");";
+    getEventFromDB(queryString, function() {
+      res.end();
+    });
+  }  
 };
 
 
