@@ -1,6 +1,7 @@
 angular.module('fomo.event', [])
 
-.controller('EventController', ['$scope', '$http', '$log','$stateParams', '$cookies', '$cookieStore','EventService', function($scope, $http, $log, $stateParams, $cookies, $cookieStore, EventService) {
+.controller('EventController', ['$scope', '$http', '$log','$state', '$stateParams', '$cookies', '$cookieStore', 'EventService', function($scope, $http, $log, $state, $stateParams, $cookies, $cookieStore, EventService) {
+
 
   $scope.data = {};
   $scope.eventId = 'abc123'; // replace with actual eventId
@@ -25,6 +26,7 @@ angular.module('fomo.event', [])
     })
     .error(function(data, status, headers, config) {
       $log.log('fail');
+      $state.go('signup');
     });
   };
   $scope.unsubscribe = function() {
@@ -37,6 +39,7 @@ angular.module('fomo.event', [])
     })
     .error(function(data, status, headers, config) {
       $log.log('fail');
+      $state.go('signup');
     });
   };
   $scope.editEvent = function() { // to do, beyond MVP

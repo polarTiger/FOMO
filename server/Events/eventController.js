@@ -99,6 +99,7 @@ module.exports = {
     // Require user to be logged in
     if(!req.session.passport.user) {
       res.send(403);
+      return;
     }
 
     if (!req.body.notifyinfo && req.body.date) { // event only with date, no notification, just insert into events table
@@ -165,6 +166,10 @@ module.exports = {
   },
 
   myEvents: function(req, res) {
+    if(!req.session.passport.user) {
+      res.send(403);
+      return;
+    }
     var id = req.session.passport.user.id;
     var queryString = "SELECT * FROM events INNER JOIN " + 
                           "users_events ON events.id = users_events.event_id WHERE users_events.user_id="+id+";";
@@ -182,6 +187,10 @@ module.exports = {
     });
   },
   subscribe: function(req, res) {
+    if(!req.session.passport.user) {
+      res.send(403);
+      return;
+    }
     var event_id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user.id;
     var queryString = "INSERT INTO users_events (user_id, event_id) select "+user_id+ " as user_id, "+event_id+
@@ -193,6 +202,10 @@ module.exports = {
   },
 
   unsubscribe: function(req, res) {
+    if(!req.session.passport.user) {
+      res.send(403);
+      return;
+    }
     var event_id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user.id;
     var queryString = "DELETE from users_events where user_id="+user_id+" and event_id="+event_id + ";";
