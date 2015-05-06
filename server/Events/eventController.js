@@ -66,32 +66,34 @@ module.exports = {
   },
 
   addEvent: function(req, res) {
+
+    // Require user to be logged in
+    if(!req.session.passport.user) {
+      res.send(403);
+    }
+
     if (!req.body.notifyinfo && req.body.date) { // event only with date, no notification, just insert into events table
       console.log("OPTION 1");
       console.log("req.body.notifyinfo", req.body.notifyinfo);
-      var queryString = "INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
-                                +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"');";
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+                        +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
+                        +req.session.passport.user.id+"' FROM first_insert;";
     } else if (!req.body.notifyinfo && !req.body.date) { // event only without event date, set date to null
       console.log("OPTION 2");
-      var queryString = "INSERT into events (event_info, event_title, event_category, event_image) values ('"
-                                +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"');";
-    } else if (!req.body.notifydate) { // if notification exists but date is unknown // must have event date!
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image) values ('"
+                        +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
+                        +req.session.passport.user.id+"' FROM first_insert;";
+    } else { // insert notifications and events, defaults to event date if notification date is unknown, defaults to 00:01 if time is unknown
       // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
       console.log("OPTION 3");
+      // console.log("notifytime: ", req.body.notifytime);
       var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
-                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id) INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
-                      +req.body.notifyinfo+"', '"+(req.body.date || '9999-01-01')+"', '"+(req.body.notifytime || '00:01') +"' FROM first_insert;";
-    } else if (!req.body.notifytime) { // if notification exists with date but time is unknown
-      console.log("OPTION 4");
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
-                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id) INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
-                      +req.body.notifyinfo+"', '"+req.body.notifydate+"', '00:01' FROM first_insert;";
-    } else { // insert notifications and events, everything
-      console.log("OPTION 5");
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
-                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id) INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
-                      +req.body.notifyinfo+"', '"+req.body.notifydate+"', '"+req.body.notifytime+"' FROM first_insert;";
+                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
+                      +req.body.notifyinfo+"', '"+(req.body.notifydate || req.body.date || '9999-01-01')+"', '"+(req.body.notifytime || '00:01') +"' FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
+                      +req.session.passport.user.id+"' FROM first_insert;";
+      
     }
+
     pg.connect(dbUrl, function(err, client, done) {
       if(err) {
         return console.error('error fetching client from pool', err);
@@ -103,7 +105,8 @@ module.exports = {
           return console.error('error running query', err);
         }
 
-        res.end();
+
+        res.send(result);
         client.end();
 
       });
