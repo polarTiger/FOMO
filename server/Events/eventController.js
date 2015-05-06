@@ -4,6 +4,7 @@ var nodemailer = require('nodemailer');
 
 
 var getEventFromDB = function(queryString, cb) {
+  console.log(queryString);
   pg.connect(dbUrl, function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -17,9 +18,9 @@ var getEventFromDB = function(queryString, cb) {
         cb(result.rows);
       }
       //output: 1
-      client.end();
     });
   });
+  pg.end();
 };
 
 
@@ -33,7 +34,7 @@ var sendEmail = function(emails) {
   });
   var mailOptions = {
       from: 'FOMO <azcardsruleforeversuckitsea@gmail.com>',
-      to: "" + emails + ", kevinmarkvi@yahoo.com, davidtansf@gmail.com, sevenlist0110@gmail.com, trevorcaverly@gmail.com", 
+      to: "" + emails, 
       subject: 'EVENT TRIGGERED!',
       text: 'TEST TRIGGER EMAIL', // plaintext body
       html: '<b>Team Polar Tiger Rules!</b>' // html body
@@ -63,29 +64,27 @@ setInterval(function(){
      dbDate=JSON.stringify(dbDate).slice(1,11);
    
 
-     console.log('local time is ',localTime);
+     // console.log('local time is ',localTime);
 
      var dbTime=data[0].notification_time.slice(0,5);
-     console.log('dbTime is :', dbTime);
+     // console.log('dbTime is :', dbTime);
 
      if (date === dbDate) {
       if (localTime === dbTime  && data[0].fired === false) {
-        // send notifications
-        console.log('email sent!!!!!!');
-        /*
+
+        
          getEventFromDB(queryStringTrigger, function(data2){
-          console.log('now set the trigger to true');
-          triggerEvent2();
+          module.exports.triggerEvent();
          });
-        */  
-        module.exports.triggerEvent();
+          
+        
      }
 
     }
   }
     
   });
-}, 1000*60); // update every 5 seconds
+}, 1000*10); // update every 5 seconds
 
 
 module.exports = {
@@ -172,7 +171,7 @@ module.exports = {
   triggerEvent: function() {
     console.log("TriggerEvent Function Called");
     var eventId = 1; //req.body.event_id
-    var queryString = "SELECT email FROM users WHERE id = (SELECT user_id FROM users_events WHERE event_id = '"+ eventId + "');";
+    var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
 
     getEventFromDB(queryString, function(emails){
       email = emails[0].email;
