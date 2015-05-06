@@ -50,6 +50,30 @@ setInterval(function(){
   //console.log((date.getMonth() + 1) + '-' + date.getDate() + '-' +  date.getFullYear());
 
   getEventFromDB(queryString, function(data){
+    console.log(data);
+    if (data[0].notification_date !== null) {
+      for (var i=0; i< data.length; i++) {
+        
+          var dbDate= new Date(data[0].notification_date);
+          var localTime= JSON.stringify(date).slice(12,17);
+          var localDate=JSON.stringify(date).slice(1,11);
+          dbDate=JSON.stringify(dbDate).slice(1,11);
+          console.log('local time is ',localTime);
+          console.log('local date is ', localDate);
+          var dbTime=data[0].notification_time.slice(0,5);
+          console.log('dbTime is :', dbTime);
+          console.log('dbDate is: ', dbDate);
+          console.log('local date type ', typeof localDate);
+          console.log('db date type ', typeof dbDate);
+          console.log(localDate === dbDate);
+          console.log(localTime=== dbTime);
+          if ( localDate === dbDate && localTime === dbTime) {
+              console.log('triggering:!!!');
+              module.exports.triggerEvent(i);
+          }
+        }
+    }
+    /*
     if (data[0].notification_date !== null) {
 
      var dbDate = new Date(data[0].notification_date);
@@ -68,6 +92,10 @@ setInterval(function(){
         }
       }
     }
+
+  }
+  */
+    
   });
 }, 1000*10); // update every 5 seconds
 
@@ -172,7 +200,7 @@ module.exports = {
     });
   },
 
-  triggerEvent: function() {
+  triggerEvent: function(i) {
     console.log("TriggerEvent Function Called");
     var eventId = 1; //req.body.event_id
     var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
