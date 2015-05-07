@@ -10,8 +10,9 @@
 <!-- http://stackoverflow.com/questions/26926345/angularjs-ng-repeat-add-comma-separated-and-and-before-last-item -->
 <!--     <button ng-click="editEvent()" type="submit" class="btn btn-default navbar-btn">Edit Event</button> -->
     <h4> --------------------------- Notifications --------------------------- </h4>
-    <p>Notification Info: {{data.notification_info}}</p>
-    <p>On: {{data.notification_date | date}}, {{data.notification_time}}</p>
+    <p ng-show="data.notification_info">Notification Info: {{data.notification_info}}</p>
+    <p ng-show="data.notification_info">On: {{data.notification_date | date}}, {{data.notification_time}}</p>
+    <p ng-show="!data.notification_info">No notifications yet – edit event to add one</p>
     <button ng-if="!data.subscribed" class="btn btn-default navbar-btn" ng-hide="notifyBtn" class="ng-hide" ng-click="subscribe()" notype="submit" >Subscribe!</button>
 
     <button ng-if="data.subscribed" class="btn btn-default navbar-btn" ng-hide="notifyBtn" class="ng-hide" ng-click="unsubscribe()" notype="submit" >Unsubscribe!</button>
