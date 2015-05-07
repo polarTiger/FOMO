@@ -3,5 +3,4 @@ var app = express();
 
 require('./middleware.js')(app, express);
 
-
 module.exports = app;

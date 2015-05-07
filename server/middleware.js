@@ -6,7 +6,6 @@ var favicon = require('serve-favicon');
 var session = require('express-session');
 var passport = require('./passport/passportConfig');
 
-
 module.exports = function (app, express) {
 
   var userRouter = express.Router();
@@ -24,10 +23,6 @@ module.exports = function (app, express) {
   app.use('/api/users', userRouter);
   app.use('/api/events', eventRouter);
 
-
-
   require('./Users/userRoutes.js')(userRouter);
   require('./Events/eventRoutes.js')(eventRouter);
-
-
 };

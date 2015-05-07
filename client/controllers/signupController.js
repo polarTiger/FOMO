@@ -6,7 +6,7 @@ angular.module('fomo.signup', [])
     .success(function(data) {
       $scope.events = data;
       console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.events);
-    })
+    });
   };
 
   $scope.signup = function() {
@@ -14,7 +14,7 @@ angular.module('fomo.signup', [])
       username: $scope.user.username,
       password: $scope.user.password,
       email: $scope.user.email
-    }
+    };
 
     $http.post('api/users/signup', userObj).
       success(function(data, status, headers, config) {

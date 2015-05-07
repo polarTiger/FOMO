@@ -39,6 +39,4 @@ module.exports = {
 
   signInPost : 
     passport.authenticate('local', { failureRedirect: '/login'})
-    
-
 };
