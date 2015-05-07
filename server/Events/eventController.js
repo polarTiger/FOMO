@@ -43,33 +43,33 @@ var sendEmail = function(emails) {
   });
 };
 
-setInterval(function(){
-  var queryString = "SELECT * FROM notifications WHERE id = " + 1 + ";";
+setInterval(function(){ 
+  var queryString = "SELECT * FROM notifications";
   var date = new Date();
-  var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ 1 + ";";
-  //console.log((date.getMonth() + 1) + '-' + date.getDate() + '-' +  date.getFullYear());
-
+  
   getEventFromDB(queryString, function(data){
-    if (data[0].notification_date !== null) {
-
-     var dbDate = new Date(data[0].notification_date);
-     var localTime = JSON.stringify(date).slice(12,17);
-     date = JSON.stringify(date).slice(1,11);
-     dbDate = JSON.stringify(dbDate).slice(1,11);
-     // console.log('local time is ',localTime);
-
-     var dbTime = data[0].notification_time.slice(0,5);
-     // console.log('dbTime is :', dbTime);
-     if (date === dbDate) {
-      if (localTime === dbTime  && data[0].fired === false) {
-         getEventFromDB(queryStringTrigger, function(data2){
-          module.exports.triggerEvent();
-         });
+    console.log(data);
+    for (var i = 0; i < data.length; i++) {
+      (function(i){
+        if (data[i].notification_date !== null && data[i].notification_time !== null) {
+         var dbDate= new Date(data[i].notification_date);
+         var localTime= JSON.stringify(date).slice(12,17);
+         date=JSON.stringify(date).slice(1,11);
+         dbDate=JSON.stringify(dbDate).slice(1,11);
+         var dbTime=data[i].notification_time.slice(0,5);
+        
+          if (date === dbDate) {
+            if (localTime === dbTime  && data[i].fired === false) {
+              var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ data[i].id + ";";
+              console.log('triggering!!!!!');
+              getEventFromDB(queryStringTrigger, function(data2){
+               module.exports.triggerEvent(i);
+              }); 
+            }
+          }
         }
-      }
+      })(i);
     }
-
-  }
   });
 }, 1000*10); // update every 5 seconds
 
