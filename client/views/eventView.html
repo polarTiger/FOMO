@@ -6,14 +6,17 @@
     <h3>{{data.event_date | date}}</h3>
     <p>{{data.event_info}}</p>
     <a href="http://{{data.event_image}}" target="_blank">{{data.event_image}}</a>
-    <p>Tags:<span ng-repeat='tag in test.tags'>{{$first ? ' ' : ', '}}{{tag}}</span></p>
+    <!-- <p>Tags:<span ng-repeat='tag in test.tags'>{{$first ? ' ' : ', '}}{{tag}}</span></p> --> <!-- todo: add tags -->
 <!-- http://stackoverflow.com/questions/26926345/angularjs-ng-repeat-add-comma-separated-and-and-before-last-item -->
 <!--     <button ng-click="editEvent()" type="submit" class="btn btn-default navbar-btn">Edit Event</button> -->
+    <h4> --------------------------- Notifications --------------------------- </h4>
+    <p>Notification Info: {{data.notification_info}}</p>
+    <p>On: {{data.notification_date | date}}, {{data.notification_time}}</p>
     <button ng-if="!data.subscribed" class="btn btn-default navbar-btn" ng-hide="notifyBtn" class="ng-hide" ng-click="subscribe()" notype="submit" >Subscribe!</button>
 
     <button ng-if="data.subscribed" class="btn btn-default navbar-btn" ng-hide="notifyBtn" class="ng-hide" ng-click="unsubscribe()" notype="submit" >Unsubscribe!</button>
 
-    <button class="btn btn-default navbar-btn"  class="ng-hide" ng-click="editEvent()" notype="submit" >Modify Me!</button>
+    <button class="btn btn-default navbar-btn"  class="ng-hide" ng-click="editEvent()" notype="submit">Edit Event</button>
 
     <form novalidate name="eventForm" class="form-block" role="form" ng-hide ="modifyEventBtn">
       <label for="inputEventName">Event Name:</label>
