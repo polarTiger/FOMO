@@ -1,9 +1,9 @@
 var pg = require('pg');
 var dbUrl = require('../dbConfig/dbConfig');
 var nodemailer = require('nodemailer');
+var emailInfo = require('./emailAuth.js');
 
 var getEventFromDB = function(queryString, cb) {
-  console.log(queryString);
   pg.connect(dbUrl, function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -25,14 +25,11 @@ var getEventFromDB = function(queryString, cb) {
 var sendEmail = function(emails) {
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
-      auth: {
-          user: 'azcardsruleforeversuckitsea@gmail.com',
-          pass: 'bestemailever'
-      }
+      auth: emailInfo
   });
   var mailOptions = {
-      from: 'FOMO <azcardsruleforeversuckitsea@gmail.com>',
-      to: "" + emails,
+      from: 'FOMO <tryfomo@gmail.com>',
+      to: "kevinmarkvi@yahoo.com", 
       subject: 'EVENT TRIGGERED!',
       text: 'TEST TRIGGER EMAIL', // plaintext body
       html: '<b>Team Polar Tiger Rules!</b>' // html body
