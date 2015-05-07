@@ -4,9 +4,8 @@ var passport = require('../passport/passportConfig');
 
 module.exports = {
 
-  userPlaceHolder: function(req, res) {
-    res.send(200);
-    console.log("User Route Works!!!!!");
+  signedIn: function(req, res) {
+    res.send(req.session.passport.user !== undefined);
   }, 
 
   signUpPost : function(req, res, next) {
@@ -38,5 +37,12 @@ module.exports = {
   },
 
   signInPost : 
-    passport.authenticate('local', { failureRedirect: '/login'})
+    passport.authenticate('local', { failureRedirect: '/login'}),
+
+  signout: function(req, res, next) {
+    console.log('signout');
+    req.session.destroy();
+    delete req.session;
+    res.end();
+  }
 };
