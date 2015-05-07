@@ -3,8 +3,8 @@ angular.module('fomo.loggedinservice', [])
 .factory('LoggedInService', ['$http', function($http) {
   var _loggedIn = false;
 
-  var toggleLogIn = function() {
-    _loggedIn = !_loggedIn;
+  var setLoggedIn = function(isIn) {
+    _loggedIn = isIn;
   };
 
   var isLoggedIn = function() {
@@ -14,13 +14,14 @@ angular.module('fomo.loggedinservice', [])
   var getLoggedIn = function(cb) {
     $http.get('/api/users/signedin')
         .success(function(data){
+          _loggedIn = data;
           console.log(data);
           cb(data);
         });
   }
 
   return {
-    toggleLogIn: toggleLogIn,
+    setLoggedIn: setLoggedIn,
     isLoggedIn: isLoggedIn,
     getLoggedIn: getLoggedIn
   };

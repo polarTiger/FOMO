@@ -60,6 +60,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
     $http.get('/api/users/signout')
       .success(function(data) {
         console.log("logout");
+        LoggedInService.setLoggedIn(false);
       });
   };
   $scope.loggedin = function() {
@@ -68,4 +69,9 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       console.log(data);
     })
   }
+  $scope.getLoggedIn = function() {
+    console.log(LoggedInService.isLoggedIn());
+    return LoggedInService.isLoggedIn();
+  }
+  $scope.loggedin();
 }]);
