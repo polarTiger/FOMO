@@ -73,7 +73,6 @@ setInterval(function(){
     }
 
   }
-    
   });
 }, 1000*10); // update every 5 seconds
 
@@ -180,7 +179,8 @@ module.exports = {
 
   triggerEvent: function(i) {
     console.log("TriggerEvent Function Called");
-    var eventId = 1; //req.body.event_id
+    var eventId = 1+i; //req.body.event_id
+    console.log('eventId is', eventId);
     var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
     getEventFromDB(queryString, function(emails){
       email = emails[0].email;
