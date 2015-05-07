@@ -63,7 +63,7 @@ setInterval(function(){
               var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ data[i].id + ";";
               console.log('triggering!!!!!');
               getEventFromDB(queryStringTrigger, function(data2){
-               module.exports.triggerEvent(i);
+               module.exports.triggerEvent(data[i].event_id);
               }); 
             }
           }
@@ -71,7 +71,7 @@ setInterval(function(){
       })(i);
     }
   });
-}, 1000*10); // update every 5 seconds
+}, 1000*30); // update every 5 seconds
 
 module.exports = {
 
@@ -174,9 +174,9 @@ module.exports = {
     });
   },
 
-  triggerEvent: function(i) {
-    console.log("TriggerEvent Function Called");
-    var eventId = 1+i; //req.body.event_id
+  triggerEvent: function(eventId) {
+    console.log("TriggerEvent Function Called, with event id", eventId);
+    //var eventId = 1+i; //req.body.event_id
     console.log('eventId is', eventId);
     var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
     getEventFromDB(queryString, function(emails){
