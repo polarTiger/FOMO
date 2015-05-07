@@ -32,7 +32,7 @@ var sendEmail = function(emails) {
   });
   var mailOptions = {
       from: 'FOMO <azcardsruleforeversuckitsea@gmail.com>',
-      to: "" + emails, 
+      to: "" + emails,
       subject: 'EVENT TRIGGERED!',
       text: 'TEST TRIGGER EMAIL', // plaintext body
       html: '<b>Team Polar Tiger Rules!</b>' // html body
@@ -46,12 +46,12 @@ var sendEmail = function(emails) {
   });
 };
 
-setInterval(function(){ 
+setInterval(function(){
   var queryString = "SELECT * FROM notifications WHERE id = " + 1 + ";";
   var date = new Date();
   var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ 1 + ";";
   //console.log((date.getMonth() + 1) + '-' + date.getDate() + '-' +  date.getFullYear());
-  
+
   getEventFromDB(queryString, function(data){
     if (data[0].notification_date !== null) {
 
@@ -70,7 +70,7 @@ setInterval(function(){
          });
         }
       }
-    }  
+    }
   });
 }, 1000*10); // update every 5 seconds
 
@@ -84,22 +84,50 @@ module.exports = {
   getEvent: function(req, res) {
     var id = req.url.match(/\d+/)[0];
 
-    var queryString = "SELECT * FROM events WHERE id = " + id + ";";
+    var queryString = "SELECT * FROM events INNER JOIN notifications ON events.id=notifications.event_id WHERE events.id = " + id + ";";
 
-    getEventFromDB(queryString, function(rows){
+    getEventFromDB(queryString, function(rows) {
 
-      var user_id = req.session.passport.user ? req.session.passport.user.id : 0;
+    console.log("ROWS 1:", rows);
+    // if no notification for given event (needs refactor)
+      if (rows.length === 0) {
 
-      var queryString = "SELECT * from users_events WHERE event_id=" + id +
-                        "and user_id=" + user_id + ";";
+        var queryString = "SELECT * FROM events WHERE events.id = " + id + ";";
 
-      getEventFromDB(queryString, function(subscribe) {
+        getEventFromDB(queryString, function(rows) {
 
-        console.log("subscribe", subscribe);
-        rows[0].subscribed = (subscribe.length !== 0);
+          console.log("ROWS 2:", rows);
 
-        res.end(JSON.stringify(rows[0]));
-      });
+          var user_id = req.session.passport.user ? req.session.passport.user.id : 0;
+
+          var queryString = "SELECT * from users_events WHERE event_id=" + id +
+                          "and user_id=" + user_id + ";";
+
+          getEventFromDB(queryString, function(subscribe) {
+
+            console.log("subscribe", subscribe);
+            rows[0].subscribed = (subscribe.length !== 0);
+
+            res.end(JSON.stringify(rows[0]));
+          });
+        });
+    // if notification for event, continue
+      } else {
+
+        var user_id = req.session.passport.user ? req.session.passport.user.id : 0;
+
+        var queryString = "SELECT * from users_events WHERE event_id=" + id +
+                          "and user_id=" + user_id + ";";
+
+        getEventFromDB(queryString, function(subscribe) {
+
+          console.log("subscribe", subscribe);
+          rows[0].subscribed = (subscribe.length !== 0);
+
+          res.end(JSON.stringify(rows[0]));
+        });
+      }
+
     });
   },
 
@@ -172,7 +200,7 @@ module.exports = {
       return;
     }
     var id = req.session.passport.user.id;
-    var queryString = "SELECT * FROM events INNER JOIN " + 
+    var queryString = "SELECT * FROM events INNER JOIN " +
                           "users_events ON events.id = users_events.event_id WHERE users_events.user_id="+id+";";
 
     getEventFromDB(queryString, function(rows){
@@ -213,6 +241,6 @@ module.exports = {
     getEventFromDB(queryString, function() {
       res.end();
     });
-  }  
+  }
 };
 
