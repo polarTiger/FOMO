@@ -1,4 +1,3 @@
-
 var dbUrl = require('./dbConfig');
 
 var knex = require('knex')({

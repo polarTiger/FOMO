@@ -1,7 +1,6 @@
 var pg = require('pg');
-var dbUrl= require('../dbConfig/dbConfig');
+var dbUrl = require('../dbConfig/dbConfig');
 var nodemailer = require('nodemailer');
-
 
 var getEventFromDB = function(queryString, cb) {
   console.log(queryString);
@@ -22,7 +21,6 @@ var getEventFromDB = function(queryString, cb) {
   });
   pg.end();
 };
-
 
 var sendEmail = function(emails) {
   var transporter = nodemailer.createTransport({
@@ -48,7 +46,6 @@ var sendEmail = function(emails) {
   });
 };
 
-
 setInterval(function(){ 
   var queryString = "SELECT * FROM notifications WHERE id = " + 1 + ";";
   var date = new Date();
@@ -58,34 +55,24 @@ setInterval(function(){
   getEventFromDB(queryString, function(data){
     if (data[0].notification_date !== null) {
 
-     var dbDate= new Date(data[0].notification_date);
-     var localTime= JSON.stringify(date).slice(12,17);
-     date=JSON.stringify(date).slice(1,11);
-     dbDate=JSON.stringify(dbDate).slice(1,11);
-   
-
+     var dbDate = new Date(data[0].notification_date);
+     var localTime = JSON.stringify(date).slice(12,17);
+     date = JSON.stringify(date).slice(1,11);
+     dbDate = JSON.stringify(dbDate).slice(1,11);
      // console.log('local time is ',localTime);
 
-     var dbTime=data[0].notification_time.slice(0,5);
+     var dbTime = data[0].notification_time.slice(0,5);
      // console.log('dbTime is :', dbTime);
-
      if (date === dbDate) {
       if (localTime === dbTime  && data[0].fired === false) {
-
-        
          getEventFromDB(queryStringTrigger, function(data2){
           module.exports.triggerEvent();
          });
-          
-        
-     }
-
-    }
-  }
-    
+        }
+      }
+    }  
   });
 }, 1000*10); // update every 5 seconds
-
 
 module.exports = {
 
@@ -106,21 +93,17 @@ module.exports = {
       var queryString = "SELECT * from users_events WHERE event_id=" + id +
                         "and user_id=" + user_id + ";";
 
-        getEventFromDB(queryString, function(subscribe) {
+      getEventFromDB(queryString, function(subscribe) {
 
-          console.log("subscribe", subscribe);
-          rows[0].subscribed = (subscribe.length !== 0);
+        console.log("subscribe", subscribe);
+        rows[0].subscribed = (subscribe.length !== 0);
 
-          res.end(JSON.stringify(rows[0]));
-
-        })
-
-
+        res.end(JSON.stringify(rows[0]));
+      });
     });
   },
 
   addEvent: function(req, res) {
-
     // Require user to be logged in
     if(!req.session.passport.user) {
       res.send(403);
@@ -146,7 +129,6 @@ module.exports = {
                          +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
                       +req.body.notifyinfo+"', '"+(req.body.notifydate || req.body.date || '9999-01-01')+"', '"+(req.body.notifytime || '00:01') +"' FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
                       +req.session.passport.user.id+"' FROM first_insert;";
-      
     }
 
     pg.connect(dbUrl, function(err, client, done) {
@@ -159,11 +141,8 @@ module.exports = {
         if(err) {
           return console.error('error running query', err);
         }
-
-
         res.send();
         client.end();
-
       });
     });
   },
@@ -172,7 +151,6 @@ module.exports = {
     console.log("TriggerEvent Function Called");
     var eventId = 1; //req.body.event_id
     var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
-
     getEventFromDB(queryString, function(emails){
       email = emails[0].email;
       sendEmail(email);
@@ -181,10 +159,8 @@ module.exports = {
 
 
   searchEvents: function(req, res) {
-
     var clientQuery = req.query.query;
     var queryString = "SELECT * FROM events WHERE LOWER(event_title) like LOWER('%" + clientQuery + "%');";
-
     getEventFromDB(queryString, function(rows){
       res.end(JSON.stringify(rows));
     });
@@ -211,6 +187,7 @@ module.exports = {
       res.end();
     });
   },
+
   subscribe: function(req, res) {
     if(!req.session.passport.user) {
       res.send(403);
@@ -220,7 +197,6 @@ module.exports = {
     var user_id = req.session.passport.user.id;
     var queryString = "INSERT INTO users_events (user_id, event_id) select "+user_id+ " as user_id, "+event_id+
                         " as event_id from users_events where (user_id="+user_id+" and event_id="+event_id+ ") having count(*)=0;";
-
     getEventFromDB(queryString, function() {
       res.end();
     });
@@ -239,21 +215,4 @@ module.exports = {
     });
   }  
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

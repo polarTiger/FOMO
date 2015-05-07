@@ -8,7 +8,6 @@ angular.module('fomo.results', [])
                     .success(function(data, status) {
                       $log.log(data);
                       $scope.events = data;
-                    });
-    }
-
+      });
+    };
 }]);
