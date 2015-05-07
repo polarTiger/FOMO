@@ -140,19 +140,19 @@ module.exports = {
     if (!req.body.notifyinfo && req.body.date) { // event only with date, no notification, just insert into events table
       console.log("OPTION 1");
 
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date) values ('"
                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
                         +req.session.passport.user.id+"' FROM first_insert;";
     } else if (!req.body.notifyinfo && !req.body.date) { // event only without event date, set date to null
       console.log("OPTION 2");
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image) values ('"
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link) values ('"
                         +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
                         +req.session.passport.user.id+"' FROM first_insert;";
     } else { // insert notifications and events, defaults to event date if notification date is unknown, defaults to 00:01 if time is unknown
       // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
       console.log("OPTION 3");
       // console.log("notifytime: ", req.body.notifytime);
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image, event_date) values ('"
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date) values ('"
                          +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
                       +req.body.notifyinfo+"', '"+(req.body.notifydate || req.body.date || '9999-01-01')+"', '"+(req.body.notifytime || '00:01') +"' FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
                       +req.session.passport.user.id+"' FROM first_insert;";
