@@ -29,7 +29,7 @@ var sendEmail = function(emails) {
   });
   var mailOptions = {
       from: 'FOMO <tryfomo@gmail.com>',
-      to: "kevinmarkvi@yahoo.com", 
+      to: "kevinmarkvi@yahoo.com",
       subject: 'EVENT TRIGGERED!',
       text: 'TEST TRIGGER EMAIL', // plaintext body
       html: '<b>Team Polar Tiger Rules!</b>' // html body
@@ -43,10 +43,10 @@ var sendEmail = function(emails) {
   });
 };
 
-setInterval(function(){ 
+setInterval(function(){
   var queryString = "SELECT * FROM notifications";
   var date = new Date();
-  
+
   getEventFromDB(queryString, function(data){
     // console.log(data);
     for (var i = 0; i < data.length; i++) {
@@ -57,14 +57,14 @@ setInterval(function(){
          date=JSON.stringify(date).slice(1,11);
          dbDate=JSON.stringify(dbDate).slice(1,11);
          var dbTime=data[i].notification_time.slice(0,5);
-        
+
           if (date === dbDate) {
             if (localTime === dbTime  && data[i].fired === false) {
               var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ data[i].id + ";";
               console.log('triggering!!!!!');
               getEventFromDB(queryStringTrigger, function(data2){
                module.exports.triggerEvent(data[i].event_id);
-              }); 
+              });
             }
           }
         }
@@ -137,20 +137,21 @@ module.exports = {
       return;
     }
 
-    if (!req.body.notifyinfo && req.body.date) { // event only with date, no notification, just insert into events table
-      console.log("OPTION 1");
+    if (!req.body.notifyinfo) {
+      console.log("OPTION 1"); // event only, no notification
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time) values ('"
+                        +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01 00:01:00-07')+"','"+(req.body.date || '00:01:00')+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
+                        +req.session.passport.user.id+"' FROM first_insert;";
 
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date) values ('"
-                        +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+req.body.date+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
-                        +req.session.passport.user.id+"' FROM first_insert;";
-    } else if (!req.body.notifyinfo && !req.body.date) { // event only without event date, set date to null
-      console.log("OPTION 2");
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link) values ('"
-                        +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
-                        +req.session.passport.user.id+"' FROM first_insert;";
+      console.log('QUERY STRING: ', queryString);
+    // } else if (!req.body.notifyinfo && !req.body.date) { // event only without event date, set date to null
+    //   console.log("OPTION 2");
+    //   var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image) values ('"
+    //                     +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
+    //                     +req.session.passport.user.id+"' FROM first_insert;";
     } else { // insert notifications and events, defaults to event date if notification date is unknown, defaults to 00:01 if time is unknown
       // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
-      console.log("OPTION 3");
+      console.log("OPTION 2");
       // console.log("notifytime: ", req.body.notifytime);
       var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date) values ('"
                          +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"

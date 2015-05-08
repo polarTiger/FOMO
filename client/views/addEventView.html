@@ -15,11 +15,12 @@
       <div class="form-group">
         <input type="text" ng-model="event.link" />
       </div>
-      <label for="dateInfo">Event Date</label>
+      <label for="dateInfo">Event Date & Time</label>
       <div class="form-group">
-     <input type="date" id="add-event-date" name="input" ng-model="event.date"
-         placeholder="yyyy-MM-dd" />
+<!-- <input type="date" id="add-event-date" name="input" ng-model="event.date" placeholder="yyyy-MM-dd"/> --> <!-- replace with input datetime-local -->
+     <input type="datetime-local" id="add-event-date" name="input" ng-model="event.date"/>
       </div>
+
       <label for="categoryInfo">Category</label>
       <div class="form-group">
         <select ng-model="event.category">
@@ -37,7 +38,6 @@
         <input type="date" id="add-notify-date" name="input" ng-model="event.notifydate"/>
         <input type="time" id="add-notify-time" name="input" ng-model="event.notifytime"/>
       </div>
-
         <input type="submit" ng-disabled="eventForm.$invalid"class="btn btn-primary" ng-click="submitEvent()">
       </div>
     </form>
