@@ -45,46 +45,48 @@ var sendEmail = function(emails) {
 
 setInterval(function(){
   var queryString = "SELECT * FROM notifications";
-  var serverDate = new Date().toJSON();
 
   getEventFromDB(queryString, function(data){
 
     for (var i = 0; i < data.length; i++) {
       (function(i){
         if (data[i].notification_date !== null && data[i].notification_time !== null) {
+          var serverDate = new Date().toJSON();
+          var serverTime = serverDate.slice(11,16);
+          serverDate = serverDate.slice(0,10);
+          var dbTime = data[i].notification_time.slice(0,8);
+          var dbYear = data[i].notification_date.getFullYear();
+          var dbMonth = data[i].notification_date.getMonth();
+          var dbDay = data[i].notification_date.getDate();
+          var dbHour = parseInt(data[i].notification_time.slice(0,2));
+          var dbMin = parseInt(data[i].notification_time.slice(3,5));
+          var dbSec = parseInt(data[i].notification_time.slice(6,8));
+          var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin, dbSec)).toJSON();
 
-         var serverTime = serverDate.slice(11,16);
-         serverDate = serverDate.slice(0,10);
-         var dbTime = data[i].notification_time.slice(0,8);
-         var dbYear = data[i].notification_date.getFullYear();
-         var dbMonth = data[i].notification_date.getMonth();
-         var dbDay = data[i].notification_date.getDate();
-         var dbHour = parseInt(data[i].notification_time.slice(0,2));
-         var dbMin = parseInt(data[i].notification_time.slice(3,5));
-         var dbSec = parseInt(data[i].notification_time.slice(6,8));
-         var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin, dbSec)).toJSON();
-
-         dbTime = dbTime.slice(0,5);
-         dbDate = dbDate.slice(0,10);
-         console.log('dbDate is ', dbDate);
-         console.log('serverDate is ', serverDate);
-         console.log('dbTime is ', dbTime);
-         console.log('serverTime is ', serverTime);
-
+          dbTime = dbTime.slice(0,5);
+          dbDate = dbDate.slice(0,10);
+          //console.log('dbDate is ', dbDate);
+          //console.log('serverDate is ', serverDate);
+          //console.log('dbTime is ', dbTime);
+          //console.log('serverTime is ', serverTime);
           if (serverDate === dbDate) {
-            if (serverTime === dbTime  && data[i].fired === false) {
+            if (serverTime === dbTime  && data[i].fired === null) {
               var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ data[i].id + ";";
               console.log('triggering!!!!!');
               getEventFromDB(queryStringTrigger, function(data2){
-               module.exports.triggerEvent(data[i].event_id);
-              });
+                var idObj = {query: {
+                  event_id: data[i].event_id
+                }};
+                console.log("IDOBJ: ", idObj);
+               module.exports.triggerEvent(idObj); 
+              }); 
             }
           }
         }
       })(i);
     }
   });
-}, 1000*30); // update every 5 seconds
+}, 1000*10); // update every 5 seconds
 
 module.exports = {
 
@@ -191,19 +193,9 @@ module.exports = {
     });
   },
 
-  backEndTriggerEvent: function(eventId) {
-    console.log("backEndTriggerEvent Function Called");//, with event id", eventId);
-    var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
-    getEventFromDB(queryString, function(emails){
-      email = emails[0].email;
-      sendEmail(email);
-    });
-  },
-
-
   triggerEvent: function(req, res) {
     console.log("TriggerEvent Function Called");//, with event id", eventId);
-    var eventId = req.query.event_id;
+    var eventId = req.query.event_id; //this is the id, which is an integer. 
     console.log('EVENT ID: ', eventId);
     var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
     getEventFromDB(queryString, function(emails){
