@@ -15,13 +15,13 @@
 <body>
 
   <!--CONTENT DIV -->
-  <div class="main-container">
+  <div class="main-container" ng-controller="MainController">
     <!-- Navigation -->
     <h1 class='title'>fomo<p class='subtitle'>fear of missing out</p></h1>
     <nav id="hmenu" class="col-md-12">
       <ul>
         <li class="col-md-3"><a href="#/home">home</a></li>
-        <li class="col-md-3"><a href="#/signin">signin</a></li>
+        <li class="col-md-3"><a ng-if="isLoggedIn()===false" href="#/signin">signin</a><a href ng-if="isLoggedIn()===true" ng-click="logout()">logout</a></li>
         <li class="col-md-3"><a href="#/user">my events</a></li>
         <li class="col-md-3"><a href="#/addevent">new event</a></li>
       </ul>
@@ -55,6 +55,7 @@
     <script src="controllers/signupController.js"></script>
     <script src="controllers/ResultsController.js"></script>
     <script src="services/EventService.js"></script>
+    <script src="services/loggedInService.js"></script>
     <script src="services/SearchService.js"></script>
     <script src="services/AddEventService.js"></script>
     <script src="services/UserService.js"></script>
