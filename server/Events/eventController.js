@@ -56,7 +56,14 @@ setInterval(function(){
          var serverTime = serverDate.slice(11,16);
          serverDate = serverDate.slice(0,10);
          var dbTime = data[i].notification_time.slice(0,8);
-         var dbDate = new Date(data[i].notification_date.toString().replace(/\d{2}:\d{2}:\d{2}/, dbTime)).toJSON();
+         var dbYear = data[i].notification_date.getFullYear();
+         var dbMonth = data[i].notification_date.getMonth();
+         var dbDay = data[i].notification_date.getDate();
+         var dbHour = parseInt(data[i].notification_time.slice(0,2));
+         var dbMin = parseInt(data[i].notification_time.slice(3,5));
+         var dbSec = parseInt(data[i].notification_time.slice(6,8));
+         var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin, dbSec)).toJSON();
+      
          dbTime = dbTime.slice(0,5);
          dbDate = dbDate.slice(0,10);
          console.log('dbDate is ', dbDate);
@@ -77,7 +84,7 @@ setInterval(function(){
       })(i);
     }
   });
-}, 1000*30); // update every 5 seconds
+}, 1000*10); // update every 5 seconds
 
 module.exports = {
 
