@@ -48,7 +48,7 @@ setInterval(function(){
   var serverDate = new Date().toJSON();
 
   getEventFromDB(queryString, function(data){
-    // console.log(data);
+
     for (var i = 0; i < data.length; i++) {
       (function(i){
         if (data[i].notification_date !== null && data[i].notification_time !== null) {
@@ -100,7 +100,7 @@ module.exports = {
 
     getEventFromDB(queryString, function(rows) {
 
-    console.log("ROWS 1:", rows);
+    //console.log("ROWS 1:", rows);
     // if no notification for given event (needs refactor)
       if (rows.length === 0) {
 
@@ -117,7 +117,7 @@ module.exports = {
 
           getEventFromDB(queryString, function(subscribe) {
 
-            console.log("subscribe", subscribe);
+            //console.log("subscribe", subscribe);
             rows[0].subscribed = (subscribe.length !== 0);
 
             res.end(JSON.stringify(rows[0]));
@@ -133,13 +133,12 @@ module.exports = {
 
         getEventFromDB(queryString, function(subscribe) {
 
-          console.log("subscribe", subscribe);
+          //console.log("subscribe", subscribe);
           rows[0].subscribed = (subscribe.length !== 0);
 
           res.end(JSON.stringify(rows[0]));
         });
       }
-
     });
   },
 
@@ -192,10 +191,20 @@ module.exports = {
     });
   },
 
-  triggerEvent: function(eventId) {
-    console.log("TriggerEvent Function Called, with event id", eventId);
-    //var eventId = 1+i; //req.body.event_id
-    console.log('eventId is', eventId);
+  backEndTriggerEvent: function(eventId) {
+    console.log("backEndTriggerEvent Function Called");//, with event id", eventId);
+    var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
+    getEventFromDB(queryString, function(emails){
+      email = emails[0].email;
+      sendEmail(email);
+    });
+  },
+
+
+  triggerEvent: function(req, res) {
+    console.log("TriggerEvent Function Called");//, with event id", eventId);
+    var eventId = req.query.event_id;
+    console.log('EVENT ID: ', eventId);
     var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
     getEventFromDB(queryString, function(emails){
       email = emails[0].email;
@@ -227,7 +236,7 @@ module.exports = {
   },
 
   editEvent: function(req, res) {
-    console.log("REQUEST>BODY: ", req.body);
+    //console.log("REQUEST>BODY: ", req.body);
     var queryString = "UPDATE events SET event_info = '" + req.body.event_info + "', event_title = '" + req.body.event_title + "', event_category = '" + req.body.event_category + "', event_date = '" + req.body.event_date + "' WHERE id = '" + req.body.id +"';";
     getEventFromDB(queryString, function() {
       res.end();

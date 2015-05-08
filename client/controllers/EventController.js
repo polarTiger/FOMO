@@ -12,7 +12,7 @@ angular.module('fomo.event', [])
     .then(function(data) {
       $scope.data = data.data;
       $log.log('haha, ', $cookies['connect.sid']);
-      console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
+      //console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
     });
   };
 
@@ -59,6 +59,10 @@ angular.module('fomo.event', [])
     });
   };
 
+  $scope.triggerEvent = function() {
+    $http.get('/api/events/triggerevent/', {params: {event_id: $stateParams.eventID}});
+  };
+
   $scope.modifyEvent = function() {
     $http.post('/api/events/editevent/'+$stateParams.eventID, $scope.eventData)
         .success(function(data, status, headers, config) {
@@ -72,7 +76,7 @@ angular.module('fomo.event', [])
   
   $scope.addEmail = function() {
     $scope.email.eventId = $scope.eventId;
-    console.log('EMAIL: ', $scope.email);
+    //console.log('EMAIL: ', $scope.email);
     $scope.subBtn = true;
     $scope.notifyBtn = true;
     EventService.submitEmail($scope.email);
