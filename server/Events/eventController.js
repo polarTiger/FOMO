@@ -48,7 +48,7 @@ setInterval(function(){
   var date = new Date();
   
   getEventFromDB(queryString, function(data){
-    console.log(data);
+    // console.log(data);
     for (var i = 0; i < data.length; i++) {
       (function(i){
         if (data[i].notification_date !== null && data[i].notification_time !== null) {

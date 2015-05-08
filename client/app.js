@@ -56,22 +56,18 @@ angular.module('fomo', ['ui.router', 'fomo.event',
 })
 .controller("MainController", ['$scope', '$http', 'LoggedInService', function($scope, $http, LoggedInService) {
   $scope.logout = function() {
-    console.log('signout');
+    console.log('signout attempt');
     $http.get('/api/users/signout')
       .success(function(data) {
         console.log("logout");
         LoggedInService.setLoggedIn(false);
       });
   };
-  $scope.loggedin = function() {
-    console.log('signedin?');
-    LoggedInService.getLoggedIn(function(data){
-      console.log(data);
-    })
-  }
-  $scope.getLoggedIn = function() {
-    console.log(LoggedInService.isLoggedIn());
+  $scope.isLoggedIn = function() {
     return LoggedInService.isLoggedIn();
   }
-  $scope.loggedin();
+  $scope.getLoggedIn = function() {
+    LoggedInService.getLoggedIn();
+  }
+  $scope.getLoggedIn();
 }]);
