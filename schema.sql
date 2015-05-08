@@ -35,7 +35,7 @@ CREATE TABLE "events" (
   "event_info" TEXT NULL DEFAULT NULL,
   "event_title" TEXT NOT NULL,
   "event_category" TEXT NULL DEFAULT NULL,
-  "event_date" TIMESTAMP (0) WITH TIME ZONE NULL DEFAULT NULL,
+  "event_date" DATE NULL DEFAULT NULL,
   "event_time" TIME NULL DEFAULT NULL,
   "event_link" TEXT NULL DEFAULT NULL,
   "event_image" TEXT NULL DEFAULT NULL,
