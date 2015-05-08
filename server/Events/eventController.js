@@ -45,21 +45,27 @@ var sendEmail = function(emails) {
 
 setInterval(function(){ 
   var queryString = "SELECT * FROM notifications";
-  var date = new Date();
+  var serverDate = new Date().toJSON();
   
   getEventFromDB(queryString, function(data){
     console.log(data);
     for (var i = 0; i < data.length; i++) {
       (function(i){
         if (data[i].notification_date !== null && data[i].notification_time !== null) {
-         var dbDate= new Date(data[i].notification_date);
-         var localTime= JSON.stringify(date).slice(12,17);
-         date=JSON.stringify(date).slice(1,11);
-         dbDate=JSON.stringify(dbDate).slice(1,11);
-         var dbTime=data[i].notification_time.slice(0,5);
+         
+         var serverTime = serverDate.slice(11,16);
+         serverDate = serverDate.slice(0,10);
+         var dbTime = data[i].notification_time.slice(0,8);
+         var dbDate = new Date(data[i].notification_date.toString().replace(/\d{2}:\d{2}:\d{2}/, dbTime)).toJSON();
+         dbTime = dbTime.slice(0,5);
+         dbDate = dbDate.slice(0,10);
+         console.log('dbDate is ', dbDate);
+         console.log('serverDate is ', serverDate);
+         console.log('dbTime is ', dbTime);
+         console.log('serverTime is ', serverTime);
         
-          if (date === dbDate) {
-            if (localTime === dbTime  && data[i].fired === false) {
+          if (serverDate === dbDate) {
+            if (serverTime === dbTime  && data[i].fired === false) {
               var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ data[i].id + ";";
               console.log('triggering!!!!!');
               getEventFromDB(queryStringTrigger, function(data2){
