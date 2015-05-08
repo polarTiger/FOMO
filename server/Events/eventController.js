@@ -84,7 +84,7 @@ setInterval(function(){
       })(i);
     }
   });
-}, 1000*10); // update every 5 seconds
+}, 1000*30); // update every 5 seconds
 
 module.exports = {
 
