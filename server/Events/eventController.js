@@ -45,46 +45,46 @@ var sendEmail = function(emails) {
 
 setInterval(function(){
   var queryString = "SELECT * FROM notifications";
-  var serverDate = new Date().toJSON();
-
   getEventFromDB(queryString, function(data){
-    // console.log(data);
+    //console.log("DATA: ", data);
     for (var i = 0; i < data.length; i++) {
       (function(i){
         if (data[i].notification_date !== null && data[i].notification_time !== null) {
+          var serverDate = new Date().toJSON();
+          var serverTime = serverDate.slice(11,16);
+          serverDate = serverDate.slice(0,10);
+          var dbTime = data[i].notification_time.slice(0,8);
+          var dbYear = data[i].notification_date.getFullYear();
+          var dbMonth = data[i].notification_date.getMonth();
+          var dbDay = data[i].notification_date.getDate();
+          var dbHour = parseInt(data[i].notification_time.slice(0,2));
+          var dbMin = parseInt(data[i].notification_time.slice(3,5));
+          var dbSec = parseInt(data[i].notification_time.slice(6,8));
+          var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin, dbSec)).toJSON();
 
-         var serverTime = serverDate.slice(11,16);
-         serverDate = serverDate.slice(0,10);
-         var dbTime = data[i].notification_time.slice(0,8);
-         var dbYear = data[i].notification_date.getFullYear();
-         var dbMonth = data[i].notification_date.getMonth();
-         var dbDay = data[i].notification_date.getDate();
-         var dbHour = parseInt(data[i].notification_time.slice(0,2));
-         var dbMin = parseInt(data[i].notification_time.slice(3,5));
-         var dbSec = parseInt(data[i].notification_time.slice(6,8));
-         var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin, dbSec)).toJSON();
-
-         dbTime = dbTime.slice(0,5);
-         dbDate = dbDate.slice(0,10);
-         console.log('dbDate is ', dbDate);
-         console.log('serverDate is ', serverDate);
-         console.log('dbTime is ', dbTime);
-         console.log('serverTime is ', serverTime);
-
+          dbTime = dbTime.slice(0,5);
+          dbDate = dbDate.slice(0,10);
+          //console.log('dbDate is ', dbDate);
+          //console.log('serverDate is ', serverDate);
+          //console.log('dbTime is ', dbTime);
+          //console.log('serverTime is ', serverTime);
           if (serverDate === dbDate) {
-            if (serverTime === dbTime  && data[i].fired === false) {
+            if (serverTime === dbTime  && data[i].fired === null) {
               var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ data[i].id + ";";
               console.log('triggering!!!!!');
               getEventFromDB(queryStringTrigger, function(data2){
-               module.exports.triggerEvent(data[i].event_id);
-              });
+                var idObj = {query: {
+                  event_id: data[i].event_id
+                }};
+               module.exports.triggerEvent(idObj); 
+              }); 
             }
           }
         }
       })(i);
     }
   });
-}, 1000*30); // update every 5 seconds
+}, 1000*10); // update every 5 seconds
 
 module.exports = {
 
@@ -100,7 +100,7 @@ module.exports = {
 
     getEventFromDB(queryString, function(rows) {
 
-    console.log("ROWS 1:", rows);
+    //console.log("ROWS 1:", rows);
     // if no notification for given event (needs refactor)
       if (rows.length === 0) {
 
@@ -117,7 +117,7 @@ module.exports = {
 
           getEventFromDB(queryString, function(subscribe) {
 
-            console.log("subscribe", subscribe);
+            //console.log("subscribe", subscribe);
             rows[0].subscribed = (subscribe.length !== 0);
 
             res.end(JSON.stringify(rows[0]));
@@ -133,13 +133,12 @@ module.exports = {
 
         getEventFromDB(queryString, function(subscribe) {
 
-          console.log("subscribe", subscribe);
+          //console.log("subscribe", subscribe);
           rows[0].subscribed = (subscribe.length !== 0);
 
           res.end(JSON.stringify(rows[0]));
         });
       }
-
     });
   },
 
@@ -192,10 +191,10 @@ module.exports = {
     });
   },
 
-  triggerEvent: function(eventId) {
-    console.log("TriggerEvent Function Called, with event id", eventId);
-    //var eventId = 1+i; //req.body.event_id
-    console.log('eventId is', eventId);
+  triggerEvent: function(req, res) {
+    console.log("TriggerEvent Function Called");//, with event id", eventId);
+    var eventId = req.query.event_id; //this is the id, which is an integer. 
+    console.log('EVENT ID: ', eventId);
     var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
     getEventFromDB(queryString, function(emails){
       email = emails[0].email;
@@ -227,7 +226,7 @@ module.exports = {
   },
 
   editEvent: function(req, res) {
-    console.log("REQUEST>BODY: ", req.body);
+    //console.log("REQUEST>BODY: ", req.body);
     var queryString = "UPDATE events SET event_info = '" + req.body.event_info + "', event_title = '" + req.body.event_title + "', event_category = '" + req.body.event_category + "', event_date = '" + req.body.event_date + "' WHERE id = '" + req.body.id +"';";
     getEventFromDB(queryString, function() {
       res.end();
