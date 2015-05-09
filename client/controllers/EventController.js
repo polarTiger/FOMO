@@ -8,6 +8,16 @@ angular.module('fomo.event', [])
   $scope.modifyEventBtn = true; // hides event form on initial load
 
   $scope.modifyInfoBtn = true;
+  $scope.editInfo = false;
+  $scope.editDate = false;
+  $scope.editTime = false;
+
+
+  $scope.setEditAttribute = function(attr, value) {
+    console.log(attr, value);
+    $scope["edit" + attr] = value;
+    console.log($scope.editInfo);
+  }
 
   $scope.getEvent = function() {
     EventService.getEvent($stateParams.eventID)
@@ -77,7 +87,17 @@ angular.module('fomo.event', [])
   };
 
   $scope.submitInfo = function() {
-    $http.post('/api/events/editevent/'+$stateParams.eventID, {event_info: $scope.data.info})
+    $http.post('/api/events/editevent/'+$stateParams.eventID, {event_info: $scope.data.event_info})
+        .success(function(data, status, headers, config) {
+        $log.log('success submit info');
+      })
+        .error(function(data, status, headers, config) {
+        $log.log('fail');
+      });
+  };  
+
+  $scope.submitDate = function() {
+    $http.post('/api/events/editevent/'+$stateParams.eventID, {event_date: $scope.data.event_date})
         .success(function(data, status, headers, config) {
         $log.log('success submit info');
       })
