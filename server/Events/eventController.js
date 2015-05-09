@@ -149,11 +149,14 @@ module.exports = {
       res.send(403);
       return;
     }
-
+    var formattedDate = null;
+    if (req.body.date) {
+      formattedDate = "'"+req.body.date+"'";
+    }
     if (!req.body.notifyinfo) {
       console.log("OPTION 1"); // event only, no notification
       var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time) values ('"
-                        +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01 00:01:00-07')+"','"+(req.body.date || '00:01:00')+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
+                        +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"',"+formattedDate+","+formattedDate+") RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
                         +req.session.passport.user.id+"' FROM first_insert;";
 
       console.log('QUERY STRING: ', queryString);
@@ -170,6 +173,7 @@ module.exports = {
                          +req.body.info+"', '"+req.body.name+"', '"+req.body.category+"','"+req.body.link+"','"+(req.body.date || '9999-01-01') + "') RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
                       +req.body.notifyinfo+"', '"+(req.body.notifydate || req.body.date || '9999-01-01')+"', '"+(req.body.notifytime || '00:01') +"' FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
                       +req.session.passport.user.id+"' FROM first_insert;";
+      console.log('QUERY STRING: ', queryString);
     }
 
     pg.connect(dbUrl, function(err, client, done) {
