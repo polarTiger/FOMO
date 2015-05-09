@@ -253,11 +253,26 @@ module.exports = {
   },
 
   editEvent: function(req, res) {
-    //console.log("REQUEST>BODY: ", req.body);
-    var queryString = "UPDATE events SET event_info = '" + req.body.event_info + "', event_title = '" + req.body.event_title + "', event_category = '" + req.body.event_category + "', event_date = '" + req.body.event_date + "' WHERE id = '" + req.body.id +"';";
-    getEventFromDB(queryString, function() {
-      res.end();
-    });
+
+    var editStrings = [];
+    var queryStart = "UPDATE events SET "
+    var queryEnd = " WHERE id="+req.params.id+";"
+    var query;
+
+    for (var key in req.body){
+      if (req.body[key]) {
+        editStrings.push(key+"='"+req.body[key]+"'")
+      }
+    }
+
+    query = queryStart + editStrings.join(', ') + queryEnd;
+    console.log("query =", query);
+
+    getEventFromDB(query, function(){});
+  
+
+    res.end();
+  
   },
 
   subscribe: function(req, res) {
