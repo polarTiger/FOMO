@@ -18,7 +18,10 @@
       <label for="dateInfo">Event Date & Time</label>
       <div class="form-group">
 <!-- <input type="date" id="add-event-date" name="input" ng-model="event.date" placeholder="yyyy-MM-dd"/> --> <!-- replace with input datetime-local -->
-     <input type="datetime-local" id="add-event-date" name="input" ng-model="event.date"/>
+<!--       <input type="datetime-local" id="add-event-date" name="input" min="2001-01-01T00:00:00" max="2013-12-31T00:00:00" ng-model="event.date"/> -->
+      <input type="date" id="add-event-date" name="input" ng-model="event.eventdate" ng-required='event.eventtime'/>
+<!-- conditional validation: http://stackoverflow.com/questions/13466133/how-can-i-conditionally-require-form-inputs-with-angularjs -->
+      <input type="time" id="add-event-time" name="input" ng-model="event.eventtime"/>
       </div>
 
       <label for="categoryInfo">Category</label>
@@ -35,10 +38,10 @@
       </div>
       <label for="dateInfo">Notification Date & Time</label>
       <div class="form-group">
-        <input type="date" id="add-notify-date" name="input" ng-model="event.notifydate"/>
+        <input type="date" id="add-notify-date" name="input" ng-model="event.notifydate" ng-required='event.notifytime'/>
         <input type="time" id="add-notify-time" name="input" ng-model="event.notifytime"/>
       </div>
-        <input type="submit" ng-disabled="eventForm.$invalid"class="btn btn-primary" ng-click="submitEvent()">
+        <input type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary" ng-click="submitEvent()">
       </div>
     </form>
   </div>
