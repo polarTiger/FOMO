@@ -44,7 +44,6 @@ var sendEmail = function(emails) {
 };
 
 setInterval(function(){
-  console.log('checking');
   var queryString = "SELECT * FROM notifications";
   getEventFromDB(queryString, function(data){
     //console.log("DATA: ", data);
@@ -77,7 +76,6 @@ setInterval(function(){
                 var idObj = {query: {
                   event_id: data[i].event_id
                 }};
-                console.log("IDOBJ: ", idObj);
                module.exports.triggerEvent(idObj); 
               }); 
             }
