@@ -45,14 +45,14 @@ var sendEmail = function(emails) {
 
 setInterval(function(){
   var queryString = "SELECT * FROM notifications";
-  var serverDate = new Date().toJSON();
+  
 
   getEventFromDB(queryString, function(data){
     // console.log(data);
     for (var i = 0; i < data.length; i++) {
       (function(i){
         if (data[i].notification_date !== null && data[i].notification_time !== null) {
-
+         var serverDate = new Date().toJSON(); 
          var serverTime = serverDate.slice(11,16);
          serverDate = serverDate.slice(0,10);
          var dbTime = data[i].notification_time.slice(0,8);
