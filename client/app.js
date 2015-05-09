@@ -25,7 +25,6 @@ angular.module('fomo', ['ui.router', 'fomo.event',
         'main-content': {
           templateUrl: './views/signinView.html',
           controller: 'SigninController'
-
         }
       }
     })
@@ -54,6 +53,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       controller: 'AddController'
     });
 })
+
 .controller("MainController", ['$scope', '$http', 'LoggedInService', '$state', function($scope, $http, LoggedInService, $state) {
   $scope.logout = function() {
     console.log('signout attempt');
