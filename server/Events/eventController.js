@@ -44,6 +44,7 @@ var sendEmail = function(emails) {
 };
 
 setInterval(function(){
+  console.log('checking');
   var queryString = "SELECT * FROM notifications";
   getEventFromDB(queryString, function(data){
     //console.log("DATA: ", data);
