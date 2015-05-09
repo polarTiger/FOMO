@@ -22,17 +22,18 @@ var getEventFromDB = function(queryString, cb) {
   pg.end();
 };
 
-var sendEmail = function(emails) {
+var sendEmail = function(emails, link, title, eventInfo, nInfo) {
+  console.log("NOTIFICATION DATA: ", notificationData);
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: emailInfo
   });
   var mailOptions = {
       from: 'FOMO <tryfomo@gmail.com>',
-      to: "kevinmarkvi@yahoo.com",
-      subject: 'EVENT TRIGGERED!',
-      text: 'TEST TRIGGER EMAIL', // plaintext body
-      html: '<b>Team Polar Tiger Rules!</b>' // html body
+      to: '' + emails,
+      subject: 'FOMO | ' + title + ' | Notification!',
+      text: 'FOMO', // plaintext body
+      html: '<p><b>'+ title + '</b></p> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>Notification Info: '+ nInfo + '</p> <br> <p>' + link + '</p>',
   };
   transporter.sendMail(mailOptions, function(error, info){
       if(error){
@@ -46,7 +47,7 @@ var sendEmail = function(emails) {
 setInterval(function(){
   var queryString = "SELECT * FROM notifications";
   getEventFromDB(queryString, function(data){
-    //console.log("DATA: ", data);
+    notificationData = data;//console.log("DATA: ", data);
     for (var i = 0; i < data.length; i++) {
       (function(i){
         if (data[i].notification_date !== null && data[i].notification_time !== null) {
@@ -61,14 +62,14 @@ setInterval(function(){
           var dbMin = data[i].notification_time ? parseInt(data[i].notification_time.slice(3,5)) : 1;
           //var dbSec = data[i].notification_time ? parseInt(data[i].notification_time.slice(6,8)) : 0;
           var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin)).toJSON();
-          console.log(dbYear, dbMonth, dbDay, dbHour, dbMin);
-          console.log(dbDate);
+          //console.log(dbYear, dbMonth, dbDay, dbHour, dbMin);
+          //console.log(dbDate);
           dbTime = dbTime.slice(0,5);
           dbDate = dbDate.slice(0,10);
-          console.log('dbDate is ', dbDate);
-          console.log('serverDate is ', serverDate);
-          console.log('dbTime is ', dbTime);
-          console.log('serverTime is ', serverTime);
+          // console.log('dbDate is ', dbDate);
+          // console.log('serverDate is ', serverDate);
+          // console.log('dbTime is ', dbTime);
+          // console.log('serverTime is ', serverTime);
           if (serverDate === dbDate) {
             if (serverTime === dbTime  && data[i].fired === null) {
               var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ data[i].id + ";";
@@ -219,16 +220,22 @@ module.exports = {
   },
 
   triggerEvent: function(req, res) {
-    console.log("TriggerEvent Function Called");//, with event id", eventId);
     var eventId = req.query.event_id; //this is the id, which is an integer.
-    console.log('EVENT ID: ', eventId);
+    var notificationInfo;
+    for (var i = 0; i < notificationData.length; i++) {
+      if (notificationData[i].event_id.toString() === eventId) {
+        notificationInfo = notificationData[i].notification_info;
+      }
+    }
     var queryString = "SELECT email FROM users INNER JOIN users_events ON users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
-    getEventFromDB(queryString, function(emails){
-      email = emails[0].email;
-      sendEmail(email);
+
+    getEventFromDB("SELECT * FROM events WHERE id = " + eventId +";", function(data) {
+      getEventFromDB(queryString, function(emails){
+        email = emails[0].email;
+        sendEmail(email, data[0].event_link, data[0].event_title, data[0].event_info, notificationInfo);
+      });
     });
    },
-
 
   searchEvents: function(req, res) {
     var clientQuery = req.query.query;
