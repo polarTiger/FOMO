@@ -20,10 +20,10 @@
     <h1 class='title'>fomo<p class='subtitle'>fear of missing out</p></h1>
     <nav id="hmenu" class="col-md-12">
       <ul>
-        <li class="col-md-3"><a href="#/home">home</a></li>
+        <li class="col-md-3"><a ng-if="isLoggedIn()===true" href="#/home">home</a></li>
+        <li class="col-md-3"><a ng-if="isLoggedIn()===true" href="#/user">my events</a></li>
+        <li class="col-md-3"><a ng-if="isLoggedIn()===true" href="#/addevent">new event</a></li>
         <li class="col-md-3"><a ng-if="isLoggedIn()===false" href="#/signin">signin</a><a href ng-if="isLoggedIn()===true" ng-click="logout()">logout</a></li>
-        <li class="col-md-3"><a href="#/user">my events</a></li>
-        <li class="col-md-3"><a href="#/addevent">new event</a></li>
       </ul>
     </nav>
 

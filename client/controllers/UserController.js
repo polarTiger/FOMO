@@ -8,7 +8,7 @@ angular.module('fomo.user', [])
       console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.events);
     })
     .error(function(data, status, headers, config) {
-      $state.go('signup');
+      $state.go('signin');
     });
   };
 }]);
