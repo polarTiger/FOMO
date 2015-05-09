@@ -11,7 +11,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
 
 .config(function($stateProvider, $urlRouterProvider) {
   // If an unknown route is entered, it redirects to the home page.
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/signin');
   // Routes to the home page
   $stateProvider
     .state('home', {
@@ -54,20 +54,21 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       controller: 'AddController'
     });
 })
-.controller("MainController", ['$scope', '$http', 'LoggedInService', function($scope, $http, LoggedInService) {
+.controller("MainController", ['$scope', '$http', 'LoggedInService', '$state', function($scope, $http, LoggedInService, $state) {
   $scope.logout = function() {
     console.log('signout attempt');
     $http.get('/api/users/signout')
       .success(function(data) {
         console.log("logout");
         LoggedInService.setLoggedIn(false);
+        $state.go('signin');
       });
   };
   $scope.isLoggedIn = function() {
     return LoggedInService.isLoggedIn();
-  }
+  };
   $scope.getLoggedIn = function() {
     LoggedInService.getLoggedIn();
-  }
+  };
   $scope.getLoggedIn();
 }]);

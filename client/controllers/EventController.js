@@ -25,7 +25,7 @@ angular.module('fomo.event', [])
     })
     .error(function(data, status, headers, config) {
       $log.log('fail');
-      $state.go('signup');
+      $state.go('signin');
     });
   };
 
@@ -38,7 +38,7 @@ angular.module('fomo.event', [])
     })
     .error(function(data, status, headers, config) {
       $log.log('fail');
-      $state.go('signup');
+      $state.go('signin');
     });
   };
 
