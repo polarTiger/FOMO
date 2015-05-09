@@ -7,11 +7,13 @@ angular.module('fomo.event', [])
   $scope.subBtn = true; // hides email button on initial load
   $scope.modifyEventBtn = true; // hides event form on initial load
 
+  $scope.modifyInfoBtn = true;
+
   $scope.getEvent = function() {
     EventService.getEvent($stateParams.eventID)
     .then(function(data) {
       $scope.data = data.data;
-      $log.log('haha, ', $cookies['connect.sid']);
+      // $log.log('haha, ', $cookies['connect.sid']);
       //console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
     });
   };
@@ -73,7 +75,17 @@ angular.module('fomo.event', [])
         $log.log('fail');
       });
   };
-  
+
+  $scope.submitInfo = function() {
+    $http.post('/api/events/editevent/'+$stateParams.eventID, {event_info: $scope.data.info})
+        .success(function(data, status, headers, config) {
+        $log.log('success submit info');
+      })
+        .error(function(data, status, headers, config) {
+        $log.log('fail');
+      });
+  };  
+
   $scope.addEmail = function() {
     $scope.email.eventId = $scope.eventId;
     //console.log('EMAIL: ', $scope.email);
