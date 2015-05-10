@@ -46,6 +46,7 @@ var sendEmail = function(emails, link, title, eventInfo, nInfo) {
 
 setInterval(function(){
   var queryString = "SELECT * FROM notifications";
+
   getEventFromDB(queryString, function(data){
     notificationData = data;//console.log("DATA: ", data);
     for (var i = 0; i < data.length; i++) {
