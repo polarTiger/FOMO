@@ -12,7 +12,7 @@
 }
 
 .offscreen {
-  position: absolute; 
+  position: absolute;
   top: -30em;
   left: -300em;
 }
@@ -88,5 +88,9 @@ nav#hmenu ul a:hover{
   opacity: .6;
   font-family: arial, verdana;
   text-shadow: none;
+}
+
+#editbtn {
+  float: right;
 }
 
