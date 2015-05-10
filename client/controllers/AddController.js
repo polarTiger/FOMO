@@ -1,7 +1,7 @@
 angular.module('fomo.addEvent', [])
 
-.controller('AddController', ['$scope', '$log', 'AddEventService',
-                                    function($scope, $log, AddEventService) {
+.controller('AddController', ['$scope', '$log', '$state', 'AddEventService',
+                                    function($scope, $log, $state, AddEventService) {
   var categories = ['music', 'other'];
   $scope.event = {
     categories: categories,
@@ -12,5 +12,6 @@ angular.module('fomo.addEvent', [])
   $scope.submitEvent = function(){
     console.log("$scope.event", $scope.event);
     AddEventService.postEvent($scope.event);
+    $state.go('user');
   };
 }]);
