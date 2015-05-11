@@ -11,7 +11,7 @@
     </form> -->
 
     <div class="row">
-      <h3 class="col-md-2">{{data.event_date | date}} {{data.event_time | date: 'h:mm a'}}</h3>
+      <h3 class="col-md-4">{{data.event_date | date}} {{data.event_time | date: 'h:mm a'}}</h3>
       <form ng-show="editDate" novalidate name="dateForm" class="form-block" role="form">
         <input type="date" id="add-notify-date" name="input" ng-model="data.event_date" ng-required='event.eventtime'/>
         <input type="time" id="add-event-time" name="input" ng-model="data.event_time"/>
