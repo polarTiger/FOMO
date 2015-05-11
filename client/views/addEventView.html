@@ -1,6 +1,8 @@
-<div class="form-block col-md-4">
+<div >
   <div >
-    <form novalidate name="eventForm" class="form-block" role="form">
+    <form class="form-horizontal container" novalidate name="eventForm" role="form">
+
+      <div class="form-group col-md-4">
       <label for="inputEventName">Event Name:</label>
       <div class="form-group">
         <input type="text" name="name" ng-model="event.name" ng-required="true"/>
@@ -31,6 +33,9 @@
         </select>
 
       </div>
+      </div>
+
+      <div class="form-group col-md-4" style ="padding-top: 5%;">
       <label for="notificationInfo">Create a Notification</label>
       <div class="form-group">
         <textarea name="notifyinfo" ng-model="event.notifyinfo" ng-minlength="2" placeholder="Describe your notification" ng-required='event.notifydate'></textarea>
@@ -43,6 +48,7 @@
       </div>
         <input type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary" ng-click="submitEvent()">
       </div>
+      
     </form>
   </div>
 </div>
