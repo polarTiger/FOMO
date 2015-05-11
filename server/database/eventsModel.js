@@ -24,7 +24,7 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  triggerEvent: function(eventId, cb) {
+  findEmailsForEvent: function(eventId, cb) {
     var queryString = "SELECT email FROM users INNER JOIN users_events ON "+
                       "users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
     queryDB(queryString, cb);
@@ -101,7 +101,6 @@ module.exports = {
                         +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"',"+formattedEventDate+","+formattedEventTime+") RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
                         +user_id+"' FROM first_insert;";
 
-      console.log('QUERY STRING: ', queryString);
     // } else if (!body.notifyinfo && !body.date) { // event only without event date, set date to null
     //   console.log("OPTION 2");
     //   var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image) values ('"
@@ -121,7 +120,14 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  notificationCheck: function() {
+  getAllNotifications: function(cb) {
+    var queryString = "SELECT * FROM notifications";
+    queryDB(queryString, cb);
+  },
+
+  setNotificationToFired: function(id, cb) {
+    var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ id + ";";
+    queryDB(queryStringTrigger, cb);
 
   }
 

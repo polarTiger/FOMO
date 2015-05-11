@@ -34,6 +34,7 @@ var testTrigger = function(data, i){
     var serverDate = new Date().toJSON();
     var serverTime = serverDate.slice(11,16);
     serverDate = serverDate.slice(0,10);
+
     var dbTime = data[i].notification_time.slice(0,8);
     var dbYear = data[i].notification_date.slice(0,4);
     var dbMonth = parseInt(data[i].notification_date.slice(5,7))-1;
@@ -41,24 +42,28 @@ var testTrigger = function(data, i){
     var dbHour = data[i].notification_time ? parseInt(data[i].notification_time.slice(0,2)) : 0;
     var dbMin = data[i].notification_time ? parseInt(data[i].notification_time.slice(3,5)) : 1;
     //var dbSec = data[i].notification_time ? parseInt(data[i].notification_time.slice(6,8)) : 0;
+
     var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin)).toJSON();
-    console.log(dbYear, dbMonth, dbDay, dbHour, dbMin);
-    console.log(dbDate);
+    // console.log(dbYear, dbMonth, dbDay, dbHour, dbMin);
+    // console.log(dbDate);
     dbTime = dbTime.slice(0,5);
     dbDate = dbDate.slice(0,10);
-    console.log('dbDate is ', dbDate);
-    console.log('serverDate is ', serverDate);
-    console.log('dbTime is ', dbTime);
-    console.log('serverTime is ', serverTime);
+    // console.log('dbDate is ', dbDate);
+    // console.log('serverDate is ', serverDate);
+    // console.log('dbTime is ', dbTime);
+    // console.log('serverTime is ', serverTime);
+
     if (serverDate === dbDate) {
       if (serverTime === dbTime  && data[i].fired === null) {
-        var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ data[i].id + ";";
         console.log('triggering!!!!!');
-        queryDB(queryStringTrigger, function(data2){
-          var idObj = {query: {
-            event_id: data[i].event_id
-          }};
-         module.exports.triggerEvent(idObj);
+        db.setNotificationToFired(data[i].id, function(data2){
+          var idObj = {
+                        query:  {
+                                  event_id: data[i].event_id
+                                }
+                      };
+
+          module.exports.triggerEvent(idObj);
         });
       }
     }
@@ -106,6 +111,7 @@ setInterval(function(){
           }
         }
       })(i);
+
 
     }
   });
@@ -158,6 +164,7 @@ module.exports = {
         email = emails[0].email;
         sendEmail(email, data[0].event_link, data[0].event_title, data[0].event_info, notificationInfo);
       });
+
 
     });
    },
