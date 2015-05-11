@@ -2,9 +2,7 @@ var pg = require('pg');
 var dbUrl = require('../dbConfig/dbConfig');
 var nodemailer = require('nodemailer');
 var emailInfo = require('./emailAuth.js');
-var db = require('../database/eventsModel');
-var queryDB = require('../database/utils').queryDB;
-
+var db = require('./eventsModel');
 
 var sendEmail = function(emails, link, title, eventInfo, nInfo) {
   console.log("NOTIFICATION DATA: ", notificationData);

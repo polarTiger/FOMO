@@ -1,4 +1,4 @@
-var db = require('./utils');
+var db = require('../database/utils');
 var queryDB = db.queryDB;
 
 module.exports = {
