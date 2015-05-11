@@ -1,4 +1,4 @@
-angular.module('fomo.user', [])
+angular.module('fomo.user', ['customFilters'])
 
 .controller('UserController', ['$scope', 'UserService', '$state', function($scope, UserService, $state) {
   $scope.getallEvents = function() {
