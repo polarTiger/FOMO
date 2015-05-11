@@ -1,5 +1,6 @@
 var db = require('../database/utils');
 var queryDB = db.queryDB;
+var selectColumnsFromTablesAsExcept = db.selectColumnsFromTablesAsExcept;
 
 module.exports = {
   getJustEventData: function(id, cb) {
@@ -7,8 +8,8 @@ module.exports = {
     queryDB(queryString, cb);
   },
   getEvent: function(id, user_id, cb) {
-
-    var queryString = "SELECT * FROM events LEFT OUTER JOIN notifications ON "+
+    var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
+    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON "+
                       "events.id=notifications.event_id WHERE events.id = " + id + ";";
 
     queryDB(queryString, function(rows) {
@@ -23,7 +24,8 @@ module.exports = {
 
   },
   searchEvents: function(searchQuery, cb) {
-    var queryString = "SELECT * FROM events WHERE LOWER(event_title) "+ 
+    var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
+    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_title) "+ 
                       "like LOWER('%" + searchQuery + "%');";
     queryDB(queryString, cb);
   },
@@ -35,8 +37,15 @@ module.exports = {
   },
 
   myEvents: function(id, cb) {
-    var queryString = "SELECT * FROM events INNER JOIN " +
-                          "users_events ON events.id = users_events.event_id WHERE users_events.user_id="+id+";";
+    var queryStart = selectColumnsFromTablesAsExcept(['events', 'users_events', 'notifications'], 
+                                                        {
+                                                          'notifications.id': 'notificationsID',
+                                                          'users_events.id':'users_eventsID'
+                                                        });
+    var queryString = queryStart + " FROM events INNER JOIN " +
+                          "users_events ON events.id = users_events.event_id " +
+                          "LEFT OUTER JOIN notifications ON events.id=notifications.event_id" +
+                          " WHERE users_events.user_id="+id+";";
     queryDB(queryString, cb);
   },
 
