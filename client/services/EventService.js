@@ -1,6 +1,6 @@
 angular.module('fomo.eventservice', [])
 
-.factory('EventService', ['$http', '$stateParams', '$log', function($http, $stateParams, $log) {
+.factory('EventService', ['$http', '$stateParams', '$log', '$state', function($http, $stateParams, $log, $state) {
   var getEvent = function(eventId) {
     console.log('SERVICE: GET_EVENTS');
     //return $http.get('api/events/event/2')
@@ -34,8 +34,8 @@ angular.module('fomo.eventservice', [])
     }
 
     var sendObject = {
-      eventdate: eventObject.eventdate ? UTCeventdate.slice(0,10) : null, // date and time converted to UTC time, ie. 7 or 8 hours ahead from Pacific
-      eventtime: UTCeventdate ? UTCeventdate.slice(11,16) : null // null when no event date, 12:01 local when no event time, or else user defined event time
+      event_date: eventObject.eventdate ? UTCeventdate.slice(0,10) : null, // date and time converted to UTC time, ie. 7 or 8 hours ahead from Pacific
+      event_time: UTCeventdate ? UTCeventdate.slice(11,16) : null // null when no event date, 12:01 local when no event time, or else user defined event time
     };
 
     console.log('SERVICE: UPDATE EVENT_DATE: ', sendObject);
@@ -43,6 +43,7 @@ angular.module('fomo.eventservice', [])
     return $http.post('/api/events/editevent/'+$stateParams.eventID, sendObject)
       .success(function(data, status, headers, config) {
         console.log('success update event date');
+        $state.go('user');
       })
       .error(function(data, status, headers, config) {
         $log.log('fail');
