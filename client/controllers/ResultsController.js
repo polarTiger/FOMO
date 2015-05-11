@@ -1,6 +1,6 @@
-angular.module('fomo.results', [])
+angular.module('fomo.results', ['customFilters'])
 
-.controller('ResultsController', ['$scope', '$log', 'SearchService', 
+.controller('ResultsController', ['$scope', '$log', 'SearchService',
   function($scope, $log, SearchService) {
     
     $scope.submit = function() {
@@ -10,4 +10,4 @@ angular.module('fomo.results', [])
                       $scope.events = data;
       });
     };
-}]);
+}])
