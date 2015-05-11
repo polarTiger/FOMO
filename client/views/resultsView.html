@@ -1,6 +1,8 @@
-  <div class="form-group">
-  <input type="text" class="" ng-model="query" placeholder="Search for event">
-  <button type="submit" class="btn" ng-click="submit()">Submit</button>
+<div class="form-group">
+  <form novalidate name="searchForm" class="form-block" role="form" ng-submit='submit()'>
+    <input type="text" class="" ng-model="query" placeholder="Search for event">
+    <button type="submit" class="btn">Submit</button>
+  </form>
 </div>
 
 <div class="row column-headings">
