@@ -2,6 +2,10 @@ var db = require('./utils');
 var queryDB = db.queryDB;
 
 module.exports = {
+  getJustEventData: function(id, cb) {
+    var queryString = "SELECT * FROM events WHERE id = " + id +";";
+    queryDB(queryString, cb);
+  },
   getEvent: function(id, user_id, cb) {
 
     var queryString = "SELECT * FROM events LEFT OUTER JOIN notifications ON "+
