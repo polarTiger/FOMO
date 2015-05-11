@@ -5,7 +5,7 @@ var emailInfo = require('./emailAuth.js');
 var db = require('./eventsModel');
 
 var sendEmail = function(emails, link, title, eventInfo, nInfo) {
-  console.log("NOTIFICATION DATA: ", notificationData);
+  //console.log("NOTIFICATION DATA: ", notificationData);
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: emailInfo
@@ -18,7 +18,7 @@ var sendEmail = function(emails, link, title, eventInfo, nInfo) {
       html: '<p><b>'+ title + '</b></p> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>Notification Info: '+ nInfo + '</p> <br> <p>' + link + '</p>',
 
   };
-  console.log(mailOptions);
+  //console.log(mailOptions);
   transporter.sendMail(mailOptions, function(error, info){
       if(error){
           console.log(error);
@@ -113,11 +113,14 @@ module.exports = {
         notificationInfo = notificationData[i].notification_info;
       }
     }
-
     db.getJustEventData(eventId, function(data) {
       db.findEmailsForEvent(eventId, function(emails){
-        email = emails[0].email;
-        sendEmail(email, data[0].event_link, data[0].event_title, data[0].event_info, notificationInfo);
+        emailList = [];
+        for (var i = 0; i < emails.length; i++) {
+          emailList.push(emails[i].email);
+        }
+        emailList.join(',');
+        sendEmail(emailList, data[0].event_link, data[0].event_title, data[0].event_info, notificationInfo);
       });
     });
    },

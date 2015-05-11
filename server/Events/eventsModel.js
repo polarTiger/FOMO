@@ -119,7 +119,7 @@ module.exports = {
                          +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"',"+formattedEventDate+","+formattedEventTime+") RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
                       +body.notifyinfo+"', "+formattedNotifyDate+", "+formattedNotifyTime+" FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
                       +user_id+"' FROM first_insert;";
-      console.log('QUERY STRING: ', queryString);
+      //console.log('QUERY STRING: ', queryString);
     }
     queryDB(queryString, cb);
   },
