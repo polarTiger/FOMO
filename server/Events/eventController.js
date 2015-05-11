@@ -4,18 +4,18 @@ var nodemailer = require('nodemailer');
 var emailInfo = require('./emailAuth.js');
 var db = require('./eventsModel');
 
-var sendEmail = function(emails, link, title, eventInfo, nInfo) {
-  //console.log("NOTIFICATION DATA: ", notificationData);
+var sendEmail = function(emails, image, link, title, eventInfo, nInfo) {
+  image = image || "http://localhost:3003/images/stock.jpg"; //will need to change url when deployed
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: emailInfo
   });
   var mailOptions = {
       from: 'FOMO <tryfomo@gmail.com>',
-      to: ''+emails,
+      to: 'kevinmarkvi@yahoo.com',//+ emails,
       subject: 'FOMO | ' + title + ' | Notification!',
       text: 'FOMO', // plaintext body
-      html: '<p><b>'+ title + '</b></p> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>Notification Info: '+ nInfo + '</p> <br> <p>' + link + '</p>',
+      html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + '> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>Notification Info: '+ nInfo + '</p> <br> <p>' + link + '</p>',
 
   };
   //console.log(mailOptions);
@@ -71,7 +71,7 @@ setInterval(function(){
       testTrigger(data, i);
     }
   });
-}, 1000*10); // update every 5 seconds
+}, 1000*10); // updates every 10 seconds
 
 module.exports = {
 
@@ -103,9 +103,9 @@ module.exports = {
     });
 
   },
-
+  //Prepares data and passes it to the send email function
   triggerEvent: function(req, res) {
-    var eventId = req.query.event_id; //this is the id, which is an integer.
+    var eventId = req.query.event_id; 
 
     var notificationInfo;
     for (var i = 0; i < notificationData.length; i++) {
@@ -120,7 +120,7 @@ module.exports = {
           emailList.push(emails[i].email);
         }
         emailList.join(',');
-        sendEmail(emailList, data[0].event_link, data[0].event_title, data[0].event_info, notificationInfo);
+        sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info, notificationInfo);
       });
     });
    },
