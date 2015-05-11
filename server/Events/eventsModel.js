@@ -1,9 +1,11 @@
 var db = require('../database/utils');
 var queryDB = db.queryDB;
-var selectColumnsFromTablesAsExcept = db.selectColumnsFromTablesAsExcept;
+var selectColumnsFromTablesAsExcept = db.selectColumnsFromTablesAsExcept(db.tableColumns);
+var escape = require('pg-escape');
 
 module.exports = {
   getJustEventData: function(id, cb) {
+
     var queryString = "SELECT * FROM events WHERE id = " + id +";";
     queryDB(queryString, cb);
   },
@@ -110,9 +112,11 @@ module.exports = {
 
     if (!body.notifyinfo) {
       console.log("OPTION 1: EVENT ONLY"); // event only, no notification
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time, event_image) values ('"
-                        +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"',"+formattedEventDate+","+formattedEventTime+",'"+body.imgUrl+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
-                        +user_id+"' FROM first_insert;";
+      // console.log(user_id, typeof user_id);
+      var queryString = escape("WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time, event_image) values ("
+                        +"%L, %L, %L, %L,"+formattedEventDate+","+formattedEventTime+",'"+body.imgUrl+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
+                        +user_id+"' FROM first_insert;", body.info, body.name, body.category, body.link);
+
 
     // } else if (!body.notifyinfo && !body.date) { // event only without event date, set date to null
     //   console.log("OPTION 2");

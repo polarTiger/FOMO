@@ -12,7 +12,7 @@ var sendEmail = function(emails, image, link, title, eventInfo, nInfo) {
   });
   var mailOptions = {
       from: 'FOMO <tryfomo@gmail.com>',
-      to: 'kevinmarkvi@yahoo.com',//+ emails,
+      to: 'trevorcaverly@gmail.com',//+ emails,
       subject: 'FOMO | ' + title + ' | Notification!',
       text: 'FOMO', // plaintext body
       html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + '> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>Notification Info: '+ nInfo + '</p> <br> <p>' + link + '</p>',
