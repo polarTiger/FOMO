@@ -11,9 +11,9 @@ angular.module('fomo.event', [])
   $scope.editInfo = false;
   $scope.editDate = false;
   $scope.editTime = false;
+  $scope.editNotifyInfo = false;
   $scope.editNotifyDate = false;
   $scope.editNotifyTime = false;
-
 
 
   $scope.setEditAttribute = function(attr, value) {
@@ -26,6 +26,7 @@ angular.module('fomo.event', [])
     .then(function(data) {
       $scope.data = data.data;
       $scope.data.event_infonew = $scope.data.event_info;
+      $scope.data.notification_infonew = $scope.data.notification_info;
 
       if ($scope.data.event_date) {
         var dbYear = $scope.data.event_date.slice(0,4);
@@ -127,19 +128,34 @@ angular.module('fomo.event', [])
     $http.post('/api/events/editevent/'+$stateParams.eventID, {event_info: $scope.data.event_infonew})
         .success(function(data, status, headers, config) {
         $scope.data.event_info = $scope.data.event_infonew;
-        console.log('success submit info');
+        console.log('success submit event_info');
       })
         .error(function(data, status, headers, config) {
         console.log('fail');
       });
   };
 
+  $scope.submitNotifyInfo = function() {
+    $http.post('/api/events/editevent/'+$stateParams.eventID, {event_notification: $scope.data.notification_infonew})
+        .success(function(data, status, headers, config) {
+        $scope.data.notification_info = $scope.data.notification_infonew;
+        console.log('success submit notify_info');
+      })
+        .error(function(data, status, headers, config) {
+        console.log('fail');
+      });
+  };
+
+
   $scope.submitNewDate = function() {
-    $scope.data.eventdate = $scope.data.event_date;
-    $scope.data.eventtime = $scope.data.event_time;
+    $scope.data.eventdate = $scope.data.event_datenew;
+    $scope.data.eventtime = $scope.data.event_timenew;
     console.log("$scope.data", $scope.data);
 
-    EventService.updateEventDate($scope.data);
+    EventService.updateEventDate($scope.data).then(function() {
+      $scope.data.event_date = $scope.data.event_datenew;
+      $scope.data.event_time = $scope.data.event_timenew;
+    });
   };
 
   // $scope.addEmail = function() {
