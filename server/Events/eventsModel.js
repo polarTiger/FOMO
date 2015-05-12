@@ -26,8 +26,16 @@ module.exports = {
 
   },
   searchEvents: function(searchQuery, cb) {
+    var categoryString = (searchQuery.category==="undefined" || !searchQuery.category)  ? "": " AND LOWER(events.event_category) like LOWER('%" + searchQuery.category + "%')";
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
     var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_title) "+ 
+                      "like LOWER('%" + searchQuery.query + "%')" + categoryString + ";";
+    queryDB(queryString, cb);
+  },
+
+  searchCategories: function(searchQuery, cb) {
+    var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
+    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_category) "+ 
                       "like LOWER('%" + searchQuery + "%');";
     queryDB(queryString, cb);
   },
