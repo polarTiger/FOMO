@@ -98,3 +98,7 @@ nav#hmenu ul a:hover{
 #notification {
   margin-top: -5px;
 }
+
+.invalidTxtBox {
+  border-color: red;
+}

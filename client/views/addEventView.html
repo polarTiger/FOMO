@@ -7,8 +7,15 @@
       <div class="col-lg-5 col-md-5 col-xs-12">
       <div class="form-group " style="border-color: red;">
       <label for="inputEventName">Event Name(*):</label>
-      <div class="form-group">
-        <input type="text" name="name" ng-model="event.name" ng-required="true" ng-change="test()" />
+      <div class="form-group" style >
+        <input type="text" name="name" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()"
+        ng-class="{'invalidTxtBox': queryresult.length > 0 || event.name.length === 0 }" /> 
+        <div ng-show = "queryresult.length > 0" style="color:red;">
+        Event name already exists, please try a different name
+        </div>
+        <div ng-repeat = " result in queryresult | limitTo:3">
+        {{result.event_title}}
+        </div>
         <p ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" >Please enter the event name.</p>
       </div>
       <label for="inputInfo">Info(*):</label>
