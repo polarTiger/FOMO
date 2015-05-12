@@ -6,6 +6,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
                       'fomo.searchservice',
                       'fomo.signup',
                       'fomo.signin',
+                      'fomo.search',
                       'fomo.loggedinservice',
                       'ngCookies'])
 
@@ -36,6 +37,11 @@ angular.module('fomo', ['ui.router', 'fomo.event',
           controller: 'SignupController'
         }
       }
+    })
+    .state('search', {
+      url: '/search',
+      templateUrl: './views/searchView.html',
+      controller: 'searchController'
     })
     .state('user', {
       url: '/user',

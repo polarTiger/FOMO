@@ -5,9 +5,9 @@ angular.module('fomo.results', ['customFilters'])
     
     $scope.submit = function() {
       SearchService.searchWithQuery($scope.query)
-                    .success(function(data, status) {
-                      $log.log(data);
-                      $scope.events = data;
+        .success(function(data, status) {
+          $log.log(data);
+          $scope.events = data;
       });
     };
-}])
+}]);

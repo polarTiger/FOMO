@@ -9,5 +9,5 @@ angular.module('customFilters', [])
       link = "http://" + link;
     }
     return link;
-  }
+  };
 });
