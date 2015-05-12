@@ -24,10 +24,16 @@ angular.module('fomo.signup', [])
         if (data === 'already exists') {
           $scope.userAlreadyExist = true;
         } else {
-          $scope.userAlreadyExist = false;
-          $state.go('signin');
+
+        $scope.userAlreadyExist = false;
+        $http.post('api/users/signin', userObj)
+          .success(function(data, status, headers, config) {
+            console.log('success');
+            console.log(LoggedInService);
+            LoggedInService.setLoggedIn(true);
+            $state.go('home');
+          })
         }
-        
       })
       .error(function(data, status, headers, config) {
         //$log.log('fail');
