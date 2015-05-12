@@ -4,6 +4,7 @@ angular.module('fomo.search', ['customFilters'])
   function($scope, $log, SearchService) {
 
     var categories = ['music', 'sports', 'other'];
+    $scope.queryresult = [];
     $scope.event = {
       categories: categories,
       category: categories[0]
@@ -18,4 +19,24 @@ angular.module('fomo.search', ['customFilters'])
           $scope.events = data;
       });
     };
+
+    $scope.liveSearchEventTitle = function(){
+      SearchService.searchWithQuery($scope.event.name)
+        .success(function(data, status) {
+          $scope.queryresult = data;
+          //console.log($scope.event.name);
+          //console.log(' SEARCH CONTROLLER get the result from db ', data);
+            //$scope.events = data;
+      });
+    };
+
+    $scope.eventIsInQuery = function() {
+      for (var i = 0; i < $scope.queryresult.length; i++) {
+        if ($scope.event.name === $scope.queryresult[i].event_title) {
+          return true;
+        }
+      }
+      return false;
+    };
+
 }]);

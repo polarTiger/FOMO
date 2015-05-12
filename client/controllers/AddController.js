@@ -1,6 +1,6 @@
 angular.module('fomo.addEvent', [])
 .controller('AddController', ['$scope', '$log', '$state', 'AddEventService', 'SearchService',
-                                    function($scope, $log, $state, AddEventService, SearchService) {
+    function($scope, $log, $state, AddEventService, SearchService) {
   var categories = ['music', 'sports', 'other'];
   $scope.queryresult = [];
   $scope.event = {
@@ -10,17 +10,17 @@ angular.module('fomo.addEvent', [])
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   };
   $scope.submitEvent = function(){
-    console.log("$scope.event", $scope.event);
+    //console.log("$scope.event", $scope.event);
     AddEventService.postEvent($scope.event);
     $state.go('user');
   };
   $scope.liveSearchEventTitle = function(){
     SearchService.searchWithQuery($scope.event.name)
-                    .success(function(data, status) {
-                      $scope.queryresult = data;
-                      console.log($scope.event.name);
-                      console.log(' get the result from db ', data);
-                      //$scope.events = data;
+      .success(function(data, status) {
+        $scope.queryresult = data;
+        //console.log($scope.event.name);
+        //console.log(' get the result from db ', data);
+        //$scope.events = data;
     });
   };
 
@@ -31,5 +31,5 @@ angular.module('fomo.addEvent', [])
       }
     }
     return false;
-  }
+  };
 }]);
