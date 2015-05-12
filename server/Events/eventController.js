@@ -123,7 +123,13 @@ module.exports = {
    },
 
   searchEvents: function(req, res) {
-    db.searchEvents(req.query.query, function(rows){
+    db.searchEvents(req.query, function(rows){
+      res.end(JSON.stringify(rows));
+    });
+  },
+
+  searchCategories: function(req, res) {
+    db.searchCategories(req.query.query, function(rows){
       res.end(JSON.stringify(rows));
     });
   },
