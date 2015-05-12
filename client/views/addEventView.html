@@ -10,7 +10,7 @@
       <div class="form-group" style >
         <input type="text" name="name" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()"
         ng-class="{'invalidTxtBox': queryresult.length > 0 || event.name.length === 0 }" /> 
-        <div ng-show = "queryresult.length > 0" style="color:red;">
+        <div ng-show = "queryresult.length > 0 && eventIsInQuery()" style="color:red;">
         Event name already exists, please try a different name
         </div>
         <div ng-repeat = " result in queryresult | limitTo:3">
@@ -68,7 +68,7 @@
           </div>
 
           <div class="form-group">
-          <input type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary" ng-click="submitEvent()">
+          <input type="submit" ng-disabled="eventForm.$invalid || eventIsInQuery()" class="btn btn-primary" ng-click="submitEvent()">
           </div>
 
         </div>

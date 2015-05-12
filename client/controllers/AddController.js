@@ -23,4 +23,13 @@ angular.module('fomo.addEvent', [])
                       //$scope.events = data;
     });
   };
+
+  $scope.eventIsInQuery = function() {
+    for (var i = 0; i < $scope.queryresult.length; i++) {
+      if ($scope.event.name === $scope.queryresult[i].event_title) {
+        return true;
+      }
+    }
+    return false;
+  }
 }]);
