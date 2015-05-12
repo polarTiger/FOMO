@@ -1,20 +1,21 @@
 var eventController = require('./eventController.js');
+var loggedOutBlock = require('../authentication/authentication').loggedOutBlock;
 
 module.exports = function (app) {
 
   app.get('/event/:id', eventController.getEvent);
 
-  app.post('/subscribe/:id', eventController.subscribe);
+  app.post('/subscribe/:id', loggedOutBlock, eventController.subscribe);
 
-  app.delete('/unsubscribe/:id', eventController.unsubscribe);
+  app.delete('/unsubscribe/:id', loggedOutBlock, eventController.unsubscribe);
 
-  app.post('/addevent', eventController.addEvent);
+  app.post('/addevent', loggedOutBlock, eventController.addEvent);
 
-  app.post('/editevent/:id', eventController.editEvent);
+  app.post('/editevent/:id', loggedOutBlock, eventController.editEvent);
 
-  app.get('/triggerevent', eventController.triggerEvent);
+  app.get('/triggerevent', loggedOutBlock, eventController.triggerEvent);
 
-  app.get('/myevents', eventController.myEvents);
+  app.get('/myevents', loggedOutBlock, eventController.myEvents);
 
   app.get('/topevents', eventController.eventPlaceHolder);
 

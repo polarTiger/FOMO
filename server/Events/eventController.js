@@ -90,11 +90,6 @@ module.exports = {
   },
 
   addEvent: function(req, res) {
-    // Require user to be logged in
-    if(!req.session.passport.user) {
-      res.send(403);
-      return;
-    }
 
     console.log('addEvent body: ', req.body);
 
@@ -105,6 +100,7 @@ module.exports = {
   },
   //Prepares data and passes it to the send email function
   triggerEvent: function(req, res) {
+
     var eventId = req.query.event_id; 
 
     var notificationInfo;
@@ -132,10 +128,7 @@ module.exports = {
   },
 
   myEvents: function(req, res) {
-    if(!req.session.passport.user) {
-      res.send(403);
-      return;
-    }
+
     var id = req.session.passport.user.id;
     db.myEvents(id, function(rows){
       res.end(JSON.stringify(rows));
@@ -150,10 +143,7 @@ module.exports = {
   },
 
   subscribe: function(req, res) {
-    if(!req.session.passport.user) {
-      res.send(403);
-      return;
-    }
+
     var event_id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user.id;
 
@@ -163,10 +153,7 @@ module.exports = {
   },
 
   unsubscribe: function(req, res) {
-    if(!req.session.passport.user) {
-      res.send(403);
-      return;
-    }
+
     var event_id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user.id;
 
