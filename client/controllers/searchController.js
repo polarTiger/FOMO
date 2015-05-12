@@ -1,6 +1,6 @@
-angular.module('fomo.results', ['customFilters'])
+angular.module('fomo.search', ['customFilters'])
 
-.controller('ResultsController', ['$scope', '$log', 'SearchService',
+.controller('searchController', ['$scope', '$log', 'SearchService',
   function($scope, $log, SearchService) {
     
     $scope.submit = function() {
