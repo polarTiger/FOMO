@@ -43,7 +43,7 @@ angular.module('fomo.eventservice', [])
     return $http.post('/api/events/editevent/'+$stateParams.eventID, sendObject)
       .success(function(data, status, headers, config) {
         console.log('success update event date');
-        $state.go('user');
+        // $state.go('user');
       })
       .error(function(data, status, headers, config) {
         $log.log('fail');

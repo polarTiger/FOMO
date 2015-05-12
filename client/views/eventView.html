@@ -19,7 +19,7 @@
         <input type="date" id="add-notify-date" name="input" ng-model="data.event_datenew" ng-required='data.event_timenew'/>
         <input type="time" id="add-event-time" name="input" ng-model="data.event_timenew"/>
         <!--  http://stackoverflow.com/questions/16251977/angularjs-toggle-button -->
-        <input id='editbtn' type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary col-md-1 form-group" ng-click="submitNewDate()" value='Update Date'>
+        <input id='editbtn' type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary col-md-1 form-group" ng-click="submitNewDate(); setEditAttribute('Date', !editDate)" value='Update Date'>
       </form>
     </div>
 
@@ -43,10 +43,19 @@
     </div>
 
     <div class="row">
-      <p class="col-md-8" ng-show="data.notification_info">{{data.notification_info}}</p>
+      <p class="col-md-8" ng-hide="data.notification_info">No notifications yet! Create one below:</p>
     </div>
 
     <div class="row">
+      <p ng-hide="editNotifyInfo" class="col-md-9">{{data.notification_info}}</p>
+      <button id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('NotifyInfo', !editNotifyInfo); defaultText(['notification_info'])">{{!editNotifyInfo && 'Edit Info' || 'Cancel'}}</button>
+      <form class="row" ng-show="editNotifyInfo || !data.notification_info" novalidate name="infoForm" class="form-block" role="form">
+        <textarea name="info" ng-model="data.notification_infonew" ng-minlength="1" class="col-md-9" style="height: 50px;"></textarea>
+        <input type="submit" id='editbtn' class="btn btn-primary col-md-1" ng-click="submitNotifyInfo(); setEditAttribute('NotifyInfo', !editNotifyInfo)" value='Update Info'>
+      </form>
+    </div>
+
+    <div ng-show="data.notification_date" class="row">
       <p class="col-md-8" ng-show="data.notification_info">{{data.notification_date | date}} – {{data.notification_time | date: 'h:mm a'}}</p>
       <button id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('NotifyDate', !editNotifyDate)">{{!editNotifyDate && 'Edit Date' || 'Cancel'}}</button>
       <form ng-show="editNotifyDate" novalidate name="dateForm" class="form-block" role="form">
@@ -57,14 +66,12 @@
       </form>
     </div>
 
-    <div class="row">
-      <p class="col-md-8" ng-show="!data.notification_info">No notifications yet – edit event to add one</p>
-    </div>
+    <HR>
 
     <button ng-if="!data.subscribed" class="btn btn-default navbar-btn" ng-click="subscribe()" notype="submit" >Subscribe to Event!</button>
 
-    <button ng-if="data.subscribed" class="btn btn-default navbar-btn" ng-click="unsubscribe()" notype="submit" >Unsubscribe!</button>
+    <button ng-if="data.subscribed" class="btn btn-default navbar-btn" ng-click="unsubscribe()" notype="submit" >Unsubscribe from Event!</button>
 
-    <button class="btn btn-default navbar-btn"  class="ng-hide" ng-click="triggerEvent()" notype="submit">Trigger Notification</button>
+    <button class="btn btn-default navbar-btn" ng-hide="data.notification_time || !data.notification_info" ng-click="triggerEvent()" notype="submit">Trigger Notification Now</button>
   </span>
 </div>
