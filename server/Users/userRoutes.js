@@ -14,5 +14,3 @@ module.exports = function (app) {
   app.get('/signout', userController.signout);
 
 };
-
-

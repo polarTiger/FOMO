@@ -102,3 +102,15 @@ nav#hmenu ul a:hover{
 .invalidTxtBox {
   border-color: red;
 }
+
+#signup {
+  padding-left:33%;
+}
+
+#signin {
+  padding-left:33%;
+}
+
+.center-heading {
+  text-align: center;
+}
