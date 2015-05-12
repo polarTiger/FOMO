@@ -149,6 +149,13 @@ module.exports = {
     });
   },
 
+  editNotification: function(req, res) {
+
+    db.editNotification(req.body, req.params.id, function(){
+      res.end();
+    });
+  },
+
   subscribe: function(req, res) {
 
     var event_id = req.url.match(/\d+/)[0];

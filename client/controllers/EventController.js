@@ -41,7 +41,7 @@ angular.module('fomo.event', [])
 
       // create copies for modifying event_date and event_time
       $scope.data.event_datenew = $scope.data.event_date;
-   //   $scope.data.event_timenew = $scope.data.event_time;
+      $scope.data.event_timenew = $scope.data.event_time;
 
       if ($scope.data.notification_date) {
         var dbYearNotify = $scope.data.notification_date.slice(0,4);
@@ -53,6 +53,9 @@ angular.module('fomo.event', [])
         $scope.data.notification_time = new Date(Date.UTC(dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify));
         $scope.data.notification_date = new Date(Date.UTC(dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify));
       }
+
+      $scope.data.notification_datenew = $scope.data.notification_date;
+      $scope.data.notification_timenew = $scope.data.notification_time;
 
       console.log("EVENT DATE/TIME: " + dbYear, dbMonth, dbDay, dbHour, dbMin);
       console.log("NOTIFICATION DATE/TIME: " + dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify);
@@ -113,17 +116,6 @@ angular.module('fomo.event', [])
     $http.get('/api/events/triggerevent/', {params: {event_id: $stateParams.eventID}});
   };
 
-  // $scope.modifyEvent = function() {
-  //   $http.post('/api/events/editevent/'+$stateParams.eventID, $scope.eventData)
-  //       .success(function(data, status, headers, config) {
-  //       $scope.modifyEventBtn = true;
-  //       $log.log('success');
-  //     })
-  //       .error(function(data, status, headers, config) {
-  //       $log.log('fail');
-  //     });
-  // };
-
   $scope.submitInfo = function() {
     $http.post('/api/events/editevent/'+$stateParams.eventID, {event_info: $scope.data.event_infonew})
         .success(function(data, status, headers, config) {
@@ -136,7 +128,7 @@ angular.module('fomo.event', [])
   };
 
   $scope.submitNotifyInfo = function() {
-    $http.post('/api/events/editevent/'+$stateParams.eventID, {event_notification: $scope.data.notification_infonew})
+    $http.post('/api/events/editnotification/'+$stateParams.eventID, {notification_info: $scope.data.notification_infonew})
         .success(function(data, status, headers, config) {
         $scope.data.notification_info = $scope.data.notification_infonew;
         console.log('success submit notify_info');
@@ -150,7 +142,7 @@ angular.module('fomo.event', [])
   $scope.submitNewDate = function() {
     $scope.data.eventdate = $scope.data.event_datenew;
     $scope.data.eventtime = $scope.data.event_timenew;
-    console.log("$scope.data", $scope.data);
+    console.log("$scope.data EVENT_DATE", $scope.data);
 
     EventService.updateEventDate($scope.data).then(function() {
       $scope.data.event_date = $scope.data.event_datenew;
@@ -158,12 +150,16 @@ angular.module('fomo.event', [])
     });
   };
 
-  // $scope.addEmail = function() {
-  //   $scope.email.eventId = $scope.eventId;
-  //   //console.log('EMAIL: ', $scope.email);
-  //   $scope.subBtn = true;
-  //   $scope.notifyBtn = true;
-  //   EventService.submitEmail($scope.email);
-  // };
+  $scope.submitNewNotificationDate = function() {
+    $scope.data.notificationdate = $scope.data.notification_datenew;
+    $scope.data.notificationtime = $scope.data.notification_timenew;
+    console.log("$scope.data NOTIFICATION_DATE", $scope.data);
+
+    EventService.updateNotificationDate($scope.data).then(function() {
+      $scope.data.notification_date = $scope.data.notification_datenew;
+      $scope.data.notification_time = $scope.data.notification_timenew;
+    });
+  };
+
 }]);
 

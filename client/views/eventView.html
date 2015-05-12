@@ -55,14 +55,15 @@
       </form>
     </div>
 
-    <div ng-show="data.notification_date" class="row">
-      <p class="col-md-8" ng-show="data.notification_info">{{data.notification_date | date}} – {{data.notification_time | date: 'h:mm a'}}</p>
+    <div ng-show="data.notification_date" class="row form-group">
+      <p class="col-md-4" ng-hide="editNotifyDate" ng-show="data.notification_info">{{data.notification_date | date}} – {{data.notification_time | date: 'h:mm a'}}</p>
       <button id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('NotifyDate', !editNotifyDate)">{{!editNotifyDate && 'Edit Date' || 'Cancel'}}</button>
       <form ng-show="editNotifyDate" novalidate name="dateForm" class="form-block" role="form">
-        <input type="date" id="add-notify-date" name="input" ng-model="data.notification_date" ng-required='data.notification_time'/>
-        <input type="time" id="add-notify-time" name="input" ng-model="data.notification_time"/>
+
+        <input type="date" id="add-notify-date" name="input" ng-model="data.notification_datenew" ng-required='data.notification_timenew'/>
+        <input type="time" id="add-notify-time" name="input" ng-model="data.notification_timenew"/>
         <!--  http://stackoverflow.com/questions/16251977/angularjs-toggle-button -->
-        <input id='editbtn' type="submit" class="btn btn-primary col-md-1" ng-click="submitNewDate()" value='Update Date'>
+        <input id='editbtn' type="submit" class="btn btn-primary col-md-1" ng-click="submitNewNotificationDate(); setEditAttribute('NotifyDate', !editNotifyDate)" value='Update Date'>
       </form>
     </div>
 

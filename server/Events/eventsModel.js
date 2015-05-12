@@ -28,14 +28,14 @@ module.exports = {
   searchEvents: function(searchQuery, cb) {
     var categoryString = (searchQuery.category==="undefined" || !searchQuery.category)  ? "": " AND LOWER(events.event_category) like LOWER('%" + searchQuery.category + "%')";
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
-    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_title) "+ 
+    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_title) "+
                       "like LOWER('%" + searchQuery.query + "%')" + categoryString + ";";
     queryDB(queryString, cb);
   },
 
   searchCategories: function(searchQuery, cb) {
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
-    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_category) "+ 
+    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_category) "+
                       "like LOWER('%" + searchQuery + "%');";
     queryDB(queryString, cb);
   },
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   myEvents: function(id, cb) {
-    var queryStart = selectColumnsFromTablesAsExcept(['events', 'users_events', 'notifications'], 
+    var queryStart = selectColumnsFromTablesAsExcept(['events', 'users_events', 'notifications'],
                                                         {
                                                           'notifications.id': 'notificationsID',
                                                           'users_events.id':'users_eventsID'
@@ -63,6 +63,22 @@ module.exports = {
     var editStrings = [];
     var queryStart = "UPDATE events SET "
     var queryEnd = " WHERE id="+id+";"
+    var query;
+
+    for (var key in body){
+      if (body[key]) {
+        editStrings.push(key+"='"+body[key]+"'")
+      }
+    }
+
+    query = queryStart + editStrings.join(', ') + queryEnd;
+    queryDB(query, cb);
+  },
+
+  editNotification: function(body, id, cb) {
+    var editStrings = [];
+    var queryStart = "UPDATE notifications SET "
+    var queryEnd = " WHERE event_id="+id+";"
     var query;
 
     for (var key in body){
@@ -131,7 +147,7 @@ module.exports = {
     //   var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image) values ('"
     //                     +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
     //                     +req.session.passport.user.id+"' FROM first_insert;";
-    } else { 
+    } else {
       // insert notifications and events, defaults to event date if notification date is unknown, defaults to 00:01 if time is unknown
       // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
       console.log("OPTION 2: EVENT AND NOTIFICATION TABLE");
