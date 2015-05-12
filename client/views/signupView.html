@@ -1,6 +1,11 @@
 <div class="form-block col-md-4">
   <div id='signup'>
     <h1>Sign Up</h1>
+    <div ng-show="userAlreadyExist" style="color:red;">
+      <div>User already exist!!!!!</div>
+      <div>please use sign in page instead,</div>
+      <div>or retry with a different username.</div>
+    </div>
     <form novalidate name="signupForm" class="form-block" role="form" ng-submit='signup()'>
       <label for="username">Username</label>
       <div class="form-group">

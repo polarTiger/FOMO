@@ -8,7 +8,7 @@
       <div class="form-group " style="border-color: red;">
       <label for="inputEventName">Event Name(*):</label>
       <div class="form-group">
-        <input type="text" name="name" ng-model="event.name" ng-required="true" />
+        <input type="text" name="name" ng-model="event.name" ng-required="true" ng-change="test()" />
         <p ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" >Please enter the event name.</p>
       </div>
       <label for="inputInfo">Info(*):</label>
