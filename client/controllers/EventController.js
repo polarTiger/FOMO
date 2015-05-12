@@ -11,6 +11,8 @@ angular.module('fomo.event', [])
   $scope.editInfo = false;
   $scope.editDate = false;
   $scope.editTime = false;
+  $scope.editNotifyDate = false;
+  $scope.editNotifyTime = false;
 
 
 
@@ -36,6 +38,10 @@ angular.module('fomo.event', [])
         $scope.data.event_date = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin));
       }
 
+      // create copies for modifying event_date and event_time
+      $scope.data.event_datenew = $scope.data.event_date;
+   //   $scope.data.event_timenew = $scope.data.event_time;
+
       if ($scope.data.notification_date) {
         var dbYearNotify = $scope.data.notification_date.slice(0,4);
         var dbMonthNotify = parseInt($scope.data.notification_date.slice(5,7))-1;
@@ -53,8 +59,10 @@ angular.module('fomo.event', [])
     });
   };
 
-  $scope.defaultText = function(input) {
-    $scope.data[input + "new"] = $scope.data[input];
+  $scope.defaultText = function(inputarray) {
+    for (var i = 0; i < inputarray.length; i++) {
+      $scope.data[inputarray[i] + "new"] = $scope.data[inputarray[i]];
+    }
   };
 
   $scope.subscribe = function() {
@@ -134,12 +142,12 @@ angular.module('fomo.event', [])
     EventService.updateEventDate($scope.data);
   };
 
-  $scope.addEmail = function() {
-    $scope.email.eventId = $scope.eventId;
-    //console.log('EMAIL: ', $scope.email);
-    $scope.subBtn = true;
-    $scope.notifyBtn = true;
-    EventService.submitEmail($scope.email);
-  };
+  // $scope.addEmail = function() {
+  //   $scope.email.eventId = $scope.eventId;
+  //   //console.log('EMAIL: ', $scope.email);
+  //   $scope.subBtn = true;
+  //   $scope.notifyBtn = true;
+  //   EventService.submitEmail($scope.email);
+  // };
 }]);
 

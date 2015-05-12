@@ -1,9 +1,9 @@
 <div >
   <div >
     <form class="form-horizontal container" novalidate name="eventForm" role="form" style="padding-top: 5%;">
-    <div class="form-group">
-    <div class="colo-md-12" style="color:red;">(*) is required </div>
-    </div>
+      <div class="form-group">
+      <div class="colo-md-12" style="color:red;">(*) is required </div>
+      </div>
       <div class="col-lg-5 col-md-5 col-xs-12">
       <div class="form-group " style="border-color: red;">
       <label for="inputEventName">Event Name(*):</label>
@@ -44,27 +44,33 @@
       </div>
 
       <div class="col-lg-5 col-md-5 col-xs-12">
-      <div class="form-group">
-      <label for="notificationInfo">Create a Notification</label>
-      <div class="form-group">
-        <textarea name="notifyinfo" ng-model="event.notifyinfo" ng-minlength="2" placeholder="Describe your notification" ng-required='event.notifydate'></textarea>
-        <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter information about the notifcation.</p>
-      </div>
-      <label for="dateInfo">Notification Date & Time</label>
-      <div class="form-group">
-        <input type="date" id="add-notify-date" name="input" ng-model="event.notifydate" ng-required='event.notifytime'/>
-        <input type="time" id="add-notify-time" name="input" ng-model="event.notifytime"/>
-      </div>
-      <div class="form-group">
-      <input type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary" ng-click="submitEvent()">
-      </div>
-      </div>
+        <div class="form-group">
+
+          <label for="notificationInfo">Create a Notification</label>
+
+          <div class="form-group">
+            <textarea name="notifyinfo" ng-model="event.notifyinfo" ng-minlength="2" placeholder="Describe your notification" ng-required='event.notifydate'></textarea>
+            <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter information about the notifcation.</p>
+          </div>
+
+          <label for="dateInfo">Notification Date & Time</label>
+
+          <div class="form-group">
+            <input type="date" id="add-notify-date" name="input" ng-model="event.notifydate" ng-required='event.notifytime'/>
+            <input type="time" id="add-notify-time" name="input" ng-model="event.notifytime"/>
+          </div>
+
+          <div class="form-group">
+          <input type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary" ng-click="submitEvent()">
+          </div>
+
+        </div>
       </div>
 
       <div class="col-lg-2 col-md-2 col-xs-12">
       <div class="form-group">
-      <div class="form-group">Please enter required field indicated by (*) in the left column to create an event. 
-      An event can have a notification date/time that is on or before the actual event date. If so, 
+      <div class="form-group">Please enter required field indicated by (*) in the left column to create an event.
+      An event can have a notification date/time that is on or before the actual event date. If so,
       please fill in the right column if you know the notification time and date
       </div>
       </div>
