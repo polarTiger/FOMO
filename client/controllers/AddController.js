@@ -15,6 +15,6 @@ angular.module('fomo.addEvent', [])
     $state.go('user');
   };
   $scope.test = function(){
-    console.log('haha changed!');
+    console.log('user entered event name has been updated!');
   };
 }]);
