@@ -17,7 +17,7 @@ angular.module('fomo.event', [])
     console.log(attr, value);
     $scope["edit" + attr] = value;
     console.log($scope.editInfo);
-  }
+  };
 
   $scope.getEvent = function() {
     EventService.getEvent($stateParams.eventID)
