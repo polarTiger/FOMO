@@ -110,8 +110,8 @@ module.exports = {
 
     if (!body.notifyinfo) {
       console.log("OPTION 1: EVENT ONLY"); // event only, no notification
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time) values ('"
-                        +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"',"+formattedEventDate+","+formattedEventTime+") RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time, event_image) values ('"
+                        +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"',"+formattedEventDate+","+formattedEventTime+",'"+body.imgUrl+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
                         +user_id+"' FROM first_insert;";
 
     // } else if (!body.notifyinfo && !body.date) { // event only without event date, set date to null
@@ -124,8 +124,8 @@ module.exports = {
       // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
       console.log("OPTION 2: EVENT AND NOTIFICATION TABLE");
 
-      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time) values ('"
-                         +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"',"+formattedEventDate+","+formattedEventTime+") RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
+      var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time, event_image) values ('"
+                         +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"',"+formattedEventDate+","+formattedEventTime+",'" +body.imgUrl + "') RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, '"
                       +body.notifyinfo+"', "+formattedNotifyDate+", "+formattedNotifyTime+" FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
                       +user_id+"' FROM first_insert;";
       //console.log('QUERY STRING: ', queryString);
