@@ -18,13 +18,14 @@ angular.module('fomo.addeventservice', [])
       UTCnotifydate = new Date(UTCnotifydate).toJSON();
       console.log('UTCnotifydate: ', UTCnotifydate);
     }
-
+    console.log("eventObject", eventObject);
     var sendObject = {
+
       name: eventObject.name,
       info: eventObject.info,
       category: eventObject.category,
       link: eventObject.link,
-      imgUrl: eventObject.imgUrl,
+      imgUrl: eventObject.imgUrl ? eventObject.imgUrl : null ,
       eventdate: eventObject.eventdate ? UTCeventdate.slice(0,10) : null, // date and time converted to UTC time, ie. 7 or 8 hours ahead from Pacific
       eventtime: UTCeventdate ? UTCeventdate.slice(11,16) : null, // null when no event date, 12:01 local when no event time, or else user defined event time
       notifyinfo: eventObject.notifyinfo,

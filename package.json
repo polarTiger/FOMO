@@ -23,6 +23,7 @@
     "passport-local": "^1.0.0",
     "passport-oauth": "^1.0.0",
     "pg": "^4.3.0",
+    "pg-escape": "^0.1.0",
     "serve-favicon": "~2.2.0",
     "when": "^3.7.3"
   },

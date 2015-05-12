@@ -2,7 +2,6 @@ angular.module('customFilters', [])
 
 .filter("linkFormat", function(){
   return function(link) {
-    console.log(link);
     if (!link || link.length === 0 || link === "undefined") {
       return "";
     }
