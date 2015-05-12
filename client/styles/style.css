@@ -92,5 +92,9 @@ nav#hmenu ul a:hover{
 
 #editbtn {
   float: right;
+  margin-left: 10px;
 }
 
+#notification {
+  margin-top: -5px;
+}

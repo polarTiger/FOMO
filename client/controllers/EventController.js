@@ -13,27 +13,48 @@ angular.module('fomo.event', [])
   $scope.editTime = false;
 
 
+
   $scope.setEditAttribute = function(attr, value) {
     console.log(attr, value);
     $scope["edit" + attr] = value;
-    console.log($scope.editInfo);
   };
 
   $scope.getEvent = function() {
     EventService.getEvent($stateParams.eventID)
     .then(function(data) {
       $scope.data = data.data;
-      var dbYear = $scope.data.event_date.slice(0,4);
-      var dbMonth = parseInt($scope.data.event_date.slice(5,7))-1;
-      var dbDay = $scope.data.event_date.slice(8,10);
-      var dbHour = $scope.data.event_time ? parseInt($scope.data.event_time.slice(0,2)) : 0;
-      var dbMin = $scope.data.event_time ? parseInt($scope.data.event_time.slice(3,5)) : 1;
-      //var dbSec = data[i].notification_time ? parseInt(data[i].notification_time.slice(6,8)) : 0;
-      $scope.data.event_time = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin));
-      $scope.data.event_date = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin));
-      console.log(dbYear, dbMonth, dbDay, dbHour, dbMin);
+      $scope.data.event_infonew = $scope.data.event_info;
+
+      if ($scope.data.event_date) {
+        var dbYear = $scope.data.event_date.slice(0,4);
+        var dbMonth = parseInt($scope.data.event_date.slice(5,7))-1;
+        var dbDay = $scope.data.event_date.slice(8,10);
+        var dbHour = $scope.data.event_time ? parseInt($scope.data.event_time.slice(0,2)) : 0;
+        var dbMin = $scope.data.event_time ? parseInt($scope.data.event_time.slice(3,5)) : 1;
+        //var dbSec = data[i].notification_time ? parseInt(data[i].notification_time.slice(6,8)) : 0;
+        $scope.data.event_time = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin));
+        $scope.data.event_date = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin));
+      }
+
+      if ($scope.data.notification_date) {
+        var dbYearNotify = $scope.data.notification_date.slice(0,4);
+        var dbMonthNotify = parseInt($scope.data.notification_date.slice(5,7))-1;
+        var dbDayNotify = $scope.data.notification_date.slice(8,10);
+        var dbHourNotify = $scope.data.notification_time ? parseInt($scope.data.notification_time.slice(0,2)) : 0;
+        var dbMinNotify = $scope.data.notification_time ? parseInt($scope.data.notification_time.slice(3,5)) : 1;
+        //var dbSec = data[i].notification_time ? parseInt(data[i].notification_time.slice(6,8)) : 0;
+        $scope.data.notification_time = new Date(Date.UTC(dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify));
+        $scope.data.notification_date = new Date(Date.UTC(dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify));
+      }
+
+      console.log("EVENT DATE/TIME: " + dbYear, dbMonth, dbDay, dbHour, dbMin);
+      console.log("NOTIFICATION DATE/TIME: " + dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify);
       console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
     });
+  };
+
+  $scope.defaultText = function(input) {
+    $scope.data[input + "new"] = $scope.data[input];
   };
 
   $scope.subscribe = function() {
@@ -62,7 +83,7 @@ angular.module('fomo.event', [])
     });
   };
 
-  $scope.editEvent = function() { // to do, beyond MVP
+  $scope.editEvent = function() {
     console.log('EDIT_EVENT');
     $scope.modifyEventBtn = !$scope.modifyEventBtn;
 
@@ -95,8 +116,9 @@ angular.module('fomo.event', [])
   // };
 
   $scope.submitInfo = function() {
-    $http.post('/api/events/editevent/'+$stateParams.eventID, {event_info: $scope.data.event_info})
+    $http.post('/api/events/editevent/'+$stateParams.eventID, {event_info: $scope.data.event_infonew})
         .success(function(data, status, headers, config) {
+        $scope.data.event_info = $scope.data.event_infonew;
         console.log('success submit info');
       })
         .error(function(data, status, headers, config) {
