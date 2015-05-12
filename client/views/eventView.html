@@ -73,6 +73,6 @@
 
     <button ng-if="data.subscribed" class="btn btn-default navbar-btn" ng-click="unsubscribe()" notype="submit" >Unsubscribe from Event!</button>
 
-    <button class="btn btn-default navbar-btn" ng-hide="data.notification_time || !data.notification_info" ng-click="triggerEvent()" notype="submit">Trigger Notification Now</button>
+    <button class="btn btn-default navbar-btn" ng-hide="data.notification_time" ng-click="triggerEvent()" notype="submit">Trigger Notification Now</button>
   </span>
 </div>
