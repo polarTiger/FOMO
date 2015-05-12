@@ -18,7 +18,8 @@ var sendEmail = function(emails, image, link, title, eventInfo, nInfo) {
       html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + '> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>Notification Info: '+ nInfo + '</p> <br> <p>' + link + '</p>',
 
   };
-  //console.log(mailOptions);
+
+  console.log("mailOptions: ", mailOptions);
   transporter.sendMail(mailOptions, function(error, info){
       if(error){
           console.log(error);
@@ -101,9 +102,9 @@ module.exports = {
   //Prepares data and passes it to the send email function
   triggerEvent: function(req, res) {
 
-    var eventId = req.query.event_id; 
-
+    var eventId = req.query.event_id;
     var notificationInfo;
+
     for (var i = 0; i < notificationData.length; i++) {
       if (notificationData[i].event_id.toString() === eventId) {
         notificationInfo = notificationData[i].notification_info;
