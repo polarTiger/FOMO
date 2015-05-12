@@ -1,6 +1,7 @@
 angular.module('fomo.signup', [])
 
 .controller('SignupController', ['$scope', '$http', '$state', 'UserService', 'LoggedInService', function($scope, $http, $state, UserService, LoggedInService) {
+  $scope.userAlreadyExist = false;
   $scope.getallEvents = function() {
     UserService.getallEvents()
     .success(function(data) {
@@ -20,7 +21,13 @@ angular.module('fomo.signup', [])
       .success(function(data, status, headers, config) {
         //$log.log('success');
         //LoggedInService.setLoggedIn(true);
-        $state.go('signin');
+        if (data === 'already exists') {
+          $scope.userAlreadyExist = true;
+        } else {
+          $scope.userAlreadyExist = false;
+          $state.go('signin');
+        }
+        
       })
       .error(function(data, status, headers, config) {
         //$log.log('fail');
