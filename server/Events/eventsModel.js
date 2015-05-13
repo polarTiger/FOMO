@@ -105,59 +105,21 @@ module.exports = {
 
   addEvent: function(body, user_id, cb) {
 
-    var formattedEventDate = null;
-    var formattedEventTime = null;
     var formattedNotifyDate = body.notifydate;
     var formattedNotifyTime = null;
 
-    if (body.eventdate) {
-      formattedEventDate = "'"+body.eventdate+"'";
-    }
+    formattedNotifyDate = body.notifydate ? "'"+body.notifydate+"'" : null;
 
-    if (body.eventtime) {
-      formattedEventTime = "'"+body.eventtime+"'";
-    }
-
-    if (!body.notifydate) { // if undefined, set equal is EventDate
-      formattedNotifyDate = formattedEventDate;
-    } else {
-      formattedNotifyDate = "'"+body.notifydate+"'";
-    }
-
-    if (!body.notifytime) { // if undefined, check to see if notification exists, then set to EventTime
-      if (formattedNotifyDate) {
-        formattedNotifyTime = formattedEventTime;
-      }
-    } else {
-      formattedNotifyTime = "'"+body.notifytime+"'";
-    }
+    formattedNotifyTime = body.notifytime ? "'"+body.notifytime+"'" : null;
 
 
 
-    if (!body.notifyinfo) {
-      console.log("OPTION 1: EVENT ONLY"); // event only, no notification
-      // console.log(user_id, typeof user_id);
-      var queryString = escape("WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time, event_image) values ("
-                        +"%L, %L, %L, %L,"+formattedEventDate+","+formattedEventTime+", %L ) RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
-                        +user_id+"' FROM first_insert;", body.info, body.name, body.category, body.link, body.imgUrl);
+    var queryString = escape("WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_image) values ("
+                      +"%L, %L, %L, %L, %L ) RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, %L"
+                    + ", "+formattedNotifyDate+", "+formattedNotifyTime+" FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
+                    +user_id+"' FROM first_insert;",  body.info, body.name, body.category, body.link, body.imgUrl, body.notifyinfo);
+    //console.log('QUERY STRING: ', queryString);
 
-
-    // } else if (!body.notifyinfo && !body.date) { // event only without event date, set date to null
-    //   console.log("OPTION 2");
-    //   var queryString = "WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_image) values ('"
-    //                     +body.info+"', '"+body.name+"', '"+body.category+"','"+body.link+"') RETURNING id) INSERT into users_events (event_id, user_id) SELECT id, '"
-    //                     +req.session.passport.user.id+"' FROM first_insert;";
-    } else {
-      // insert notifications and events, defaults to event date if notification date is unknown, defaults to 00:01 if time is unknown
-      // insert into multiple tables: http://stackoverflow.com/questions/20561254/insert-data-in-3-tables-at-a-time-using-postgres
-      console.log("OPTION 2: EVENT AND NOTIFICATION TABLE");
-
-      var queryString = escape("WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time, event_image) values ("
-                        +"%L, %L, %L, %L,"+formattedEventDate+","+formattedEventTime+", %L ) RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, %L"
-                      + ", "+formattedNotifyDate+", "+formattedNotifyTime+" FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
-                      +user_id+"' FROM first_insert;",  body.info, body.name, body.category, body.link, body.imgUrl, body.notifyinfo);
-      //console.log('QUERY STRING: ', queryString);
-    }
     queryDB(queryString, cb);
   },
 
