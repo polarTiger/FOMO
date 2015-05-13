@@ -2,19 +2,17 @@
 
 Do you have FOMO | Fear Of Missing Out?
 
-__(http://try-fomo.com)__
-
-## Team
-- David Tan - [github.com/davidtansf](https://github.com/davidtansf)
-- Seven Li - [github.com/7seven7lst](https://github.com/7seven7lst)
-- Trevor Caverly - [github.com/tjcaverly](https://github.com/tjcaverly)
-- Kevin Berg - [github.com/KevinMarkVI](https://github.com/KevinMarkVI)
+__http://try-fomo.com__
 
 ## Summary
 
-FOMO is a crowdsourced event notifier application where you can create an event, such as a book or album release, and be notified when the moment happens!
+FOMO is a crowdsourced notifer app that allows users to subsribe to any event to receive notifications. No more having to track your events across individual sites! The fear of missing out, or [FOMO](http://en.wikipedia.org/wiki/Fear_of_missing_out), describes the issue we are solving.
 
 ## Features
+
+- Content from Eventful API
+- Instant search
+- Trigger notification immediately
 
 ## Tech Stack
 Angular, Node/Express, PostgreSQL, Jasmine, Bookshelf
@@ -41,3 +39,10 @@ Angular, Node/Express, PostgreSQL, Jasmine, Bookshelf
 ## Screenshots
 ![Image of Event View]
 (http://gdurl.com/2erH)
+
+## Team
+
+- David Tan - [github.com/davidtansf](https://github.com/davidtansf)
+- Seven Li - [github.com/7seven7lst](https://github.com/7seven7lst)
+- Trevor Caverly - [github.com/tjcaverly](https://github.com/tjcaverly)
+- Kevin Berg - [github.com/KevinMarkVI](https://github.com/KevinMarkVI)
