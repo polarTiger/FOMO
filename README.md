@@ -2,7 +2,7 @@
 
 Do you have FOMO | Fear Of Missing Out?
 
-__http://try-fomo.com__
+__[try-fomo.com](http://www.try-fomo.com)__
 
 ## Summary
 
@@ -12,9 +12,10 @@ FOMO is a crowdsourced notifer app that allows users to subsribe to any event to
 
 - Content from Eventful API
 - Instant search
-- Trigger notification immediately
+- Trigger notifications immediately
 
 ## Tech Stack
+
 Angular, Node/Express, PostgreSQL, Jasmine, Bookshelf
 
 ## Developer Environment
@@ -37,6 +38,8 @@ Angular, Node/Express, PostgreSQL, Jasmine, Bookshelf
 1. Open <http://localhost:3003> in your browser.
 
 ## Screenshots
+
+Event View:
 ![Image of Event View]
 (http://gdurl.com/2erH)
 
