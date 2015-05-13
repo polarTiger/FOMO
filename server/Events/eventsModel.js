@@ -5,8 +5,9 @@ var escape = require('pg-escape');
 
 module.exports = {
   getJustEventData: function(id, cb) {
-
-    var queryString = "SELECT * FROM events WHERE id = " + id +";";
+    var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
+    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON "+
+                      "events.id=notifications.event_id WHERE events.id = " + id + ";";
     queryDB(queryString, cb);
   },
   getEvent: function(id, user_id, cb) {
@@ -115,9 +116,9 @@ module.exports = {
 
 
     var queryString = escape("WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_image) values ("
-                      +"%L, %L, %L, %L, %L ) RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, %L"
-                    + ", "+formattedNotifyDate+", "+formattedNotifyTime+" FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
-                    +user_id+"' FROM first_insert;",  body.info, body.name, body.category, body.link, body.imgUrl, body.notifyinfo);
+                      +"%L, %L, %L, %L, %L ) RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_date, notification_time) SELECT id, "
+                    +formattedNotifyDate+", "+formattedNotifyTime+" FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
+                    +user_id+"' FROM first_insert;",  body.info, body.name, body.category, body.link, body.imgUrl);
     //console.log('QUERY STRING: ', queryString);
 
     queryDB(queryString, cb);

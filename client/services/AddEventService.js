@@ -19,7 +19,6 @@ angular.module('fomo.addeventservice', [])
       category: eventObject.category,
       link: eventObject.link,
       imgUrl: eventObject.imgUrl ? eventObject.imgUrl : null ,
-      notifyinfo: eventObject.notifyinfo ? eventObject.notifyinfo : null,
       notifydate: eventObject.notifydate ? UTCnotifydate.slice(0,10) : null,
       notifytime: UTCnotifydate ? UTCnotifydate.slice(11,16) : null
       // date: UTCdate,
