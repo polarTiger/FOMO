@@ -108,23 +108,13 @@ module.exports = {
     var formattedNotifyDate = body.notifydate;
     var formattedNotifyTime = null;
 
+    formattedNotifyDate = body.notifydate ? "'"+body.notifydate+"'" : null;
 
-    if (!body.notifydate) { // if undefined, set equal is EventDate
-      formattedNotifyDate = formattedEventDate;
-    } else {
-      formattedNotifyDate = "'"+body.notifydate+"'";
-    }
-
-    if (!body.notifytime) { // if undefined, check to see if notification exists, then set to EventTime
-      if (formattedNotifyDate) {
-        formattedNotifyTime = formattedEventTime;
-      }
-    } else {
-      formattedNotifyTime = "'"+body.notifytime+"'";
-    }
+    formattedNotifyTime = body.notifytime ? "'"+body.notifytime+"'" : null;
 
 
-    var queryString = escape("WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_date, event_time, event_image) values ("
+
+    var queryString = escape("WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_image) values ("
                       +"%L, %L, %L, %L, %L ) RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_info, notification_date, notification_time) SELECT id, %L"
                     + ", "+formattedNotifyDate+", "+formattedNotifyTime+" FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
                     +user_id+"' FROM first_insert;",  body.info, body.name, body.category, body.link, body.imgUrl, body.notifyinfo);
