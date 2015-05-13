@@ -9,8 +9,6 @@ angular.module('fomo.event', [])
 
   $scope.modifyInfoBtn = true;
   $scope.editInfo = false;
-  $scope.editDate = false;
-  $scope.editTime = false;
   $scope.editNotifyInfo = false;
   $scope.editNotifyDate = false;
   $scope.editNotifyTime = false;
@@ -27,21 +25,6 @@ angular.module('fomo.event', [])
       $scope.data = data.data;
       $scope.data.event_infonew = $scope.data.event_info;
       $scope.data.notification_infonew = $scope.data.notification_info;
-
-      if ($scope.data.event_date) {
-        var dbYear = $scope.data.event_date.slice(0,4);
-        var dbMonth = parseInt($scope.data.event_date.slice(5,7))-1;
-        var dbDay = $scope.data.event_date.slice(8,10);
-        var dbHour = $scope.data.event_time ? parseInt($scope.data.event_time.slice(0,2)) : 0;
-        var dbMin = $scope.data.event_time ? parseInt($scope.data.event_time.slice(3,5)) : 1;
-        //var dbSec = data[i].notification_time ? parseInt(data[i].notification_time.slice(6,8)) : 0;
-        $scope.data.event_time = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin));
-        $scope.data.event_date = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin));
-      }
-
-      // create copies for modifying event_date and event_time
-      $scope.data.event_datenew = $scope.data.event_date;
-      $scope.data.event_timenew = $scope.data.event_time;
 
       if ($scope.data.notification_date) {
         var dbYearNotify = $scope.data.notification_date.slice(0,4);
@@ -127,28 +110,6 @@ angular.module('fomo.event', [])
       });
   };
 
-  $scope.submitNotifyInfo = function() {
-    $http.post('/api/events/editnotification/'+$stateParams.eventID, {notification_info: $scope.data.notification_infonew})
-        .success(function(data, status, headers, config) {
-        $scope.data.notification_info = $scope.data.notification_infonew;
-        console.log('success submit notify_info');
-      })
-        .error(function(data, status, headers, config) {
-        console.log('fail');
-      });
-  };
-
-
-  $scope.submitNewDate = function() {
-    $scope.data.eventdate = $scope.data.event_datenew;
-    $scope.data.eventtime = $scope.data.event_timenew;
-    console.log("$scope.data EVENT_DATE", $scope.data);
-
-    EventService.updateEventDate($scope.data).then(function() {
-      $scope.data.event_date = $scope.data.event_datenew;
-      $scope.data.event_time = $scope.data.event_timenew;
-    });
-  };
 
   $scope.submitNewNotificationDate = function() {
     $scope.data.notificationdate = $scope.data.notification_datenew;

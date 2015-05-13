@@ -19,7 +19,7 @@
         <input type="date" id="add-notify-date" name="input" ng-model="data.notification_datenew" ng-required='data.notification_timenew'/>
         <input type="time" id="add-event-time" name="input" ng-model="data.notification_timenew"/>
         <!--  http://stackoverflow.com/questions/16251977/angularjs-toggle-button -->
-        <input id='editbtn' type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary col-md-1 form-group" ng-click="submitNewDate(); setEditAttribute('Date', !editDate)" value='Update Date'>
+        <input id='editbtn' type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary col-md-1 form-group" ng-click="submitNewNotificationDate(); setEditAttribute('Date', !editDate)" value='Update Date'>
       </form>
     </div>
 
