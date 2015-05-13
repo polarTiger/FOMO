@@ -5,6 +5,13 @@ var emailInfo = require('./emailAuth.js');
 var db = require('./eventsModel');
 
 
+
+
+var eventful = require('eventful-node');
+var eventfulKey = require('./eventfulAPIKey');
+var eventfulClient = new eventful.Client(eventfulKey);
+var flag = false;
+
 //This function takes params from the triggerEvent function and sends the actual email
 var sendEmail = function(emails, image, link, title, eventInfo, nInfo) {
   image = image || "http://localhost:3003/images/stock.jpg"; //will need to change url when deployed
@@ -36,7 +43,7 @@ var testTrigger = function(data, i){
   if (data[i].notification_date !== null && data[i].notification_time !== null) {
     var serverDate = new Date().toJSON();
     var serverTime = serverDate.slice(11,16);
-    serverDate = serverDate.slice(0,10);
+    serverDate = serverDate.slice(0,10); 
     var dbTime = data[i].notification_time.slice(0,8);
     var dbYear = data[i].notification_date.slice(0,4);
     var dbMonth = parseInt(data[i].notification_date.slice(5,7))-1;
@@ -68,6 +75,46 @@ var testTrigger = function(data, i){
 
 //Checks the current time against times in the database in order to automatically trigger events
 setInterval(function(){
+  var serverDate = new Date().toJSON();
+  var serverTime = serverDate.slice(11,16);
+  serverDate = serverDate.slice(0,10); 
+  console.log(serverTime);
+  if (serverTime === '18:14') {
+    if ( flag === false) {
+      flag = true; 
+      eventfulClient.searchEvents({page_size: 10, // number of results
+        within: 10, // distance
+        date: "2015051300-2015051500"}, function(err, data){
+        if(err){
+          return console.error(err);
+        } 
+        console.log('Recieved ' + data.search.total_items + ' events');
+        
+        console.log('Event listings: ');
+        
+        //print the title of each event 
+        
+        for (var i = 0; i < data.search.events.event.length; i++) {
+           var eventfulObj = {
+             name: data.search.events.event[i].title,
+             info: data.search.events.event[i].description,
+             category: 'music', // need to look at how eventful generate category, it's not in the obj
+             link: data.search.events.event[i].url, 
+             imgUrl: data.search.events.event[i].image.url,
+             eventdate: data.search.events.event[i].start_time.slice(0,10),
+             eventtime: data.search.events.event[i].start_time.slice(11,16),
+             notifydate: null,
+             notifytime: null
+           };
+          db.putEventFromWebToDB(eventfulObj, function(){
+            console.log('write to db...');
+          });
+        } 
+      });
+    } 
+  } else {
+    flag = false;
+  }
 
   db.getAllNotifications(function(data){
     notificationData = data;
