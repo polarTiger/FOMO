@@ -96,6 +96,7 @@ setInterval(function(){
       flag = true; 
       eventfulClient.searchEvents({page_size: 10, // number of results
         within: 10, // distance
+        mature: 'safe', // set content to be safe PG content
         date: startTimeStr + '-' + endTimeStr}, function(err, data){
         if(err){
           return console.error(err);
@@ -187,6 +188,12 @@ module.exports = {
   //Calls the searchCategories function in the eventsModel file with the selected category from the req
   searchCategories: function(req, res) {
     db.searchCategories(req.query.query, function(rows){
+      res.end(JSON.stringify(rows));
+    });
+  },
+
+  getPopularEvents: function(req, res) {
+    db.getPopularEvents(function(rows){
       res.end(JSON.stringify(rows));
     });
   },

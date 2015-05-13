@@ -3,7 +3,10 @@ angular.module('fomo.results', ['customFilters'])
 .controller('ResultsController', ['$scope', '$log', 'SearchService',
   function($scope, $log, SearchService) {
     $scope.genPopularEvent = function() {
-      
+      SearchService.searchPopular()
+      .success(function(data,status){
+        $scope.popularEvents = data;
+      })
     }
     $scope.submit = function() {
       console.log('query is ',$scope.query);
@@ -13,4 +16,5 @@ angular.module('fomo.results', ['customFilters'])
           $scope.events = data;
       });
     };
+    $scope.genPopularEvent();
 }]);
