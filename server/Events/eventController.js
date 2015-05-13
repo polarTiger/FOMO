@@ -14,7 +14,7 @@ var flag = false;
 
 //This function takes params from the triggerEvent function and sends the actual email
 var sendEmail = function(emails, image, link, title, eventInfo, nInfo) {
-  image = image || "http://localhost:3003/images/stock.jpg"; //will need to change url when deployed
+  image = image || "http://localhost:3003/images/stock.jpg"; //Change url when deployed
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: emailInfo
@@ -28,12 +28,13 @@ var sendEmail = function(emails, image, link, title, eventInfo, nInfo) {
 
   };
 
-  console.log("mailOptions: ", mailOptions);
+  //console.log("mailOptions: ", mailOptions);
   transporter.sendMail(mailOptions, function(error, info){
       if(error){
-          console.log(error);
-      }else{
-          console.log('Message sent: ' + info.response);
+        res.send(500);
+      } else {
+      console.log('Message sent: ' + info.response);
+      res.send(200);
       }
   });
 };
@@ -141,6 +142,7 @@ module.exports = {
     res.send(200);
     console.log("Event Route Works!!!!!");
   },
+
   //Gets the event ID from the request url and calls the get event function in the eventsModel file
   getEvent: function(req, res) {
     var id = req.url.match(/\d+/)[0];
@@ -155,11 +157,10 @@ module.exports = {
     db.addEvent(req.body, req.session.passport.user.id, function(){
       res.end();
     });
-
   },
+
   //Prepares data and passes it to the send email function
   triggerEvent: function(req, res) {
-
     var eventId = req.query.event_id;
 
     db.getJustEventData(eventId, function(data) {
