@@ -40,8 +40,7 @@ angular.module('fomo.event', [])
       $scope.data.notification_datenew = $scope.data.notification_date;
       $scope.data.notification_timenew = $scope.data.notification_time;
 
-      console.log("EVENT DATE/TIME: " + dbYear, dbMonth, dbDay, dbHour, dbMin);
-      console.log("NOTIFICATION DATE/TIME: " + dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify);
+      console.log("EVENT DATE/TIME: " + dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify);
       console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
     });
   };

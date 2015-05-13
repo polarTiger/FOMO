@@ -33,10 +33,10 @@ module.exports = {
 
   //Queries the database and returns data based on the give searchQuery string
   searchEvents: function(searchQuery, cb) {
-    var categoryString = (searchQuery.category==="undefined" || !searchQuery.category)  ? "": " AND LOWER(events.event_category) like LOWER('%" + searchQuery.category + "%')";
+    var categoryString = (searchQuery.category==="undefined" || !searchQuery.category)  ? "": escape(" AND LOWER(events.event_category) like LOWER(%L)", '%'+searchQuery.category+'%');
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
-    var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_title) "+
-                      "like LOWER('%" + searchQuery.query + "%')" + categoryString + ";";
+    var queryString = queryStart + escape(" FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_title) "+
+                      "like LOWER(%L)" + categoryString + ";", '%'+searchQuery.query+'%' );
     queryDB(queryString, cb);
   },
 
