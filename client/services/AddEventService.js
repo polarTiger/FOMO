@@ -9,7 +9,6 @@ angular.module('fomo.addeventservice', [])
       var UTCnotifytime = eventObject.notifytime ? eventObject.notifytime.toString().match(/\d{2}:\d{2}:\d{2}/)[0] : '00:01:00';
       var UTCnotifydate = eventObject.notifydate.toString().replace(/\d{2}:\d{2}:\d{2}/,UTCnotifytime);
       UTCnotifydate = new Date(UTCnotifydate).toJSON();
-      console.log('UTCnotifydate: ', UTCnotifydate);
     }
     console.log("eventObject", eventObject);
     var sendObject = {
@@ -29,8 +28,6 @@ angular.module('fomo.addeventservice', [])
       // notifydate: $filter('date')(eventObject.notifydate, 'yyyy-MM-dd'),
       // notifytime: $filter('date')(eventObject.notifytime, 'HH:mm') // format in military time
     };
-
-    console.log('SERVICE: GET_EVENTS: ', sendObject);
 
     $http.post('/api/events/addevent', sendObject)
         .success(function(data, status, headers, config) {
