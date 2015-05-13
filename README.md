@@ -16,9 +16,24 @@ FOMO is a crowdsourced event notifier application where you can create an event,
 ## Tech Stack
 Angular, Node/Express, PostgreSQL, Jasmine, Bookshelf
 
-### Install Dependencies
-npm install
-bower install
+## Developer Environment
+
+1. Configure Postgres:
+ - Run '\i path/to/schema.sql' to generate db and tables locally.
+ - In server/dbConfig/, copy "dbConfig.example.js",rename to "dbConfig.js", AND change the 'username' to your mac username.
+
+1. Run the following in the project directory:
+
+    ```sh
+    # install dependencies
+    npm install
+    bower install
+
+    # start server
+    node index.js
+    ```
+
+1. Open <http://localhost:3003> in your browser.
 
 ## Screenshots
 ![Image of Event View]
