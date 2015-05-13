@@ -82,7 +82,3 @@ INSERT INTO users_events (user_id, event_id) values (1, 1);
 INSERT INTO users (username, password, email) values ('Jane', '4567', 'tryfomo@gmail.com');
 INSERT INTO events (event_info, event_title, event_category) values ('test event info 2', 'event2', 'music');
 INSERT INTO users_events (user_id, event_id) values (2, 2);
-
-INSERT INTO users (username, password, email) values ('Bob', '9999', 'tryfomo@gmail.com');
-INSERT INTO events (event_info, event_title, event_category) values ('test event info 3', 'event3', 'album');
-INSERT INTO users_events (user_id, event_id) values (3, 3);

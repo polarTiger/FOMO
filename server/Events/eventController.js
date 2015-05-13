@@ -154,7 +154,7 @@ module.exports = {
       res.end(JSON.stringify(rows[0]));
     });
   },
-  
+
   //Calls the  addEvent function in the eventsModel file with the event information from the req.body and user id
   addEvent: function(req, res) {
     db.addEvent(req.body, req.session.passport.user.id, function(){
@@ -167,7 +167,7 @@ module.exports = {
     var eventId = req.query.event_id;
 
     db.getJustEventData(eventId, function(data) {
-      db.findEmailsForEvent(eventId, function(emails){
+      db.findEmailsForEvent(eventId, function(emails) {
         emailList = [];
         for (var i = 0; i < emails.length; i++) {
           emailList.push(emails[i].email);

@@ -10,7 +10,7 @@ FOMO is a crowdsourced notifier app that allows users to subscribe to any event 
 
 ## Features
 
-- Content from Eventful API
+- Content from Eventful
 - Instant search
 - Trigger notifications immediately
 

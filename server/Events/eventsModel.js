@@ -83,7 +83,7 @@ module.exports = {
 
     for (var key in body){
       if (body[key]) {
-        editStrings.push(key+"='"+body[key]+"'");
+        editStrings.push(key+"="+escape('%L', body[key]));
       }
     }
     query = queryStart + editStrings.join(', ') + queryEnd;
@@ -99,14 +99,14 @@ module.exports = {
 
     for (var key in body){
       if (body[key]) {
-        editStrings.push(key+"='"+body[key]+"'");
+        editStrings.push(key+"="+escape('%L', body[key]));
       }
     }
     query = queryStart + editStrings.join(', ') + queryEnd;
     queryDB(query, cb);
   },
 
-  //Inserts user and event information into the users_events table 
+  //Inserts user and event information into the users_events table
   subscribe: function(user_id, event_id, cb) {
     var queryString = "INSERT INTO users_events (user_id, event_id) select "+user_id+ " as user_id, "+event_id+
                         " as event_id from users_events where (user_id="+user_id+" and event_id="+event_id+ ") having count(*)=0;";

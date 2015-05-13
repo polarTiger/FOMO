@@ -54,7 +54,7 @@ angular.module('fomo.event', [])
   $scope.subscribe = function() {
     $http.post('api/events/subscribe/'+ $stateParams.eventID)
       .success(function(data, status, headers, config) {
-        $log.log('success');
+        $log.log('successfully subscribed');
         $scope.data.subscribed = true;
         // $log.log(data);
     })
@@ -67,7 +67,7 @@ angular.module('fomo.event', [])
   $scope.unsubscribe = function() {
     $http.delete('api/events/unsubscribe/'+ $stateParams.eventID)
       .success(function(data, status, headers, config) {
-        $log.log('success');
+        $log.log('successfully unsubscribed');
         $scope.data.subscribed = false;
         // $log.log(data);
     })
@@ -95,7 +95,7 @@ angular.module('fomo.event', [])
   };
 
   $scope.triggerEvent = function() {
-    $http.get('/api/events/triggerevent/', {params: {event_id: $stateParams.eventID}});
+    EventService.triggerEvent({params: {event_id: $stateParams.eventID}});
   };
 
   $scope.submitInfo = function() {
