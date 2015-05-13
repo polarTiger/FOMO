@@ -133,6 +133,11 @@ module.exports = {
   },
 
   //NEEDS COMMENT
+  putEventFromWebToDB : function(infoObj, cb) {
+    var queryString = "INSERT INTO events (event_title, event_info, event_category, event_link, event_image) values ('"+infoObj.name+"', '" +infoObj.link+"', '" +infoObj.category+"', '" +infoObj.link+"', '" +infoObj.imgUrl+"')";
+    queryDB(queryString, cb);
+  },
+
   getAllNotifications: function(cb) {
     var queryString = "SELECT * FROM notifications";
     queryDB(queryString, cb);
