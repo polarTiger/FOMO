@@ -2,6 +2,8 @@ var pg = require('pg');
 var dbUrl = require('../dbConfig/dbConfig');
 
 module.exports = {
+
+  //General function that queries the database given a mySQL query string
   queryDB: function(queryString, cb) {
     console.log(queryString);
     pg.connect(dbUrl, function(err, client, done) {
@@ -23,27 +25,12 @@ module.exports = {
       pg.end();
     },
 
+  //NEEDS COMMENT 
   sanitizeString: function(str) {
     return str.replace(/'/g,"''");
   },
 
-  /**
-   * create a function which does the following: 
-   *
-   * creates the beginning of a select query using all columns from tables in 
-   * the array tables. 
-   *
-   * as is an object in the form {"notifications.id: notificationsId"} where
-   * notifications.id AS notificationsId will be used. 
-   *
-   * except is an object in the form {"notifications.id: notificationsId"} where 
-   * all included keys will not be added to the select query
-   * 
-   * "SELECT events.id, events.info, notification.id AS notificationsID" is a sample output
-   *
-   * In the outer function, tableColumns provides an object with the names of your tables 
-   * as keys and the column names as values. Pass this 
-   */
+  //NEEDS COMMENT
   selectColumnsFromTablesAsExcept: function(tableColumns) {
     return function(tables, as, except){
       as = as || {};
@@ -63,14 +50,14 @@ module.exports = {
         }
       }
       return queryStart += columns.join(', ');
-    }
+    };
   },
 
   tableColumns: {
-                'events': ['id', 'event_info', 'event_title', 'event_category', 'event_date', 'event_time', 'event_link', 'event_image'],
-                'notifications': ['id', 'event_id', 'notification_info', 'notification_date', 'notification_time', 'fired'],
-                'users': ['id', 'username', 'password',  'email', 'timestamp'],
-                'users_events': ['id', 'event_id', 'user_id']
-              }
+    'events': ['id', 'event_info', 'event_title', 'event_category', 'event_link', 'event_image'],
+    'notifications': ['id', 'event_id', 'notification_date', 'notification_time', 'fired'],
+    'users': ['id', 'username', 'password',  'email', 'timestamp'],
+    'users_events': ['id', 'event_id', 'user_id']
+  }
 
 };

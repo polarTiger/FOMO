@@ -35,8 +35,6 @@ CREATE TABLE "events" (
   "event_info" TEXT NULL DEFAULT NULL,
   "event_title" TEXT NOT NULL,
   "event_category" TEXT NULL DEFAULT NULL,
-  "event_date" TEXT NULL DEFAULT NULL,
-  "event_time" TEXT NULL DEFAULT NULL,
   "event_link" TEXT NULL DEFAULT NULL,
   "event_image" TEXT NULL DEFAULT NULL,
   PRIMARY KEY ("id")
@@ -63,7 +61,6 @@ CREATE TABLE "users_events" (
 CREATE TABLE "notifications" (
   "id" SERIAL NOT NULL,
   "event_id" INTEGER NULL DEFAULT NULL,
-  "notification_info" TEXT NULL DEFAULT NULL,
   "notification_date" TEXT NULL DEFAULT NULL,
   "notification_time" TEXT NULL DEFAULT NULL,
   "fired" BOOLEAN NULL DEFAULT NULL,
