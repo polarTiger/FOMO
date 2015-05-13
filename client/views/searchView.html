@@ -2,7 +2,7 @@
   <form novalidate name="searchForm" class="form-block" role="form" ng-submit='submit()'>
     <input type="text" class="" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()" 
       ng-class="{'invalidTxtBox': queryresult.length > 0 || event.name.length === 0}" placeholder="Search for event">
-    <select ng-model="event.category">
+    <select ng-model="event.category" ng-change="liveSearchEventTitle()">
       <option ng-repeat="category in event.categories">{{category}}</option>
     </select>
     <button type="submit" class="btn">Submit</button>
