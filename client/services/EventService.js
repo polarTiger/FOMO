@@ -23,32 +23,6 @@ angular.module('fomo.eventservice', [])
       });
   };
 
-  var updateEventDate = function(eventObject) {
-
-    if (eventObject.eventdate) { // handles eventdate and eventtime, or just event date but no event time (defaults to 12:01 local)
-      var UTCdate = eventObject.eventdate.toJSON().slice(0,10);
-      var UTCeventtime = eventObject.eventtime ? eventObject.eventtime.toString().match(/\d{2}:\d{2}:\d{2}/)[0] : '00:01:00';
-      var UTCeventdate = eventObject.eventdate.toString().replace(/\d{2}:\d{2}:\d{2}/,UTCeventtime);
-      UTCeventdate = new Date(UTCeventdate).toJSON();
-      console.log('UTCeventdate: ', UTCeventdate);
-    }
-
-    var sendObject = {
-      event_date: eventObject.eventdate ? UTCeventdate.slice(0,10) : null, // date and time converted to UTC time, ie. 7 or 8 hours ahead from Pacific
-      event_time: UTCeventdate ? UTCeventdate.slice(11,16) : null // null when no event date, 12:01 local when no event time, or else user defined event time
-    };
-
-    console.log('SERVICE: UPDATE EVENT_DATE: ', sendObject);
-
-    return $http.post('/api/events/editevent/'+$stateParams.eventID, sendObject)
-      .success(function(data, status, headers, config) {
-        console.log('success update event date');
-        // $state.go('user');
-      })
-      .error(function(data, status, headers, config) {
-        $log.log('fail');
-      });
-  };
 
   var updateNotificationDate = function(eventObject) {
 
@@ -80,7 +54,6 @@ angular.module('fomo.eventservice', [])
   return {
     getEvent: getEvent,
     submitEmail: submitEmail,
-    updateEventDate: updateEventDate,
     updateNotificationDate: updateNotificationDate
   };
 }]);
