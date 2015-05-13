@@ -1,0 +1,26 @@
+<div class="form-block col-md-3 col-md-offset-4">
+  <div id='signup'>
+    <h1 class="center-heading">Sign Up</h1>
+    <div ng-show="userAlreadyExist" style="color:red;">
+      <div>User already exist!!!!!</div>
+      <div>please use sign in page instead,</div>
+      <div>or retry with a different username.</div>
+    </div>
+    <form novalidate name="signupForm" class="form-block" role="form" ng-submit='signup()'>
+      <label for="username">Username:</label>
+      <div class="form-group">
+        <input type="text" ng-model="user.username" />
+      </div>
+      <label for="email">Email:</label>
+      <div class="form-group">
+        <input type="text" ng-model="user.email" />
+      </div>
+      <label for="password">Password:</label>
+      <div class="form-group">
+        <input type="password" ng-model="user.password" />
+      </div>
+      <button>Sign Up</button>
+    </form>
+    <a href="#/signin">Have an account? <strong>Sign In</strong> ...</a>
+  </div>
+</div>
