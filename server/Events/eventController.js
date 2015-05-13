@@ -103,13 +103,7 @@ module.exports = {
   triggerEvent: function(req, res) {
 
     var eventId = req.query.event_id;
-    var notificationInfo;
 
-    for (var i = 0; i < notificationData.length; i++) {
-      if (notificationData[i].event_id.toString() === eventId) {
-        notificationInfo = notificationData[i].notification_info;
-      }
-    }
     db.getJustEventData(eventId, function(data) {
       db.findEmailsForEvent(eventId, function(emails){
         emailList = [];
@@ -117,7 +111,7 @@ module.exports = {
           emailList.push(emails[i].email);
         }
         emailList.join(',');
-        sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info, notificationInfo);
+        sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info);
       });
     });
    },
