@@ -6,7 +6,7 @@ __[try-fomo.com](http://www.try-fomo.com)__
 
 ## Summary
 
-FOMO is a crowdsourced notifer app that allows users to subsribe to any event to receive notifications. No more having to track your events across individual sites! The fear of missing out, or [FOMO](http://en.wikipedia.org/wiki/Fear_of_missing_out), describes the issue we are solving.
+FOMO is a crowdsourced notifier app that allows users to subscribe to any event to receive notifications. No more tracking your events across individual sites! The fear of missing out, or [FOMO](http://en.wikipedia.org/wiki/Fear_of_missing_out), describes the issue we are solving.
 
 ## Features
 
