@@ -13,7 +13,7 @@ var eventfulClient = new eventful.Client(eventfulKey);
 var flag = false;
 
 //This function takes params from the triggerEvent function and sends the actual email
-var sendEmail = function(emails, image, link, title, eventInfo, nInfo) {
+var sendEmail = function(emails, image, link, title, eventInfo, res) {
   image = image || "http://localhost:3003/images/stock.jpg"; //Change url when deployed
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
@@ -24,17 +24,19 @@ var sendEmail = function(emails, image, link, title, eventInfo, nInfo) {
       to: '' + emails,
       subject: 'FOMO | ' + title + ' | Notification!',
       text: 'FOMO', // plaintext body
-      html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + '> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>Notification Info: '+ nInfo + '</p> <br> <p>' + link + '</p>',
+      html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + '> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>' + link + '</p>',
 
   };
 
   //console.log("mailOptions: ", mailOptions);
+  console.log("RES: ", res);
   transporter.sendMail(mailOptions, function(error, info){
       if(error){
         res.send(500);
+        console.log(error);
       } else {
-      console.log('Message sent: ' + info.response);
-      res.send(200);
+        res.send(200);
+        console.log('Message sent: ' + info.response);
       }
   });
 };
@@ -86,8 +88,8 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
   
-  console.log(startTimeStr);
-  console.log(endTimeStr);
+  //console.log(startTimeStr);
+  //console.log(endTimeStr);
   if (serverTime === '19:00') {
 
     if ( flag === false) {
@@ -170,7 +172,7 @@ module.exports = {
           emailList.push(emails[i].email);
         }
         emailList.join(',');
-        sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info);
+        sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info, res);
       });
     });
    },
