@@ -2,10 +2,13 @@
 
 Do you have FOMO | Fear Of Missing Out?
 
+__(http://try-fomo.com)__
+
 ## Team
-- Product Owner: David Tan
-- Scrum Master: Seven Li
-- Development Team: Trevor Caverly, Kevin Berg
+- David Tan - [github.com/davidtansf](https://github.com/davidtansf)
+- Seven Li - [github.com/7seven7lst](https://github.com/7seven7lst)
+- Trevor Caverly - [github.com/tjcaverly](https://github.com/tjcaverly)
+- Kevin Berg - [github.com/KevinMarkVI](https://github.com/KevinMarkVI)
 
 ## Summary
 
