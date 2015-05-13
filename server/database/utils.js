@@ -67,7 +67,7 @@ module.exports = {
   },
 
   tableColumns: {
-                'events': ['id', 'event_info', 'event_title', 'event_category', 'event_date', 'event_time', 'event_link', 'event_image'],
+                'events': ['id', 'event_info', 'event_title', 'event_category', 'event_link', 'event_image'],
                 'notifications': ['id', 'event_id', 'notification_info', 'notification_date', 'notification_time', 'fired'],
                 'users': ['id', 'username', 'password',  'email', 'timestamp'],
                 'users_events': ['id', 'event_id', 'user_id']
