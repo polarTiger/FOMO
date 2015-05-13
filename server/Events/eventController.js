@@ -75,16 +75,25 @@ var testTrigger = function(data, i){
 
 //Checks the current time against times in the database in order to automatically trigger events
 setInterval(function(){
-  var serverDate = new Date().toJSON();
+  var serverDateLocal = new Date();
+  var serverDate= serverDateLocal.toJSON();
   var serverTime = serverDate.slice(11,16);
+  var endTime = serverDateLocal.getTime()+ 24*60*60*1000;
   serverDate = serverDate.slice(0,10); 
-  console.log(serverTime);
-  if (serverTime === '18:14') {
+
+  var startTimeStr = serverDate.replace(/-/g,'') + '00';
+  endTime = new Date(endTime).toJSON();
+  var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
+  
+  console.log(startTimeStr);
+  console.log(endTimeStr);
+  if (serverTime === '19:00') {
+
     if ( flag === false) {
       flag = true; 
       eventfulClient.searchEvents({page_size: 10, // number of results
         within: 10, // distance
-        date: "2015051300-2015051500"}, function(err, data){
+        date: startTimeStr + '-' + endTimeStr}, function(err, data){
         if(err){
           return console.error(err);
         } 
@@ -95,6 +104,7 @@ setInterval(function(){
         //print the title of each event 
         
         for (var i = 0; i < data.search.events.event.length; i++) {
+          console.log(data.search.events.event[i]);
            var eventfulObj = {
              name: data.search.events.event[i].title,
              info: data.search.events.event[i].description,
@@ -106,6 +116,7 @@ setInterval(function(){
              notifydate: null,
              notifytime: null
            };
+          console.log(eventfulObj);
           db.putEventFromWebToDB(eventfulObj, function(){
             console.log('write to db...');
           });
