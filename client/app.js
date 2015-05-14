@@ -61,7 +61,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
 })
 
 .controller("MainController", ['$scope', '$http', 'LoggedInService', '$rootScope', '$state', function($scope, $http, LoggedInService, $rootScope, $state) {
-  $rootScope.user = {};
+  $rootScope.root = {user:{}};
   $scope.logout = function() {
     console.log('signout attempt');
     $http.get('/api/users/signout')
@@ -81,6 +81,6 @@ angular.module('fomo', ['ui.router', 'fomo.event',
     $scope.username = LoggedInService.getUserName();
     console.log($scope.username);
   };
-  $scope.getLoggedIn();
-  $scope.user = $rootScope.user;
+  // $scope.getLoggedIn();
+  $scope.user = $rootScope.root.user;
 }]);

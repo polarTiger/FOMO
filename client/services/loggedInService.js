@@ -17,7 +17,7 @@ angular.module('fomo.loggedinservice', [])
   };
 
   var setUserName = function(username) {
-    $rootScope.user.username = username;
+    $rootScope.root.user.username = username;
     _userName = username;
   }
 
