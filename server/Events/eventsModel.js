@@ -28,7 +28,6 @@ module.exports = {
         cb(rows);
       });
     });
-
   },
 
   //Queries the database and returns data based on the give searchQuery string
@@ -120,6 +119,7 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
+  // change # of subscriber of the events by +1 or -1 depends on if the user subscribe or unsubscribe
   changeSubscriberCount: function(event_id, change, cb) {
     var queryString = "UPDATE  events set no_of_subscriber=no_of_subscriber+"+ change + " WHERE id=" + event_id +";";
     console.log(queryString);
@@ -143,7 +143,7 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  //NEEDS COMMENT
+  //puts the event obj fetched from eventful api to database events table
   putEventFromWebToDB : function(infoObj, cb) {
     var queryString = "INSERT INTO events (event_title, event_info, event_category, event_link, event_image) values ('"+infoObj.name+"', '" +infoObj.link+"', '" +infoObj.category+"', '" +infoObj.link+"', '" +infoObj.imgUrl+"')";
     queryDB(queryString, cb);
@@ -158,7 +158,6 @@ module.exports = {
   setNotificationToFired: function(id, date, cb) {
     var queryStringTrigger = "UPDATE notifications set fired=TRUE, notification_date='"+date.serverDate+"', notification_time='"+date.serverTime+"' WHERE event_id= "+ id +";";
     queryDB(queryStringTrigger, cb);
-
   }
 
 
