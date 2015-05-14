@@ -1,11 +1,16 @@
 var pg = require('pg');
-var dbUrl = require('../dbConfig/dbConfig');
+var dbUrl = process.env.DATABASE_URL || require('../dbConfig/dbConfig');
 var nodemailer = require('nodemailer');
-var emailInfo = require('./emailAuth.js');
+if (process.env.EMAILADDRESS){
+  var emailInfo = {user: process.env.EMAILADDRESS,
+              pass:  process.env.EMAILPASSWORD};
+} else {
+  var emailInfo = require('./emailAuth.js');
+}
 var db = require('./eventsModel');
 
 var eventful = require('eventful-node');
-var eventfulKey = require('./eventfulAPIKey');
+var eventfulKey = process.env.EVENTFULKEY || require('./eventfulAPIKey');
 var eventfulClient = new eventful.Client(eventfulKey);
 var flag = false;
 

@@ -1,4 +1,4 @@
-var dbUrl = require('./dbConfig');
+var dbUrl = process.env.DATABASE_URL || require('./dbConfig');
 
 var knex = require('knex')({
   client: 'pg', 
@@ -8,4 +8,3 @@ var knex = require('knex')({
 var Bookshelf = require('bookshelf')(knex);
 
 module.exports = Bookshelf;
-
