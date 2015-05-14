@@ -57,7 +57,7 @@ module.exports = {
 
   //NEEDS COMMENT
   getPopularEvents: function(cb) {
-    var queryString = "SELECT * FROM events ORDER BY RANDOM() limit 5 ;";
+    var queryString = "SELECT * FROM events ORDER BY no_of_subscriber DESC limit 10 ;";
     queryDB(queryString, cb)
   },
 
@@ -117,6 +117,12 @@ module.exports = {
   unsubscribe: function(user_id, event_id, cb) {
     var queryString = "DELETE from users_events where user_id="+user_id+
                       " and event_id="+event_id + ";";
+    queryDB(queryString, cb);
+  },
+
+  changeSubscriberCount: function(event_id, change, cb) {
+    var queryString = "UPDATE  events set no_of_subscriber=no_of_subscriber+"+ change + " WHERE id=" + event_id +";";
+    console.log(queryString);
     queryDB(queryString, cb);
   },
 

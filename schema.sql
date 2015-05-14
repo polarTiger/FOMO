@@ -39,6 +39,7 @@ CREATE TABLE "events" (
   "event_category" TEXT NULL DEFAULT NULL,
   "event_link" TEXT NULL DEFAULT NULL,
   "event_image" TEXT NULL DEFAULT NULL,
+  "no_of_subscriber" INTEGER DEFAULT 0,
   PRIMARY KEY ("id")
 );
 
