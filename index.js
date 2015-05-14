@@ -1,5 +1,5 @@
 var app = require('./server/server');
 
 
-app.listen(3003);
+app.listen(process.env.PORT || 3003);
 
