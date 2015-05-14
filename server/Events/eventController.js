@@ -98,7 +98,7 @@ setInterval(function(){
 
   //console.log(startTimeStr);
   //console.log(endTimeStr);
-  if (serverTime === '19:00') {
+  if (serverTime === '18:31') {
 
     if ( flag === false) {
       flag = true;
@@ -264,7 +264,10 @@ module.exports = {
     var user_id = req.session.passport.user.id;
 
     db.subscribe(user_id, event_id, function() {
-      res.end();
+      db.changeSubscriberCount(event_id, 1, function() {
+        res.end();
+      });
+      //res.end();
     });
   },
 
@@ -274,7 +277,10 @@ module.exports = {
     var user_id = req.session.passport.user.id;
 
     db.unsubscribe(user_id, event_id, function() {
-      res.end();
+      db.changeSubscriberCount(event_id, -1, function() {
+        res.end();
+      });
+      //res.end();
     });
   }
 };

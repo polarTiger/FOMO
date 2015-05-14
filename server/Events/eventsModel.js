@@ -120,6 +120,12 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
+  changeSubscriberCount: function(event_id, change, cb) {
+    var queryString = "UPDATE  events set no_of_subscriber=no_of_subscriber+"+ change + " WHERE id=" + event_id +";";
+    console.log(queryString);
+    queryDB(queryString, cb);
+  },
+
   //NEEDS COMMENT
   addEvent: function(body, user_id, cb) {
     var formattedNotifyDate = body.notifydate;
