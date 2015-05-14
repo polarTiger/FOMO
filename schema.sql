@@ -18,12 +18,14 @@
 
 CREATE TABLE "users" (
   "id" SERIAL NOT NULL,
-  "username" TEXT NOT NULL,
+  "username" TEXT NOT NULL UNIQUE,
   "password" VARCHAR NOT NULL,
   "email" TEXT NULL DEFAULT NULL,
   "timestamp" TIMESTAMP NOT NULL DEFAULT current_timestamp ,
   PRIMARY KEY ("id")
 );
+
+ALTER TABLE users ADD UNIQUE (username);
 
 -- ---
 -- Table 'events'
@@ -39,6 +41,8 @@ CREATE TABLE "events" (
   "event_image" TEXT NULL DEFAULT NULL,
   PRIMARY KEY ("id")
 );
+
+ALTER TABLE events ADD UNIQUE (event_title);
 
 -- ---
 -- Table 'users_events'
