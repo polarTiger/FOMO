@@ -95,7 +95,10 @@ angular.module('fomo.event', [])
   };
 
   $scope.triggerEvent = function() {
-    EventService.triggerEvent({params: {event_id: $stateParams.eventID}});
+    EventService.triggerEvent({params: {event_id: $stateParams.eventID}})
+    .then(function() {
+      $scope.data.fired = true;
+    })
   };
 
   $scope.submitInfo = function() {

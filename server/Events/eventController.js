@@ -16,28 +16,31 @@ var flag = false;
 var sendEmail = function(emails, image, link, title, eventInfo, res) {
   image = image || "http://localhost:3003/images/stock.jpg"; //Change url when deployed
   var transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: emailInfo
+    service: 'Gmail',
+    auth: emailInfo
   });
   var mailOptions = {
-      from: 'FOMO <tryfomo@gmail.com>',
-      to: '' + emails,
-      subject: 'FOMO | ' + title + ' | Notification!',
-      text: 'FOMO', // plaintext body
-      html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + ' height="200"> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>' + link + '</p>',
-
+    from: 'FOMO <tryfomo@gmail.com>',
+    to: '' + emails,
+    subject: 'FOMO | ' + title + ' | Notification!',
+    text: 'FOMO', // plaintext body
+    html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + ' height="200"> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>' + link + '</p>',
   };
 
   //console.log("mailOptions: ", mailOptions);
-  console.log("RES: ", res);
+  // console.log("RES: ", res);
   transporter.sendMail(mailOptions, function(error, info){
-      if(error){
+    if(error) {
+      if(res) {
         res.send(500);
         console.log(error);
-      } else {
+      }
+    } else {
+      if(res) {
         res.send(200);
         console.log('Message sent: ' + info.response);
       }
+    }
   });
 };
 
@@ -46,7 +49,7 @@ var testTrigger = function(data, i){
   if (data[i].notification_date !== null && data[i].notification_time !== null) {
     var serverDate = new Date().toJSON();
     var serverTime = serverDate.slice(11,16);
-    serverDate = serverDate.slice(0,10); 
+    serverDate = serverDate.slice(0,10);
     var dbTime = data[i].notification_time.slice(0,8);
     var dbYear = data[i].notification_date.slice(0,4);
     var dbMonth = parseInt(data[i].notification_date.slice(5,7))-1;
@@ -63,13 +66,21 @@ var testTrigger = function(data, i){
     // console.log('serverDate is ', serverDate);
     // console.log('dbTime is ', dbTime);
     // console.log('serverTime is ', serverTime);
+
+    var date = {
+      serverDate: serverDate,
+      serverTime: serverTime
+    };
+
+  //  console.log('data in testTrigger: ', data);
+
     if (serverDate === dbDate) {
-      if (serverTime === dbTime  && data[i].fired === null) {
-        db.setNotificationToFired(data[i].id, function(){
+      if (serverTime === dbTime && data[i].fired === null) {
+        db.setNotificationToFired(data[i].event_id, date, function(){
           var idObj = {query: {
             event_id: data[i].event_id
           }};
-         module.exports.triggerEvent(idObj);
+          module.exports.triggerEvent(idObj);
         });
       }
     }
@@ -79,41 +90,41 @@ var testTrigger = function(data, i){
 //Checks the current time against times in the database in order to automatically trigger events
 setInterval(function(){
   var serverDateLocal = new Date();
-  var serverDate= serverDateLocal.toJSON();
+  var serverDate = serverDateLocal.toJSON();
   var serverTime = serverDate.slice(11,16);
   var endTime = serverDateLocal.getTime()+ 24*60*60*1000;
-  serverDate = serverDate.slice(0,10); 
+  serverDate = serverDate.slice(0,10);
 
   var startTimeStr = serverDate.replace(/-/g,'') + '00';
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
-  
+
   //console.log(startTimeStr);
   //console.log(endTimeStr);
   if (serverTime === '19:00') {
 
     if ( flag === false) {
-      flag = true; 
+      flag = true;
       eventfulClient.searchEvents({page_size: 10, // number of results
         within: 10, // distance
         mature: 'safe', // set content to be safe PG content
         date: startTimeStr + '-' + endTimeStr}, function(err, data){
         if(err){
           return console.error(err);
-        } 
+        }
         console.log('Recieved ' + data.search.total_items + ' events');
-        
+
         console.log('Event listings: ');
-        
-        //print the title of each event 
-        
+
+        //print the title of each event
+
         for (var i = 0; i < data.search.events.event.length; i++) {
           console.log(data.search.events.event[i]);
            var eventfulObj = {
              name: data.search.events.event[i].title,
              info: data.search.events.event[i].description,
              category: 'music', // need to look at how eventful generate category, it's not in the obj
-             link: data.search.events.event[i].url, 
+             link: data.search.events.event[i].url,
              imgUrl: data.search.events.event[i].image.url,
              eventdate: data.search.events.event[i].start_time.slice(0,10),
              eventtime: data.search.events.event[i].start_time.slice(11,16),
@@ -124,9 +135,9 @@ setInterval(function(){
           db.putEventFromWebToDB(eventfulObj, function(){
             console.log('write to db...');
           });
-        } 
+        }
       });
-    } 
+    }
   } else {
     flag = false;
   }
@@ -162,7 +173,7 @@ module.exports = {
     });
   },
 
-  //Prepares data and passes it to the send email function
+  // Prepares data and passes it to the send email function
   triggerEvent: function(req, res) {
     var eventId = req.query.event_id;
 
@@ -177,6 +188,36 @@ module.exports = {
       });
     });
    },
+
+   triggerSingle: function(req, res) {
+     var eventId = req.query.event_id;
+
+     db.getJustEventData(eventId, function(data) {
+       db.findEmailsForEvent(eventId, function(emails) {
+         emailList = [];
+         for (var i = 0; i < emails.length; i++) {
+           emailList.push(emails[i].email);
+         }
+         emailList.join(',');
+         sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info, res);
+
+         var serverDate = new Date().toJSON(); // date in UTC
+         var serverTime = serverDate.slice(11,16); // formatted YYYY-MM-DD in UTC
+         serverDate = serverDate.slice(0,10); // formatted HH:MM in UTC
+
+         console.log("serverDate: ", serverDate);
+         console.log("serverTime", serverTime);
+
+         var date = {
+           serverDate: serverDate,
+           serverTime: serverTime
+         };
+
+         db.setNotificationToFired(eventId, date, function() {
+         });
+       });
+     });
+    },
 
   //Calls the searchEvents function in the eventsModel file with the query string included from the req
   searchEvents: function(req, res) {

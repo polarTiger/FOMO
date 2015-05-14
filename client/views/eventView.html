@@ -36,10 +36,12 @@
 
     <HR>
 
-    <button ng-if="!data.subscribed" class="btn btn-default navbar-btn" ng-click="subscribe()" notype="submit" >Subscribe to Event!</button>
+    <h3 ng-show='data.fired'>---------EVENT TRIGGERED---------</h3>
 
-    <button ng-if="data.subscribed" class="btn btn-default navbar-btn" ng-click="unsubscribe()" notype="submit" >Unsubscribe from Event!</button>
+    <button ng-if="!data.subscribed" ng-hide='data.fired' class="btn btn-default navbar-btn" ng-click="subscribe()" notype="submit" >Subscribe to Event!</button>
 
-    <button class="btn btn-default navbar-btn" ng-hide="data.notification_time" ng-click="triggerEvent()" notype="submit">Trigger Notification Now</button>
+    <button ng-if="data.subscribed" ng-hide='data.fired' class="btn btn-default navbar-btn" ng-click="unsubscribe()" notype="submit" >Unsubscribe from Event!</button>
+
+    <button class="btn btn-default navbar-btn" ng-hide="data.notification_time" ng-if="!data.fired" ng-click="triggerEvent()" notype="submit">Trigger Notification Now</button>
   </span>
 </div>

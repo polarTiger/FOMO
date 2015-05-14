@@ -149,9 +149,8 @@ module.exports = {
   },
 
   //NEEDS COMMENT
-  setNotificationToFired: function(id, cb) {
-
-    var queryStringTrigger = "UPDATE notifications set fired= TRUE WHERE id= "+ id + ";";
+  setNotificationToFired: function(id, date, cb) {
+    var queryStringTrigger = "UPDATE notifications set fired=TRUE, notification_date='"+date.serverDate+"', notification_time='"+date.serverTime+"' WHERE event_id= "+ id +";";
     queryDB(queryStringTrigger, cb);
 
   }
