@@ -11,6 +11,7 @@ angular.module('fomo.searchservice', [])
     });
   };
 
+  //search for top 10 most subscribed events
   var searchPopular = function() {
     return $http({
       method: 'GET',
