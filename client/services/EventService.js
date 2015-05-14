@@ -51,9 +51,21 @@ angular.module('fomo.eventservice', [])
       });
   };
 
+  var triggerEvent = function(params) {
+
+    return $http.get('/api/events/triggerevent/', {params: {event_id: $stateParams.eventID}})
+    .success(function() {
+        $log.log('successfully triggered');
+    })
+    .error(function() {
+      $log.log('fail');
+    })
+  };
+
   return {
     getEvent: getEvent,
     submitEmail: submitEmail,
-    updateNotificationDate: updateNotificationDate
+    updateNotificationDate: updateNotificationDate,
+    triggerEvent: triggerEvent
   };
 }]);

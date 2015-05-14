@@ -15,7 +15,7 @@ module.exports = function (app) {
 
   app.post('/editnotification/:id', loggedOutBlock, eventController.editNotification);
 
-  app.get('/triggerevent', loggedOutBlock, eventController.triggerEvent);
+  app.get('/triggerevent', loggedOutBlock, eventController.triggerSingle);
 
   app.get('/myevents', loggedOutBlock, eventController.myEvents);
 
