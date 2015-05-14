@@ -4,9 +4,6 @@ var nodemailer = require('nodemailer');
 var emailInfo = require('./emailAuth.js');
 var db = require('./eventsModel');
 
-
-
-
 var eventful = require('eventful-node');
 var eventfulKey = require('./eventfulAPIKey');
 var eventfulClient = new eventful.Client(eventfulKey);
@@ -14,7 +11,7 @@ var flag = false;
 
 //This function takes params from the triggerEvent function and sends the actual email
 var sendEmail = function(emails, image, link, title, eventInfo, res) {
-  image = image || "http://localhost:3003/images/stock.jpg"; //Change url when deployed
+  image = image || "http://wfive.files.wordpress.com/2012/11/keep-calm-and-say-no-to-fomo2.png"; //Change url when deployed
   var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: emailInfo
