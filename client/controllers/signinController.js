@@ -13,9 +13,10 @@ angular.module('fomo.signin', [])
 
       $http.post('api/users/signin', userObj)
         .success(function(data, status, headers, config) {
-          $log.log('success');
-          console.log(LoggedInService);
+          $log.log('success ');
           LoggedInService.setLoggedIn(true);
+          LoggedInService.setUserName(userObj.username)
+          // $scope.$parent.username = userObj.username;
           $state.go('home');
       })
       .error(function(data, status, headers, config) {
