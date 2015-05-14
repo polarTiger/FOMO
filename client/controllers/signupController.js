@@ -29,8 +29,8 @@ angular.module('fomo.signup', [])
         $http.post('api/users/signin', userObj)
           .success(function(data, status, headers, config) {
             console.log('success');
-            console.log(LoggedInService);
             LoggedInService.setLoggedIn(true);
+            LoggedInService.setUserName(userObj.username)
             $state.go('home');
           })
         }
