@@ -13,7 +13,7 @@
     <div class="row form-group">
       <h3 ng-hide="editDate" class="col-md-4">{{(data.notification_date | date) || 'No date yet'}} – {{(data.notification_time | date: 'h:mm a') || 'add one'}}</h3>
 
-      <button ng-hide='data.fired' id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('Date', !editDate); defaultText(['notification_date','notification_time'])">{{!editDate && 'Edit Date' || 'Cancel'}}</button>
+      <button ng-hide='data.fired || isLoggedIn()===false' id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('Date', !editDate); defaultText(['notification_date','notification_time'])">{{!editDate && 'Edit Date' || 'Cancel'}}</button>
 
       <form ng-show="editDate" novalidate name="dateForm" class="form-group form-block" role="form">
         <input type="date" id="add-notify-date" name="input" ng-model="data.notification_datenew" ng-required='data.notification_timenew'/>
@@ -26,7 +26,7 @@
     <div class="row">
       <p ng-hide="editInfo" class="col-md-9">{{data.event_info}}</p>
 
-      <button ng-hide='data.fired' id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('Info', !editInfo); defaultText(['event_info'])">{{!editInfo && 'Edit Info' || 'Cancel'}}</button>
+      <button ng-hide='data.fired || isLoggedIn()===false' id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('Info', !editInfo); defaultText(['event_info'])">{{!editInfo && 'Edit Info' || 'Cancel'}}</button>
       <form class="row" ng-show="editInfo" novalidate name="infoForm" class="form-block" role="form">
         <textarea name="info" ng-model="data.event_infonew" ng-minlength="1" class="col-md-9" style="height: 120px;"></textarea>
         <input type="submit" id='editbtn' class="btn btn-primary col-md-1" ng-click="submitInfo(); setEditAttribute('Info', !editInfo)" value='Update Info'>
