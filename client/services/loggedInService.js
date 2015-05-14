@@ -3,6 +3,7 @@ angular.module('fomo.loggedinservice', [])
 .factory('LoggedInService', ['$http', '$rootScope', '$log', function($http, $rootScope, $log) {
   var _loggedIn; 
   var _userName;
+  $rootScope.root = {user:{}};
 
   var setLoggedIn = function(isIn) {
     _loggedIn = isIn;
@@ -17,6 +18,7 @@ angular.module('fomo.loggedinservice', [])
   };
 
   var setUserName = function(username) {
+    console.log("set username test ", username);
     $rootScope.root.user.username = username;
     _userName = username;
   }
@@ -29,14 +31,13 @@ angular.module('fomo.loggedinservice', [])
         .success(function(data){
           _loggedIn = Boolean(data);
           if (_loggedIn) {
-            setUserName(data.username);
+            setUserName(data);
           } else {
             _userName = null;
           }
           cb(data);
         });
   };
-
 
   getLoggedIn();
 
@@ -46,6 +47,5 @@ angular.module('fomo.loggedinservice', [])
     getLoggedIn: getLoggedIn,
     getUserName: getUserName,
     setUserName: setUserName
-
   };
 }]);
