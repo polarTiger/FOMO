@@ -5,7 +5,9 @@ var passport = require('../passport/passportConfig');
 module.exports = {
 
   signedIn: function(req, res) {
-    res.send(req.session.passport.user !== undefined);
+    console.log("signed in, ", req.session.passport.user);
+    var result = req.session.passport.user ? req.session.passport.user.username : null; 
+    res.send(result);
   }, 
 
   signUpPost : function(req, res, next) {
