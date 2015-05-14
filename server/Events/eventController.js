@@ -6,8 +6,8 @@ var db = require('./eventsModel');
 
 var eventful = require('eventful-node');
 var eventfulKey = require('./eventfulAPIKey');
-var eventfulClient = new eventful.Client(eventfulKey);
-var flag = false;
+var eventfulClient = new eventful.Client(eventfulKey); // create Eventful client
+var flag = false; // keep track of if the server had fetched eventful api data in that day or not. 
 
 //This function takes params from the triggerEvent function and sends the actual email
 var sendEmail = function(emails, image, link, title, eventInfo, res) {
@@ -24,8 +24,6 @@ var sendEmail = function(emails, image, link, title, eventInfo, res) {
     html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + ' height="200"> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>' + link + '</p>',
   };
 
-  //console.log("mailOptions: ", mailOptions);
-  // console.log("RES: ", res);
   transporter.sendMail(mailOptions, function(error, info){
     if(error) {
       if(res) {
@@ -43,34 +41,30 @@ var sendEmail = function(emails, image, link, title, eventInfo, res) {
 
 //NEEEDS COMMENT
 var testTrigger = function(data, i){
+  // if the notification date and time are both not null
   if (data[i].notification_date !== null && data[i].notification_time !== null) {
-    var serverDate = new Date().toJSON();
-    var serverTime = serverDate.slice(11,16);
-    serverDate = serverDate.slice(0,10);
-    var dbTime = data[i].notification_time.slice(0,8);
-    var dbYear = data[i].notification_date.slice(0,4);
+    
+    var serverDate = new Date().toJSON(); // get the server local day and convert to UTC day
+    var serverTime = serverDate.slice(11,16); // extract the UTC time from the string
+    serverDate = serverDate.slice(0,10); // extract the UTC date from the string
+    var dbTime = data[i].notification_time.slice(0,8); // get from db the event notication time in UTC
+    var dbYear = data[i].notification_date.slice(0,4); 
     var dbMonth = parseInt(data[i].notification_date.slice(5,7))-1;
     var dbDay = data[i].notification_date.slice(8,10);
     var dbHour = data[i].notification_time ? parseInt(data[i].notification_time.slice(0,2)) : 0;
     var dbMin = data[i].notification_time ? parseInt(data[i].notification_time.slice(3,5)) : 1;
-    //var dbSec = data[i].notification_time ? parseInt(data[i].notification_time.slice(6,8)) : 0;
+    // based on the notification date and time extracted from db, construct the UTC time. 
     var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin)).toJSON();
-    //console.log(dbYear, dbMonth, dbDay, dbHour, dbMin);
-    //console.log(dbDate);
-    dbTime = dbTime.slice(0,5);
-    dbDate = dbDate.slice(0,10);
-    // console.log('dbDate is ', dbDate);
-    // console.log('serverDate is ', serverDate);
-    // console.log('dbTime is ', dbTime);
-    // console.log('serverTime is ', serverTime);
+
+    dbTime = dbTime.slice(0,5); // extract the UTC time
+    dbDate = dbDate.slice(0,10); // extrac the UTC date
 
     var date = {
       serverDate: serverDate,
       serverTime: serverTime
     };
-
-  //  console.log('data in testTrigger: ', data);
-
+    /* if the server UTC time and date matches the db stored UTC notification date/time, and
+      if that event has not been triggered, then trigger it. */
     if (serverDate === dbDate) {
       if (serverTime === dbTime && data[i].fired === null) {
         db.setNotificationToFired(data[i].event_id, date, function(){
@@ -86,21 +80,24 @@ var testTrigger = function(data, i){
 
 //Checks the current time against times in the database in order to automatically trigger events
 setInterval(function(){
-  var serverDateLocal = new Date();
-  var serverDate = serverDateLocal.toJSON();
-  var serverTime = serverDate.slice(11,16);
-  var endTime = serverDateLocal.getTime()+ 24*60*60*1000;
-  serverDate = serverDate.slice(0,10);
+  var serverDateLocal = new Date(); // generate the local date/time of the server
+  var serverDate = serverDateLocal.toJSON(); // convert the server local time to UTC time
+  var serverTime = serverDate.slice(11,16); // extract the UTC time string
+  /* get the time as milliseconds since 1970, 
+    and then add 1 day of worth of milliseconds to construct end time
+  */
+  var endTime = serverDateLocal.getTime()+ 24*60*60*1000; 
 
+  serverDate = serverDate.slice(0,10);
+  // eventful date formate is: YYYYMMDD00, the '00' on the end is to be appended and doesn't have real meaning
   var startTimeStr = serverDate.replace(/-/g,'') + '00';
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  //console.log(startTimeStr);
-  //console.log(endTimeStr);
-  if (serverTime === '19:00') {
+  if (serverTime === '19:00') { // let server do fetch the eventful API every day at 19:00 UTC time
 
-    if ( flag === false) {
+    if ( flag === false) { // if the server haven't been triggered that day to fetch eventful API yet
+      // then trigger to fetch event
       flag = true;
       eventfulClient.searchEvents({page_size: 10, // number of results
         within: 10, // distance
@@ -112,33 +109,36 @@ setInterval(function(){
         console.log('Recieved ' + data.search.total_items + ' events');
 
         console.log('Event listings: ');
-
-        //print the title of each event
-
+        // iterate through each events obj 
         for (var i = 0; i < data.search.events.event.length; i++) {
           console.log(data.search.events.event[i]);
-           var eventfulObj = {
-             name: data.search.events.event[i].title,
-             info: data.search.events.event[i].description,
-             category: 'music', // need to look at how eventful generate category, it's not in the obj
-             link: data.search.events.event[i].url,
-             imgUrl: data.search.events.event[i].image.url,
-             eventdate: data.search.events.event[i].start_time.slice(0,10),
-             eventtime: data.search.events.event[i].start_time.slice(11,16),
-             notifydate: null,
-             notifytime: null
+          // construct an event object with info to be written to db
+          var eventfulObj = {
+            name: data.search.events.event[i].title,
+            info: data.search.events.event[i].description,
+            category: 'music', // need to look at how eventful generate category, it's not in the obj
+            link: data.search.events.event[i].url,
+            imgUrl: data.search.events.event[i].image.url,
+            eventdate: data.search.events.event[i].start_time.slice(0,10),
+            eventtime: data.search.events.event[i].start_time.slice(11,16),
+            notifydate: null,
+            notifytime: null
            };
-          console.log(eventfulObj);
+          // write the event to db
           db.putEventFromWebToDB(eventfulObj, function(){
             console.log('write to db...');
           });
         }
       });
     }
-  } else {
+  } else { 
+    /* else, if the event has already been triggered, and has past the time '19:00'
+       say it's 19:01, then reset the trigger back to false so it can be ready to fire again
+       the next day
+    */
     flag = false;
   }
-
+  // get all the notifications and check if the trigger time is up, if so trigger the email
   db.getAllNotifications(function(data){
     notificationData = data;
     for (var i = 0; i < data.length; i++) {
@@ -230,6 +230,7 @@ module.exports = {
     });
   },
 
+  //Calls the getPopularEvents function in the eventsModel file to select the most subscribed events
   getPopularEvents: function(req, res) {
     db.getPopularEvents(function(rows){
       res.end(JSON.stringify(rows));

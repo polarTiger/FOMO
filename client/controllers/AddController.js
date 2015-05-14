@@ -16,13 +16,12 @@ angular.module('fomo.addEvent', [])
     $state.go('user');
   };
 
+  // perform Live search on the event title to see if the event title already exists in db
   $scope.liveSearchEventTitle = function(){
     SearchService.searchWithQuery($scope.event.name)
       .success(function(data, status) {
+        // queryresult will be rendered on front end partially
         $scope.queryresult = data;
-        //console.log($scope.event.name);
-        //console.log(' get the result from db ', data);
-        //$scope.events = data;
     });
   };
 
