@@ -56,6 +56,11 @@ module.exports = {
   },
 
   //NEEDS COMMENT
+  getPopularEvents: function(cb) {
+    var queryString = "SELECT * FROM events ORDER BY RANDOM() limit 5 ;";
+    queryDB(queryString, cb)
+  },
+
   myEvents: function(id, cb) {
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'users_events', 'notifications'],
                                                         {

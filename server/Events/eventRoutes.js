@@ -24,5 +24,7 @@ module.exports = function (app) {
   app.get ('/search', eventController.searchEvents);
 
   app.get('/categorysearch', eventController.searchCategories);
+
+  app.get('/popularevent', eventController.getPopularEvents);
 };
 
