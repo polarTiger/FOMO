@@ -98,7 +98,7 @@ setInterval(function(){
 
   //console.log(startTimeStr);
   //console.log(endTimeStr);
-  if (serverTime === '18:31') {
+  if (serverTime === '19:00') {
 
     if ( flag === false) {
       flag = true;
