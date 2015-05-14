@@ -3,6 +3,8 @@ angular.module('fomo.results', ['customFilters'])
 .controller('ResultsController', ['$scope', '$log', 'SearchService',
   function($scope, $log, SearchService) {
 
+    $scope.orderVariable = 'event_title';
+
     $scope.genPopularEvent = function() {
       SearchService.searchPopular()
       .success(function(data,status){

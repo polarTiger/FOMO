@@ -1,6 +1,6 @@
 angular.module('fomo.event', [])
 
-.controller('EventController', ['$scope', '$http', '$log','$state', '$stateParams', '$cookies', '$cookieStore', 'EventService', function($scope, $http, $log, $state, $stateParams, $cookies, $cookieStore, EventService) {
+.controller('EventController', ['$scope', '$http', '$log','$state', '$stateParams', '$cookies', '$cookieStore', 'EventService', 'LoggedInService', function($scope, $http, $log, $state, $stateParams, $cookies, $cookieStore, EventService, LoggedInService) {
 
   $scope.data = {};
   $scope.eventId = 'abc123'; // replace with actual eventId
@@ -122,6 +122,10 @@ angular.module('fomo.event', [])
       $scope.data.notification_date = $scope.data.notification_datenew;
       $scope.data.notification_time = $scope.data.notification_timenew;
     });
+  };
+
+  $scope.isLoggedIn = function() {
+    return LoggedInService.isLoggedIn();
   };
 
 }]);
