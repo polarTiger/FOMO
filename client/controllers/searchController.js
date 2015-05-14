@@ -3,6 +3,12 @@ angular.module('fomo.search', ['customFilters'])
 .controller('searchController', ['$scope', '$log', 'SearchService',
   function($scope, $log, SearchService) {
 
+    $scope.orderVariable = 'event_title';
+    // $scope.orderFunction = function(order) {
+    //   order = order || 'event_title';
+    //   return order;
+    // };
+
     var categories = ['all', 'music', 'sports', 'other'];
     $scope.queryresult = [];
     $scope.event = {
