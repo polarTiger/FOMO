@@ -16,7 +16,7 @@ angular.module('fomo.signin', [])
           $log.log('success ');
           LoggedInService.setLoggedIn(true);
           LoggedInService.setUserName(userObj.username)
-          // $scope.$parent.username = userObj.username;
+          
           $state.go('home');
       })
       .error(function(data, status, headers, config) {
