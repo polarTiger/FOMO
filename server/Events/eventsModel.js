@@ -57,7 +57,7 @@ module.exports = {
 
   //NEEDS COMMENT
   getPopularEvents: function(cb) {
-    var queryString = "SELECT * FROM events ORDER BY RANDOM() limit 5 ;";
+    var queryString = "SELECT * FROM events ORDER BY no_of_subscriber DESC limit 10 ;";
     queryDB(queryString, cb)
   },
 
