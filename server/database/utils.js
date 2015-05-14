@@ -1,5 +1,5 @@
 var pg = require('pg');
-var dbUrl = require('../dbConfig/dbConfig');
+var dbUrl = process.env.DATABASE_URL || require('../dbConfig/dbConfig');
 
 module.exports = {
 
