@@ -1,7 +1,7 @@
 angular.module('fomo.loggedinservice', [])
 
 .factory('LoggedInService', ['$http', '$rootScope', '$log', function($http, $rootScope, $log) {
-  var _loggedIn; 
+  var _loggedIn = false; 
   var _userName;
   $rootScope.root = {user:{}};
 
@@ -38,7 +38,6 @@ angular.module('fomo.loggedinservice', [])
           cb(data);
         });
   };
-
   getLoggedIn();
 
   return {
