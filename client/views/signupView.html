@@ -1,26 +1,35 @@
-<div class="form-block col-md-3 col-md-offset-4">
+<div class="body"></div>
+<div class="grad"></div>
+<div class="containersignup"></div>
+
+<div class="header">
+  <div>FOMO</div>
+  <br>
+  <div><span>fear of missing out</span></div>
+</div>
+
+<div class="form-block login">
   <div id='signup'>
-    <h1 class="center-heading">Sign Up</h1>
     <div ng-show="userAlreadyExist" style="color:red;">
-      <div>User already exist!!!!!</div>
-      <div>please use sign in page instead,</div>
+      <div>User already exists!</div>
+      <div>Please use sign in page instead,</div>
       <div>or retry with a different username.</div>
     </div>
+
     <form novalidate name="signupForm" class="form-block" role="form" ng-submit='signup()'>
-<!--       <label for="username">Username:</label> -->
       <div class="form-group">
-        <input placeholder="Username" class="field" type="text" ng-model="user.username"/>
+        <input placeholder="Username" type="text" ng-model="user.username"/>
       </div>
-<!--       <label for="email">Email:</label> -->
       <div class="form-group">
-        <input placeholder="Email" class="field" type="text" ng-model="user.email" />
+        <input placeholder="Email" type="text" ng-model="user.email" />
       </div>
-<!--       <label for="password">Password:</label> -->
+
       <div class="form-group">
-        <input placeholder="Choose your password" class="field" type="password" ng-model="user.password"/>
+        <input placeholder="Choose your password" type="password" ng-model="user.password"/>
       </div>
-      <button class="field">Sign Up</button>
+      <button>Sign Up</button>
     </form>
-    <a href="#/signin">Have an account? <strong>Sign In</strong> ...</a>
+    <br>
+    <a class='signup' href="#/signin">Have an account? <strong>Sign In</strong> ...</a>
   </div>
 </div>
