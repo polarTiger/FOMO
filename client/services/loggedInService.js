@@ -4,7 +4,7 @@ angular.module('fomo.loggedinservice', [])
   var _loggedIn = false; 
   var _userName;
   if (!$rootScope.root) {
-   $rootScope.root = {user:{}, loggedIn:false}; 
+   $rootScope.root = {user:{username:null}, loggedIn:false}; 
   }
 
 
