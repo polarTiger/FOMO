@@ -22,7 +22,7 @@ body{
   height: auto;
   background-image: url(../images/fomo.jpg);
   background-size: cover;
-  -webkit-filter: blur(2px);
+  -webkit-filter: blur(0px);
   z-index: 0;
 }
 
@@ -39,14 +39,30 @@ body{
   opacity: 0.7;
 }
 
-.header{
+.container{
+  position: absolute;
+  top: calc(50% - 125px);
+  left: calc(50% - 350px);
+  height: 275px;
+  width: 750px;
+  background-color: rgba(0, 0, 0, 0.65);
+/*  margin: 0 auto 10px;*/
+  margin-right: 20%;
+  border-radius: 2px;
+  opacity: 1;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+/*  overflow: hidden;*/
+  z-index: 2;
+}
+
+ .header{
   position: absolute;
   top: calc(50% - 60px);
   left: calc(50% - 260px);
   z-index: 2;
 }
 
-.header div{
+ .header div{
   float: right;
   color: #fff;
   font-family: 'Exo', sans-serif;
@@ -54,11 +70,11 @@ body{
   font-weight: 200;
 }
 
-.header div span{
+ .header div span{
   color: #5379fa !important;
 }
 
-.login{
+ .login{
   position: absolute;
   top: calc(50% - 75px);
   left: calc(50% - 50px);
@@ -146,28 +162,29 @@ body{
 <div class="body"></div>
 <div class="grad"></div>
 
-<div class="header">
-  <div>FOMO</div>
-  <br>
-  <div><span>fear of missing out</span></div>
-</div>
-
-<div class="form-block login">
-  <div id='signin'>
-    <form novalidate name="signinform" class="form-block" role="form" ng-submit='signin()'>
-
-      <div class="form-group">
-        <input placeholder="Username" type="text" ng-model="user.username"/>
-      </div>
-
-      <div class="form-group">
-        <input placeholder="Password" type="password" ng-model="user.password"/>
-      </div>
-      <button>Log In</button>
-    </form>
+<div class="container"></div>
+  <div class="header">
+    <div>FOMO</div>
     <br>
-    <a href="#/signup">Don't have an account? <strong>Sign Up</strong> ...</a>
+    <div><span>fear of missing out</span></div>
   </div>
-</div>
+
+  <div class="form-block login">
+    <div id='signin'>
+      <form novalidate name="signinform" class="form-block" role="form" ng-submit='signin()'>
+
+        <div class="form-group">
+          <input placeholder="Username" type="text" ng-model="user.username"/>
+        </div>
+
+        <div class="form-group">
+          <input placeholder="Password" type="password" ng-model="user.password"/>
+        </div>
+        <button>Log In</button>
+      </form>
+      <br>
+      <a href="#/signup">Don't have an account? <strong>Sign Up</strong> ...</a>
+    </div>
+  </div>
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
