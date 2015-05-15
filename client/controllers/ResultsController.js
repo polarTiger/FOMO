@@ -4,7 +4,7 @@ angular.module('fomo.results', ['customFilters'])
   function($scope, $log, SearchService) {
 
     $scope.orderVariable = 'event_title';
-
+    // make a call for top 10 most subscribed event to backend
     $scope.genPopularEvent = function() {
       SearchService.searchPopular()
       .success(function(data,status){
