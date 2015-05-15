@@ -9,7 +9,7 @@
       <label for="inputEventName">Event Name*:</label>
       <div class="form-group" style >
         <input type="text" name="name" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()"
-        ng-class="{'invalidTxtBox': queryresult.length > 0 || event.name.length === 0 }" /> 
+        ng-class="{'invalidTxtBox': queryresult.length > 0 || event.name.length === 0 }" />
         <div ng-show = "queryresult.length > 0 && eventIsInQuery()" style="color:red;">
         Event name already exists, please try a different name
         </div>

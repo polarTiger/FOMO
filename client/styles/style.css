@@ -114,3 +114,7 @@ nav#hmenu ul a:hover{
 .center-heading {
   text-align: center;
 }
+
+.field {
+  width: 100%
+}
