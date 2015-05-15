@@ -1,19 +1,22 @@
 
-<p> Here's our popular events : </p>
-
-
-<div class="row column-headings">
-  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-2">Event</span></a>
-  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-2">Category</span></a>
-  <a href="#" ng-click="orderVariable='event_link'"><span class="col-md-2">Link</span></a>
+<div class="col-lg-12 col-md-12 col-xs-12">
+<div style="font-family: arial rounded mt, verdana, sans-serif; font-size: 4em; margin-left:auto; margin-right:auto; vertical-align:middle; text-align: center;"> Here's our popular events : </div>
 </div>
 
-<div class="row search-result" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)">
+
+<div class="row column-headings" style =" vertical-align:middle; text-align: center; margin-left:10%; margin-right: 10%;">
+  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-6 col-xs-6">Event</span></a>
+  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-2 col-xs-2">Category</span></a>
+  <a href="#" ng-click="orderVariable='event_link'"><span class="col-md-2 col-xs-2">Link</span></a>
+  <span class="col-md-2 col-xs-2">Event Date</span>
+</div>
+
+<div class="row search-result test" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)" style =" vertical-align:middle; text-align: center; margin-left:10%; margin-right: 10%; height: 8em;">
   <div>
-    <span class="col-md-2"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
-    <span class="col-md-2">{{event.event_category}}</span>
-    <span class="col-md-2"><a href="{{event.event_link | linkFormat}}">{{event.event_link | linkFormat}}</a></span>
-    <span class="col-md-2">{{event.notification_date}}</span>
+    <span class="col-md-6 col-xs-6"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
+    <span class="col-md-2 col-xs-2">{{event.event_category}}</span>
+    <span class="col-md-2 col-xs-2"><a href="{{event.event_link | linkFormat}}" target="_blank">Go to this event!</a></span>
+    <span class="col-md-2 col-xs-2">{{event.notification_date}}</span>
   </div>
 </div>
 

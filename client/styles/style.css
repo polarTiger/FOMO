@@ -118,6 +118,10 @@ nav#hmenu ul a:hover {
   text-align: center;
 }
 
+.test {
+  background-image: url('../images/coachella.jpg');
+
+}
 .field {
   width: 100%
 }
