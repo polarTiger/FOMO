@@ -27,7 +27,7 @@ var sendEmail = function(emails, image, link, title, eventInfo, res) {
     to: '' + emails,
     subject: 'FOMO | ' + title + ' | Notification!',
     text: 'FOMO', // plaintext body
-    html: '<p><b>'+ title + '</b></p> <br> <img src='+ image + ' height="200"> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>' + link + '</p>',
+    html: '<h2><b>'+ title + '</b></h2> <br> <img src='+ image + ' height="200"> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>' + link + '</p>',
   };
 
   transporter.sendMail(mailOptions, function(error, info){
