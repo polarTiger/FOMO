@@ -1,6 +1,9 @@
 /* CSS Reset */
 /*html,body,div,span,applet,object,iframe,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,label,legend,p,blockquote,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}body{line-height:1;color:black;background:white;}:focus{outline:0;}table{border-collapse:collapse;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul{list-style:none;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}abbr,acronym{border:0;}*/
 
+@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
 .title {
   text-align: center;
   font-family: arial rounded mt, verdana, sans-serif;
@@ -118,3 +121,175 @@ nav#hmenu ul a:hover{
 .field {
   width: 100%
 }
+
+.body{
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -40px;
+  bottom: -40px;
+  width: auto;
+  height: auto;
+  background-image: url(../images/fomo.jpg);
+  background-size: cover;
+  -webkit-filter: blur(0px);
+  z-index: 0;
+}
+
+.grad {  /* shaded filter over entire background image */
+  position: absolute;
+/*  top: -20px;
+  left: -20px;
+  right: -40px;
+  bottom: -40px;*/
+  top: -20px;
+  left: -20px;
+  right: -40px;
+  bottom: -40px;
+  opacity: 0.7;
+  width: auto;
+  height: auto;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+  z-index: 1;
+}
+
+.containersignup {
+  position: absolute;
+  top: calc(55% - 125px);
+  left: calc(50% - 350px);
+  height: 330px;
+  width: 750px;
+  background-color: rgba(0, 0, 0, 0.65);
+/*  margin: 0 auto 10px;*/
+/*  margin-right: 20%;*/
+  border-radius: 2px;
+  opacity: 1;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
+}
+
+.containersignin {
+  position: absolute;
+  top: calc(55% - 125px);
+  left: calc(50% - 350px);
+  height: 275px;
+  width: 750px;
+  background-color: rgba(0, 0, 0, 0.65);
+/*  margin: 0 auto 10px;*/
+/*  margin-right: 20%;*/
+  border-radius: 2px;
+  opacity: 1;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
+}
+
+.header{
+  position: absolute;
+  top: calc(55% - 60px);
+  left: calc(50% - 260px);
+  z-index: 2;
+}
+
+ .header div{
+  float: right;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 35px;
+  font-weight: 200;
+}
+
+ .header div span{
+  color: #5379fa !important;
+}
+
+.login{
+  position: absolute;
+  top: calc(55% - 75px);
+  left: calc(50% - 50px);
+  height: 150px;
+  width: 350px;
+  padding: 10px;
+  z-index: 2;
+}
+
+.login input[type=text]{
+  width: 280px;
+  height: 50px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-top: -5px;
+}
+
+.login input[type=password]{
+  width: 280px;
+  height: 50px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-top: -5px;
+}
+
+.login button{
+  width: 280px;
+  height: 35px;
+  background: #fff;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #a18d6c;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 6px;
+  margin-top: 0px;
+}
+
+.login button:hover{
+  opacity: 0.8;
+}
+
+.login button:active{
+  opacity: 0.6;
+}
+
+.login input[type=text]:focus{
+  outline: none;
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login input[type=password]:focus{
+  outline: none;
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+.login button:focus{
+  outline: none;
+}
+
+.signup {
+  font-family: 'Exo', sans-serif;
+  font-size: 14px;
+  color: #ae8ee1;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.8); /* place */
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
