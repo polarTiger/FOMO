@@ -22,6 +22,8 @@ CREATE TABLE "users" (
   "password" VARCHAR NOT NULL,
   "email" TEXT NULL DEFAULT NULL,
   "timestamp" TIMESTAMP NOT NULL DEFAULT current_timestamp ,
+  "verification_hash" VARCHAR NULL,
+  "verified" BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY ("id")
 );
 
