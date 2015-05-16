@@ -49,8 +49,8 @@ module.exports = {
 
   //Finds all email address from users subscribed to an event from the users table given the event id
   findEmailsForEvent: function(eventId, cb) {
-    var queryString = "SELECT email FROM users INNER JOIN users_events ON "+
-                      "users.id=users_events.user_id WHERE users_events.event_id="+ eventId + ";";
+    var queryString = "SELECT email, verified FROM users INNER JOIN users_events ON "+
+                      "users.id=users_events.user_id WHERE users.verified=TRUE AND users_events.event_id="+ eventId + ";";
     queryDB(queryString, cb);
   },
 

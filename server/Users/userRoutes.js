@@ -13,4 +13,6 @@ module.exports = function (app) {
 
   app.get('/signout', userController.signout);
 
+  app.get('/verify', userController.verify);
+
 };

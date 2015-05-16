@@ -5,7 +5,7 @@ module.exports = {
 
   //General function that queries the database given a mySQL query string
   queryDB: function(queryString, cb) {
-    //console.log(queryString);
+    console.log(queryString);
     pg.connect(dbUrl, function(err, client, done) {
 
         if(err) {
@@ -54,10 +54,24 @@ module.exports = {
   },
 
   tableColumns: {
-    'events': ['id', 'event_info', 'event_title', 'event_category', 'event_link', 'event_image'],
+    'events': ['id', 'event_info', 'event_title', 'event_category', 'event_link', 'event_image', 'no_of_subscriber'],
     'notifications': ['id', 'event_id', 'notification_date', 'notification_time', 'fired'],
-    'users': ['id', 'username', 'password',  'email', 'timestamp'],
+    'users': ['id', 'username', 'password',  'email', 'verification_hash', 'verified', 'timestamp'],
     'users_events': ['id', 'event_id', 'user_id']
+  },
+
+  /*
+   * Generates a unique id
+   * http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+   */ 
+  uniqueEmailCode: function() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return uuid;
   }
 
 };
