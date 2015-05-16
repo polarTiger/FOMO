@@ -118,6 +118,16 @@ nav#hmenu ul a:hover {
   text-align: center;
 }
 
+.top10Odd {
+  background-image: url('../images/top10Odd.jpg');
+  background-size: 100%, 100%;
+
+}
+.top10Even {
+  background-image: url('../images/top10Even.jpg');
+  background-size: 100%, 100%;
+
+}
 .field {
   width: 100%
 }
@@ -362,4 +372,3 @@ nav#hmenu ul a:hover {
 ::-moz-input-placeholder {
    color: rgba(255,255,255,0.6);
 }
-
