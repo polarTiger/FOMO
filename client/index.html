@@ -12,14 +12,14 @@
   <script src="styles/prefixfree.min.js"></script>
 </head>
 
-<body>
+<body class="test">
   <div class="main-container" ng-controller="MainController">
     <div ui-view name="nav"></div> <!-- Navigation -->
   </div>
 
-  <div ui-view="main_content"></div>
+  <div ui-view="main_content" style="height: 100%; width: 100%;"></div>
 
-  <div ui-view></div>
+  <div ui-view style="height: 100%; width: 100%;"></div>
 
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
