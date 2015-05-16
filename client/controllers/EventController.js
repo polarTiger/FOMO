@@ -12,11 +12,16 @@ angular.module('fomo.event', [])
   $scope.editNotifyInfo = false;
   $scope.editNotifyDate = false;
   $scope.editNotifyTime = false;
-
+  $scope.confirmTrigger = false;
 
   $scope.setEditAttribute = function(attr, value) {
     console.log(attr, value);
     $scope["edit" + attr] = value;
+  };
+
+  $scope.toggleConfirmTrigger = function() {
+    
+    $scope.confirmTrigger = !$scope.confirmTrigger;
   };
 
   $scope.getEvent = function() {
@@ -40,8 +45,8 @@ angular.module('fomo.event', [])
       $scope.data.notification_datenew = $scope.data.notification_date;
       $scope.data.notification_timenew = $scope.data.notification_time;
 
-      console.log("EVENT DATE/TIME: " + dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify);
-      console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
+      //console.log("EVENT DATE/TIME: " + dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify);
+      //console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
     });
   };
 
@@ -96,7 +101,7 @@ angular.module('fomo.event', [])
     EventService.triggerEvent({params: {event_id: $stateParams.eventID}})
     .then(function() {
       $scope.data.fired = true;
-    })
+    });
   };
 
   $scope.submitInfo = function() {

@@ -12,6 +12,7 @@ angular.module('fomo.eventservice', [])
         return err;
       });
   };
+
   var submitEmail = function(data) {
     console.log("EMAIL IN SERVICE: ", data);
     return $http.post('/event/' + data.eventId, data)
@@ -59,7 +60,7 @@ angular.module('fomo.eventservice', [])
     })
     .error(function() {
       $log.log('fail');
-    })
+    });
   };
 
   return {
@@ -69,3 +70,4 @@ angular.module('fomo.eventservice', [])
     triggerEvent: triggerEvent
   };
 }]);
+
