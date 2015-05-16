@@ -90,7 +90,7 @@ module.exports = {
       if (sha1(code)===rows[0].verification_hash) {
         validation.markUserAsVerified(username, function(){
           res.send(username + ", your email is good");
-        })
+        });
 
         } else {
           res.send(username + ", sorry bad validation");
