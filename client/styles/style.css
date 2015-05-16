@@ -233,6 +233,15 @@ nav#hmenu ul a:hover {
   opacity: 0.7;
 }
 
+#dupuser {
+  padding-bottom: 5px;
+}
+
+#dupuser div{
+  font-family: 'Exo', sans-serif;
+  color: red;
+  margin-top: -45px;
+}
 
 .tour {
   position: absolute;
