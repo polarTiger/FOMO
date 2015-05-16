@@ -147,6 +147,8 @@ nav#hmenu ul a:hover {
   bottom: -40px;
   width: auto;
   height: auto;
+  min-width: 650px; /* render correctly for very small screens */
+  min-height: 260px; /* render correctly for very small screens */
   background-image: url(../images/fomo.jpg);
   background-size: cover;
   -webkit-filter: blur(0px);
@@ -164,6 +166,8 @@ nav#hmenu ul a:hover {
   right: -40px;
   bottom: -40px;
   opacity: 0.7;
+  min-width: 650px;
+  min-height: 260px;
   width: auto;
   height: auto;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */

@@ -6,8 +6,8 @@ angular.module('fomo.signin', [])
     $state.go('home');
   } else {
     $scope.signin = function() {
-      $scope.signinform.submitted = false;
-      $scope.signinform.incorrect = false;
+      $scope.signinform.submitted = false; // clears error message
+      $scope.signinform.incorrect = false; // clears error message
       if ($scope.signinform.$valid) {
         var userObj = {
           username: $scope.user.username,
