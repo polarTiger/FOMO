@@ -157,7 +157,7 @@ nav#hmenu ul a:hover {
   position: absolute;
   top: calc(55% - 125px);
   left: calc(50% - 350px);
-  height: 330px;
+  height: 320px;
   width: 750px;
   background-color: rgba(0, 0, 0, 0.65);
 /*  margin: 0 auto 10px;*/
@@ -173,7 +173,7 @@ nav#hmenu ul a:hover {
   position: absolute;
   top: calc(55% - 125px);
   left: calc(50% - 350px);
-  height: 275px;
+  height: 263px;
   width: 750px;
   background-color: rgba(0, 0, 0, 0.65);
 /*  margin: 0 auto 10px;*/
@@ -206,8 +206,8 @@ nav#hmenu ul a:hover {
 
 .aboutsignup {
   position: absolute;
-  top: calc(55% - -185px);
-  left: calc(50% - 345px);
+  top: calc(55% - -170px);
+  left: calc(50% - 340px);
   height: 25px;
   width: 50px;
   z-index: 3;
@@ -215,8 +215,8 @@ nav#hmenu ul a:hover {
 
 .aboutsignin {
   position: absolute;
-  top: calc(55% - -130px);
-  left: calc(50% - 345px);
+  top: calc(55% - -113px);
+  left: calc(50% - 340px);
   height: 25px;
   width: 50px;
   z-index: 3;
@@ -241,6 +241,16 @@ nav#hmenu ul a:hover {
   font-family: 'Exo', sans-serif;
   color: red;
   margin-top: -45px;
+}
+
+#allfields {
+  padding-bottom: 5px;
+}
+
+#allfields div{
+  font-family: 'Exo', sans-serif;
+  color: red;
+  margin-top: -25px;
 }
 
 .tour {
