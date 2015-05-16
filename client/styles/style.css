@@ -46,7 +46,7 @@ nav#hmenu ul li {
   display: inline;
 }
 
-nav#hmenu ul a:link{
+nav#hmenu ul a:link {
   margin: 0;
   padding: .3em .4em .3em .4em;
   text-decoration: none;
@@ -54,7 +54,7 @@ nav#hmenu ul a:link{
   color: #FFFFFF;
 }
 
-nav#hmenu ul a:visited{
+nav#hmenu ul a:visited {
   margin: 0;
   padding: .3em .4em .3em .4em;
   text-decoration: none;
@@ -63,7 +63,7 @@ nav#hmenu ul a:visited{
   color: #FFFFFF;
 }
 
-nav#hmenu ul a:active{
+nav#hmenu ul a:active {
   margin: 0;
   padding: .3em .4em .3em .4em;
   text-decoration: none;
@@ -72,7 +72,7 @@ nav#hmenu ul a:active{
   color: #d8dcdd;
 }
 
-nav#hmenu ul a:hover{
+nav#hmenu ul a:hover {
   margin: 0;
   padding: .3em .4em .3em .4em;
   text-decoration: none;
@@ -122,7 +122,7 @@ nav#hmenu ul a:hover{
   width: 100%
 }
 
-.body{
+.body {
   position: absolute;
   top: -20px;
   left: -20px;
@@ -185,14 +185,14 @@ nav#hmenu ul a:hover{
   z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
 }
 
-.header{
+.header {
   position: absolute;
   top: calc(55% - 60px);
   left: calc(50% - 260px);
   z-index: 2;
 }
 
- .header div{
+ .header div {
   float: right;
   color: #fff;
   font-family: 'Exo', sans-serif;
@@ -200,11 +200,81 @@ nav#hmenu ul a:hover{
   font-weight: 200;
 }
 
- .header div span{
+ .header div span {
   color: #5379fa !important;
 }
 
-.login{
+.aboutsignup {
+  position: absolute;
+  top: calc(55% - -185px);
+  left: calc(50% - 345px);
+  height: 25px;
+  width: 50px;
+  z-index: 3;
+}
+
+.aboutsignin {
+  position: absolute;
+  top: calc(55% - -130px);
+  left: calc(50% - 345px);
+  height: 25px;
+  width: 50px;
+  z-index: 3;
+}
+
+.about a:focus {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.about a:hover {
+  color: #337ab7;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+#dupuser {
+  padding-bottom: 5px;
+}
+
+#dupuser div{
+  font-family: 'Exo', sans-serif;
+  color: red;
+  margin-top: -45px;
+}
+
+.tour {
+  position: absolute;
+  top: calc(55% - 0px);
+  left: calc(50% - 210px);
+  height: 150px;
+  width: 225px;
+  z-index: 3;
+}
+
+.tour button {
+  width: 200px;
+  height: 35px;
+  background: #86a1fb;
+  border: 0px solid #fff;
+  cursor: pointer;
+/*  background: transparent;*/
+  border-radius: 2px;
+/*  color: #a18d6c;*/
+  color:#333;
+  font-family: 'Exo', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+/*  font-weight: 400;*/
+  padding: 6px;
+  margin-top: 75px;
+}
+
+.tour button:hover {
+  opacity: 0.8;
+}
+
+.login {
   position: absolute;
   top: calc(55% - 75px);
   left: calc(50% - 50px);
@@ -214,7 +284,7 @@ nav#hmenu ul a:hover{
   z-index: 2;
 }
 
-.login input[type=text]{
+.login input[type=text] {
   width: 280px;
   height: 50px;
   background: transparent;
@@ -228,7 +298,7 @@ nav#hmenu ul a:hover{
   margin-top: -5px;
 }
 
-.login input[type=password]{
+.login input[type=password] {
   width: 280px;
   height: 50px;
   background: transparent;
@@ -242,7 +312,7 @@ nav#hmenu ul a:hover{
   margin-top: -5px;
 }
 
-.login button{
+.login button {
   width: 280px;
   height: 35px;
   background: #fff;
@@ -257,25 +327,25 @@ nav#hmenu ul a:hover{
   margin-top: 0px;
 }
 
-.login button:hover{
+.login button:hover {
   opacity: 0.8;
 }
 
-.login button:active{
+.login button:active {
   opacity: 0.6;
 }
 
-.login input[type=text]:focus{
+.login input[type=text]:focus {
   outline: none;
   border: 1px solid rgba(255,255,255,0.9);
 }
 
-.login input[type=password]:focus{
+.login input[type=password]:focus {
   outline: none;
   border: 1px solid rgba(255,255,255,0.9);
 }
 
-.login button:focus{
+.login button:focus {
   outline: none;
 }
 
@@ -285,11 +355,11 @@ nav#hmenu ul a:hover{
   color: #ae8ee1;
 }
 
-::-webkit-input-placeholder{
+::-webkit-input-placeholder {
    color: rgba(255,255,255,0.8); /* place */
 }
 
-::-moz-input-placeholder{
+::-moz-input-placeholder {
    color: rgba(255,255,255,0.6);
 }
 
