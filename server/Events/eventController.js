@@ -63,7 +63,7 @@ var testTrigger = function(data, i){
     var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin)).toJSON();
 
     dbTime = dbTime.slice(0,5); // extract the UTC time
-    dbDate = dbDate.slice(0,10); // extrac the UTC date
+    dbDate = dbDate.slice(0,10); // extract the UTC date
 
     var date = {
       serverDate: serverDate,
