@@ -37,12 +37,14 @@
 
     <HR>
 
-    <h3 ng-show='data.fired'>---------EVENT TRIGGERED---------</h3>
+    <h4 ng-show='data.fired'>-----Event Triggered-----</h4>
 
     <button ng-if="!data.subscribed && isLoggedIn()===true" ng-hide='data.fired' class="btn btn-default navbar-btn" ng-click="subscribe()" notype="submit" >Subscribe to Event!</button>
 
     <button ng-if="data.subscribed" ng-hide='data.fired' class="btn btn-default navbar-btn" ng-click="unsubscribe()" notype="submit" >Unsubscribe from Event!</button>
 
-    <button class="btn btn-default navbar-btn" ng-hide="data.notification_time" ng-if="!data.fired && isLoggedIn()===true" ng-click="triggerEvent()" notype="submit">Trigger Notification Now</button>
+    <button class="btn btn-default navbar-btn" ng-hide="data.notification_time" ng-if="!data.fired && isLoggedIn()===true" ng-click="toggleConfirmTrigger()" notype="submit">{{ !confirmTrigger && 'Trigger Notification' || 'Cancel'}}</button>
+
+    <button type="submit" ng-if="!data.fired && isLoggedIn()===true && confirmTrigger===true" class="btn btn-default navbar-btn" ng-click="triggerEvent()">Confirm Trigger</button>
   </span>
 </div>
