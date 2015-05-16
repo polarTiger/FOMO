@@ -119,7 +119,13 @@ nav#hmenu ul a:hover {
 }
 
 .test {
-  background-image: url('../images/coachella.jpg');
+  background-image: url('../images/test1.jpg');
+  background-size: 100%, 100%;
+
+}
+.test2 {
+  background-image: url('../images/test2.jpg');
+  background-size: 100%, 100%;
 
 }
 .field {
