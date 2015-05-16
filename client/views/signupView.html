@@ -21,17 +21,19 @@
     <div ng-show="userAlreadyExist" id="dupuser">
       <div>User already exists - please choose another username!</div>
     </div>
-
+    <div ng-show="(signupForm.name.$invalid || signupForm.email.$invalid || signupForm.password.$invalid) && signupForm.submitted" id="allfields">
+      <div>ERROR – complete all fields</div>
+    </div>
     <form novalidate name="signupForm" class="form-block" role="form" ng-submit='signup()'>
       <div class="form-group">
-        <input placeholder="Username" type="text" ng-model="user.username"/>
+        <input name='name' required ng-class="{'error': signupForm.$invalid}" placeholder="Username" type="text" ng-model="user.username"/>
       </div>
       <div class="form-group">
-        <input placeholder="Email" type="text" ng-model="user.email" />
+        <input name='email' required ng-class="{'error': signupForm.$invalid}" placeholder="Email" type="text" ng-model="user.email" />
       </div>
 
       <div class="form-group">
-        <input placeholder="Choose your password" type="password" ng-model="user.password"/>
+        <input name='password' required placeholder="Choose your password" type="password" ng-class="{'error': signupForm.$invalid}" ng-model="user.password"/>
       </div>
       <button>Sign Up</button>
     </form>

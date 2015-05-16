@@ -16,13 +16,19 @@
 
 <div class="form-block login">
   <div id='signin'>
+  <div ng-show="(signinform.name.$invalid || signinform.password.$invalid) && signinform.submitted" id="allfields">
+    <div>Please complete all fields</div>
+  </div>
+  <div ng-show="signinform.incorrect" id="allfields">
+    <div>Incorrect username or password</div>
+  </div>
     <form novalidate name="signinform" class="form-block" role="form" ng-submit='signin()'>
       <div class="form-group">
-        <input placeholder="Username" type="text" ng-model="user.username"/>
+        <input name='name' required ng-class="{'error': signinform.$invalid}" placeholder="Username" type="text" ng-model="user.username"/>
       </div>
 
       <div class="form-group">
-        <input placeholder="Password" type="password" ng-model="user.password"/>
+        <input name='password' required ng-class="{'error': signinform.$invalid}" placeholder="Password" type="password" ng-model="user.password"/>
       </div>
       <button>Log In</button>
     </form>
