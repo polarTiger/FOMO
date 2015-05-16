@@ -17,13 +17,21 @@ angular.module('fomo', ['ui.router', 'fomo.event',
   $stateProvider
     .state('home', {
       url: '/home',
-      templateUrl: './views/resultsView.html',
-      controller: 'ResultsController'
+      views: {
+        nav: {
+           templateUrl: './views/navView.html'
+           // http://stackoverflow.com/questions/29576063/how-to-attach-navbar-only-on-certain-pages-using-ui-router
+        },
+        main_content: {
+          templateUrl: './views/resultsView.html',
+          controller: 'ResultsController'
+        }
+      }
     })
     .state('signin', {
       url: '/signin',
       views: {
-        'main-content': {
+        main_content: {
           templateUrl: './views/signinView.html',
           controller: 'SigninController'
         }
@@ -32,7 +40,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
     .state('signup', {
       url: '/signup',
       views: {
-        'main-content': {
+        main_content: {
           templateUrl: './views/signupView.html',
           controller: 'SignupController'
         }
@@ -40,25 +48,53 @@ angular.module('fomo', ['ui.router', 'fomo.event',
     })
     .state('search', {
       url: '/search',
-      templateUrl: './views/searchView.html',
-      controller: 'searchController'
+      views: {
+        nav: {
+           templateUrl: './views/navView.html'
+        },
+        main_content: {
+          templateUrl: './views/searchView.html',
+          controller: 'searchController'
+        }
+      }
     })
     .state('user', {
       url: '/user',
-      templateUrl: './views/userView.html',
-      controller: 'UserController'
+      views: {
+        nav: {
+           templateUrl: './views/navView.html'
+        },
+        main_content: {
+          templateUrl: './views/userView.html',
+          controller: 'UserController'
+        }
+      }
     })
     .state('event', {
       url: '/event/:eventID',  // change to /event/:eventId
-      templateUrl: './views/eventView.html',
-      controller: 'EventController'
+      views: {
+        nav: {
+           templateUrl: './views/navView.html'
+        },
+        main_content: {
+          templateUrl: './views/eventView.html',
+          controller: 'EventController'
+        }
+      }
     })
     .state('addevent', {
       url: '/addevent',
-      templateUrl: './views/addEventView.html',
-      controller: 'AddController'
+      views: {
+        nav: {
+           templateUrl: './views/navView.html'
+        },
+        main_content: {
+          templateUrl: './views/addEventView.html',
+          controller: 'AddController'
+        }
+      }
     });
-})
+  })
 
 .controller("MainController", ['$scope', '$http', 'LoggedInService', '$rootScope', '$state', function($scope, $http, LoggedInService, $rootScope, $state) {
   $scope.logout = function() {
