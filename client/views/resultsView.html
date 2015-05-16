@@ -10,7 +10,7 @@
   <a href="#" ng-click="orderVariable='event_link'"><span class="col-md-3 col-xs-3">Link</span></a>
 </div>
 
-<div class="row" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)" style =" vertical-align:middle; text-align: center; margin-left:10%; margin-right: 10%; height: 100%;font-family: arial rounded mt, verdana, sans-serif; padding-top: 2%; padding-bottom:2%; margin-bottom: 0.4%; text-shadow: 0 50% 50%; box-shadow: 0px 1px 3px; border-radius:2%;" ng-class="{'test': $odd , 'test2': $even}">
+<div class="row" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)" style =" vertical-align:middle; text-align: center; margin-left:10%; margin-right: 10%; height: 100%;font-family: arial rounded mt, verdana, sans-serif; padding-top: 2%; padding-bottom:2%; margin-bottom: 0.4%; text-shadow: 0 50% 50%; box-shadow: 0px 1px 3px; border-radius:2%;" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
   <div>
     <span class="col-md-6 col-xs-6"><a style="color:#211E22;" href="#/event/{{event.id}}">{{event.event_title}}</a></span>
     <span class="col-md-3 col-xs-3" style="color:grey">{{event.event_category}}</span>
