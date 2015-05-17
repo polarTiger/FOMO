@@ -7,7 +7,7 @@
   
   <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-2">Date</span></a>
 <div class="row column-headings searchHeading">
-  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-5 col-xs-5" id="searchHeadingTxt">Event</span></a>
+  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-4 col-xs-4" id="searchHeadingTxt">Event</span></a>
   <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3" id="searchHeadingTxt">Category</span></a>
   <span class="col-md-2">Link</span>
   <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-1 col-xs-1" id="searchHeadingTxt">Date</span></a>
@@ -16,9 +16,9 @@
 
 <div class="row searchContent top10Style" ng-repeat="event in events | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
   <div>
-    <span class="col-md-5 col-xs-5"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
+    <span class="col-md-4 col-xs-4"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
     <span class="col-md-3 col-xs-3">{{event.event_category}}</span>
     <span class="col-md-3 col-xs-3"><a href="{{event.event_link | linkFormat}} target="_blank"">Click Here!</a></span>
-    <span class="col-md-1 col-xs-1">{{event.notification_date}}</span>
+    <span class="col-md-2 col-xs-2" id="eventDateTxt">{{event.notification_date}}</span>
   </div>
 </div>

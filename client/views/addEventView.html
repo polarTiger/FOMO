@@ -6,11 +6,11 @@
       </div>
       <div class="col-lg-5 col-md-5 col-xs-12">
       <div class="form-group " style="border-color: red;">
-      <label for="inputEventName" class="addEventFieldTitle">Event Name*:</label>
+      <label for="inputEventName" class="addEventFieldTitle">Event Name*:<span ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" > (Required)</span></label>
       <div class="form-group">
         <input type="text" name="name" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()"
         ng-class="{'invalidTxtBox': queryresult.length > 0 || event.name.length === 0 }" />
-        <div ng-show = "queryresult.length > 0 && eventIsInQuery()" style="color:red;">
+        <div ng-show = "queryresult.length > 0 && eventIsInQuery()">
         Event name already exists, please try a different name
         </div>
         <!--
@@ -18,12 +18,12 @@
         {{result.event_title}}
         </div>
         -->
-        <p ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" >Please enter the event name.</p>
+        
       </div>
-      <label for="inputInfo" class="addEventFieldTitle">Info*:</label>
+      <label for="inputInfo" class="addEventFieldTitle">Info*:<span ng-show="eventForm.info.$error.required && !eventForm.info.$pristine"> (Required)</span></label>
       <div class="form-group ">
         <textarea name="info" ng-model="event.info" ng-minlength="2" ng-required="true" id="addEventInfoTxtBox"></textarea>
-        <p ng-show="eventForm.info.$error.required && !eventForm.info.$pristine" class="help-block">Please enter information about the event.</p>
+        
       </div>
       <label for="linkInfo" class="addEventFieldTitle">Link</label>
       <div class="form-group">
