@@ -470,6 +470,13 @@ nav#hmenu ul a:hover {
   border-radius:2%;
 }
 
+/* user View page */
+.userViewTitle {
+  vertical-align: middle; 
+  text-align: center; 
+  color: #CCCCFF;
+}
+
 /* add event page */
 
 #addEventDiv {
