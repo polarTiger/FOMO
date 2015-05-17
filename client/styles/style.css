@@ -481,17 +481,43 @@ nav#hmenu ul a:hover {
 }
 
 /* add event page */
+.containersAddEventGradient {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+  z-index: 1;
+}
+.containersAddEvent {
+  position: absolute;
+  
+  top: 40vh;
+  left: 10%;
+  right: 10%;
+
+  /*
+  height: 200%;
+  width: 80%;
+  */
+  background-color: rgba(0, 0, 0, 0.65);
+/*  margin: 0 auto 10px;*/
+/*  margin-right: 20%;*/
+  border-radius: 2px;
+  opacity: 1;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
+
+}
 
 #addEventDiv {
   vertical-align:middle; 
-  margin-left:40%; 
+  margin-left: 30%; 
   margin-right:20%;
 }
 #addEventForm {
-  padding-top: 2%; 
+  padding-top: 2%;
+  vertical-align:middle; 
   margin-left: auto; 
   margin-right:auto; 
-  vertical-align:middle;
+  
 }
 .addEventFieldTitle {
   color: white;
