@@ -124,7 +124,7 @@ nav#hmenu ul a:hover {
   background-image: url('../images/top10Odd.jpg');
   background-size: 100%, 100%;
   */
-  background: linear-gradient(to right, #CC66FF, #FFCCFF, #CC66FF);
+  background: linear-gradient(to right , #DADAE6, #8585AD, #DADAE6);
 
 }
 .top10Even {
@@ -387,15 +387,106 @@ nav#hmenu ul a:hover {
    color: rgba(255,255,255,0.6);
 }
 
-.test {
+/* home pages background image */
+.homepage {
   width: auto;
   height: auto;
   background-image: url(../images/dance.jpg);
   background-size: cover;
   -webkit-filter: blur(0px);
   z-index: 0;
-  background-repeat: no-repeat;
-
-
-
 }
+
+/* results View home page */
+#top10Title {
+  font-family: arial rounded mt, verdana, sans-serif; 
+  font-size: 200%; 
+  margin-left:auto; 
+  margin-right:auto; 
+  vertical-align:middle; 
+  text-align: center; 
+  color: #CCCCFF;
+}
+.top10Heading {
+  vertical-align:middle; 
+  text-align: center; 
+  margin-left:10%; 
+  margin-right: 10%; 
+  font-size: 100%;
+}
+.headingText {
+  color: white;
+}
+
+.top10Style {
+  vertical-align:middle; 
+  text-align: center; 
+  margin-left:10%; 
+  margin-right: 10%; 
+  height: 100%;
+  font-family: arial rounded mt, verdana, sans-serif; 
+  padding-top: 2%; 
+  padding-bottom:2%; 
+  margin-bottom: 0.4%; 
+  text-shadow: 0 50% 50%; 
+  box-shadow: 0px 1px 3px; 
+  border-radius:2%;
+}
+
+/* search view */
+.searchBar {
+  margin-left:35%; 
+  margin-right: 35%; 
+  padding-top:5%;
+}
+
+.searchHeading {
+  vertical-align:middle; 
+  text-align: center; 
+  margin-left:5%; 
+  margin-right: 5%; 
+  font-size: 100%; 
+}
+#searchHeadingTxt{
+  color: #00CC99;
+  font-weight: bold;
+}
+
+.searchContent {
+  vertical-align:middle; 
+  text-align: center; 
+  margin-left:5%; 
+  margin-right: 5%; 
+  height: 100%;
+  font-family: arial rounded mt, verdana, sans-serif; 
+  padding-top: 2%; 
+  padding-bottom:2%; 
+  margin-bottom: 0.4%; 
+  text-shadow: 0 50% 50%; 
+  box-shadow: 0px 1px 3px; 
+  border-radius:2%;
+}
+
+/* add event page */
+
+#addEventDiv {
+  vertical-align:middle; 
+  margin-left:40%; 
+  margin-right:20%;
+}
+#addEventForm {
+  padding-top: 2%; 
+  margin-left: auto; 
+  margin-right:auto; 
+  vertical-align:middle;
+}
+.addEventFieldTitle {
+  color: white;
+  text-color: white;
+}
+
+#addEventInfoTxtBox {
+  width: 60%; 
+  height: 100px;
+}
+
