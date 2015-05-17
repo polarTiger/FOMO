@@ -19,8 +19,6 @@ module.exports = function (app) {
 
   app.get('/myevents', loggedOutBlock, eventController.myEvents);
 
-  app.get('/topevents', eventController.eventPlaceHolder);
-
   app.get ('/search', eventController.searchEvents);
 
   app.get('/categorysearch', eventController.searchCategories);

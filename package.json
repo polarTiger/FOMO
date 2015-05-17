@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "node ./server/server.js & mocha test/server/routesSpec.js; RES=$?; kill %1 exit $RES;",
+    "test": "node ./index.js & mocha test/server/routesSpec.js; RES=$?; kill %1 exit $RES;",
+    "test": "mocha test/server/routesSpec.js",
     "start": "node ./index.js",
     "postinstall": "bower install"
   },
