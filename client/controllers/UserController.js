@@ -8,7 +8,6 @@ angular.module('fomo.user', ['customFilters'])
     UserService.getallEvents()
     .success(function(data) {
       $scope.events = data;
-      console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.events);
     })
     .error(function(data, status, headers, config) {
       $state.go('signin');

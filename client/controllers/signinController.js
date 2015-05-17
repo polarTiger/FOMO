@@ -18,7 +18,7 @@ angular.module('fomo.signin', [])
           .success(function(data, status, headers, config) {
             $log.log('success');
             LoggedInService.setLoggedIn(true);
-            LoggedInService.setUserName(userObj.username)
+            LoggedInService.setUserName(userObj.username);
 
             $state.go('home');
         })

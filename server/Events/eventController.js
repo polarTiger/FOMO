@@ -1,19 +1,20 @@
 var pg = require('pg');
 var dbUrl = process.env.DATABASE_URL || require('../dbConfig/dbConfig');
 var nodemailer = require('nodemailer');
+
 if (process.env.EMAILADDRESS){
   var emailInfo = {user: process.env.EMAILADDRESS,
-              pass:  process.env.EMAILPASSWORD};
+                   pass:  process.env.EMAILPASSWORD};
 } else {
   var emailInfo = require('./emailAuth.js');
 }
+
 var db = require('./eventsModel');
-
 var eventful = require('eventful-node');
-
 var eventfulKey = process.env.EVENTFULKEY || require('./eventfulAPIKey');
 var eventfulClient = new eventful.Client(eventfulKey);
 var flag = false;
+
 
 //This function takes params from the triggerEvent function and sends the actual email
 var sendEmail = function(emails, image, link, title, eventInfo, res) {
@@ -45,7 +46,6 @@ var sendEmail = function(emails, image, link, title, eventInfo, res) {
   });
 };
 
-//NEEEDS COMMENT
 var testTrigger = function(data, i){
   // if the notification date and time are both not null
   if (data[i].notification_date !== null && data[i].notification_time !== null) {
@@ -114,7 +114,6 @@ setInterval(function(){
         }
         console.log('Recieved ' + data.search.total_items + ' events');
 
-        console.log('Event listings: ');
         // iterate through each events obj 
         for (var i = 0; i < data.search.events.event.length; i++) {
           console.log(data.search.events.event[i]);
@@ -154,12 +153,6 @@ setInterval(function(){
 }, 1000*10); // updates every 10 seconds
 
 module.exports = {
-  //DELETE ME WHEN NO LONGER USED IN EVENTROUTES FILE
-  eventPlaceHolder: function(req, res) {
-    res.send(200);
-    console.log("Event Route Works!!!!!");
-  },
-
   //Gets the event ID from the request url and calls the get event function in the eventsModel file
   getEvent: function(req, res) {
     var id = req.url.match(/\d+/)[0];

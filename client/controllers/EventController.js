@@ -12,15 +12,15 @@ angular.module('fomo.event', [])
   $scope.editNotifyInfo = false;
   $scope.editNotifyDate = false;
   $scope.editNotifyTime = false;
-  $scope.confirmTrigger = false;
+  $scope.confirmTrigger = false; //hides the trigger confirm button
 
   $scope.setEditAttribute = function(attr, value) {
     console.log(attr, value);
     $scope["edit" + attr] = value;
   };
 
+  //toggles the trigger button
   $scope.toggleConfirmTrigger = function() {
-    
     $scope.confirmTrigger = !$scope.confirmTrigger;
   };
 
@@ -44,9 +44,6 @@ angular.module('fomo.event', [])
 
       $scope.data.notification_datenew = $scope.data.notification_date;
       $scope.data.notification_timenew = $scope.data.notification_time;
-
-      //console.log("EVENT DATE/TIME: " + dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify);
-      //console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.data);
     });
   };
 
@@ -61,8 +58,8 @@ angular.module('fomo.event', [])
       .success(function(data, status, headers, config) {
         $log.log('successfully subscribed');
         $scope.data.subscribed = true;
-        // $log.log(data);
     })
+      
     .error(function(data, status, headers, config) {
       $log.log('fail');
       $state.go('signin');
@@ -74,7 +71,6 @@ angular.module('fomo.event', [])
       .success(function(data, status, headers, config) {
         $log.log('successfully unsubscribed');
         $scope.data.subscribed = false;
-        // $log.log(data);
     })
     .error(function(data, status, headers, config) {
       $log.log('fail');
@@ -83,7 +79,6 @@ angular.module('fomo.event', [])
   };
 
   $scope.editEvent = function() {
-    console.log('EDIT_EVENT');
     $scope.modifyEventBtn = !$scope.modifyEventBtn;
 
     $http.get('api/events/event/'+ $stateParams.eventID)

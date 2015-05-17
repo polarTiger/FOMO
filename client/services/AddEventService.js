@@ -4,7 +4,6 @@ angular.module('fomo.addeventservice', [])
 
   var postEvent = function(eventObject) {
 
-
     if (eventObject.notifydate) {
       var UTCnotifytime = eventObject.notifytime ? eventObject.notifytime.toString().match(/\d{2}:\d{2}:\d{2}/)[0] : '00:01:00';
       var UTCnotifydate = eventObject.notifydate.toString().replace(/\d{2}:\d{2}:\d{2}/,UTCnotifytime);
@@ -37,7 +36,6 @@ angular.module('fomo.addeventservice', [])
         $log.log('fail');
       });
   };
-
   return {
     postEvent: postEvent
   };

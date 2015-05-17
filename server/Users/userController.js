@@ -2,12 +2,12 @@ var validation = require('./validationModel');
 var User = require('./userModel');
 var bcrypt = require('bcrypt-nodejs');
 var passport = require('../passport/passportConfig');
-var uniqueEmailCode = require('../database/utils').uniqueEmailCode
+var uniqueEmailCode = require('../database/utils').uniqueEmailCode;
 var nodemailer = require('nodemailer');
 var sha1 = require('node-sha1');
 if (process.env.EMAILADDRESS){
   var emailInfo = {user: process.env.EMAILADDRESS,
-              pass:  process.env.EMAILPASSWORD};
+                   pass:  process.env.EMAILPASSWORD};
   var rootURL = process.env.ROOTURL;
 } else {
   var emailInfo = require('../Events/emailAuth.js');
@@ -31,44 +31,43 @@ var sendVerificationEmail = function(email, username, secretCode) {
 
   transporter.sendMail(mailOptions);
 
-}
+};
 
 module.exports = {
 
   signedIn: function(req, res) {
-    console.log("signed in, ", req.session.passport.user);
     var result = req.session.passport.user ? req.session.passport.user.username : null; 
     res.send(result);
   }, 
 
   signUpPost : function(req, res, next) {
-   console.log('inside Sign up post');
-   var user = req.body;
-   var usernamePromise = null;
-   usernamePromise = new User({username: user.username}).fetch();
+    console.log('inside Sign up post');
+    var user = req.body;
+    var usernamePromise = null;
+    usernamePromise = new User({username: user.username}).fetch();
 
-   return usernamePromise.then(function(model) {
+    return usernamePromise.then(function(model) {
       if(model) {
          res.end('already exists');
       } else {
-         //****************************************************//
-         // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
-         //****************************************************//
-         var password = user.password;
-         var hash = bcrypt.hashSync(password);
-         var emailCode = uniqueEmailCode();
-         var emailHash = sha1(emailCode);
+        //****************************************************//
+        // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
+        //****************************************************//
+        var password = user.password;
+        var hash = bcrypt.hashSync(password);
+        var emailCode = uniqueEmailCode();
+        var emailHash = sha1(emailCode);
 
-         var signUpUser = new User({username: user.username,
-          password: hash,
-          email: user.email,
-          verification_hash: emailHash
-         });
+        var signUpUser = new User({username: user.username,
+                                   password: hash,
+                                   email: user.email,
+                                   verification_hash: emailHash
+                                  });
 
-         signUpUser.save().then(function(model) {
-            sendVerificationEmail(user.email, user.username, emailCode);
-            res.end();
-         });  
+        signUpUser.save().then(function(model) {
+          sendVerificationEmail(user.email, user.username, emailCode);
+          res.end();
+        });  
       }
    });
   },
@@ -97,6 +96,5 @@ module.exports = {
         }
       });
     }
-
   
 };

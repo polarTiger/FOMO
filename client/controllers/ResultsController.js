@@ -4,7 +4,7 @@ angular.module('fomo.results', ['customFilters'])
   function($scope, $log, SearchService) {
 
     $scope.orderVariable = 'event_title';
-    // make a call for top 10 most subscribed event to backend
+    // make a call for top 10 most subscribed event to the database
     $scope.genPopularEvent = function() {
       SearchService.searchPopular()
       .success(function(data,status){
@@ -15,7 +15,6 @@ angular.module('fomo.results', ['customFilters'])
     $scope.orderVariable = 'event_title';
     
     $scope.submit = function() {
-      console.log('query is ',$scope.query);
       SearchService.searchWithQuery($scope.query)
         .success(function(data, status) {
           $log.log(data);
