@@ -124,8 +124,11 @@ nav#hmenu ul a:hover {
   background-image: url('../images/top10Odd.jpg');
   background-size: 100%, 100%;
   */
+  /*
   background: linear-gradient(to right , #DADAE6, #8585AD, #DADAE6);
-
+  */
+  background-image: url('../images/top10Odd.jpg');
+  background-size: 100%, 100%;
 }
 .top10Even {
   background-image: url('../images/top10Even.jpg');
