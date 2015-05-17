@@ -1,20 +1,20 @@
 
 <div class="col-lg-12 col-md-12 col-xs-12">
-<div style="font-family: arial rounded mt, verdana, sans-serif; font-size: 200%; margin-left:auto; margin-right:auto; vertical-align:middle; text-align: center;"> Here are our popular events : </div>
+<div id="top10Title"> Here's our popular events : </div>
 </div>
 
 
-<div class="row column-headings" style=" vertical-align:middle; text-align: center; margin-left:10%; margin-right: 10%; font-size: 100%;">
-  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-6 col-xs-6">Event</span></a>
-  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3">Category</span></a>
-  <a href="#" ng-click="orderVariable='event_link'"><span class="col-md-3 col-xs-3">Link</span></a>
+<div class="row column-headings top10Heading">
+  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-6 col-xs-6" style="color:white;">Event</span></a>
+  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3" style="color:white;">Category</span></a>
+  <a href="#" ng-click="orderVariable='event_link'"><span class="col-md-3 col-xs-3" style="color:white;">Link</span></a>
 </div>
 
-<div class="row" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)" style =" vertical-align:middle; text-align: center; margin-left:10%; margin-right: 10%; height: 100%;font-family: arial rounded mt, verdana, sans-serif; padding-top: 2%; padding-bottom:2%; margin-bottom: 0.4%; text-shadow: 0 50% 50%; box-shadow: 0px 1px 3px; border-radius:2%;" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
+<div class="row top10Style" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
   <div>
-    <span class="col-md-6 col-xs-6"><a style="color:#211E22;" href="#/event/{{event.id}}">{{event.event_title}}</a></span>
-    <span class="col-md-3 col-xs-3" style="color:grey">{{event.event_category}}</span>
-    <span class="col-md-3 col-xs-3"><a style="color: #211E22;" href="{{event.event_link | linkFormat}}" target="_blank">Click Here!</a></span>
+    <span class="col-md-6 col-xs-6"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
+    <span class="col-md-3 col-xs-3">{{event.event_category}}</span>
+    <span class="col-md-3 col-xs-3"><a href="{{event.event_link | linkFormat}}" target="_blank">Click Here!</a></span>
   </div>
 </div>
 

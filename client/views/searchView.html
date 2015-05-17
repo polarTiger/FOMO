@@ -1,6 +1,6 @@
-<div class="form-group">
-  <form novalidate name="searchForm" class="form-block" role="form" ng-submit='submit()'>
-    <input type="text" class="" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()" placeholder="Search for event">
+<div class="form-group searchBar">
+  <form novalidate name="searchForm" class="simple-form" role="form" ng-submit='submit()'>
+    <input type="text" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()" placeholder="Search for event">
     <select ng-model="event.category" ng-change="liveSearchEventTitle()">
       <option ng-repeat="category in event.categories">{{category}}</option>
     </select>
@@ -8,19 +8,19 @@
   </form>
 </div>
 
-<div class="row column-headings">
-  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-2">Event</span></a>
-  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-2">Category</span></a>
-  <a href="#" ng-click="orderVariable='event_link'"><span class="col-md-2">Link</span></a>
-  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-2">Date</span></a>
+<div class="row column-headings searchHeading">
+  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-5 col-xs-5" id="searchHeadingTxt">Event</span></a>
+  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3" id="searchHeadingTxt">Category</span></a>
+  <a href="#" ng-click="orderVariable='event_link'"><span class="col-md-3 col-xs-3" id="searchHeadingTxt">Link</span></a>
+  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-1 col-xs-1" id="searchHeadingTxt">Date</span></a>
 
 </div>
-<div class="row search-result" ng-repeat="event in queryresult | orderBy:orderVariable" ng-click="selection(event)">
+<div class="row searchContent" ng-repeat="event in queryresult | orderBy:orderVariable | limitTo : 10" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
   <div>
-    <span class="col-md-2"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
-    <span class="col-md-2">{{event.event_category}}</span>
-    <span class="col-md-2"><a href="{{event.event_link | linkFormat}}">{{event.event_link | linkFormat}}</a></span>
-    <span class="col-md-2">{{event.notification_date}}</span>
+    <span class="col-md-5 col-xs-5"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
+    <span class="col-md-3 col-xs-3">{{event.event_category}}</span>
+    <span class="col-md-3 col-xs-3"><a href="{{event.event_link | linkFormat}} target="_blank"">Click Here!</a></span>
+    <span class="col-md-1 col-xs-1">{{event.notification_date}}</span>
   </div>
 </div>
 
