@@ -6,7 +6,6 @@ angular.module('fomo.signup', [])
     UserService.getallEvents()
     .success(function(data) {
       $scope.events = data;
-      console.log('CONTROLLER: RESULTS FROM EVENTS:', $scope.events);
     });
   };
 
@@ -32,13 +31,13 @@ angular.module('fomo.signup', [])
             .success(function(data, status, headers, config) {
               console.log('success');
               LoggedInService.setLoggedIn(true);
-              LoggedInService.setUserName(userObj.username)
+              LoggedInService.setUserName(userObj.username);
               $state.go('home');
-            })
+            });
           }
         })
         .error(function(data, status, headers, config) {
-          //$log.log('fail');
+          $log.log('fail');
         });
     } else {
       $scope.signupForm.submitted = true;

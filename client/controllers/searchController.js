@@ -30,9 +30,7 @@ angular.module('fomo.search', ['customFilters'])
       SearchService.searchWithQuery($scope.event.name, normalizedCategcory)
         .success(function(data, status) {
           $scope.queryresult = data;
-          //console.log($scope.event.name);
-          //console.log(' SEARCH CONTROLLER get the result from db ', data);
-            //$scope.events = data;
+          //$scope.events = data;
       });
     };
 
@@ -44,5 +42,4 @@ angular.module('fomo.search', ['customFilters'])
       }
       return false;
     };
-
 }]);

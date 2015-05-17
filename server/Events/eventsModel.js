@@ -39,7 +39,6 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  //NEEDS COMMENT
   searchCategories: function(searchQuery, cb) {
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
     var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_category) "+
@@ -54,7 +53,6 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  //NEEDS COMMENT
   getPopularEvents: function(cb) {
     //currently get top 10 most subscribed events and send to front end
     var queryString = "SELECT * FROM events ORDER BY no_of_subscriber DESC limit 10 ;";
@@ -127,7 +125,6 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  //NEEDS COMMENT
   addEvent: function(body, user_id, cb) {
     var formattedNotifyDate = body.notifydate;
     var formattedNotifyTime = null;
@@ -139,8 +136,6 @@ module.exports = {
                       +"%L, %L, %L, %L, %L ) RETURNING id), second_insert AS (INSERT into notifications (event_id, notification_date, notification_time) SELECT id, "
                     +formattedNotifyDate+", "+formattedNotifyTime+" FROM first_insert) INSERT into users_events (event_id, user_id) SELECT id, '"
                     +user_id+"' FROM first_insert;",  body.info, body.name, body.category, body.link, body.imgUrl);
-    //console.log('QUERY STRING: ', queryString);
-
     queryDB(queryString, cb);
   },
 
@@ -155,12 +150,10 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  //NEEDS COMMENT
   setNotificationToFired: function(id, date, cb) {
     var queryStringTrigger = "UPDATE notifications set fired=TRUE, notification_date='"+date.serverDate+"', notification_time='"+date.serverTime+"' WHERE event_id= "+ id +";";
     queryDB(queryStringTrigger, cb);
   }
-
 
 };
 

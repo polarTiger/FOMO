@@ -17,4 +17,4 @@ module.exports = {
     var queryString = escape("UPDATE users SET verified=TRUE WHERE username=%L;", username);
     queryDB(queryString, cb);
   } 
-}
+};
