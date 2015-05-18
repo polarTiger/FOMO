@@ -9,6 +9,7 @@ angular.module('fomo.results', ['customFilters'])
       SearchService.searchPopular()
       .success(function(data,status){
         $scope.popularEvents = data;
+        console.log('popularEvents are ',$scope.popularEvents );
       });
     };
 
