@@ -393,7 +393,7 @@ nav#hmenu ul a:hover {
 /* home pages background image */
 .homepage {
   width: auto;
-  height: auto;
+  height: 100vh;
   background-image: url(../images/dance.jpg);
   background-size: cover;
   -webkit-filter: blur(0px);
@@ -401,6 +401,9 @@ nav#hmenu ul a:hover {
 }
 
 /* results View home page */
+#eventDateTxt {
+  font-size: 80%;
+}
 #top10Title {
   font-family: arial rounded mt, verdana, sans-serif; 
   font-size: 200%; 
@@ -433,7 +436,7 @@ nav#hmenu ul a:hover {
   margin-bottom: 0.4%; 
   text-shadow: 0 50% 50%; 
   box-shadow: 0px 1px 3px; 
-  border-radius:2%;
+  border-radius:6px;
 }
 
 /* search view */
@@ -467,21 +470,54 @@ nav#hmenu ul a:hover {
   margin-bottom: 0.4%; 
   text-shadow: 0 50% 50%; 
   box-shadow: 0px 1px 3px; 
-  border-radius:2%;
+  border-radius:6px;
+}
+
+/* user View page */
+.userViewTitle {
+  vertical-align: middle; 
+  text-align: center; 
+  color: #CCCCFF;
 }
 
 /* add event page */
+.containersAddEventGradient {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+  z-index: 1;
+}
+.containersAddEvent {
+  position: absolute;
+  
+  top: 40vh;
+  left: 10%;
+  right: 10%;
+
+  /*
+  height: 200%;
+  width: 80%;
+  */
+  background-color: rgba(0, 0, 0, 0.65);
+/*  margin: 0 auto 10px;*/
+/*  margin-right: 20%;*/
+  border-radius: 2px;
+  opacity: 1;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
+
+}
 
 #addEventDiv {
   vertical-align:middle; 
-  margin-left:40%; 
+  margin-left: 30%; 
   margin-right:20%;
 }
 #addEventForm {
-  padding-top: 2%; 
+  padding-top: 2%;
+  vertical-align:middle; 
   margin-left: auto; 
   margin-right:auto; 
-  vertical-align:middle;
+  
 }
 .addEventFieldTitle {
   color: white;
