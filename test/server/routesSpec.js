@@ -8,12 +8,11 @@ var expect = require('chai').expect;
 var bodyParser = require('body-parser');
 var path = require('path');
 
-
 var assert = require('assert'),
     otherAssert = require('chai').assert,
     http = require('http');
 
-var url = "http://localhost:3113"
+var url = "http://localhost:3113";
 
 describe('/', function () {
   it('should return 200', function (done) {
@@ -42,10 +41,6 @@ describe('/categorysearch', function () {
   });
 });
 
-
-
-
-
 describe('event routes', function() {
 
   describe('search ', function() {
@@ -56,108 +51,110 @@ describe('event routes', function() {
         .end(done);
     });
   });
-});
 
-describe('/popularevent', function () {
+
+  describe('/popularevent', function () {
   it('should return 200', function (done) {
-    http.get(url+'/api/events/popularevent', function (res) {
-      assert.equal(200, res.statusCode);
-      done();
+    request(url)
+      .get('/api/events/popularevent')
+      .expect(200)
+      .end(done);
     });
   });
-});
 
-describe('/event/1', function () {
+  describe('/event/1', function () {
   it('should return 200', function (done) {
-    http.get(url+'/api/events/event/1', function (res) {
-      assert.equal(200, res.statusCode);
-      done();
+    request(url)
+      .get('/api/events/event/1')
+      .expect(200)
+      .end(done);
     });
   });
-});
 
-describe('/triggerevent', function () {
+
+  describe('/triggerevent', function () {
   it('should return 403', function (done) {
-    http.get(url+'/api/events/triggerevent', function (res) {
-      assert.equal(403, res.statusCode);
-      done();
+    request(url)
+      .get('/api/events/triggerevent')
+      .expect(403)
+      .end(done);
     });
   });
-});
 
-describe('/myevents', function () {
+  describe('/myevents', function () {
   it('should return 403', function (done) {
-    http.get(url+'/api/events/myevents', function (res) {
-      assert.equal(403, res.statusCode);
-      done();
+    request(url)
+      .get('/api/events/myevents')
+      .expect(403)
+      .end(done);
     });
   });
-});
 
-describe('/arglebargle', function () {
+  describe('/arglebargle', function () {
   it('should return 404', function (done) {
-    http.get(url+'/api/events/arglebargle', function (res) {
-      assert.equal(404, res.statusCode);
-      done();
+    request(url)
+      .get('/api/events/arglebargle')
+      .expect(404)
+      .end(done);
     });
   });
 });
 
-describe('/signedin', function () {
-  it('should return 200', function (done) {
-    http.get(url+'/api/users/signedin', function (res) {
-      assert.equal(200, res.statusCode);
-      done();
+describe('user routes', function() {
+
+  describe('/signedin', function () {
+    it('should return 200', function (done) {
+      http.get(url+'/api/users/signedin', function (res) {
+        assert.equal(200, res.statusCode);
+        done();
+      });
     });
   });
-});
 
-describe('/verify', function () {
-  it('should return 200', function (done) {
-    http.get(url+'/api/users/verify?username=BigPete&secretCode=secretcode', function (res) {
-      assert.equal(200, res.statusCode);
-      done();
+  describe('/verify', function () {
+    it('should return 200', function (done) {
+      http.get(url+'/api/users/verify?username=BigPete&secretCode=secretcode', function (res) {
+        assert.equal(200, res.statusCode);
+        done();
+      });
     });
   });
-});
 
+  describe('Posts a user', function (){
+    it("posts a new user to /users", function(done){
+      var user = { username : 'BigPete', 
+                    password: 'test', 
+                    email : 'fake@gmail.com' };
+      request(url)
+        .post("/api/users/signup")
+        .send(user)
+        .expect(200, done);
+    });
 
-describe("Posting is easy to test with supertest", function (){
- 
-  it("posts a new user to /users", function(done){
-    var user = { username : 'BigPete', 
-                  password: 'test', 
-                  email : 'fake@gmail.com' };
- 
-    request(url)
-      .post("/api/users/signup")
-      .send(user)
-      .expect(200, done);
-  });
+    it("logs out", function(done){
+      var user = { username : 'BigPete', 
+                    password: 'test', 
+                    email : 'fake@gmail.com' };
+      request(url)
+        .get("/api/users/signout")
+        .expect(200, done);
+    });
 
-  it("logs out", function(done){
-    var user = { username : 'BigPete', 
-                  password: 'test', 
-                  email : 'fake@gmail.com' };
-  
-    request(url)
-      .get("/api/users/signout")
-      .expect(200, done);
-  });
+    it("logs in user", function(done){
+      request(url)
+        .post("/api/users/signin")
+        .send({username: 'BigPete',
+               password: 'test'})
+        .expect(302, 'Moved Temporarily. Redirecting to /', done);
+    });
 
-  it("logs in user", function(done){
-    request(url)
-      .post("/api/users/signin")
-      .send({username: 'BigPete',
-             password: 'test'})
-      .expect(302, 'Moved Temporarily. Redirecting to /', done);
-  })
+    it("user is logged in", function(done){
+      request(url)
+        .get("/api/users/signedin")
+        .set('Accept', 'application/json')
+        .expect(200, done);
+    });
 
-  it("user is logged in", function(done){
-    request(url)
-      .get("/api/users/signedin")
-      .set('Accept', 'application/json')
-      .expect(200, done);
   });
 
 });
