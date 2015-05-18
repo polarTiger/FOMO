@@ -4,13 +4,12 @@
     <h3>My Events</h3>
   </span>
 </div>
-  
-  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-2">Date</span></a>
+
 <div class="row column-headings searchHeading">
   <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-4 col-xs-4" id="searchHeadingTxt">Event</span></a>
   <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3" id="searchHeadingTxt">Category</span></a>
-  <span class="col-md-2">Link</span>
-  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-1 col-xs-1" id="searchHeadingTxt">Date</span></a>
+  <span class="col-md-3 col-xs-3">Link</span>
+  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-2 col-xs-2" id="searchHeadingTxt">Date</span></a>
 
 </div>
 
@@ -18,7 +17,7 @@
   <div>
     <span class="col-md-4 col-xs-4"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
     <span class="col-md-3 col-xs-3">{{event.event_category}}</span>
-    <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href="{{event.event_link | linkFormat}} target="_blank"">Click Here!</a></span>
+    <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href='{{event.event_link | linkFormat}}' target="_blank">Click Here!</a></span>
     <span class="col-md-2 col-xs-2" id="eventDateTxt" ng-show="event.notification_date !== null">{{event.notification_date}}</span>
   </div>
 </div>

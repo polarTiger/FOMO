@@ -8,6 +8,7 @@
   <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-6 col-xs-6" style="color:white;">Event</span></a>
   <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3" style="color:white;">Category</span></a>
   <span class="col-md-3 col-xs-3" style="color:white;">Link</span>
+</div>
 
 <div class="row top10Style" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
   <div>
