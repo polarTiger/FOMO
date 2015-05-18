@@ -21,12 +21,19 @@ var sendVerificationEmail = function(email, username, secretCode) {
     auth: emailInfo
   });
 
+  var messageString = '<h1> Welcome to FOMO!</h1> <p>In order to send you notification emails,'
+     +' we need to verify that you own this email address. <a href='+rootURL + 'api/users/verify?secretCode='
+     +secretCode+'&username='+username+' >Click this link to verify your email address.</a>'
+     +' Alternatively, copy this url into your address bar. ' + rootURL + 'api/users/verify?secretCode='
+     +secretCode+'&username='+username+'</p>'
+     + '<p> Thank you for trying FOMO!</p>'
+
   var mailOptions = {
-    from: 'FOMO <tryfomo@gmail.com>',
+    from: 'WELCOME TO FOMO <tryfomo@gmail.com>',
     to: '' + email,
-    subject: 'Verify your email address',
+    subject: 'FOMO Email Verification',
     text: 'FOMO', // plaintext body
-    html: '<a href='+rootURL + 'api/users/verify?secretCode='+secretCode+'&username='+username+' >click here</a>'
+    html: messageString
   };
 
   transporter.sendMail(mailOptions);
@@ -85,14 +92,17 @@ module.exports = {
   verify: function(req, res, next) {
     var code = req.query.secretCode;
     var username = req.query.username;
+    var message = "<a href="+rootURL+">Click here to return to the main site. </a>"
+    var failMessage = "Sorry, the validation failed. "
+    var successMessage = "Congratulations, your email address is confirmed and you can now receive email notifications for events you are subscribed to. ";
     validation.getUserHash(username, function(rows) {
-      if (sha1(code)===rows[0].verification_hash) {
+      if (rows[0] && sha1(code)===rows[0].verification_hash) {
         validation.markUserAsVerified(username, function(){
-          res.send(username + ", your email is good");
+          res.send("<p>Hello, "+username+". " + successMessage+message + "</p>");
         });
 
         } else {
-          res.send(username + ", sorry bad validation");
+          res.send("<p>Hello, "+username+". " + failMessage + message+"</p>");
         }
       });
     }
