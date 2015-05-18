@@ -16,7 +16,7 @@ FOMO is a crowdsourced notifier app that allows users to subscribe to any event 
 
 ## Tech Stack
 
-Angular, Node/Express, PostgreSQL, Jasmine, Bookshelf
+Angular, Node/Express, PostgreSQL, Mocha/Chai, Bookshelf
 
 ## Developer Environment
 
