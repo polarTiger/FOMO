@@ -409,19 +409,19 @@ nav#hmenu ul a:hover {
   font-size: 80%;
 }
 #top10Title {
-  font-family: arial rounded mt, verdana, sans-serif; 
-  font-size: 200%; 
-  margin-left:auto; 
-  margin-right:auto; 
-  vertical-align:middle; 
-  text-align: center; 
+  font-family: arial rounded mt, verdana, sans-serif;
+  font-size: 200%;
+  margin-left:auto;
+  margin-right:auto;
+  vertical-align:middle;
+  text-align: center;
   color: #CCCCFF;
 }
 .top10Heading {
-  vertical-align:middle; 
-  text-align: center; 
-  margin-left:10%; 
-  margin-right: 10%; 
+  vertical-align:middle;
+  text-align: center;
+  margin-left:10%;
+  margin-right: 10%;
   font-size: 100%;
 }
 .headingText {
@@ -429,33 +429,33 @@ nav#hmenu ul a:hover {
 }
 
 .top10Style {
-  vertical-align:middle; 
-  text-align: center; 
-  margin-left:10%; 
-  margin-right: 10%; 
+  vertical-align:middle;
+  text-align: center;
+  margin-left:10%;
+  margin-right: 10%;
   height: 100%;
-  font-family: arial rounded mt, verdana, sans-serif; 
-  padding-top: 2%; 
-  padding-bottom:2%; 
-  margin-bottom: 0.4%; 
-  text-shadow: 0 50% 50%; 
-  box-shadow: 0px 1px 3px; 
+  font-family: arial rounded mt, verdana, sans-serif;
+  padding-top: 2%;
+  padding-bottom:2%;
+  margin-bottom: 0.4%;
+  text-shadow: 0 50% 50%;
+  box-shadow: 0px 1px 3px;
   border-radius:6px;
 }
 
 /* search view */
 .searchBar {
-  margin-left:35%; 
-  margin-right: 35%; 
+  margin-left:35%;
+  margin-right: 35%;
   padding-top:5%;
 }
 
 .searchHeading {
-  vertical-align:middle; 
-  text-align: center; 
-  margin-left:5%; 
-  margin-right: 5%; 
-  font-size: 100%; 
+  vertical-align:middle;
+  text-align: center;
+  margin-left:5%;
+  margin-right: 5%;
+  font-size: 100%;
 }
 #searchHeadingTxt{
   color: #00CC99;
@@ -463,24 +463,24 @@ nav#hmenu ul a:hover {
 }
 
 .searchContent {
-  vertical-align:middle; 
-  text-align: center; 
-  margin-left:5%; 
-  margin-right: 5%; 
+  vertical-align:middle;
+  text-align: center;
+  margin-left:5%;
+  margin-right: 5%;
   height: 100%;
-  font-family: arial rounded mt, verdana, sans-serif; 
-  padding-top: 2%; 
-  padding-bottom:2%; 
-  margin-bottom: 0.4%; 
-  text-shadow: 0 50% 50%; 
-  box-shadow: 0px 1px 3px; 
+  font-family: arial rounded mt, verdana, sans-serif;
+  padding-top: 2%;
+  padding-bottom:2%;
+  margin-bottom: 0.4%;
+  text-shadow: 0 50% 50%;
+  box-shadow: 0px 1px 3px;
   border-radius:6px;
 }
 
 /* user View page */
 .userViewTitle {
-  vertical-align: middle; 
-  text-align: center; 
+  vertical-align: middle;
+  text-align: center;
   color: #CCCCFF;
 }
 
@@ -491,7 +491,7 @@ nav#hmenu ul a:hover {
 }
 .containersAddEvent {
   position: absolute;
-  
+
   top: 40vh;
   left: 10%;
   right: 10%;
@@ -512,16 +512,16 @@ nav#hmenu ul a:hover {
 }
 
 #addEventDiv {
-  vertical-align:middle; 
-  margin-left: 30%; 
+  vertical-align:middle;
+  margin-left: 30%;
   margin-right:20%;
 }
 #addEventForm {
   padding-top: 2%;
-  vertical-align:middle; 
-  margin-left: auto; 
-  margin-right:auto; 
-  
+  vertical-align:middle;
+  margin-left: auto;
+  margin-right:auto;
+
 }
 .addEventFieldTitle {
   color: white;
@@ -529,7 +529,7 @@ nav#hmenu ul a:hover {
 }
 
 #addEventInfoTxtBox {
-  width: 60%; 
+  width: 60%;
   height: 100px;
 }
 

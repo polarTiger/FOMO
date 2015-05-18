@@ -1,6 +1,6 @@
-html, 
-body, 
-.container, 
+html,
+body,
+.container,
 .content-wrap {
 	overflow: hidden;
 	width: 100%;
@@ -12,7 +12,8 @@ body,
 }
 
 .menu-wrap a {
-	color: #555d7c;
+	color: #ddd;
+	font-family: 'Exo', sans-serif;
 }
 
 .menu-wrap a:hover,
@@ -54,7 +55,7 @@ body,
 	border: none;
 	text-indent: 2.5em;
 	color: transparent;
-	background: #8a92b3;
+	background: #366184;
 }
 
 .menu-button::before {
@@ -74,7 +75,8 @@ body,
 /* Menu */
 .menu-wrap {
 	z-index: 999;
-	background: #8a92b3;
+/*	background: #8a92b3;*/
+background-color: rgba(54,97,132, 0.4);
 	-webkit-transition: width 0.4s, height 0.4s, -webkit-transform 0.4s;
 	transition: width 0.4s, height 0.4s, transform 0.4s;
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
@@ -105,7 +107,7 @@ body,
 	display: block;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	font-size: 0.5em;
+	font-size: 0.6em;
 	font-weight: 700;
 	padding-top: 0.5em;
 }

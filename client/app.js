@@ -32,7 +32,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
     .state('signin', {
       url: '/signin',
       views: {
-        main_content: {
+        lp_content: {
           templateUrl: './views/signinView.html',
           controller: 'SigninController'
         }
@@ -41,7 +41,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
     .state('signup', {
       url: '/signup',
       views: {
-        main_content: {
+        lp_content: {
           templateUrl: './views/signupView.html',
           controller: 'SignupController'
         }
