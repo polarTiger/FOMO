@@ -1,7 +1,40 @@
 
 
-<h1 class='title'>fomo<p class='subtitle'>fear of missing out</p></h1>
-<nav id="hmenu" class="col-md-12">
+<!-- <h1 class='title'>fomo<p class='subtitle'>fear of missing out</p></h1> -->
+
+<!-- <link rel="stylesheet" type="text/css" href="../styles/normalize.css"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="../styles/demo.css"/> -->
+<link rel="stylesheet" type="text/css" href="../styles/menu_topexpand.css"/>
+
+<div class="container">
+
+  <div class="menu-wrap">
+    <nav class="menu">
+      <div class="icon-list">
+
+        <a href="#/home"><i class="fa fa-fw fa-home"></i><span>Home</span></a>
+
+        <a ng-if="root.loggedIn===true" href="#/user"><i class="fa fa-fw fa-bell-o"></i><span ng-bind="(root.user.username ? root.user.username+'\'s' : 'Your') + ' Events'"></span></a>
+
+        <a href="#/search"><i class="fa fa-fw fa-search"></i><span>Search</span></a>
+
+        <a ng-if="root.loggedIn===true" href="#/addevent"><i class="fa fa-fw fa-plus"></i><span>New Event</span></a>
+
+        <a ng-if="root.loggedIn===false" href="#/signin"><i class="fa fa-fw fa-sign-in"></i><span ng-bind='"sign in"'></a>
+
+        <a ng-if="root.loggedIn===true" ng-click="logout()"><i class="fa fa-sign-out"></i><span ng-bind='"log out"'></span></a>
+
+      </div>
+    </nav>
+  </div>
+
+  <button class="menu-button" id="open-button"></button> <!-- this is the button -->
+</div>
+
+<!-- <script src="../styles/classie.js"></script>
+<script src="../styles/main.js"></script> -->
+
+<!-- <nav id="hmenu" class="col-md-12">
   <ul>
     <li class="col-md-1"></li>
     <li class="col-md-2"><a href="#/home">home</a></li>
@@ -11,4 +44,4 @@
     <li class="col-md-2"><a ng-if="root.loggedIn===false" href="#/signin"><span ng-bind='"signin"'></span></a><a href ng-if="root.loggedIn===true" ng-click="logout()"><span ng-bind='"logout"'></span></a></li>
     <li class="col-md-1"></li>
   </ul>
-</nav>
+</nav> -->

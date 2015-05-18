@@ -2,6 +2,7 @@
 
 <html ng-app="fomo">
 
+<!--
 <head>
   <meta charset="utf-8" />
   <title>FOMO | Fear Of Missing Out</title>
@@ -13,7 +14,7 @@
 
 <body class="homepage">
   <div class="main-container" ng-controller="MainController">
-    <div ui-view name="nav"></div> <!-- Navigation -->
+    <div ui-view name="nav"></div> Navigation
   </div>
 
   <div ui-view="main_content"></div>
@@ -38,7 +39,50 @@
   <script src="controllers/signupController.js"></script>
   <script src="filters/filters.js"></script>
   <script src="app.js"></script>
-<!--      <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="windowResizeHelper.js"></script>
+-->
+  <head>
+    <meta charset="utf-8" />
+    <title>FOMO | Fear Of Missing Out</title>
+    <link rel="icon" href="styles/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="styles/prefixfree.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <!--  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+  </head>
+
+  <body class="homepage" ng-controller="MainController">
+    <div ui-view="nav"></div>
+    <div class="content-wrap">
+
+      <div ui-view="main_content"></div>
+      <div ui-view></div>
+
+    </div>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+    <script src="controllers/EventController.js"></script>
+    <script src="controllers/AddController.js"></script>
+    <script src="controllers/signupController.js"></script>
+    <script src="controllers/ResultsController.js"></script>
+    <script src="services/EventService.js"></script>
+    <script src="services/loggedInService.js"></script>
+    <script src="services/SearchService.js"></script>
+    <script src="services/AddEventService.js"></script>
+    <script src="services/UserService.js"></script>
+    <script src="controllers/UserController.js"></script>
+    <script src="controllers/searchController.js"></script>
+    <script src="controllers/signinController.js"></script>
+    <script src="controllers/signupController.js"></script>
+    <script src="controllers/NavController.js"></script>
+    <script src="filters/filters.js"></script>
+    <script src="styles/classie.js"></script>
+    <script src="app.js"></script>
+    <script src="windowResizeHelper.js"></script>
+
   </body>
 </html>
