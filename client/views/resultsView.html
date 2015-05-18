@@ -14,7 +14,7 @@
   <div>
     <span class="col-md-6 col-xs-6"><a href="#/event/{{event.id}}">{{event.event_title}}</a></span>
     <span class="col-md-3 col-xs-3">{{event.event_category}}</span>
-    <span class="col-md-3 col-xs-3"><a href="{{event.event_link | linkFormat}}" target="_blank">Click Here!</a></span>
+    <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href="{{event.event_link | linkFormat}}" target="_blank">Click Here!</a></span>
   </div>
 </div>
 
