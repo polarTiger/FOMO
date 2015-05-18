@@ -15,7 +15,6 @@ if (process.env.EMAILADDRESS){
 }
 
 var sendVerificationEmail = function(email, username, secretCode) {
-  console.log('hi');
   var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: emailInfo
@@ -43,7 +42,9 @@ var sendVerificationEmail = function(email, username, secretCode) {
 module.exports = {
 
   signedIn: function(req, res) {
+
     var result = req.session.passport.user ? req.session.passport.user.username : null; 
+    console.log('signed in? ', result);
     res.send(result);
   }, 
 
