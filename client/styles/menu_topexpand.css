@@ -12,7 +12,7 @@ body,
 }
 
 .menu-wrap a {
-	color: #ddd;
+	color: #ddd; /* menu text color */
 	font-family: 'Exo', sans-serif;
 }
 
@@ -51,11 +51,16 @@ body,
 .menu-button {
 	z-index: 1000;
 	margin: 0;
-	padding: 0;
+	margin-left: -15px; /* moves menu button to align when menu closed */
 	border: none;
 	text-indent: 2.5em;
-	color: transparent;
-	background: #366184;
+/*	color: transparent;*/
+/*	background: #366184;*/ /* changes menu button color background */
+	background: transparent;
+}
+
+.menu-button:focus { /* http://stackoverflow.com/questions/4524180/unwanted-ouline-or-border-around-button-when-clicked */
+  outline:none; /* doesn't show blue border when button clicked */
 }
 
 .menu-button::before {
@@ -75,8 +80,10 @@ body,
 /* Menu */
 .menu-wrap {
 	z-index: 999;
-/*	background: #8a92b3;*/
-background-color: rgba(54,97,132, 0.4);
+  margin-left: -15px; /* resets menu bar to show across screen */
+  /* background: #8a92b3;*/
+  /* background-color: rgba(54,97,132, 0.4);*/ /* old blue */
+  background-color: rgba(102,102,102, 0.6); /* menu bar color when open */
 	-webkit-transition: width 0.4s, height 0.4s, -webkit-transform 0.4s;
 	transition: width 0.4s, height 0.4s, transform 0.4s;
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
@@ -106,7 +113,7 @@ background-color: rgba(54,97,132, 0.4);
 .icon-list a span {
 	display: block;
 	text-transform: uppercase;
-	letter-spacing: 1px;
+	letter-spacing: 1px; /* spaces out individual letters */
 	font-size: 0.6em;
 	font-weight: 700;
 	padding-top: 0.5em;
