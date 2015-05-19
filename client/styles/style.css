@@ -127,21 +127,11 @@ nav#hmenu ul a:hover {
   /*
   background: linear-gradient(to right , #DADAE6, #8585AD, #DADAE6);
   */
-<<<<<<< HEAD
-  /*background-image: url('../images/top10Odd.jpg');*/
-  background-color: rgba(100, 100, 100, 0.65);
-  background-size: 100%, 100%;
-}
-.top10Even {
-/*  background-image: url('../images/top10Even.jpg');*/
-  background-color: rgba(0, 0, 0, 0.45);
-=======
   background-color: rgba(0, 0, 0, 0.45);
   background-size: 100%, 100%;
 }
 .top10Even {
   background-color: rgba(123,140,228, 0.45);
->>>>>>> [ux] main page redesign layout
   background-size: 100%, 100%;
 
 }
