@@ -6,10 +6,8 @@ app.listen(3113);
 var expect = require('chai').expect;
 var bodyParser = require('body-parser');
 var path = require('path');
-var assert = require('assert')
+var assert = require('assert');
 var agent = require('supertest').agent(app);
-
-
 
 describe('/', function () {
   it('should return 200', function (done) {
@@ -19,26 +17,16 @@ describe('/', function () {
   });
 });
 
-describe('/api/events/search', function () {
-  it('should return 200', function (done) {
-    agent
-      .get('/api/events/search')
-      .expect(200)
-      .end(done); 
-  });
-});
-
-
-describe('/categorysearch', function () {
-  it('should return 200', function (done) {
-    agent
-      .get('/api/events/categorysearch')
-      .expect(200)
-      .end(done); 
-  });
-});
-
 describe('event routes', function() {
+
+  describe('/categorysearch', function () {
+    it('should return 200', function (done) {
+      agent
+        .get('/api/events/categorysearch')
+        .expect(200)
+        .end(done);
+      });
+    });
 
   describe('search ', function() {
     it('returns 200 for search', function(done) {
@@ -48,7 +36,6 @@ describe('event routes', function() {
         .end(done);
     });
   });
-
 
   describe('/popularevent', function () {
     it('should return 200', function (done) {
@@ -67,7 +54,6 @@ describe('event routes', function() {
         .end(done);
     });
   });
-
 
   describe('/triggerevent', function () {
     it('should return 403', function (done) {
@@ -103,7 +89,6 @@ var user = { username : 'BigPete',
 
 describe("User tests", function (){
 
- 
   it("expects to post a new user to /users", function(done){
     agent
       .post("/api/users/signup")
@@ -117,8 +102,7 @@ describe("User tests", function (){
       .post("/api/users/signin")
       .send({username: 'BigPete',
              password: 'tet'})
-      .expect(302, 'Moved Temporarily. Redirecting to /login', done)
-
+      .expect(302, 'Moved Temporarily. Redirecting to /login', done);
   });
 
   it("logs in user", function(done){
@@ -130,17 +114,15 @@ describe("User tests", function (){
   });
 });
 
-
-
 describe("User authentication tests", function(){
   before(function(done){
     agent.post("/api/users/signin")
-          .send({username: 'BigPete',
-                password: 'test'})
-          .end(function(err, res){
-            agent.saveCookies(res);
-            done();
-          });
+      .send({username: 'BigPete',
+            password: 'test'})
+      .end(function(err, res){
+        agent.saveCookies(res);
+        done();
+      });
   });
 
   describe("user logged in and logged out permissions", function(){
@@ -156,11 +138,13 @@ describe("User authentication tests", function(){
         .get("/api/users/signedin")
         .expect("BigPete", done);
     });
+
     it("expects to be allowed at myevents", function(done){
       agent
         .get("/api/events/myevents")
         .expect(200, done);
     });
+
     it("expects to be allowed at subscribe", function(done){
       agent
         .post("/api/events/subscribe/1")
@@ -185,6 +169,7 @@ describe("User authentication tests", function(){
           .get("/api/events/myevents")
           .expect(403, done);
       });
+
       it("expects to be denied at subscribe", function(done){
         agent
           .post("/api/events/subscribe/1")
