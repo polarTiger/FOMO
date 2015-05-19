@@ -6,7 +6,7 @@ app.listen(3113);
 var expect = require('chai').expect;
 var bodyParser = require('body-parser');
 var path = require('path');
-var assert = require('assert')
+var assert = require('assert');
 var agent = require('supertest').agent(app);
 
 
@@ -49,7 +49,6 @@ describe('event routes', function() {
     });
   });
 
-
   describe('/popularevent', function () {
     it('should return 200', function (done) {
       agent
@@ -67,7 +66,6 @@ describe('event routes', function() {
         .end(done);
     });
   });
-
 
   describe('/triggerevent', function () {
     it('should return 403', function (done) {
@@ -117,7 +115,7 @@ describe("User tests", function (){
       .post("/api/users/signin")
       .send({username: 'BigPete',
              password: 'tet'})
-      .expect(302, 'Moved Temporarily. Redirecting to /login', done)
+      .expect(302, 'Moved Temporarily. Redirecting to /login', done);
 
   });
 
