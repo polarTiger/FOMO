@@ -35,7 +35,7 @@ Angular, Node/Express, PostgreSQL, Mocha/Chai, Bookshelf
     node index.js
     ```
 
-1. Open <http://localhost:3003> in your browser.
+1. Open http://localhost:3003 in your browser.
 
 ## Screenshots
 

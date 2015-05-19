@@ -1,60 +1,56 @@
 
-<div class="containersAddEventGradient">
-<div class="containersAddEvent">
-  <div >
-    <div class="col-lg-6 col-md-6 col-xs-6" id="addEventDiv">
-      <form class="form-horizontal container" novalidate name="eventForm" role="form" id="addEventForm">
+<!-- <div class="containersAddEvent"> -->
+  <div>
+    <div class="addevent">  <!-- id="addEventDiv" -->
+
+      <div ng-show="queryresult.length > 0 && eventIsInQuery()" id="dupevent">
+        <div>Event already exists!</div>
+      </div>
+<!-- TODO: add validation for addNewEvent
+      <form novalidate name="eventForm" class="form-block" role="form" id="addEventForm">
+<!--         <div class="col-lg-5 col-md-5 col-xs-12"> -->
+
+
+<!--           <label for="inputEventName" class="addEventFieldTitle"> --><!-- <span ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" > (Required)</span> -->
+    <!--       <span ng-show= "queryresult.length > 0 && eventIsInQuery()"> name already exists</span> --><!-- </label> -->
         <div class="form-group">
-  <!--       <div class="colo-md-12" style="color:red;">*required </div> -->
-        </div>
-        <div class="col-lg-5 col-md-5 col-xs-12">
-        <div class="form-group " style="border-color: red;">
-        <label for="inputEventName" class="addEventFieldTitle">Event Name*:<span ng-show="eventForm.name.$error.required && !eventForm.name.$pristine" > (Required)</span><span ng-show = "queryresult.length > 0 && eventIsInQuery()"> name already exist</span></label>
-        <div class="form-group">
-          <input type="text" name="name" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()"
+          <input type="text" placeholder="Event name*" name="name" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()"
           ng-class="{'invalidTxtBox': queryresult.length > 0 || event.name.length === 0 }" />
-          
-          <!--
-          <div ng-repeat = " result in queryresult | limitTo:3">
-          {{result.event_title}}
-          </div>
-          -->
-          
         </div>
-        <label for="inputInfo" class="addEventFieldTitle">Info*:<span ng-show="eventForm.info.$error.required && !eventForm.info.$pristine"> (Required)</span></label>
-        <div class="form-group ">
-          <textarea name="info" ng-model="event.info" ng-minlength="2" ng-required="true" id="addEventInfoTxtBox"></textarea>
-          
-        </div>
-        <label for="linkInfo" class="addEventFieldTitle">Link</label>
+
+<!--         <label for="inputInfo" class="addEventFieldTitle">Info*:<span ng-show="eventForm.info.$error.required && !eventForm.info.$pristine"> (Required)</span></label> -->
         <div class="form-group">
-          <input type="text" ng-model="event.link" />
+<!--           <input type="text" name="info" ng-model="event.info" ng-minlength="2" ng-required="true" placeholder="Info*" id="addEventInfoTxtBox"/input> -->
+          <textarea name="info" ng-model="event.info" ng-minlength="2" ng-required="true" placeholder="Info*"></textarea>
         </div>
-        <label for="imgInfo" class="addEventFieldTitle">Image Url</label>
+
         <div class="form-group">
-          <input type="url" ng-model="event.imgUrl" />
+          <input type="text" placeholder="Link" ng-model="event.link"/>
         </div>
+
+        <div class="form-group">
+          <input type="url" placeholder="Image Url" ng-model="event.imgUrl"/>
+        </div>
+
         <label for="dateInfo" class="addEventFieldTitle">Date & Time</label>
         <div class="form-group">
   <!-- <input type="date" id="add-event-date" name="input" ng-model="event.date" placeholder="yyyy-MM-dd"/> --> <!-- replace with input datetime-local -->
   <!--       <input type="datetime-local" id="add-event-date" name="input" min="2001-01-01T00:00:00" max="2013-12-31T00:00:00" ng-model="event.date"/> -->
-        <input type="date" id="add-event-date" name="input" ng-model="event.notifydate" ng-required='event.notifytime'/>
-  <!-- conditional validation: http://stackoverflow.com/questions/13466133/how-can-i-conditionally-require-form-inputs-with-angularjs -->
-        <input type="time" id="add-event-time" name="input" ng-model="event.notifytime"/>
+          <input type="date" id="add-event-date" name="input" ng-model="event.notifydate" ng-required='event.notifytime' placeholder="time"/>
+    <!-- conditional validation: http://stackoverflow.com/questions/13466133/how-can-i-conditionally-require-form-inputs-with-angularjs -->
+          <input type="time" id="add-event-time" name="input" ng-model="event.notifytime"/>
         </div>
 
         <label for="categoryInfo" class="addEventFieldTitle">Category</label>
         <div class="form-group">
           <select ng-model="event.category">
             <option ng-repeat="category in event.categories">{{category}}</option>
-            <input type="submit" ng-disabled="eventForm.$invalid || eventIsInQuery()" class="btn btn-primary" ng-click="submitEvent()">
           </select>
+<!--           <button>Submit</button> -->
+            <input type="button" ng-disabled="eventForm.$invalid || eventIsInQuery()" class="btn btn-primary" ng-click="submitEvent()" value="Submit">
         </div>
       </form>
     </div>
   </div>
-</div>
-
-</div>
 
 
