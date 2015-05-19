@@ -127,13 +127,11 @@ nav#hmenu ul a:hover {
   /*
   background: linear-gradient(to right , #DADAE6, #8585AD, #DADAE6);
   */
-  /*background-image: url('../images/top10Odd.jpg');*/
-  background-color: rgba(100, 100, 100, 0.65);
+  background-color: rgba(0, 0, 0, 0.45);
   background-size: 100%, 100%;
 }
 .top10Even {
-/*  background-image: url('../images/top10Even.jpg');*/
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(123,140,228, 0.45);
   background-size: 100%, 100%;
 
 }
@@ -396,7 +394,7 @@ nav#hmenu ul a:hover {
 .homepage {
   width: auto;
   height: 100vh;
-  background-image: url(../images/dance.jpg);
+  background-image: url(../images/main.jpg);
   background-size: cover;
   -webkit-filter: blur(0px);
   z-index: 0;
@@ -409,10 +407,14 @@ nav#hmenu ul a:hover {
 #top10Title {
   font-family: arial rounded mt, verdana, sans-serif;
   font-size: 200%;
+  /*
   margin-left:auto;
   margin-right:auto;
   vertical-align:middle;
+
   text-align: center;
+  */
+  margin-left:10%;
   color: #CCCCFF;
 }
 .top10Heading {
@@ -432,14 +434,21 @@ nav#hmenu ul a:hover {
   margin-left:10%;
   margin-right: 10%;
   height: 100%;
-  font-family: arial rounded mt, verdana, sans-serif;
+  font-family: 'Exo', serif;
+  font-style: bold;
   padding-top: 2%;
   padding-bottom:2%;
   margin-bottom: 0.4%;
   text-shadow: 0 50% 50%;
   box-shadow: 0px 1px 3px;
   border-radius:6px;
-/*  opacity: 0.5;*/
+  color: #e9f2f9;
+}
+
+.displayResult {
+  color: white;
+  font-family: 'Exo', serif;
+  letter-spacing: 1px;
 }
 
 /* search view */
@@ -478,8 +487,7 @@ nav#hmenu ul a:hover {
 
 /* user View page */
 .userViewTitle {
-  vertical-align: middle;
-  text-align: center;
+  margin-left:5%;
   color: #CCCCFF;
 }
 
