@@ -8,10 +8,10 @@
 </div>
 
 <div class="row column-headings searchHeading">
-  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-5 col-xs-5" id="searchHeadingTxt">Event</span></a>
-  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3" id="searchHeadingTxt">Category</span></a>
-  <span class="col-md-3 col-xs-3">Link</span>
-  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-1 col-xs-1" id="searchHeadingTxt">Date</span></a>
+  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-5 col-xs-5"><span class="displayResult">Event</span></span></a>
+  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3"><span class="displayResult">Category</span></span></a>
+  <span class="col-md-3 col-xs-3"><span class="displayResult">Link</span></span>
+  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-1 col-xs-1"><span class="displayResult">Date</span></span></a>
 
 </div>
 <div class="row searchContent" ng-repeat="event in queryresult | orderBy:orderVariable | limitTo : 10" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
