@@ -19,26 +19,16 @@ describe('/', function () {
   });
 });
 
-describe('/api/events/search', function () {
-  it('should return 200', function (done) {
-    agent
-      .get('/api/events/search')
-      .expect(200)
-      .end(done); 
-  });
-});
-
-
-describe('/categorysearch', function () {
-  it('should return 200', function (done) {
-    agent
-      .get('/api/events/categorysearch')
-      .expect(200)
-      .end(done); 
-  });
-});
-
 describe('event routes', function() {
+
+  describe('/categorysearch', function () {
+    it('should return 200', function (done) {
+      http.get(url+'/api/events/categorysearch', function (res) {
+        assert.equal(200, res.statusCode);
+        done();
+      });
+    });
+  });
 
   describe('search ', function() {
     it('returns 200 for search', function(done) {
@@ -46,6 +36,15 @@ describe('event routes', function() {
         .get('/api/events/search?query=sentinel')
         .expect(200)
         .end(done);
+    });
+  });
+
+  describe('/api/events/search', function () {
+    it('should return 200', function (done) {
+      http.get(url+'/api/events/search', function (res) {
+        assert.equal(200, res.statusCode);
+        done();
+      });
     });
   });
 
