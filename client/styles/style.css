@@ -487,8 +487,7 @@ nav#hmenu ul a:hover {
 
 /* user View page */
 .userViewTitle {
-  vertical-align: middle;
-  text-align: center;
+  margin-left:5%;
   color: #CCCCFF;
 }
 
