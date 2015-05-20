@@ -654,10 +654,26 @@ body {
 }
 
 /* search view */
-.searchBar {
-  margin-left:35%;
-  margin-right: 35%;
+
+.searchEvent input[type=text] {
+  
+  margin-left:auto;
+  margin-right: auto;
+  margin-top:5%;
   padding-top:5%;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-bottom: 2%;
+}
+#searchBar {
+  vertical-align: middle;
+  text-align: center;
 }
 
 .searchHeading {
