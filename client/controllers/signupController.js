@@ -2,16 +2,21 @@ angular.module('fomo.signup', [])
 
 .controller('SignupController', ['$scope', '$http', '$state', 'UserService', 'LoggedInService', function($scope, $http, $state, UserService, LoggedInService) {
   $scope.userAlreadyExist = false;
+  $scope.passwordMismatch = false;
   $scope.getallEvents = function() {
     UserService.getallEvents()
     .success(function(data) {
       $scope.events = data;
     });
   };
-
   $scope.signup = function() {
     // http://www.ng-newsletter.com/posts/validations.html
-    if ($scope.signupForm.$valid) {
+    $scope.passwordMismatch = false;
+    $scope.userAlreadyExist = false;
+    if ($scope.user.password !== $scope.user.passwordValidation && $scope.signupForm.$valid) {
+          $scope.passwordMismatch = true;
+          // $scope.userAlreadyExist = false;
+    } else if ($scope.signupForm.$valid) {
       var userObj = {
         username: $scope.user.username,
         password: $scope.user.password,

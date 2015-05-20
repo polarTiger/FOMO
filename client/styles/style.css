@@ -252,11 +252,11 @@ nav#hmenu ul a:hover {
 
 /* error message for dup users on signup */
 
-#dupuser {
+#dupuser, #matchpass {
   padding-bottom: 5px;
 }
 
-#dupuser div{
+#dupuser, #matchpass div{
   font-family: 'Exo', sans-serif;
   color: red;
   margin-top: -45px;
