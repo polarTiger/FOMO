@@ -4,6 +4,7 @@ body,
 .content-wrap {
 	width: 100%;
 	height: 100%;
+	overflow: hidden; /* when commented out, menu looks choppy when opening */
 }
 
 .container {
@@ -49,7 +50,8 @@ body,
 /* Menu Button */
 .menu-button {
 	z-index: 1000;
-	margin: 0;
+/*	margin: 0;*/
+	margin-top: -20px;
 	margin-left: -15px; /* moves menu button to align when menu closed */
 	border: none;
 	text-indent: 2.5em;
@@ -79,6 +81,7 @@ body,
 /* Menu */
 .menu-wrap {
 	z-index: 999;
+	margin-top: -20px; /* resets menu bar, no whitespace across top */
   margin-left: -15px; /* resets menu bar to show across screen */
   /* background: #8a92b3;*/
   /* background-color: rgba(54,97,132, 0.4);*/ /* old blue */

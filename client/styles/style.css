@@ -162,8 +162,8 @@ nav#hmenu ul a:hover {
   right: -40px;
   bottom: -40px;
   opacity: 0.7;
-  min-width: 650px;
-  min-height: 260px;
+  min-width: 650px; /* render correctly for very small screens */
+  min-height: 260px; /* render correctly for very small screens */
   width: auto;
   height: auto;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
@@ -250,6 +250,8 @@ nav#hmenu ul a:hover {
   opacity: 0.7;
 }
 
+/* error message for dup users on signup */
+
 #dupuser {
   padding-bottom: 5px;
 }
@@ -258,6 +260,18 @@ nav#hmenu ul a:hover {
   font-family: 'Exo', sans-serif;
   color: red;
   margin-top: -45px;
+}
+
+/* error message for dup events */
+
+#dupevent {
+  padding-bottom: 5px;
+}
+
+#dupevent div{
+  font-family: 'Exo', sans-serif;
+  color: red;
+  margin-top: -25px;
 }
 
 #allfields {
@@ -388,6 +402,134 @@ nav#hmenu ul a:hover {
 
 ::-moz-input-placeholder {
    color: rgba(255,255,255,0.6);
+}
+
+/* CSS for addEventView */ /* todo - seperate file */
+
+.addevent {
+  position: absolute;
+  top: calc(15% - 75px);
+  left: calc(25% - 50px);
+  height: 150px;
+  width: 500px;
+  padding: 10px;
+  z-index: 2;
+}
+
+.addevent input[type=text] {
+  width: 350px;
+  height: 50px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-top: -5px;
+}
+
+.addevent textarea {
+  width: 350px;
+  height: 150px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-top: -5px;
+}
+
+.addevent input[type=url] {
+  width: 350px;
+  height: 50px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-top: -5px;
+}
+
+.addevent input[type=date] {
+  width: 173px;
+  height: 50px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-top: -5px;
+}
+
+.addevent input[type=time] {
+  width: 172px;
+  height: 50px;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-top: -5px;
+}
+
+.addEventFieldTitle {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Exo', sans-serif;
+}
+
+.addevent input[type=button] {
+  width: 280px;
+  height: 35px;
+  background: #fff;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #a18d6c;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 6px;
+  margin-top: 0px;
+}
+
+.addevent input[type=button]:hover {
+  opacity: 0.8;
+}
+
+.addevent input[type=button]:active {
+  opacity: 0.6;
+}
+
+.addevent input[type=text]:focus {
+  outline: none;
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+.addevent input[type=password]:focus {
+  outline: none;
+  border: 1px solid rgba(255,255,255,0.9);
+}
+
+.addevent button:focus {
+  outline: none;
 }
 
 /* home pages background image */
@@ -541,13 +683,9 @@ nav#hmenu ul a:hover {
   margin-right:auto;
 
 }
-.addEventFieldTitle {
-  color: white;
-  text-color: white;
-}
 
-#addEventInfoTxtBox {
+/*#addEventInfoTxtBox {
   width: 60%;
   height: 100px;
-}
+}*/
 

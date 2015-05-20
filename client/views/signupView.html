@@ -22,7 +22,7 @@
       <div>User already exists - please choose another username!</div>
     </div>
     <div ng-show="(signupForm.name.$invalid || signupForm.email.$invalid || signupForm.password.$invalid) && signupForm.submitted" id="allfields">
-      <div>ERROR – complete all fields</div>
+      <div>Please complete all fields</div>
     </div>
     <form novalidate name="signupForm" class="form-block" role="form" ng-submit='signup()'>
       <div class="form-group">
