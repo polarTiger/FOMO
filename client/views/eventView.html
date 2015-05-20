@@ -1,7 +1,7 @@
 
 <div data-ng-init="getEvent()" class="col-md-12" id='event-container'>
   <span class="col-md-11">
-      <img ng-hide='data.event_image===undefined' ng-src='{{data.event_image || "./images/stock.jpg"}}' height="200" alt="Not Working"/>
+      <img ng-hide='data.event_image===undefined' ng-src='{{(data.event_image | linkFormat) || "./images/stock.jpg"}}' height="200" alt="Not Working"/>
 
     <h1>{{data.event_title}}</h1>
 
@@ -33,7 +33,7 @@
       </form>
     </div>
 
-    <a href="http://{{data.event_link}}" target="_blank">{{data.event_link}}</a>
+    <a href="{{data.event_link | linkFormat}}" target="_blank">{{data.event_link}}</a>
 
     <HR>
 

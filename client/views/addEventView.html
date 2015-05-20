@@ -29,13 +29,11 @@
         </div>
 
         <div class="form-group">
-          <input type="url" placeholder="Image Url" ng-model="event.imgUrl"/>
+          <input type="text" placeholder="Image Url" ng-model="event.imgUrl"/>
         </div>
 
         <label for="dateInfo" class="addEventFieldTitle">Date & Time</label>
         <div class="form-group">
-  <!-- <input type="date" id="add-event-date" name="input" ng-model="event.date" placeholder="yyyy-MM-dd"/> --> <!-- replace with input datetime-local -->
-  <!--       <input type="datetime-local" id="add-event-date" name="input" min="2001-01-01T00:00:00" max="2013-12-31T00:00:00" ng-model="event.date"/> -->
           <input type="date" id="add-event-date" name="input" ng-model="event.notifydate" ng-required='event.notifytime' placeholder="time"/>
     <!-- conditional validation: http://stackoverflow.com/questions/13466133/how-can-i-conditionally-require-form-inputs-with-angularjs -->
           <input type="time" id="add-event-time" name="input" ng-model="event.notifytime"/>
@@ -46,8 +44,9 @@
           <select ng-model="event.category">
             <option ng-repeat="category in event.categories">{{category}}</option>
           </select>
-<!--           <button>Submit</button> -->
-            <input type="button" ng-disabled="eventForm.$invalid || eventIsInQuery()" class="btn btn-primary" ng-click="submitEvent()" value="Submit">
+        </div>
+        <div class="form-group">
+          <input type="button" ng-disabled="eventForm.$invalid || eventIsInQuery()" class="btn btn-primary" ng-click="submitEvent()" value="Submit">
         </div>
       </form>
     </div>
