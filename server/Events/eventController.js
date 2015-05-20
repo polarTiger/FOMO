@@ -121,7 +121,7 @@ setInterval(function(){
           var eventfulObj = {
             name: data.search.events.event[i].title,
             info: data.search.events.event[i].description,
-            category: 'music', // need to look at how eventful generate category, it's not in the obj
+            category: 'other', 
             link: data.search.events.event[i].url,
             imgUrl: data.search.events.event[i].image.url,
             eventdate: data.search.events.event[i].start_time.slice(0,10),
