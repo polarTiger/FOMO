@@ -144,7 +144,6 @@ describe("user subscriptions", function() {
           }
         }).end(done);
       });
-    });
 
     it("user should be allowed to subscribe", function(done) {
       agent
@@ -155,9 +154,42 @@ describe("user subscriptions", function() {
     it("expects user to have unsubscribed to event", function(done) {
       agent
         .get("/api/events/myevents")
-        .expect('[]', done);
-      });
+        .expect(function(res) {
+          for (var i = 0; i < res.length; i++) {
+            if (res[i].id === 1) {
+              return false;
+            }
+          }
+        }).end(done);
     });
+  });
+});
+
+describe("add event", function() {
+  before(function(done){
+  agent.post("/api/users/signin")
+    .send({username: 'BigPete',
+          password: 'test'})
+    .end(function(err, res){
+      agent.saveCookies(res);
+      done();
+    });
+  });
+
+  describe("add event and confirm", function() {
+
+    it("should allow a user to add an event", function(done) {
+      agent
+        .post("/api/events/addevent")
+        .send({info: 'test1234',
+               name: 'also test1234'
+              })
+        .expect(200, done);
+    });
+  });
+});
+
+
 
 describe("User authentication tests", function() {
   before(function(done){
