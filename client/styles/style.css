@@ -757,5 +757,11 @@ body {
 .eventView {
   color: #fff;
   font-family: 'Exo', sans-serif;
+  letter-spacing: 1px;
+}
+
+#eventLink {
+  font-style: italic;
+  color: white;
 }
 
