@@ -2,7 +2,9 @@
 /*html,body,div,span,applet,object,iframe,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,label,legend,p,blockquote,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}body{line-height:1;color:black;background:white;}:focus{outline:0;}table{border-collapse:collapse;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul{list-style:none;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}abbr,acronym{border:0;}*/
 
 @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+@import url(http://fonts.googleapis.com/css?family=Orbitron:400);
+@import url(http://fonts.googleapis.com/css?family=Nova+Square);
+@import url(http://fonts.googleapis.com/css?family=Aldrich);
 
 .title {
   text-align: center;
@@ -167,9 +169,9 @@ body {
   opacity: 0.7;
   min-width: 650px;
   min-height: 260px;
-  width: auto;
-  height: auto;
-  background: -webkit-gradient(linear, right top, right bottom, color-stop(0%,rgba(0,0,0,0.8)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+  width: 102%;
+  height: 50%;
+  background: -webkit-gradient(linear, right top, right bottom, color-stop(0%,rgba(0,0,0,0.9)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
   z-index: 1;
 }
 
@@ -404,7 +406,7 @@ body {
   height: 600px;
   width: 450px;
   /*width: 1100px;*/
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: rgba(0, 0, 0, 0.4);
 /*  margin: 0 auto 10px;*/
 /*  margin-right: 20%;*/
   border-radius: 2px;
@@ -424,7 +426,7 @@ body {
  .headerAddEvent div {
   float: right;
   color: #5379fa !important;
-  font-family: 'Exo', sans-serif;
+  font-family: 'Aldrich', sans-serif;
   font-size: 30px;
   font-weight: 500;
 }
@@ -668,7 +670,7 @@ body {
 /* search view */
 
 .searchEvent input[type=text] {
-  
+
   margin-left:auto;
   margin-right: auto;
   margin-top:5%;
