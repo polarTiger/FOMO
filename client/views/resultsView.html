@@ -1,7 +1,7 @@
 <div></div>
 
 <div class="col-lg-12 col-md-12 col-xs-12">
-<div id="top10Title"> POPULAR EVENTS </div>
+<div id="top10Title">POPULAR EVENTS</div>
 </div>
 
 
@@ -13,9 +13,11 @@
 
 <div class="row top10Style" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
   <div>
-    <span class="col-md-6 col-xs-6"><a href="#/event/{{event.id}}"><span class="displayResult">{{event.event_title}}</span></a></span>
-    <span class="col-md-3 col-xs-3">{{event.event_category}}</span>
-    <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href="{{event.event_link | linkFormat}}" target="_blank"><span class="displayResult">Click Here!</span></a></span>
+    <span id="eventname" class="col-md-6 col-xs-6"><a href="#/event/{{event.id}}"><span class="displayResult">{{event.event_title}}</span></a></span>
+
+    <span id="category" class="col-md-3 col-xs-3">{{event.event_category}}</span>
+
+    <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href="{{event.event_link | linkFormat}}" target="_blank"><span class="displayResult">More Info</span></a></span>
   </div>
 </div>
 

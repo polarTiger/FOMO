@@ -49,17 +49,17 @@ var sendEmail = function(emails, image, link, title, eventInfo, res) {
 var testTrigger = function(data, i){
   // if the notification date and time are both not null
   if (data[i].notification_date !== null && data[i].notification_time !== null) {
-    
+
     var serverDate = new Date().toJSON(); // get the server local day and convert to UTC day
     var serverTime = serverDate.slice(11,16); // extract the UTC time from the string
     serverDate = serverDate.slice(0,10); // extract the UTC date from the string
     var dbTime = data[i].notification_time.slice(0,8); // get from db the event notication time in UTC
-    var dbYear = data[i].notification_date.slice(0,4); 
+    var dbYear = data[i].notification_date.slice(0,4);
     var dbMonth = parseInt(data[i].notification_date.slice(5,7))-1;
     var dbDay = data[i].notification_date.slice(8,10);
     var dbHour = data[i].notification_time ? parseInt(data[i].notification_time.slice(0,2)) : 0;
     var dbMin = data[i].notification_time ? parseInt(data[i].notification_time.slice(3,5)) : 1;
-    // based on the notification date and time extracted from db, construct the UTC time. 
+    // based on the notification date and time extracted from db, construct the UTC time.
     var dbDate = new Date(Date.UTC(dbYear, dbMonth, dbDay, dbHour, dbMin)).toJSON();
 
     dbTime = dbTime.slice(0,5); // extract the UTC time
@@ -89,10 +89,10 @@ setInterval(function(){
   var serverDateLocal = new Date(); // generate the local date/time of the server
   var serverDate = serverDateLocal.toJSON(); // convert the server local time to UTC time
   var serverTime = serverDate.slice(11,16); // extract the UTC time string
-  /* get the time as milliseconds since 1970, 
+  /* get the time as milliseconds since 1970,
     and then add 1 day of worth of milliseconds to construct end time
   */
-  var endTime = serverDateLocal.getTime()+ 24*60*60*1000; 
+  var endTime = serverDateLocal.getTime()+ 24*60*60*1000;
 
   serverDate = serverDate.slice(0,10);
   // eventful date formate is: YYYYMMDD00, the '00' on the end is to be appended and doesn't have real meaning
@@ -115,14 +115,14 @@ setInterval(function(){
         }
         console.log('Recieved ' + data.search.total_items + ' events');
 
-        // iterate through each events obj 
+        // iterate through each events obj
         for (var i = 0; i < data.search.events.event.length; i++) {
           console.log(data.search.events.event[i]);
           // construct an event object with info to be written to db
           var eventfulObj = {
             name: data.search.events.event[i].title,
             info: data.search.events.event[i].description,
-            category: 'music', 
+            category: 'music',
             link: data.search.events.event[i].url,
             imgUrl: data.search.events.event[i].image.url,
             eventdate: data.search.events.event[i].start_time.slice(0,10),
@@ -147,14 +147,14 @@ setInterval(function(){
         }
         console.log('Recieved ' + data.search.total_items + ' events');
 
-        // iterate through each events obj 
+        // iterate through each events obj
         for (var i = 0; i < data.search.events.event.length; i++) {
           console.log(data.search.events.event[i]);
           // construct an event object with info to be written to db
           var eventfulObj = {
             name: data.search.events.event[i].title,
             info: data.search.events.event[i].description,
-            category: 'sports', 
+            category: 'sports',
             link: data.search.events.event[i].url,
             imgUrl: data.search.events.event[i].image.url,
             eventdate: data.search.events.event[i].start_time.slice(0,10),
@@ -169,7 +169,7 @@ setInterval(function(){
         }
       });
     }
-  } else { 
+  } else {
     /* else, if the event has already been triggered, and has past the time '19:00'
        say it's 19:01, then reset the trigger back to false so it can be ready to fire again
        the next day
