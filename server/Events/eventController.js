@@ -100,7 +100,7 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '18:20') { // let server do fetch the eventful API every day at 19:00 UTC time
+  if (serverTime === '05:15') { // let server do fetch the eventful API every day at 19:00 UTC time
 
     if ( flag === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
