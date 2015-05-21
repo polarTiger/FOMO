@@ -139,6 +139,9 @@ nav#hmenu ul a:hover {
   width: 100%
 }
 
+body {
+  background-color: black; /*sets content beyond screen black*/
+}
 .body {
   position: absolute;
   top: -20px;
@@ -189,7 +192,7 @@ nav#hmenu ul a:hover {
   position: absolute;
   top: calc(55% - 125px);
   left: calc(50% - 350px);
-  height: 320px;
+  height: 385px;
   width: 750px;
   background-color: rgba(0, 0, 0, 0.65);
 /*  margin: 0 auto 10px;*/
@@ -238,7 +241,7 @@ nav#hmenu ul a:hover {
 
 .aboutsignup {
   position: absolute;
-  top: calc(55% - -170px);
+  top: calc(55% - -235px);
   left: calc(50% - 340px);
   height: 25px;
   width: 50px;
@@ -265,37 +268,39 @@ nav#hmenu ul a:hover {
   opacity: 0.7;
 }
 
-#matchpass {
+/* error message for dup users on signup */
+
+#dupuser {
   padding-bottom: 5px;
 }
 
-#matchpass div{
+#dupuser div{
   font-family: 'Exo', sans-serif;
   color: red;
   margin-top: -45px;
 }
 
-#allfields {
+#allfields, #matchpass {
   padding-bottom: 5px;
 }
 
-#allfields div{
+#allfields, #matchpass div{
   font-family: 'Exo', sans-serif;
   color: red;
   margin-top: -25px;
 }
 
-.tour {
+.explore {
   position: absolute;
   top: calc(55% - 0px);
-  left: calc(50% - 210px);
+  left: calc(50% - 235px);
   height: 150px;
   width: 225px;
   z-index: 3;
 }
 
-.tour button {
-  width: 200px;
+.explore button {
+  width: 250px;
   height: 35px;
   background: #86a1fb;
   border: 0px solid #fff;
@@ -309,10 +314,10 @@ nav#hmenu ul a:hover {
   font-weight: bold;
 /*  font-weight: 400;*/
   padding: 6px;
-  margin-top: 75px;
+  margin-top: 100px;
 }
 
-.tour button:hover {
+.explore button:hover {
   opacity: 0.8;
 }
 

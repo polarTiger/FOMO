@@ -3,6 +3,7 @@ angular.module('fomo.signup', [])
 .controller('SignupController', ['$scope', '$http', '$state', 'UserService', 'LoggedInService', function($scope, $http, $state, UserService, LoggedInService) {
   $scope.userAlreadyExist = false;
   $scope.passwordMismatch = false;
+  $scope.user = {};
   $scope.getallEvents = function() {
     UserService.getallEvents()
     .success(function(data) {
