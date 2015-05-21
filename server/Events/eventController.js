@@ -85,7 +85,7 @@ var testTrigger = function(data, i){
 };
 
 var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
-  eventfulClient.searchEvents({page_size: 5, // number of results
+  eventfulClient.searchEvents({page_size: 2, // number of results
     keywords: keyword,
     within: 10, // distance
     mature: 'safe', // set content to be safe PG content
@@ -97,7 +97,6 @@ var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
 
     // iterate through each events obj 
     for (var i = 0; i < data.search.events.event.length; i++) {
-      console.log(data.search.events.event[i]);
       // construct an event object with info to be written to db
       var eventfulObj = {
         name: data.search.events.event[i].title,
@@ -109,7 +108,7 @@ var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
         notifytime: data.search.events.event[i].start_time.slice(11,16)
        };
       // write the event to db
-      db.addEvent(eventfulObj, function(){
+      db.putEventFromWebToDB(eventfulObj, function(){
         console.log('write to db...');
       });
     }
@@ -132,7 +131,7 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '19:35') { // let server do fetch the eventful API every day at 19:00 UTC time
+  if (serverTime === '23:42') { // let server do fetch the eventful API every day at 19:00 UTC time
 
     if ( flag === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
