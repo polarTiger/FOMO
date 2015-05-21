@@ -139,6 +139,9 @@ nav#hmenu ul a:hover {
   width: 100%
 }
 
+body {
+  background-color: black; /*sets content beyond screen black*/
+}
 .body {
   position: absolute;
   top: -20px;
@@ -170,11 +173,26 @@ nav#hmenu ul a:hover {
   z-index: 1;
 }
 
+.grad1 {
+  position: absolute;
+  top: -40px;
+  left: -20px;
+  right: -40px;
+/*  bottom: -40px;*/
+  opacity: 0.7;
+  min-width: 650px;
+  min-height: 260px;
+  width: auto;
+  height: auto;
+  background: -webkit-gradient(linear, right top, right bottom, color-stop(0%,rgba(0,0,0,0.8)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+  z-index: 1;
+}
+
 .containersignup {
   position: absolute;
   top: calc(55% - 125px);
   left: calc(50% - 350px);
-  height: 320px;
+  height: 385px;
   width: 750px;
   background-color: rgba(0, 0, 0, 0.65);
 /*  margin: 0 auto 10px;*/
@@ -223,7 +241,7 @@ nav#hmenu ul a:hover {
 
 .aboutsignup {
   position: absolute;
-  top: calc(55% - -170px);
+  top: calc(55% - -235px);
   left: calc(50% - 340px);
   height: 25px;
   width: 50px;
@@ -252,49 +270,37 @@ nav#hmenu ul a:hover {
 
 /* error message for dup users on signup */
 
-#dupuser, #matchpass {
+#dupuser {
   padding-bottom: 5px;
 }
 
-#dupuser, #matchpass div{
+#dupuser div{
   font-family: 'Exo', sans-serif;
   color: red;
   margin-top: -45px;
 }
 
-/* error message for dup events */
-
-#dupevent {
+#allfields, #matchpass {
   padding-bottom: 5px;
 }
 
-#dupevent div{
+#allfields, #matchpass div{
   font-family: 'Exo', sans-serif;
   color: red;
   margin-top: -25px;
 }
 
-#allfields {
-  padding-bottom: 5px;
-}
-
-#allfields div{
-  font-family: 'Exo', sans-serif;
-  color: red;
-  margin-top: -25px;
-}
-
-.tour {
+.explore {
   position: absolute;
   top: calc(55% - 0px);
-  left: calc(50% - 210px);
+  left: calc(50% - 235px);
   height: 150px;
   width: 225px;
   z-index: 3;
 }
 
-.tour button {
-  width: 200px;
+.explore button {
+  width: 250px;
   height: 35px;
   background: #86a1fb;
   border: 0px solid #fff;
@@ -308,10 +314,10 @@ nav#hmenu ul a:hover {
   font-weight: bold;
 /*  font-weight: 400;*/
   padding: 6px;
-  margin-top: 75px;
+  margin-top: 100px;
 }
 
-.tour button:hover {
+.explore button:hover {
   opacity: 0.8;
 }
 
@@ -406,23 +412,55 @@ nav#hmenu ul a:hover {
 
 /* CSS for addEventView */ /* todo - seperate file */
 
+.containerAddEvent {
+  position: absolute;
+  top: calc(15% - 100px);
+  left: calc(20% - 100px);
+  height: 600px;
+  width: 450px;
+  /*width: 1100px;*/
+  background-color: rgba(0, 0, 0, 0.65);
+/*  margin: 0 auto 10px;*/
+/*  margin-right: 20%;*/
+  border-radius: 2px;
+  opacity: 1;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
+}
+
+.headerAddEvent {
+  position: absolute;
+  top: calc(15% - 95px);
+  left: calc(20% - -50px);
+  z-index: 2;
+}
+
+ .headerAddEvent div {
+  float: right;
+  color: #5379fa !important;
+  font-family: 'Exo', sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+}
+
 .addevent {
   position: absolute;
   top: calc(15% - 75px);
-  left: calc(25% - 50px);
-  height: 150px;
-  width: 500px;
+  left: calc(20% - 50px);
+  height: 600px;
+  width: 1000px;
   padding: 10px;
-  z-index: 2;
+  z-index: 3;
 }
 
 .addevent input[type=text] {
   width: 350px;
   height: 50px;
   background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.8);
+  border: 1.5px solid rgba(255,255,255,1);
   border-radius: 2px;
-  color: #fff;
+  color: rgba(255,255,255,1);
   font-family: 'Exo', sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -433,20 +471,6 @@ nav#hmenu ul a:hover {
 .addevent textarea {
   width: 350px;
   height: 150px;
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.8);
-  border-radius: 2px;
-  color: #fff;
-  font-family: 'Exo', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  padding: 4px;
-  margin-top: -5px;
-}
-
-.addevent input[type=url] {
-  width: 350px;
-  height: 50px;
   background: transparent;
   border: 1.5px solid rgba(255,255,255,0.8);
   border-radius: 2px;
@@ -496,7 +520,7 @@ nav#hmenu ul a:hover {
 }
 
 .addevent input[type=button] {
-  width: 280px;
+  width: 350px;
   height: 35px;
   background: #fff;
   border: 1px solid #fff;
@@ -518,27 +542,52 @@ nav#hmenu ul a:hover {
   opacity: 0.6;
 }
 
-.addevent input[type=text]:focus {
+/*.addevent input[type=text]:focus, textarea:focus, input[type=date], input[type=time] {
   outline: none;
   border: 1px solid rgba(255,255,255,0.9);
-}
-
-.addevent input[type=password]:focus {
-  outline: none;
-  border: 1px solid rgba(255,255,255,0.9);
-}
+}*/
 
 .addevent button:focus {
   outline: none;
+}
+
+/*.addevent .form-group span {
+  vertical-align: middle;
+}*/
+
+.addevent span {
+  position: absolute;
+  vertical-align: middle;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 24px;
+  font-weight: 200;
+  margin-left: 70px;
+/*  background: rgba(0,0,0,0.7);*/
+}
+
+.addevent #dupevent { /* error message for dup events */
+  color: red;
+  font-weight: 400;
+}
+
+.addevent p {
+  position: absolute;
+  vertical-align: middle;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  margin-left: 425px;
 }
 
 /* home pages background image */
 .homepage {
   width: auto;
   height: 100vh;
-  
+
   background-image: url(../images/main.jpg);
-  
+
   /*
   background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 59%, rgba(0,0,0,0.65) 100%), url('../images/main.jpg') repeat;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(59%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))), url('../images/main.jpg') repeat;
