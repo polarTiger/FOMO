@@ -100,12 +100,13 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '19:00') { // let server do fetch the eventful API every day at 19:00 UTC time
+  if (serverTime === '05:15') { // let server do fetch the eventful API every day at 19:00 UTC time
 
     if ( flag === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
       flag = true;
-      eventfulClient.searchEvents({page_size: 10, // number of results
+      eventfulClient.searchEvents({page_size: 2, // number of results
+        keywords: 'music',
         within: 10, // distance
         mature: 'safe', // set content to be safe PG content
         date: startTimeStr + '-' + endTimeStr}, function(err, data){
@@ -121,7 +122,39 @@ setInterval(function(){
           var eventfulObj = {
             name: data.search.events.event[i].title,
             info: data.search.events.event[i].description,
-            category: 'other', 
+            category: 'music', 
+            link: data.search.events.event[i].url,
+            imgUrl: data.search.events.event[i].image.url,
+            eventdate: data.search.events.event[i].start_time.slice(0,10),
+            eventtime: data.search.events.event[i].start_time.slice(11,16),
+            notifydate: null,
+            notifytime: null
+           };
+          // write the event to db
+          db.putEventFromWebToDB(eventfulObj, function(){
+            console.log('write to db...');
+          });
+        }
+      });
+
+      eventfulClient.searchEvents({page_size: 2, // number of results
+        keywords: 'sports',
+        within: 10, // distance
+        mature: 'safe', // set content to be safe PG content
+        date: startTimeStr + '-' + endTimeStr}, function(err, data){
+        if(err){
+          return console.error(err);
+        }
+        console.log('Recieved ' + data.search.total_items + ' events');
+
+        // iterate through each events obj 
+        for (var i = 0; i < data.search.events.event.length; i++) {
+          console.log(data.search.events.event[i]);
+          // construct an event object with info to be written to db
+          var eventfulObj = {
+            name: data.search.events.event[i].title,
+            info: data.search.events.event[i].description,
+            category: 'sports', 
             link: data.search.events.event[i].url,
             imgUrl: data.search.events.event[i].image.url,
             eventdate: data.search.events.event[i].start_time.slice(0,10),
