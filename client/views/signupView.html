@@ -21,10 +21,13 @@
     <div ng-show="passwordMismatch" id="matchpass">
       <div>Passwords don't match!</div>
     </div>
+    <div ng-show="emailAlreadyExist" id="matchpass">
+      <div>Email address already exists - please use a different email address!</div>
+    </div>
     <div ng-show="userAlreadyExist" id="dupuser">
       <div>User already exists - please choose another username!</div>
     </div>
-    <div ng-show="(signupForm.name.$invalid || signupForm.email.$invalid || signupForm.password.$invalid) && signupForm.submitted && !passwordMismatch && !userAlreadyExist" id="allfields">
+    <div ng-show="(signupForm.name.$invalid || signupForm.email.$invalid || signupForm.password.$invalid) && signupForm.submitted && !passwordMismatch && !userAlreadyExist && !emailAlreadyExist" id="allfields">
       <div>Please complete all fields</div>
     </div>
     <form novalidate name="signupForm" class="form-block" role="form" ng-submit='signup()'>
