@@ -72,10 +72,14 @@ module.exports = {
                                    verification_hash: emailHash
                                   });
 
-        signUpUser.save().then(function(model) {
-          sendVerificationEmail(user.email, user.username, emailCode);
-          res.end();
-        });  
+        signUpUser.save()
+                  .then(function(model) {
+                      sendVerificationEmail(user.email, user.username, emailCode);
+                      res.end();
+                    })
+                  .otherwise(function(error) {
+                    res.end('email exists');
+                  });  
       }
    });
   },
