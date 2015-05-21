@@ -28,6 +28,7 @@ CREATE TABLE "users" (
 );
 
 ALTER TABLE users ADD UNIQUE (username);
+ALTER TABLE users ADD UNIQUE (email);
 
 -- ---
 -- Table 'events'
