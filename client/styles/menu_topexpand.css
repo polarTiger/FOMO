@@ -22,7 +22,7 @@ body,
 }
 
 .content-wrap {
-	background-image: url(../images/main.jpg);
+	background-image:url(../images/main.jpg);
   width: auto;
   height: 100vh;
   margin-top: -20px;

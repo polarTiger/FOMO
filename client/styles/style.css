@@ -144,7 +144,7 @@ body {
   background-image: url(../images/fomo.jpg);
   background-size: cover;
   -webkit-filter: blur(0px);
-  z-index: 0;
+  z-index: 1;
 }
 
 .grad {  /* shaded filter over entire background image */

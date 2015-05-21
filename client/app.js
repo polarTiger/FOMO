@@ -102,4 +102,5 @@ angular.module('fomo', ['ui.router', 'fomo.event',
 })
 
 .controller("MainController", ['$scope', '$http', 'LoggedInService', '$rootScope', '$state', function($scope, $http, LoggedInService, $rootScope, $state) {
+  $rootScope.scopename = $state;
 }]);
