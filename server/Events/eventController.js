@@ -84,6 +84,37 @@ var testTrigger = function(data, i){
   }
 };
 
+var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
+  eventfulClient.searchEvents({page_size: 5, // number of results
+    keywords: keyword,
+    within: 10, // distance
+    mature: 'safe', // set content to be safe PG content
+    date: startTimeStr + '-' + endTimeStr}, function(err, data){
+    if(err){
+      return console.error(err);
+    }
+    console.log('Recieved ' + data.search.total_items + ' events');
+
+    // iterate through each events obj 
+    for (var i = 0; i < data.search.events.event.length; i++) {
+      // construct an event object with info to be written to db
+      var eventfulObj = {
+        name: data.search.events.event[i].title,
+        info: data.search.events.event[i].description,
+        category: keyword, 
+        link: data.search.events.event[i].url,
+        imgUrl: data.search.events.event[i].image.medium ? data.search.events.event[i].image.medium.url : data.search.events.event[i].image.url,
+        notifydate: data.search.events.event[i].start_time.slice(0,10),
+        notifytime: data.search.events.event[i].start_time.slice(11,16)
+       };
+      // write the event to db
+      db.putEventFromWebToDB(eventfulObj, function(){
+        console.log('write to db...');
+      });
+    }
+  });
+}
+
 //Checks the current time against times in the database in order to automatically trigger events
 setInterval(function(){
   var serverDateLocal = new Date(); // generate the local date/time of the server
@@ -100,74 +131,16 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '05:15') { // let server do fetch the eventful API every day at 19:00 UTC time
+  if (serverTime === '00:23') { // let server do fetch the eventful API every day at 19:00 UTC time
 
     if ( flag === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
       flag = true;
-      eventfulClient.searchEvents({page_size: 2, // number of results
-        keywords: 'music',
-        within: 10, // distance
-        mature: 'safe', // set content to be safe PG content
-        date: startTimeStr + '-' + endTimeStr}, function(err, data){
-        if(err){
-          return console.error(err);
-        }
-        console.log('Recieved ' + data.search.total_items + ' events');
 
-        // iterate through each events obj
-        for (var i = 0; i < data.search.events.event.length; i++) {
-          console.log(data.search.events.event[i]);
-          // construct an event object with info to be written to db
-          var eventfulObj = {
-            name: data.search.events.event[i].title,
-            info: data.search.events.event[i].description,
-            category: 'music',
-            link: data.search.events.event[i].url,
-            imgUrl: data.search.events.event[i].image.url,
-            eventdate: data.search.events.event[i].start_time.slice(0,10),
-            eventtime: data.search.events.event[i].start_time.slice(11,16),
-            notifydate: null,
-            notifytime: null
-           };
-          // write the event to db
-          db.putEventFromWebToDB(eventfulObj, function(){
-            console.log('write to db...');
-          });
-        }
-      });
-
-      eventfulClient.searchEvents({page_size: 2, // number of results
-        keywords: 'sports',
-        within: 10, // distance
-        mature: 'safe', // set content to be safe PG content
-        date: startTimeStr + '-' + endTimeStr}, function(err, data){
-        if(err){
-          return console.error(err);
-        }
-        console.log('Recieved ' + data.search.total_items + ' events');
-
-        // iterate through each events obj
-        for (var i = 0; i < data.search.events.event.length; i++) {
-          console.log(data.search.events.event[i]);
-          // construct an event object with info to be written to db
-          var eventfulObj = {
-            name: data.search.events.event[i].title,
-            info: data.search.events.event[i].description,
-            category: 'sports',
-            link: data.search.events.event[i].url,
-            imgUrl: data.search.events.event[i].image.url,
-            eventdate: data.search.events.event[i].start_time.slice(0,10),
-            eventtime: data.search.events.event[i].start_time.slice(11,16),
-            notifydate: null,
-            notifytime: null
-           };
-          // write the event to db
-          db.putEventFromWebToDB(eventfulObj, function(){
-            console.log('write to db...');
-          });
-        }
-      });
+      var keywords = ['music', 'sports', 'outdoors', 'food', 'tech', 'travel', 'business', 'health'];
+      for (var i = 0; i < keywords.length; i++) {
+        fetchEventfulEvents(keywords[i], startTimeStr, endTimeStr);
+      }
     }
   } else {
     /* else, if the event has already been triggered, and has past the time '19:00'
@@ -191,6 +164,7 @@ module.exports = {
     var id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user ? req.session.passport.user.id : 0;
     db.getEvent(id, user_id, function(rows) {
+      console.log(rows[0]);
       res.end(JSON.stringify(rows[0]));
     });
   },

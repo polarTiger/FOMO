@@ -44,6 +44,7 @@ angular.module('fomo.event', [])
 
       $scope.data.notification_datenew = $scope.data.notification_date;
       $scope.data.notification_timenew = $scope.data.notification_time;
+      console.log($scope.data);
     });
   };
 
