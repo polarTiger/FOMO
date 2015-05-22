@@ -21,13 +21,37 @@ body,
 	color: #fffce1;
 }
 
+/* Menu */
+.menu-wrap {
+	z-index: 999;
+	margin-top: -20px; /* sets vertical position of menu bar when open, no whitespace across top */
+  margin-left: -15px; /* resets menu bar to show across screen */
+  background-color: rgba(77,77,77, 0.96); /* menu bar color when open, with opacity */
+	-webkit-transition: width 0.4s, height 0.4s, -webkit-transform 0.4s;
+	transition: width 0.4s, height 0.4s, transform 0.4s;
+	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.menu {
+	height: 100%;
+	overflow: hidden;
+	font-size: 0.75em;
+}
+
+.show-menu .menu-wrap {
+	width: 100%;
+	margin-top: -20px;
+	height: 80px; /* sets height of menu bar when opened */
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+}
 .content-wrap {
 	background-image:url(../images/main.jpg);
-	background-repeat: repeat;
-
-  /*height: 100vh;*/
-  margin-top: -20px;
-
+  width: auto;
+  margin-top: -100px; /*margin-top: -20px; *//* adjusts vertical position of background image, no whitespace in between navBar and pages */
   -webkit-filter: blur(0px);
   background-size: cover;
   z-index: 0;
@@ -51,15 +75,15 @@ body,
 	width: 2.5em;
 	height: 2.25em;
 	font-size: 1.5em;
-	-webkit-transform: translate3d(1.5em,1.5em,0);
-	transform: translate3d(1.5em,1.5em,0);
+	-webkit-transform: translate3d(1.5em,0.7em,0);
+	transform: translate3d(1.5em,.7em,0); /*(horizontal, vertical) of button*/
 }
 
 /* Menu Button */
 .menu-button {
 	z-index: 1000;
 /*	margin: 0;*/
-	margin-top: -20px;
+	margin-top: -20px; /* adjusts vertical position of menu button*/
 	margin-left: -15px; /* moves menu button to align when menu closed */
 	border: none;
 	text-indent: 2.5em;
@@ -86,29 +110,9 @@ body,
 	opacity: 0.6;
 }
 
-/* Menu */
-.menu-wrap {
-	z-index: 999;
-	margin-top: -20px; /* resets menu bar, no whitespace across top */
-  margin-left: -15px; /* resets menu bar to show across screen */
-  /* background: #8a92b3;*/
-  /* background-color: rgba(54,97,132, 0.4);*/ /* old blue */
-  background-color: rgba(110,110,110, 1); /* menu bar color when open */
-	-webkit-transition: width 0.4s, height 0.4s, -webkit-transform 0.4s;
-	transition: width 0.4s, height 0.4s, transform 0.4s;
-	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-}
-
-.menu {
-	height: 100%;
-	overflow: hidden;
-	font-size: 0.75em;
-}
-
 .icon-list {
 	float: right;
-	padding: 2.5em 2em 0 6em;
+	padding: 1em 2em 0 6em; /*positions of icons: top, right, buttom, left*/
 }
 
 .icon-list a {
@@ -140,21 +144,13 @@ body,
 	}
 }
 
-/* Shown menu */
+/* Show menu */
+
 .show-menu .content-wrap {
 	-webkit-transition-delay: 0s;
 	transition-delay: 0s;
-	-webkit-transform: translate3d(0,125px,0);
-	transform: translate3d(0,125px,0);
-}
-
-.show-menu .menu-wrap {
-	width: 100%;
-	height: 125px;
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
-	-webkit-transition-delay: 0s;
-	transition-delay: 0s;
+	-webkit-transform: translate3d(0,80px,0); /*sets vertical offset of content when navBar is open*/
+	transform: translate3d(0,80px,0);
 }
 
 .show-menu .icon-list a {
