@@ -13,4 +13,5 @@ angular.module('fomo.user', ['customFilters'])
       $state.go('signin');
     });
   };
+ 
 }]);
