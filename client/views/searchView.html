@@ -23,7 +23,7 @@
 
     <span id="category" class="col-md-3 col-xs-3"><span class="displayResult">{{event.event_category}}</span></span>
 
-    <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href='{{event.event_link | linkFormat}}' target="_blank"><span class="displayResult">Click Here!</span></a></span>
+    <span class="col-md-3 col-xs-3" ><span ng-show="event.event_link !== null"><a href='{{event.event_link | linkFormat}}' target="_blank"><span class="displayResult">Click Here!</span></a></span></span>
 
     <span class="col-md-2 col-xs-2" ng-show="event.notification_date !== null" ><span class="displayResult">{{event.notification_date}}</span></span>
   </div>
