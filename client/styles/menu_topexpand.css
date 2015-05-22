@@ -92,7 +92,7 @@ body,
   margin-left: -15px; /* resets menu bar to show across screen */
   /* background: #8a92b3;*/
   /* background-color: rgba(54,97,132, 0.4);*/ /* old blue */
-  background-color: rgba(102,102,102, 0.6); /* menu bar color when open */
+  background-color: rgba(110,110,110, 1); /* menu bar color when open */
 	-webkit-transition: width 0.4s, height 0.4s, -webkit-transform 0.4s;
 	transition: width 0.4s, height 0.4s, transform 0.4s;
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
