@@ -12,7 +12,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
 
 .config(function($stateProvider, $urlRouterProvider) {
   // If an unknown route is entered, it redirects to the home page.
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/signin');
   // Routes to the home page
   $stateProvider
     .state('home', {

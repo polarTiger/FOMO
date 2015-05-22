@@ -1,6 +1,11 @@
 angular.module('fomo.addEvent', [])
-.controller('AddController', ['$scope', '$log', '$state', 'AddEventService', 'SearchService',
-    function($scope, $log, $state, AddEventService, SearchService) {
+.controller('AddController', ['$scope', '$log', '$state', 'AddEventService', 'SearchService', 'LoggedInService',
+    function($scope, $log, $state, AddEventService, SearchService, LoggedInService) {
+
+  if (!LoggedInService.isLoggedIn()) {
+    $state.go('signin');
+    return;
+  }
   var categories = ['music', 'sports', 'outdoors', 'food', 'tech', 'travel', 'business', 'health', 'other'];
   $scope.queryresult = [];
   $scope.eventText = true;
