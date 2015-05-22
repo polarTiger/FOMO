@@ -20,7 +20,8 @@
     <div ui-view="lp_content"></div>
 
     <div ui-view="nav"></div>
-    <div class="content-wrap" ng-hide="scopename.current.name==='signin' || scopename.current.name==='signup'">
+    <div ng-class="{'content-wrap': !(scopename.current.name==='signin' || scopename.current.name==='signup') }">
+
       <div ngmodel="main_content" ui-view="main_content" class="main_content"></div>
     </div>
 
