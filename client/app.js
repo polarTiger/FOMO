@@ -14,6 +14,23 @@ angular.module('fomo', ['ui.router', 'fomo.event',
   // If an unknown route is entered, it redirects to the home page.
   $urlRouterProvider.otherwise('/signin');
   // Routes to the home page
+
+  var loggedIn = ['$q', 'LoggedInService', function ($q, LoggedInService) {
+      var deferred = $q.defer();
+      console.log('in logged in promise');
+      LoggedInService.getLoggedIn(function(){
+        if (!LoggedInService.isLoggedIn()) {
+          deferred.resolve();
+          console.log('not logged in');
+        } else {
+          console.log('logged in');
+          deferred.reject('logged in');
+        }
+      
+      })
+      return deferred.promise;
+    }];
+
   $stateProvider
     .state('home', {
       url: '/home',
@@ -36,6 +53,10 @@ angular.module('fomo', ['ui.router', 'fomo.event',
           templateUrl: './views/signinView.html',
           controller: 'SigninController'
         }
+
+      },
+      resolve: {
+        loggedIn: loggedIn
       }
     })
     .state('signup', {
@@ -99,6 +120,15 @@ angular.module('fomo', ['ui.router', 'fomo.event',
         }
       }
   });
+})
+.run( function($rootScope,$state) {
+
+   // register listener to watch route changes
+   $rootScope.$on('$stateChangeError', function () {
+     // Redirect user to our home page
+     console.log('error: logged in already');
+     $state.go('home');
+   });
 })
 
 .controller("MainController", ['$scope', '$http', 'LoggedInService', '$rootScope', '$state', function($scope, $http, LoggedInService, $rootScope, $state) {
