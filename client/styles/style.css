@@ -288,6 +288,15 @@ body {
   z-index: 3;
 }
 
+.explore2 {
+  position: absolute;
+  top: calc(49% - 0px);
+  left: calc(50% - 235px);
+  height: 150px;
+  width: 225px;
+  z-index: 3;
+}
+
 .explore button {
   width: 250px;
   height: 35px;
