@@ -4,8 +4,8 @@ angular.module('fomo.search', ['customFilters'])
   function($scope, $log, SearchService) {
 
     $scope.orderVariable = 'event_title';
-
-    var categories = ['all', 'music', 'sports', 'other'];
+    $scope.searched = false;
+    var categories = ['music', 'sports', 'outdoors', 'food', 'tech', 'travel', 'business', 'health', 'other'];
     $scope.queryresult = [];
     $scope.event = {
       categories: categories,
@@ -13,7 +13,7 @@ angular.module('fomo.search', ['customFilters'])
       // https://docs.angularjs.org/api/ng/input/input%5Bdatetime-local%5D
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
     };
-    
+
     $scope.submit = function() {
       $log.log($scope);
       var normalizedCategcory = $scope.event.category === "all" ? null : $scope.event.category;
@@ -30,6 +30,11 @@ angular.module('fomo.search', ['customFilters'])
       SearchService.searchWithQuery($scope.event.name, normalizedCategcory)
         .success(function(data, status) {
           $scope.queryresult = data;
+          if (data.length > 0) {
+            $scope.searched = true;
+          } else {
+            $scope.searched = false;
+          }
           //$scope.events = data;
       });
     };

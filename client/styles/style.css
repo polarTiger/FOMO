@@ -615,6 +615,7 @@ body {
   margin-right: 10%;
   font-size: 125%;
   letter-spacing: 1.5px;
+  margin-top: 4%;
 }
 
 .top10Odd {
@@ -685,14 +686,27 @@ body {
 
 }
 
+#noresults {
+  color: white;
+  font-family: 'Exo', serif;
+  letter-spacing: 1px;
+  margin-left: auto;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-right: auto;
+  text-align: center;
+  margin-top: -25px;
+  margin-right: 50px;
+
+}
+
 /* search view */
 
 .searchEvent input[type=text] {
-
-  margin-left:auto;
+  margin-left: auto;
   margin-right: auto;
-  margin-top:5%;
-  padding-top:5%;
+  margin-top: 1%;
+  padding-top: 5%;
   background: transparent;
   border: 1.5px solid rgba(255,255,255,0.8);
   border-radius: 2px;
@@ -702,7 +716,10 @@ body {
   font-weight: 400;
   padding: 4px;
   margin-bottom: 2%;
+  width: 600px;
+  height: 40px;
 }
+
 #searchBar {
   vertical-align: middle;
   text-align: center;
