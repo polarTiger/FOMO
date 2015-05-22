@@ -726,6 +726,17 @@ body {
   color: #CCCCFF;
 }
 
+
+/* event view page */
+#eventViewInfoBox {
+  margin-left:5%;
+  margin-right: auto;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+}
 /* add event page */
 .containersAddEventGradient {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
@@ -781,4 +792,7 @@ body {
   font-style: italic;
   color: white;
 }
+
+
+
 

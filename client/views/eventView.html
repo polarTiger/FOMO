@@ -16,8 +16,8 @@
       <button ng-hide='data.fired || isLoggedIn()===false' id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('Date', !editDate); defaultText(['notification_date','notification_time'])">{{!editDate && 'Edit Date' || 'Cancel'}}</button>
 
       <form ng-show="editDate" novalidate name="dateForm" class="form-group form-block" role="form">
-        <input type="date" id="add-notify-date" name="input" ng-model="data.notification_datenew" ng-required='data.notification_timenew'/>
-        <input type="time" id="add-event-time" name="input" ng-model="data.notification_timenew"/>
+        <input type="date" id="eventViewInfoBox" name="input" ng-model="data.notification_datenew" ng-required='data.notification_timenew'/>
+        <input type="time" id="eventViewInfoBox" name="input" ng-model="data.notification_timenew"/>
         <!--  http://stackoverflow.com/questions/16251977/angularjs-toggle-button -->
         <input id='editbtn' type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary col-md-1 form-group" ng-click="submitNewNotificationDate(); setEditAttribute('Date', !editDate)" value='Update Date'>
       </form>
@@ -28,7 +28,7 @@
 
       <button ng-hide='data.fired || isLoggedIn()===false' id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('Info', !editInfo); defaultText(['event_info'])">{{!editInfo && 'Edit Info' || 'Cancel'}}</button>
       <form class="row" ng-show="editInfo" novalidate name="infoForm" class="form-block" role="form">
-        <textarea name="info" ng-model="data.event_infonew" ng-minlength="1" class="col-md-9" style="height: 120px;"></textarea>
+        <textarea name="info" ng-model="data.event_infonew" ng-minlength="1" class="col-md-9" style="height: 120px;" id="eventViewInfoBox"></textarea>
         <input type="submit" id='editbtn' class="btn btn-primary col-md-1" ng-click="submitInfo(); setEditAttribute('Info', !editInfo)" value='Update Info'>
       </form>
     </div>
