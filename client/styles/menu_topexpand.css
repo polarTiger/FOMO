@@ -23,12 +23,13 @@ body,
 
 .content-wrap {
 	background-image:url(../images/main.jpg);
-  width: auto;
-  height: 100vh;
+	background-repeat: repeat;
+
+  /*height: 100vh;*/
   margin-top: -20px;
 
   -webkit-filter: blur(0px);
-  background-size: 100% 100%;
+  background-size: cover;
   z-index: 0;
 	-webkit-overflow-scrolling: touch;
 	-webkit-transition: -webkit-transform 0.4s;
