@@ -288,6 +288,15 @@ body {
   z-index: 3;
 }
 
+.explore2 {
+  position: absolute;
+  top: calc(49% - 0px);
+  left: calc(50% - 235px);
+  height: 150px;
+  width: 225px;
+  z-index: 3;
+}
+
 .explore button {
   width: 250px;
   height: 35px;
@@ -615,6 +624,7 @@ body {
   margin-right: 10%;
   font-size: 125%;
   letter-spacing: 1.5px;
+  margin-top: 4%;
 }
 
 .top10Odd {
@@ -639,7 +649,7 @@ body {
 .top10Style {
   vertical-align:middle;
   text-align: center;
-  margin-left:10%;
+  margin-left: 10%;
   margin-right: 10%;
   letter-spacing: 1px;
   height: 100%;
@@ -663,20 +673,49 @@ body {
   font-size: 115%;
 }
 
+#eventful {
+  height: 35px;
+  opacity: 0.8;
+  margin-top: -10px;
+}
+
+#powered {
+  font-family: 'Exo', serif;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  color: #ccc;
+  margin-left: 10px;
+  margin-right: -3px;
+}
+
 .displayResult {
   color: white;
   font-family: 'Exo', serif;
   letter-spacing: 1px;
+
+}
+
+#noresults {
+  color: white;
+  font-family: 'Exo', serif;
+  letter-spacing: 1px;
+  margin-left: auto;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-right: auto;
+  text-align: center;
+  margin-top: -25px;
+  margin-right: 50px;
+
 }
 
 /* search view */
 
 .searchEvent input[type=text] {
-
-  margin-left:auto;
+  margin-left: auto;
   margin-right: auto;
-  margin-top:5%;
-  padding-top:5%;
+  margin-top: 1%;
+  padding-top: 5%;
   background: transparent;
   border: 1.5px solid rgba(255,255,255,0.8);
   border-radius: 2px;
@@ -686,18 +725,23 @@ body {
   font-weight: 400;
   padding: 4px;
   margin-bottom: 2%;
+  width: 600px;
+  height: 40px;
 }
+
 #searchBar {
   vertical-align: middle;
   text-align: center;
 }
 
 .searchHeading {
-  vertical-align:middle;
+  font-family: 'Exo', serif;
+  vertical-align: middle;
   text-align: center;
-  margin-left:5%;
+  margin-left: 5%;
   margin-right: 5%;
-  font-size: 100%;
+  font-size: 125%;
+  letter-spacing: 1.5px;
 }
 
 #searchHeadingTxt{
@@ -708,24 +752,42 @@ body {
 .searchContent {
   vertical-align:middle;
   text-align: center;
-  margin-left:5%;
+  margin-left: 5%;
   margin-right: 5%;
+  letter-spacing: 1px;
   height: 100%;
-  font-family: arial rounded mt, verdana, sans-serif;
+  font-family: 'Exo', serif;
+  font-style: bold;
   padding-top: 2%;
-  padding-bottom:2%;
+  padding-bottom: 2%;
   margin-bottom: 0.4%;
   text-shadow: 0 50% 50%;
-  box-shadow: 0px 1px 3px;
+  border: 1.5px solid rgba(200,200,200,0.8);
   border-radius:6px;
+  color: #e9f2f9;
 }
 
 /* user View page */
-.userViewTitle {
-  margin-left:5%;
-  color: #CCCCFF;
+
+#userViewTitle {
+  font-family: 'Exo', verdana, sans-serif;
+  font-size: 200%;
+  font-weight: 600;
+  margin-left: 5%;
+  color: #bca2e6;
 }
 
+
+/* event view page */
+#eventViewInfoBox {
+  margin-left:5%;
+  margin-right: auto;
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+}
 /* add event page */
 .containersAddEventGradient {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
@@ -781,4 +843,7 @@ body {
   font-style: italic;
   color: white;
 }
+
+
+
 

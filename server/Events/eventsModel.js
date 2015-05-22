@@ -142,7 +142,16 @@ module.exports = {
 
   //puts the event obj fetched from eventful api to database events table
   putEventFromWebToDB : function(infoObj, cb) {
-    var queryString = "INSERT INTO events (event_title, event_info, event_category, event_link, event_image) values ('\""+infoObj.name+"\"', '" +infoObj.link+"', '" +infoObj.category+"', '" +infoObj.link+"', '" +infoObj.imgUrl+"')";
+
+    var formattedNotifyDate = infoObj.notifydate;
+    var formattedNotifyTime = null;
+
+    formattedNotifyDate = infoObj.notifydate ? "'"+infoObj.notifydate+"'" : null;
+    formattedNotifyTime = infoObj.notifytime ? "'"+infoObj.notifytime+"'" : null;
+
+    var queryString = escape("WITH first_insert AS (INSERT into events (event_info, event_title, event_category, event_link, event_image) values ("
+                      +"%L, %L, %L, %L, %L) RETURNING id) INSERT into notifications (event_id, notification_date, notification_time) values"
+                      +"((SELECT id from first_insert), "+formattedNotifyDate+", "+formattedNotifyTime+");",infoObj.info, infoObj.name, infoObj.category, infoObj.link, infoObj.imgUrl);
     queryDB(queryString, cb);
   },
 

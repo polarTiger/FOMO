@@ -1,8 +1,9 @@
 angular.module('fomo.loggedinservice', [])
 
 .factory('LoggedInService', ['$http', '$rootScope', '$log', function($http, $rootScope, $log) {
-  var _loggedIn = false; 
+
   var _userName;
+  var _loggedIn;
   if (!$rootScope.root) {
    $rootScope.root = {user:{username:null}}; 
   }
@@ -27,7 +28,6 @@ angular.module('fomo.loggedinservice', [])
   };
 
   var getLoggedIn = function(cb) {
-    console.log('get Logged in,');
     cb = cb || function(){};
     console.log('call server for loggin info');
     $http.get('/api/users/signedin')
@@ -41,12 +41,14 @@ angular.module('fomo.loggedinservice', [])
         cb(data);
       });
   };
+  getLoggedIn();
+
 
   return {
     setLoggedIn: setLoggedIn,
     isLoggedIn: isLoggedIn,
     getLoggedIn: getLoggedIn,
     getUserName: getUserName,
-    setUserName: setUserName
+    setUserName: setUserName,
   };
 }]);

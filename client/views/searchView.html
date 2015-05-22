@@ -1,13 +1,16 @@
-<div class="form-group searchEvent col-md-12 col-xs-12" id="searchBar">
-  <form novalidate name="searchForm" class="simple-form " role="form" ng-submit='submit()'>
-    <input type="text" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()" placeholder="Search for event">
+<div class="form-group searchEvent" id="searchBar">
+  <form novalidate name="searchForm" role="form" ng-submit='submit()'>
+    <input type="text" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()" placeholder="Search for events">
+
     <select ng-model="event.category" ng-change="liveSearchEventTitle()">
       <option ng-repeat="category in event.categories">{{category}}</option>
     </select>
   </form>
 </div>
 
-<div class="row column-headings searchHeading">
+<div ng-show="event.name && !searched" id="noresults">No results</div>
+
+<div ng-show="searched" class="row column-headings searchHeading">
   <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-4 col-xs-4"><span class="displayResult">Event</span></span></a>
   <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3"><span class="displayResult">Category</span></span></a>
   <span class="col-md-3 col-xs-3"><span class="displayResult">Link</span></span>
@@ -16,10 +19,12 @@
 </div>
 <div class="row searchContent" ng-repeat="event in queryresult | orderBy:orderVariable | limitTo : 10" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
   <div>
-    <span class="col-md-4 col-xs-4"><a href="#/event/{{event.id}}"><span class="displayResult">{{event.event_title}}</span></a></span>
-    <span class="col-md-3 col-xs-3"><span class="displayResult">{{event.event_category}}</span></span>
+    <span id="eventname" class="col-md-4 col-xs-4"><a href="#/event/{{event.id}}"><span class="displayResult">{{event.event_title}}</span></a></span>
+
+    <span id="category" class="col-md-3 col-xs-3"><span class="displayResult">{{event.event_category}}</span></span>
+
     <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href='{{event.event_link | linkFormat}}' target="_blank"><span class="displayResult">Click Here!</span></a></span>
+
     <span class="col-md-2 col-xs-2" ng-show="event.notification_date !== null" ><span class="displayResult">{{event.notification_date}}</span></span>
   </div>
 </div>
-
