@@ -663,10 +663,26 @@ body {
   font-size: 115%;
 }
 
+#eventful {
+  height: 35px;
+  opacity: 0.8;
+  margin-top: -10px;
+}
+
+#powered {
+  font-family: 'Exo', serif;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  color: #ccc;
+  margin-left: 10px;
+  margin-right: -3px;
+}
+
 .displayResult {
   color: white;
   font-family: 'Exo', serif;
   letter-spacing: 1px;
+
 }
 
 /* search view */
