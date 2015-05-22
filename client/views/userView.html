@@ -1,8 +1,5 @@
-
-<div data-ng-init="getallEvents()" class="col-md-12 col-xs-12 userViewTitle" id='event-container'>
-  <span>
-<!--     <h3>MY EVENTS</h3> -->
-  </span>
+<div data-ng-init="getallEvents()" class="col-md-12 col-xs-12">
+  <div id="userViewTitle">MY EVENTS</div>
 </div>
 
 <div class="row column-headings searchHeading">
@@ -10,14 +7,16 @@
   <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3"><span class="displayResult">Category</span></span></a>
   <span class="col-md-3 col-xs-3"><span class="displayResult">Link</span></span>
   <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-2 col-xs-2"><span class="displayResult">Date</span></span></a>
-
 </div>
 
-<div class="row searchContent top10Style" ng-repeat="event in events | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
+<div class="row searchContent" ng-repeat="event in events | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
   <div>
-    <span class="col-md-4 col-xs-4"><a href="#/event/{{event.id}}"><span class="displayResult">{{event.event_title}}</span></a></span>
-    <span class="col-md-3 col-xs-3"><span class="displayResult">{{event.event_category}}</span></span>
+    <span id="eventname" class="col-md-4 col-xs-4"><a href="#/event/{{event.id}}"><span class="displayResult">{{event.event_title}}</span></a></span>
+
+    <span id="category" class="col-md-3 col-xs-3"><span class="displayResult">{{event.event_category}}</span></span>
+
     <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href='{{event.event_link | linkFormat}}' target="_blank"><span class="displayResult">Click Here!</span></a></span>
+
     <span class="col-md-2 col-xs-2" ng-show="event.notification_date !== null"><span class="displayResult">{{event.notification_date}}</span></span>
   </div>
 </div>
