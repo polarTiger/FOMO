@@ -1,7 +1,7 @@
 
 <div data-ng-init="getEvent()" class="col-md-12 eventView" id='event-container'>
   <span class="col-md-11">
-      <img ng-hide='data.event_image===undefined' ng-src='{{(data.event_image | linkFormat) || "./images/stock.jpg"}}' height="200" alt="Not Working"/>
+      <img ng-hide='data.event_image===undefined' ng-src='{{(data.event_image | linkFormat) || "./images/stock.jpg"}}' alt="Not Working"/>
 
     <h1>{{data.event_title}}</h1>
 
@@ -24,7 +24,7 @@
     </div>
 
     <div class="row">
-      <p ng-hide="editInfo" class="col-md-9">{{data.event_info}}</p>
+      <p ng-hide="editInfo" class="col-md-9">{{data.event_info |limitTo:100}}....</p>
 
       <button ng-hide='data.fired || isLoggedIn()===false' id='editbtn' class="btn btn-default col-md-1" ng-click="setEditAttribute('Info', !editInfo); defaultText(['event_info'])">{{!editInfo && 'Edit Info' || 'Cancel'}}</button>
       <form class="row" ng-show="editInfo" novalidate name="infoForm" class="form-block" role="form">

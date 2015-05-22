@@ -103,7 +103,7 @@ var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
         info: data.search.events.event[i].description,
         category: keyword, 
         link: data.search.events.event[i].url,
-        imgUrl: data.search.events.event[i].image.url,
+        imgUrl: data.search.events.event[i].image.medium ? data.search.events.event[i].image.medium.url : data.search.events.event[i].image.url,
         notifydate: data.search.events.event[i].start_time.slice(0,10),
         notifytime: data.search.events.event[i].start_time.slice(11,16)
        };
@@ -131,7 +131,7 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '23:55') { // let server do fetch the eventful API every day at 19:00 UTC time
+  if (serverTime === '00:23') { // let server do fetch the eventful API every day at 19:00 UTC time
 
     if ( flag === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
