@@ -41,7 +41,7 @@ Angular, Node/Express, PostgreSQL, Mocha/Chai, Bookshelf
 
 Sign-In:
 ![Image of Sign-in]
-http://gdurl.com/u2kL
+(http://gdurl.com/u2kL)
 
 
 Homepage:
