@@ -696,8 +696,7 @@ body {
   color: white;
   font-family: 'Exo', serif;
   letter-spacing: 1px;
-  vertical-align: middle;
-
+  text-align: center;
 }
 
 #noresults {
@@ -850,9 +849,12 @@ body {
   color: white;
 }
 
-#eventimage {
-  float:right;
+#eventImgSize {
+  width:auto;
+  height:200px;
 }
+
+
 
 
 
