@@ -1,4 +1,3 @@
-
 angular.module('fomo', ['ui.router', 'fomo.event',
                       'fomo.addEvent', 'fomo.eventservice',
                       'fomo.addeventservice', 'fomo.user', 'fomo.userservice',
@@ -126,7 +125,6 @@ angular.module('fomo', ['ui.router', 'fomo.event',
   });
 })
 .run( function($rootScope,$state, $location) {
-  // window.rootscope = $location;
   $rootScope.scopename = $state;
   $rootScope.location = $location;
    // register listener to watch route changes
@@ -136,7 +134,6 @@ angular.module('fomo', ['ui.router', 'fomo.event',
     $state.go('home');
   });
 })
-
 .controller("MainController", ['$scope', '$http', 'LoggedInService', '$rootScope', '$state', function($scope, $http, LoggedInService, $rootScope, $state) {
 
 }]);
