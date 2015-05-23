@@ -21,7 +21,7 @@
 
     <div ui-view="nav"></div>
     <div ng-class="{'content-wrap':  !(changing.name==='signin') && !(scopename.current.name==='signin' || scopename.current.name==='signup'),
-                    'body': changing.name==='signin' }">
+                    'body': changing.name==='signin'&& (scopename.current.name==='signin') }">
 
       <div ngmodel="main_content" ui-view="main_content" class="main_content"></div>
     </div>
