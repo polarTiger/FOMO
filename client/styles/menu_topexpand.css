@@ -109,7 +109,7 @@ a.selected-item {
 	background: transparent;
 }
 
-.menu-button:focus { /* http://stackoverflow.com/questions/4524180/unwanted-ouline-or-border-around-button-when-clicked */
+.menu-button:focus {
   outline:none; /* doesn't show blue border when button clicked */
 }
 
