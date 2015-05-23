@@ -13,7 +13,7 @@ var db = require('./eventsModel');
 var eventful = require('eventful-node');
 var eventfulKey = process.env.EVENTFULKEY || require('./eventfulAPIKey');
 var eventfulClient = new eventful.Client(eventfulKey);
-var flag = false;
+var fetchedEvent = false;
 
 
 //This function takes params from the triggerEvent function and sends the actual email
@@ -87,6 +87,7 @@ var testTrigger = function(data, i){
 var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
   eventfulClient.searchEvents({page_size: 5, // number of results
     keywords: keyword,
+    location: 'San Francisco',
     within: 10, // distance
     mature: 'safe', // set content to be safe PG content
     date: startTimeStr + '-' + endTimeStr}, function(err, data){
@@ -131,11 +132,11 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '00:23') { // let server do fetch the eventful API every day at 19:00 UTC time
+  if (serverTime === '17:39') { // let server do fetch the eventful API every day at 19:00 UTC time
 
-    if ( flag === false) { // if the server haven't been triggered that day to fetch eventful API yet
+    if ( fetchedEvent === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
-      flag = true;
+      fetchedEvent = true;
 
       var keywords = ['music', 'sports', 'outdoors', 'food', 'tech', 'travel', 'business', 'health'];
       for (var i = 0; i < keywords.length; i++) {
@@ -147,7 +148,7 @@ setInterval(function(){
        say it's 19:01, then reset the trigger back to false so it can be ready to fire again
        the next day
     */
-    flag = false;
+    fetchedEvent = false;
   }
   // get all the notifications and check if the trigger time is up, if so trigger the email
   db.getAllNotifications(function(data){

@@ -21,8 +21,8 @@
   left: -300em;
 }
 
-.main_content {
-  padding-top: 15px;
+.main_content { /* adjusts content, but not background image */
+  padding-top: 100px;
 }
 
 nav#hmenu {
@@ -416,6 +416,7 @@ body {
   left: calc(20% - 100px);
   height: 600px;
   width: 450px;
+  margin-top:100px;
   /*width: 1100px;*/
   background-color: rgba(0, 0, 0, 0.4);
 /*  margin: 0 auto 10px;*/
@@ -437,9 +438,11 @@ body {
  .headerAddEvent div {
   float: right;
   color: #5379fa !important;
-  font-family: 'Aldrich', sans-serif;
+  font-family: 'Exo', sans-serif;
+  text-transform: uppercase;
   font-size: 30px;
   font-weight: 500;
+  margin-top: 100px;
 }
 
 .addevent {
@@ -450,6 +453,7 @@ body {
   width: 1000px;
   padding: 10px;
   z-index: 3;
+  margin-top: 100px;
 }
 
 .addevent input[type=text] {
@@ -742,6 +746,7 @@ body {
   margin-right: 5%;
   font-size: 125%;
   letter-spacing: 1.5px;
+  margin-top: 4%;
 }
 
 #searchHeadingTxt{
@@ -773,7 +778,7 @@ body {
   font-family: 'Exo', verdana, sans-serif;
   font-size: 200%;
   font-weight: 600;
-  margin-left: 5%;
+  margin-left: 7%;
   color: #bca2e6;
 }
 
