@@ -101,6 +101,12 @@ nav#hmenu ul a:hover {
 #editbtn {
   float: right;
   margin-left: 10px;
+  margin-right:10%;
+}
+
+#updatebtn {
+  float: right;
+  margin-left: 10px;
 }
 
 #notification {
@@ -798,6 +804,8 @@ body {
 #eventImgSize {
   width:auto;
   height:200px;
+  margin-right:8%;
+  float:right;
 }
 
 
