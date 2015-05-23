@@ -162,18 +162,19 @@ body {
   z-index: 1;
 }
 
+
 .grad1 {
   position: absolute;
   top: -40px;
   left: -20px;
   right: -40px;
-/*  bottom: -40px;*/
+  bottom: -40px;
   opacity: 0.7;
   min-width: 650px;
   min-height: 260px;
   width: 102%;
   height: 50%;
-  background: -webkit-gradient(linear, right top, right bottom, color-stop(0%,rgba(0,0,0,0.9)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+  background: -webkit-gradient(linear, right top, right bottom, color-stop(0%,rgba(0,0,0,0.9)), color-stop(100%,rgba(0,0,0,0)));
   z-index: 1;
 }
 
@@ -410,50 +411,50 @@ body {
 
 /* CSS for addEventView */ /* todo - seperate file */
 
-.containerAddEvent {
+.addevent {
+  margin-left: 15%;
+  margin-top: 2%;
+  z-index: 2;
+}
+
+.addevent .containerAddEvent {
   position: absolute;
-  top: calc(15% - 100px);
-  left: calc(20% - 100px);
+  margin-left: -4%;
+  margin-top: -1%;
   height: 600px;
   width: 450px;
-  margin-top:100px;
-  /*width: 1100px;*/
   background-color: rgba(0, 0, 0, 0.4);
-/*  margin: 0 auto 10px;*/
-/*  margin-right: 20%;*/
   border-radius: 2px;
   opacity: 1;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
+  z-index: -1; /* https://developer.mozilla.org/en-US/docs/Web/CSS/z-index */
 }
 
-.headerAddEvent {
-  position: absolute;
-  top: calc(15% - 95px);
-  left: calc(20% - -50px);
-  z-index: 2;
-}
-
- .headerAddEvent div {
-  float: right;
+.addevent #addeventtitle {
   color: #5379fa !important;
   font-family: 'Exo', sans-serif;
   text-transform: uppercase;
   font-size: 30px;
   font-weight: 500;
-  margin-top: 100px;
+  z-index: 2;
+  margin-left: 90px;
 }
 
-.addevent {
-  position: absolute;
-  top: calc(15% - 75px);
-  left: calc(20% - 50px);
-  height: 600px;
-  width: 1000px;
-  padding: 10px;
-  z-index: 3;
-  margin-top: 100px;
+#addEventForm {
+  padding-top: 5px;
+/*  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;*/
+}
+
+.addEventFieldTitle {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Exo', sans-serif;
 }
 
 .addevent input[type=text] {
@@ -512,15 +513,6 @@ body {
   margin-top: -5px;
 }
 
-.addEventFieldTitle {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 400;
-  font-family: 'Exo', sans-serif;
-}
-
 .addevent input[type=button] {
   width: 350px;
   height: 35px;
@@ -544,18 +536,9 @@ body {
   opacity: 0.6;
 }
 
-/*.addevent input[type=text]:focus, textarea:focus, input[type=date], input[type=time] {
-  outline: none;
-  border: 1px solid rgba(255,255,255,0.9);
-}*/
-
 .addevent button:focus {
   outline: none;
 }
-
-/*.addevent .form-group span {
-  vertical-align: middle;
-}*/
 
 .addevent span {
   position: absolute;
@@ -565,12 +548,11 @@ body {
   font-size: 24px;
   font-weight: 200;
   margin-left: 70px;
-/*  background: rgba(0,0,0,0.7);*/
 }
 
-.addevent #dupevent { /* error message for dup events */
-  color: red;
-  font-weight: 400;
+.addevent #dupevent {
+  color: white;
+  font-weight: 500;
 }
 
 .addevent p {
@@ -583,28 +565,15 @@ body {
   margin-left: 425px;
 }
 
-/* home pages background image */
+/* ------- homepage (results) view-------  */
+
 .homepage {
   width: auto;
   height: 100vh;
-/*
-  background-image: url(../images/main.jpg);*/
-
-  /*
-  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 59%, rgba(0,0,0,0.65) 100%), url('../images/main.jpg') repeat;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(59%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))), url('../images/main.jpg') repeat;
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 59%,rgba(0,0,0,0.65) 100%), url('../images/main.jpg') repeat;
-  background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 59%,rgba(0,0,0,0.65) 100%), url('../images/main.jpg') repeat;
-  background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 59%,rgba(0,0,0,0.65) 100%), url('../images/main.jpg') repeat;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 59%,rgba(0,0,0,0.65) 100%), url('../images/main.jpg') repeat;
-  background-size: 100% 100%;
-  */
   -webkit-filter: blur(0px);
   background-size: 100% 100%;
   z-index: 0;
 }
-
-/* results View home page */
 
 #top10Title {
   font-family: 'Exo', verdana, sans-serif;
@@ -617,7 +586,7 @@ body {
   text-align: center;
   */
   margin-left:10%;
-  color: #bca2e6;
+  color: #d4c9e7;
 }
 
 .top10Heading {
@@ -632,21 +601,12 @@ body {
 }
 
 .top10Odd {
-  /*
-  background-image: url('../images/top10Odd.jpg');
-  background-size: 100%, 100%;
-  */
-  /*
-  background: linear-gradient(to right , #DADAE6, #8585AD, #DADAE6);
-  */
   background-color: rgba(0, 0, 0, 0.5);
   background-size: 100%, 100%;
 }
 
 .top10Even {
   background-color: rgba(49,72,150, 0.65);
-/*  background-color: rgba(123,140,228, 0.65);*/
-  83,121,250
   background-size: 100%, 100%;
 }
 
@@ -663,7 +623,6 @@ body {
   padding-bottom: 2%;
   margin-bottom: 0.4%;
   text-shadow: 0 50% 50%;
-/*  box-shadow: 0px 1px 3px;*/
   border: 1.5px solid rgba(200,200,200,0.8);
   border-radius: 6px;
   color: #e9f2f9;
@@ -697,7 +656,6 @@ body {
   font-family: 'Exo', serif;
   letter-spacing: 1px;
   vertical-align: middle;
-
 }
 
 #noresults {
@@ -711,10 +669,9 @@ body {
   text-align: center;
   margin-top: -25px;
   margin-right: 50px;
-
 }
 
-/* search view */
+/* ------- search view ------- */
 
 .searchEvent input[type=text] {
   margin-left: auto;
@@ -794,6 +751,7 @@ body {
   color: #fff;
   font-family: 'Exo', sans-serif;
 }
+
 /* add event page */
 .containersAddEventGradient {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
@@ -818,19 +776,6 @@ body {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
-
-}
-
-#addEventDiv {
-  vertical-align:middle;
-  margin-left: 30%;
-  margin-right:20%;
-}
-#addEventForm {
-  padding-top: 2%;
-  vertical-align:middle;
-  margin-left: auto;
-  margin-right:auto;
 
 }
 
