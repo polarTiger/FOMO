@@ -125,9 +125,10 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       }
   });
 })
-.run( function($rootScope,$state) {
-  window.rootscope = $rootScope;
+.run( function($rootScope,$state, $location) {
+  // window.rootscope = $location;
   $rootScope.scopename = $state;
+  $rootScope.location = $location;
    // register listener to watch route changes
   $rootScope.$on('$stateChangeError', function () {
      // Redirect user to our home page

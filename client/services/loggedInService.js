@@ -28,6 +28,7 @@ angular.module('fomo.loggedinservice', [])
   };
 
   var getLoggedIn = function(cb) {
+    
     cb = cb || function(){};
     console.log('call server for loggin info');
     $http.get('/api/users/signedin')
