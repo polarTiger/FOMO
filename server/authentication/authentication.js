@@ -2,7 +2,7 @@
 var loggedOutBlock = function(req, res, next) {
   if(!req.session.passport.user) {
     res.send(403);
-  } else{
+  } else {
     next();
   }
 };
