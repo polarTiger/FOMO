@@ -808,6 +808,10 @@ body {
   float:right;
 }
 
+#event-container {
+  background-color: rgba(70,70,70, 0.85);
+  padding: 10px;
+}
 
 @media (max-width: 1000px) {
   .hideTitle {
@@ -833,4 +837,7 @@ body {
   font-weight: 200;
 }
 
+.row, span {
+    overflow-wrap: break-word;
+}
 
