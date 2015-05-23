@@ -1,6 +1,3 @@
-/* CSS Reset */
-/*html,body,div,span,applet,object,iframe,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,label,legend,p,blockquote,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}body{line-height:1;color:black;background:white;}:focus{outline:0;}table{border-collapse:collapse;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul{list-style:none;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}abbr,acronym{border:0;}*/
-
 @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
 @import url(http://fonts.googleapis.com/css?family=Aldrich);
 
@@ -20,6 +17,7 @@
   top: -30em;
   left: -300em;
 }
+
 
 .main_content { /* adjusts content, but not background image */
   padding-top: 100px;
@@ -134,7 +132,7 @@ nav#hmenu ul a:hover {
 }
 
 body {
-  background-color: black; /*sets content beyond screen black*/
+  background-color: black; /* sets content beyond screen black */
 }
 
 .body {
@@ -191,8 +189,6 @@ body {
   height: 385px;
   width: 750px;
   background-color: rgba(0, 0, 0, 0.65);
-/*  margin: 0 auto 10px;*/
-/*  margin-right: 20%;*/
   border-radius: 2px;
   opacity: 1;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -207,8 +203,6 @@ body {
   height: 263px;
   width: 750px;
   background-color: rgba(0, 0, 0, 0.65);
-/*  margin: 0 auto 10px;*/
-/*  margin-right: 20%;*/
   border-radius: 2px;
   opacity: 1;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -310,14 +304,11 @@ body {
   background: #86a1fb;
   border: 0px solid #fff;
   cursor: pointer;
-/*  background: transparent;*/
   border-radius: 2px;
-/*  color: #a18d6c;*/
   color:#333;
   font-family: 'Exo', sans-serif;
   font-size: 18px;
   font-weight: bold;
-/*  font-weight: 400;*/
   padding: 6px;
   margin-top: 100px;
 }
@@ -415,7 +406,7 @@ body {
    color: rgba(255,255,255,0.6);
 }
 
-/* CSS for addEventView */ /* todo - seperate file */
+/* CSS for addEventView */
 
 .addevent {
   margin-left: 15%;
@@ -449,9 +440,6 @@ body {
 
 #addEventForm {
   padding-top: 5px;
-/*  vertical-align: middle;
-  margin-left: auto;
-  margin-right: auto;*/
 }
 
 .addEventFieldTitle {
@@ -585,12 +573,6 @@ body {
   font-family: 'Exo', verdana, sans-serif;
   font-size: 200%;
   font-weight: 600;
-  /*
-  margin-left:auto;
-  margin-right:auto;
-  vertical-align:middle;
-  text-align: center;
-  */
   margin-left:10%;
   color: #d4c9e7;
 }
@@ -769,14 +751,7 @@ body {
   top: 40vh;
   left: 10%;
   right: 10%;
-
-  /*
-  height: 200%;
-  width: 80%;
-  */
   background-color: rgba(0, 0, 0, 0.65);
-/*  margin: 0 auto 10px;*/
-/*  margin-right: 20%;*/
   border-radius: 2px;
   opacity: 1;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -784,11 +759,6 @@ body {
   z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
 
 }
-
-/*#addEventInfoTxtBox {
-  width: 60%;
-  height: 100px;
-}*/
 
 .eventView {
   color: #fff;
@@ -846,6 +816,3 @@ body {
 .row, span {
     overflow-wrap: break-word;
 }
-
-
-

@@ -4,13 +4,11 @@ body,
 .content-wrap {
 	width: 100%;
 	height: 100%;
-	/*overflow: hidden;*/ /* when commented out, menu looks choppy when opening */
 }
 
  #navlogo {
   float: left;
   color: #fff;
-/*  margin-left: -775px;*/
   font-family: 'Exo', sans-serif;
   font-size: 30px;
   font-weight: 200;
@@ -73,7 +71,7 @@ a.selected-item {
 .content-wrap {
 	background-image:url(../images/main.jpg);
   width: auto;
-  margin-top: -100px; /*margin-top: -20px; *//* adjusts vertical position of background image, no whitespace in between navBar and pages */
+  margin-top: -100px; /* adjusts vertical position of background image, no whitespace in between navBar and pages */
   -webkit-filter: blur(0px);
   background-size: cover;
   z-index: 0;
@@ -104,13 +102,10 @@ a.selected-item {
 /* Menu Button */
 .menu-button {
 	z-index: 1000;
-/*	margin: 0;*/
 	margin-top: -20px; /* adjusts vertical position of menu button*/
 	margin-left: -15px; /* moves menu button to align when menu closed */
 	border: none;
 	text-indent: 2.5em;
-/*	color: transparent;*/
-/*	background: #366184;*/ /* changes menu button color background */
 	background: transparent;
 }
 
@@ -133,7 +128,6 @@ a.selected-item {
 }
 
 .icon-list {
-/*	float: right;*/
 	padding: 1em 2em 0 6em; /*positions of icons: top, right, buttom, left*/
 }
 
@@ -206,4 +200,3 @@ a.selected-item {
 	-webkit-transition-delay: 0.5s;
 	transition-delay: 0.5s;
 }
-
