@@ -7,11 +7,6 @@
 
     <h1>{{data.event_title}}</h1>
 
-<!--     <form novalidate name="dateForm" class="form-block" role="form">
-      <textarea name="info" ng-model="data.date" ></textarea>
-      <input type="submit" class="btn btn-primary" ng-click="submitDate()">
-    </form> -->
-
     <div class="row form-group">
       <h3 ng-hide="editDate" class="col-md-4">{{(data.notification_date | date) || 'No date yet'}} – {{(data.notification_time | date: 'h:mm a') || 'add one'}}</h3>
 
