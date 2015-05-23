@@ -7,6 +7,24 @@ body,
 	/*overflow: hidden;*/ /* when commented out, menu looks choppy when opening */
 }
 
+ #navlogo {
+  float: left;
+  color: #fff;
+/*  margin-left: -775px;*/
+  font-family: 'Exo', sans-serif;
+  font-size: 30px;
+  font-weight: 200;
+  margin-top: 2px;
+  margin-left: 1%;
+}
+
+ #navlogo span {
+  color: #5379fa !important;
+}
+
+ #navlogo span span {
+  color: #222 !important;
+}
 .container {
 	background: #fffce1;
 }
@@ -111,11 +129,12 @@ body,
 }
 
 .icon-list {
-	float: right;
+/*	float: right;*/
 	padding: 1em 2em 0 6em; /*positions of icons: top, right, buttom, left*/
 }
 
 .icon-list a {
+	float: right;
 	opacity: 0;
 	display: inline-block;
 	padding: 0 0.2em;
