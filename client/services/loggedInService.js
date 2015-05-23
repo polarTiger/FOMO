@@ -5,7 +5,7 @@ angular.module('fomo.loggedinservice', [])
   var _userName;
   var _loggedIn;
   if (!$rootScope.root) {
-   $rootScope.root = {user:{username:null}}; 
+   $rootScope.root = {user:{username:null}};
   }
 
   var setLoggedIn = function(isIn) {
@@ -22,15 +22,13 @@ angular.module('fomo.loggedinservice', [])
   };
 
   var setUserName = function(username) {
-    console.log("set username test ", username);
     $rootScope.root.user.username = username;
     _userName = username;
   };
 
   var getLoggedIn = function(cb) {
-    
+
     cb = cb || function(){};
-    console.log('call server for loggin info');
     $http.get('/api/users/signedin')
       .success(function(data){
         setLoggedIn(Boolean(data));
@@ -43,7 +41,6 @@ angular.module('fomo.loggedinservice', [])
       });
   };
   getLoggedIn();
-
 
   return {
     setLoggedIn: setLoggedIn,

@@ -13,14 +13,12 @@ angular.module('fomo.signin', [])
 
       $http.post('api/users/signin', userObj)
         .success(function(data, status, headers, config) {
-          $log.log('success');
           LoggedInService.setLoggedIn(true);
           LoggedInService.setUserName(userObj.username);
 
           $state.go('home');
       })
       .error(function(data, status, headers, config) {
-        $log.log('fail');
         $scope.signinform.incorrect = true;
       });
     } else {
