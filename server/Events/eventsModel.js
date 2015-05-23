@@ -125,7 +125,6 @@ module.exports = {
   },
 
   addEvent: function(body, user_id, cb) {
-    console.log("TESTING ADD EVENT CALLED", body);
     var formattedNotifyDate = body.notifydate;
     var formattedNotifyTime = null;
 

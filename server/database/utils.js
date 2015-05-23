@@ -5,7 +5,6 @@ module.exports = {
 
   //General function that queries the database given a mySQL query string
   queryDB: function(queryString, cb) {
-    console.log(queryString);
     pg.connect(dbUrl, function(err, client, done) {
 
         if(err) {
