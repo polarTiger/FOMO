@@ -36,7 +36,11 @@ body,
 
 .menu-wrap a:hover,
 .menu-wrap a:focus {
-	color: #fffce1;
+	color: #5379fa;
+}
+
+a.selected-item {
+	color: #5379fa;
 }
 
 /* Menu */
