@@ -55,7 +55,7 @@ module.exports = {
 
   getPopularEvents: function(cb) {
     //currently get top 10 most subscribed events and send to front end
-    var queryString = "SELECT * FROM events ORDER BY no_of_subscriber DESC limit 10 ;";
+    var queryString = "SELECT * FROM events ORDER BY no_of_subscriber DESC limit 5 ;";
     queryDB(queryString, cb);
   },
 
