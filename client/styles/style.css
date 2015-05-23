@@ -162,18 +162,19 @@ body {
   z-index: 1;
 }
 
+
 .grad1 {
   position: absolute;
   top: -40px;
   left: -20px;
   right: -40px;
-/*  bottom: -40px;*/
+  bottom: -40px;
   opacity: 0.7;
   min-width: 650px;
   min-height: 260px;
   width: 102%;
   height: 50%;
-  background: -webkit-gradient(linear, right top, right bottom, color-stop(0%,rgba(0,0,0,0.9)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+  background: -webkit-gradient(linear, right top, right bottom, color-stop(0%,rgba(0,0,0,0.9)), color-stop(100%,rgba(0,0,0,0)));
   z-index: 1;
 }
 
@@ -412,8 +413,11 @@ body {
 
 .containerAddEvent {
   position: absolute;
-  top: calc(15% - 100px);
-  left: calc(20% - 100px);
+/*  top: 100px;
+  left: 100px;*/
+/*  top: calc(15% - 100px);
+  left: calc(20% - 100px);*/
+  margin-left: 5%;
   height: 600px;
   width: 450px;
   margin-top:100px;
@@ -428,24 +432,39 @@ body {
   z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
 }
 
-.headerAddEvent {
+/*.headerAddEvent {
   position: absolute;
   top: calc(15% - 95px);
   left: calc(20% - -50px);
   z-index: 2;
-}
+}*/
 
- .headerAddEvent div {
-  float: right;
+.addevent #addeventtitle {
   color: #5379fa !important;
   font-family: 'Exo', sans-serif;
   text-transform: uppercase;
   font-size: 30px;
   font-weight: 500;
-  margin-top: 100px;
+  z-index: 2;
+  margin-left: 6%;
 }
 
-.addevent {
+#addEventDiv {
+  vertical-align:middle;
+  margin-left: 30%;
+  margin-right: 20%;
+}
+#addEventForm {
+/*  padding-top: 2%;*/
+  vertical-align:middle;
+  margin-left: auto;
+  margin-right:auto;
+
+}
+/* .headerAddEvent div {
+}*/
+
+/*.addevent {
   position: absolute;
   top: calc(15% - 75px);
   left: calc(20% - 50px);
@@ -454,7 +473,7 @@ body {
   padding: 10px;
   z-index: 3;
   margin-top: 100px;
-}
+}*/
 
 .addevent input[type=text] {
   width: 350px;
@@ -617,7 +636,7 @@ body {
   text-align: center;
   */
   margin-left:10%;
-  color: #bca2e6;
+  color: #d4c9e7;
 }
 
 .top10Heading {
@@ -794,6 +813,7 @@ body {
   color: #fff;
   font-family: 'Exo', sans-serif;
 }
+
 /* add event page */
 .containersAddEventGradient {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
@@ -818,19 +838,6 @@ body {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   z-index: 2; /*https://developer.mozilla.org/en-US/docs/Web/CSS/z-index*/
-
-}
-
-#addEventDiv {
-  vertical-align:middle;
-  margin-left: 30%;
-  margin-right:20%;
-}
-#addEventForm {
-  padding-top: 2%;
-  vertical-align:middle;
-  margin-left: auto;
-  margin-right:auto;
 
 }
 
