@@ -1,7 +1,9 @@
 
 <div data-ng-init="getEvent()" class="col-md-12 eventView" id='event-container'>
-  <span class="col-md-11">
-      <img id='eventimage' ng-hide='data.event_image===undefined' ng-src='{{(data.event_image | linkFormat) || "./images/stock.jpg"}}' alt="Not Working"/>
+  <span class="col-md-12 col-sm-12 col-xs-12">
+    <span class="col-md-12 col-sm-12 col-xs-12">
+    <img class="col-md-3 col-md-offset-9 col-sm-8 col-sm-offset-4 col-xs-8 col-xs-offset-4" id="eventImgSize" ng-hide='data.event_image===undefined' ng-src='{{(data.event_image | linkFormat) || "./images/stock.jpg"}}' alt="Not Working"/>
+    </span>
 
     <h1>{{data.event_title}}</h1>
 

@@ -850,9 +850,12 @@ body {
   color: white;
 }
 
-#eventimage {
-  float:right;
+#eventImgSize {
+  width:200px;
+  height:200px;
 }
+
+
 
 
 
