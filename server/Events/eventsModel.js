@@ -13,7 +13,6 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  // 
   getEvent: function(id, user_id, cb) {
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
     var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON "+
@@ -23,7 +22,7 @@ module.exports = {
 
       var subscriptionQueryString = "SELECT * from users_events WHERE event_id=" + id +
                                   " and user_id=" + user_id + ";";
-      queryDB(subscriptionQueryString, function(subscribe){
+      queryDB(subscriptionQueryString, function(subscribe) {
         rows[0].subscribed = (subscribe.length !== 0);
         cb(rows);
       });
@@ -164,4 +163,3 @@ module.exports = {
   }
 
 };
-

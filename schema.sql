@@ -1,7 +1,7 @@
 -- while running psql in the terminal, run '\i path/to/schema.sql' to generate db and tables locally
 
--- CREATE DATABASE polartiger;
--- \connect polartiger
+-- CREATE DATABASE yourdbname;
+-- \connect yourdbname
 
 -- ---
 -- Globals
@@ -14,7 +14,6 @@
 -- Table 'users'
 --
 -- ---
-
 
 CREATE TABLE "users" (
   "id" SERIAL NOT NULL,
@@ -53,7 +52,6 @@ ALTER TABLE events ADD UNIQUE (event_title);
 --
 -- ---
 
-
 CREATE TABLE "users_events" (
   "id" SERIAL NOT NULL,
   "user_id" INTEGER NULL DEFAULT NULL,
@@ -82,11 +80,3 @@ CREATE TABLE "notifications" (
 ALTER TABLE "users_events" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "users_events" ADD FOREIGN KEY ("event_id") REFERENCES "events" ("id");
 ALTER TABLE "notifications" ADD FOREIGN KEY ("event_id") REFERENCES "events" ("id");
-
--- INSERT INTO users (username, password, email) values ('John', '1234', 'tryfomo@gmail.com');
--- INSERT INTO events (event_info, event_title, event_category) values ('test event info', 'event1', 'concert');
--- INSERT INTO users_events (user_id, event_id) values (1, 1);
-
--- INSERT INTO users (username, password, email) values ('Jane', '4567', 'tryfomo@gmail.com');
--- INSERT INTO events (event_info, event_title, event_category) values ('test event info 2', 'event2', 'music');
--- INSERT INTO users_events (user_id, event_id) values (2, 2);

@@ -25,4 +25,3 @@ module.exports = function (app) {
 
   app.get('/popularevent', eventController.getPopularEvents);
 };
-

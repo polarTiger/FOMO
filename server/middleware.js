@@ -13,7 +13,6 @@ module.exports = function (app, express) {
 
   app.use(express.static(__dirname + '/../client'));
   app.use(favicon(path.join(__dirname, '/../client/styles/favicon.ico')));
-  app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 

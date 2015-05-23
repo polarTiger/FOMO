@@ -2,11 +2,9 @@ var pg = require('pg');
 var dbUrl = process.env.DATABASE_URL || require('../dbConfig/dbConfig');
 
 module.exports = {
-
   //General function that queries the database given a mySQL query string
   queryDB: function(queryString, cb) {
     pg.connect(dbUrl, function(err, client, done) {
-
         if(err) {
           return console.error('error fetching client from pool', err);
         }
