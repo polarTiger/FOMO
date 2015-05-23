@@ -10,7 +10,7 @@
       <div class="icon-list">
         <div id="navlogo">FOMO<span> <span>|</span> fear of missing out</span></div>
 
-        <a ng-if="root.loggedIn===true" ng-click="logout()"><i class="fa fa-sign-out"></i><span ng-bind='"log out"'></span></a>
+        <a href ng-if="root.loggedIn===true" ng-click="logout()"><i class="fa fa-sign-out"></i><span ng-bind='"log out"'></span></a>
 
         <a ng-if="root.loggedIn===false" href="#/signin"><i class="fa fa-fw fa-sign-in"></i><span ng-bind='"sign in"'></a>
 
