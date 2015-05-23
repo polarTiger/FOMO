@@ -54,6 +54,9 @@ Add Event:
 (http://gdurl.com/HBA6)
 
 
+Event Page:
+![Image of Event Page]
+(http://gdurl.com/IGyy)
 
 ## Team
 
