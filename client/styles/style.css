@@ -795,9 +795,12 @@ body {
   color: white;
 }
 
-#eventimage {
-  float:right;
+#eventImgSize {
+  width:auto;
+  height:200px;
 }
+
+
 
 
 

@@ -10,13 +10,13 @@
 </div>
 
 <div class="row searchContent" ng-repeat="event in events | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
-  <div>
-    <span id="eventname" class="col-md-4 col-xs-4"><a href="#/event/{{event.id}}"><span class="displayResult">{{event.event_title}}</span></a></span>
+  <span id="eventname" class="col-md-4 col-xs-4"><a href="#/event/{{event.id}}"><span class="displayResult">{{event.event_title}}</span></a></span>
 
-    <span id="category" class="col-md-3 col-xs-3"><span class="displayResult">{{event.event_category}}</span></span>
+  <span id="category" class="col-md-3 col-xs-3 displayResult">{{event.event_category}}</span>
 
-    <span class="col-md-3 col-xs-3"><span  ng-show="event.event_link !== null"><a href='{{event.event_link | linkFormat}}' target="_blank"><span class="displayResult">Click Here!</span></a></span></span>
+  <span class="col-md-3 col-xs-3"><span  ng-show="event.event_link !== null"><a href='{{event.event_link | linkFormat}}' target="_blank"><span class="displayResult">Click Here!</span></a></span></span>
 
-    <span class="col-md-2 col-xs-2" ng-show="event.notification_date !== null"><span class="displayResult">{{convertToLocalTime(event.notification_date, event.notification_time) | date }}</span></span>
-  </div>
+  <span class="col-md-2 col-xs-2" ng-show="event.notification_date !== null"><span class="displayResult">{{convertToLocalTime(event.notification_date, event.notification_time) | date }}</span></span>
 </div>
+
+
