@@ -1,8 +1,8 @@
-function handleResize(){
+function handleResize() {
   document.body.style.height='100vh';
 }
 
-function handleScroll(){
+function handleScroll() {
   document.body.style.backgroundRepeat = "repeat-y";
 }
 

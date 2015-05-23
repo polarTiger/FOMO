@@ -26,7 +26,6 @@
       <span ng-show='eventUrl'>[Optional] Have an image url link?</span>
     </div>
 
-    <!-- conditional validation: http://stackoverflow.com/questions/13466133/how-can-i-conditionally-require-form-inputs-with-angularjs -->
     <label for="dateInfo" class="addEventFieldTitle">Date & Time</label>
     <div class="form-group">
       <input ng-focus="toggleEventDate();toggleEventText()" ng-blur="toggleEventDate()" type="date" id="add-event-date" name="input" ng-model="event.notifydate" ng-required='event.notifytime'/>
