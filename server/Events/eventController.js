@@ -15,6 +15,10 @@ var eventfulKey = process.env.EVENTFULKEY || require('./eventfulAPIKey');
 var eventfulClient = new eventful.Client(eventfulKey);
 var fetchedEvent = false;
 
+var MAX_TITLE = 50;
+var MAX_INFO = 1000;
+var MAX_LINK = 200;
+
 
 //This function takes params from the triggerEvent function and sends the actual email
 var sendEmail = function(emails, image, link, title, eventInfo, res) {
@@ -172,9 +176,16 @@ module.exports = {
 
   //Calls the  addEvent function in the eventsModel file with the event information from the req.body and user id
   addEvent: function(req, res) {
-    db.addEvent(req.body, req.session.passport.user.id, function(){
-      res.end();
-    });
+    if (String(req.body.name).length > MAX_TITLE || 
+        String(req.body.info).length > MAX_INFO || 
+        String(req.body.link).length > MAX_LINK ||
+        String(req.body.imgUrl).length > MAX_LINK) {
+      res.send(400);
+    } else {
+      db.addEvent(req.body, req.session.passport.user.id, function(){
+        res.end();
+      });
+    }
   },
 
   // Prepares data and passes it to the send email function

@@ -6,6 +6,10 @@ angular.module('fomo.addEvent', [])
     $state.go('signin');
     return;
   }
+
+  $scope.MAX_TITLE = 50;
+  $scope.MAX_INFO = 1000;
+  $scope.MAX_LINK = 200;
   var categories = ['music', 'sports', 'outdoors', 'food', 'tech', 'travel', 'business', 'health', 'other'];
   $scope.queryresult = [];
   $scope.eventText = true;
