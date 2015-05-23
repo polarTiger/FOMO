@@ -831,6 +831,12 @@ body {
   }
 }
 
+@media (max-width: 500px) {
+  .titleFont{
+    font-size:70%;
+  }
+}
+
 #fomoTitle {
   color: white !important;
   font-color: white !important;
@@ -840,4 +846,6 @@ body {
 .row, span {
     overflow-wrap: break-word;
 }
+
+
 

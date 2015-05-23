@@ -3,10 +3,10 @@
 </div>
 
 <div class="row column-headings searchHeading">
-  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-4 col-xs-4"><span class="displayResult">Event</span></span></a>
-  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3"><span class="displayResult">Category</span></span></a>
-  <span class="col-md-3 col-xs-3"><span class="displayResult">Link</span></span>
-  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-md-2 col-xs-2"><span class="displayResult">Date</span></span></a>
+  <a href="#" ng-click="orderVariable='event_title'"><span class="col-lg-4 col-md-4 col-xs-4"><span class="displayResult"><label class="titleFont">Event</label></span></span></a>
+  <a href="#" ng-click="orderVariable='event_category'"><span class="col-lg-3 col-md-3 col-xs-3"><span class="displayResult" id="test"><label class="titleFont">Category</label></span></span></a>
+  <span class="col-md-3 col-xs-3"><span class="displayResult"><label class="titleFont">Link</label></span></span>
+  <a href="#" ng-click="orderVariable='notification_date'"><span class="col-lg-2 col-md-2 col-xs-2"><span class="displayResult" id="test"><label class="titleFont">Date</label></span></span></a>
 </div>
 
 <div class="row searchContent" ng-repeat="event in events | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
