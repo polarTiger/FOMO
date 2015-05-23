@@ -39,12 +39,10 @@ var sendEmail = function(emails, image, link, title, eventInfo, res) {
     if(error) {
       if(res) {
         res.send(500);
-        console.log(error);
       }
     } else {
       if(res) {
         res.send(200);
-        console.log('Message sent: ' + info.response);
       }
     }
   });
@@ -98,7 +96,6 @@ var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
     if(err){
       return console.error(err);
     }
-    console.log('Recieved ' + data.search.total_items + ' events');
 
     // iterate through each events obj 
     for (var i = 0; i < data.search.events.event.length; i++) {
@@ -113,9 +110,7 @@ var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
         notifytime: data.search.events.event[i].start_time.slice(11,16)
        };
       // write the event to db
-      db.putEventFromWebToDB(eventfulObj, function(){
-        console.log('write to db...');
-      });
+      db.putEventFromWebToDB(eventfulObj, function(){});
     }
   });
 }
@@ -136,7 +131,7 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '17:39') { // let server do fetch the eventful API every day at 19:00 UTC time
+  if (serverTime === '19:00') { // let server do fetch the eventful API every day at 19:00 UTC time
 
     if ( fetchedEvent === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
@@ -169,7 +164,6 @@ module.exports = {
     var id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user ? req.session.passport.user.id : 0;
     db.getEvent(id, user_id, function(rows) {
-      console.log(rows[0]);
       res.end(JSON.stringify(rows[0]));
     });
   },
@@ -219,9 +213,6 @@ module.exports = {
          var serverDate = new Date().toJSON(); // date in UTC
          var serverTime = serverDate.slice(11,16); // formatted YYYY-MM-DD in UTC
          serverDate = serverDate.slice(0,10); // formatted HH:MM in UTC
-
-         console.log("serverDate: ", serverDate);
-         console.log("serverTime", serverTime);
 
          var date = {
            serverDate: serverDate,
@@ -286,7 +277,6 @@ module.exports = {
       db.changeSubscriberCount(event_id, 1, function() {
         res.end();
       });
-      //res.end();
     });
   },
 
@@ -299,7 +289,6 @@ module.exports = {
       db.changeSubscriberCount(event_id, -1, function() {
         res.end();
       });
-      //res.end();
     });
   }
 };

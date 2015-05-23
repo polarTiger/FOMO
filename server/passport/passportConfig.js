@@ -4,7 +4,6 @@ var bcrypt = require('bcrypt-nodejs');
 var User = require('../Users/userModel');
 
 passport.use(new LocalStrategy(function(username, password, done) {
-  console.log('here inside passport.use');
   new User({username: username}).fetch().then(
     function(data) {
       var user = data;

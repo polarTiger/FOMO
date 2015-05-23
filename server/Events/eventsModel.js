@@ -13,7 +13,7 @@ module.exports = {
     queryDB(queryString, cb);
   },
 
-  //NEEDS COMMENT
+  // 
   getEvent: function(id, user_id, cb) {
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
     var queryString = queryStart + " FROM events LEFT OUTER JOIN notifications ON "+
@@ -121,12 +121,10 @@ module.exports = {
   // change # of subscriber of the events by +1 or -1 depends on if the user subscribe or unsubscribe
   changeSubscriberCount: function(event_id, change, cb) {
     var queryString = "UPDATE  events set no_of_subscriber=no_of_subscriber+"+ change + " WHERE id=" + event_id +";";
-    //console.log(queryString);
     queryDB(queryString, cb);
   },
 
   addEvent: function(body, user_id, cb) {
-    console.log("TESTING ADD EVENT CALLED", body);
     var formattedNotifyDate = body.notifydate;
     var formattedNotifyTime = null;
 

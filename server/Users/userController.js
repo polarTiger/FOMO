@@ -44,12 +44,10 @@ module.exports = {
   signedIn: function(req, res) {
 
     var result = req.session.passport.user ? req.session.passport.user.username : null; 
-    console.log('signed in? ', result);
     res.send(result);
   }, 
 
   signUpPost : function(req, res, next) {
-    console.log('inside Sign up post');
     var user = req.body;
     var usernamePromise = null;
     usernamePromise = new User({username: user.username}).fetch();
@@ -58,9 +56,6 @@ module.exports = {
       if(model) {
          res.end('already exists');
       } else {
-        //****************************************************//
-        // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
-        //****************************************************//
         var password = user.password;
         var hash = bcrypt.hashSync(password);
         var emailCode = uniqueEmailCode();
@@ -88,7 +83,6 @@ module.exports = {
     passport.authenticate('local', { failureRedirect: '/login'}),
 
   signout: function(req, res, next) {
-    console.log('signout');
     req.session.destroy();
     delete req.session;
     res.end();

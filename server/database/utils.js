@@ -5,7 +5,6 @@ module.exports = {
 
   //General function that queries the database given a mySQL query string
   queryDB: function(queryString, cb) {
-    console.log(queryString);
     pg.connect(dbUrl, function(err, client, done) {
 
         if(err) {
@@ -19,13 +18,12 @@ module.exports = {
           } else {
             cb(result.rows);
           }
-          //output: 1
         });
       });
       pg.end();
     },
 
-  //NEEDS COMMENT
+  // 
   selectColumnsFromTablesAsExcept: function(tableColumns) {
     return function(tables, as, except){
       as = as || {};
@@ -54,11 +52,8 @@ module.exports = {
     'users': ['id', 'username', 'password',  'email', 'verification_hash', 'verified', 'timestamp'],
     'users_events': ['id', 'event_id', 'user_id']
   },
-
-  /*
-   * Generates a unique id
-   * http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-   */ 
+ 
+  // Generate a unique id
   uniqueEmailCode: function() {
     var d = new Date().getTime();
     var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
