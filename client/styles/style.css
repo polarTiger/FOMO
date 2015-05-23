@@ -823,10 +823,14 @@ body {
 
 @media (max-width: 500px) {
   .fomo {
-    font-size:85%;
-    color:white;
-    text-color: white;
+    font-size:90%;
   }
+}
+
+#fomoTitle {
+  color: white !important;
+  font-color: white !important;
+  font-weight: 200;
 }
 
 
