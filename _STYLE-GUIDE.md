@@ -357,25 +357,3 @@ When writing any block of code that is logically subordinate to the line immedia
     var cat = "cat";
     ```
 
-
-### HTML
-
-* Do not use ids for html elements. Use a class instead.
-
-    ```html
-    <!-- good -->
-    <img class="lucy" />
-
-    <!-- bad -->
-    <img id="lucy" />
-    ```
-
-* Do not include a `type=text/javascript"` attribute on script tags
-
-    ```html
-    <!-- good -->
-    <script src="a.js"></script>
-
-    <!-- bad -->
-    <script src="a.js" type="text/javascript"></script>
-    ```

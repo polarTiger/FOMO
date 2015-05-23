@@ -25,11 +25,6 @@ module.exports = {
       pg.end();
     },
 
-  //NEEDS COMMENT 
-  sanitizeString: function(str) {
-    return str.replace(/'/g,"''");
-  },
-
   //NEEDS COMMENT
   selectColumnsFromTablesAsExcept: function(tableColumns) {
     return function(tables, as, except){
