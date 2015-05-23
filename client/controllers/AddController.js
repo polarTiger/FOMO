@@ -43,8 +43,6 @@ angular.module('fomo.addEvent', [])
   $scope.event = {
     categories: categories,
     category: categories[0]
-    // https://docs.angularjs.org/api/ng/input/input%5Bdatetime-local%5D
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   };
 
   $scope.submitEvent = function(){

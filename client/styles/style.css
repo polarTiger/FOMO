@@ -795,9 +795,9 @@ body {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .fomo {
-    font-size:90%;
+    font-size:60%;
   }
 }
 
@@ -810,7 +810,7 @@ body {
 #fomoTitle {
   color: white !important;
   font-color: white !important;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 .row, span {

@@ -11,7 +11,6 @@ angular.module('fomo.signup', [])
     });
   };
   $scope.signup = function() {
-    // http://www.ng-newsletter.com/posts/validations.html
     $scope.passwordMismatch = false;
     $scope.userAlreadyExist = false;
     $scope.emailAlreadyExist = false;
@@ -27,24 +26,23 @@ angular.module('fomo.signup', [])
 
       $http.post('api/users/signup', userObj)
           .success(function(data, status, headers, config) {
-          if (data === 'already exists') {
-            $scope.userAlreadyExist = true;
-          } else if(data === 'email exists') {
-            $scope.emailAlreadyExist = true;
-          } else {
-
-          $scope.userAlreadyExist = false;
-          $scope.emailAlreadyExist = false;
-          $http.post('api/users/signin', userObj)
-            .success(function(data, status, headers, config) {
-              LoggedInService.setLoggedIn(true);
-              LoggedInService.setUserName(userObj.username);
-              $state.go('home');
-            });
-          }
-        })
-        .error(function(data, status, headers, config) {
-        });
+            if (data === 'already exists') {
+              $scope.userAlreadyExist = true;
+            } else if(data === 'email exists') {
+              $scope.emailAlreadyExist = true;
+            } else {
+              $scope.userAlreadyExist = false;
+              $scope.emailAlreadyExist = false;
+              $http.post('api/users/signin', userObj)
+                .success(function(data, status, headers, config) {
+                  LoggedInService.setLoggedIn(true);
+                  LoggedInService.setUserName(userObj.username);
+                  $state.go('home');
+              });
+            }
+          })
+          .error(function(data, status, headers, config) {
+          });
     } else {
       $scope.signupForm.submitted = true;
     }
