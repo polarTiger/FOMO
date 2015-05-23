@@ -16,8 +16,6 @@
         <input id='updatebtn' type="submit" ng-disabled="eventForm.$invalid" class="btn btn-primary col-md-1 form-group" ng-click="submitNewNotificationDate(); setEditAttribute('Date', !editDate)" value='Update Date'>
         <input type="date" id="eventViewInfoBox" name="input" ng-model="data.notification_datenew" ng-required='data.notification_timenew'/>
         <input type="time" id="eventViewInfoBox" name="input" ng-model="data.notification_timenew"/>
-        <!--  http://stackoverflow.com/questions/16251977/angularjs-toggle-button -->
-        
       </form>
     </div>
 
@@ -28,10 +26,9 @@
       <form class="row" ng-show="editInfo" novalidate name="infoForm" class="form-block" role="form">
         <input type="submit" id='updatebtn' class="btn btn-primary col-md-1" ng-click="submitInfo(); setEditAttribute('Info', !editInfo)" value='Update Info'>
         <textarea maxlength="1000" name="info" ng-model="data.event_infonew" ng-minlength="1" class="col-md-6" style="height: 120px;" id="eventViewInfoBox"></textarea>
-        
       </form>
     </div>
-    
+
     <a href="{{data.event_link | linkFormat}}" target="_blank"><span id="eventLink">{{data.event_link}}</span></a>
 
     <HR>

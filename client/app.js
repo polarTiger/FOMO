@@ -19,17 +19,13 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       LoggedInService.getLoggedIn(function(){
         if (!LoggedInService.isLoggedIn()) {
           deferred.resolve();
-          console.log('not logged in');
           $rootScope.changing["name"] = null;
 
         } else {
-          console.log('logged in');
           deferred.reject('logged in');
           $rootScope.changing["name"] = null;
         }
       });
-
-      console.log('in logged in promise');
 
       return deferred.promise;
     }];
@@ -41,7 +37,6 @@ angular.module('fomo', ['ui.router', 'fomo.event',
           nav: {
             templateUrl: './views/navView.html',
             controller: 'NavController'
-            // http://stackoverflow.com/questions/29576063/how-to-attach-navbar-only-on-certain-pages-using-ui-router
           },
           main_content: {
             templateUrl: './views/resultsView.html',
@@ -98,7 +93,7 @@ angular.module('fomo', ['ui.router', 'fomo.event',
       }
     })
     .state('event', {
-      url: '/event/:eventID',  // change to /event/:eventId
+      url: '/event/:eventID',
       views: {
         nav: {
            templateUrl: './views/navView.html',
@@ -130,7 +125,6 @@ angular.module('fomo', ['ui.router', 'fomo.event',
    // register listener to watch route changes
   $rootScope.$on('$stateChangeError', function () {
      // Redirect user to our home page
-    console.log('error: logged in already');
     $state.go('home');
   });
 })
