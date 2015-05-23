@@ -58,9 +58,6 @@ module.exports = {
       if(model) {
          res.end('already exists');
       } else {
-        //****************************************************//
-        // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
-        //****************************************************//
         var password = user.password;
         var hash = bcrypt.hashSync(password);
         var emailCode = uniqueEmailCode();

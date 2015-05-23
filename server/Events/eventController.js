@@ -136,7 +136,7 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '17:39') { // let server do fetch the eventful API every day at 19:00 UTC time
+  if (serverTime === '19:00') { // let server do fetch the eventful API every day at 19:00 UTC time
 
     if ( fetchedEvent === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
@@ -286,7 +286,6 @@ module.exports = {
       db.changeSubscriberCount(event_id, 1, function() {
         res.end();
       });
-      //res.end();
     });
   },
 
@@ -299,7 +298,6 @@ module.exports = {
       db.changeSubscriberCount(event_id, -1, function() {
         res.end();
       });
-      //res.end();
     });
   }
 };
