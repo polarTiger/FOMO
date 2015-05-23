@@ -29,16 +29,13 @@ angular.module('fomo.navcontroller', [])
   $scope.getUsername = function() {
     $scope.username = LoggedInService.getUserName();
   };
-  //$scope.user = $rootScope.root.user;
   $scope.getLoggedIn();
 
-  console.log('NavController initialized');
   var bodyEl = document.body,
     content = document.querySelector('.content-wrap'),
     openbtn = document.getElementById('open-button'),
     closebtn = document.getElementById('close-button'),
     isOpen = false;
-    console.log('openbtn: ', openbtn);
   function init() {
     initEvents();
   }
@@ -48,14 +45,6 @@ angular.module('fomo.navcontroller', [])
     if(closebtn) {
       closebtn.addEventListener( 'click', toggleMenu );
     }
-
-    // close the menu element if anywhere on the page is clicked
-    // content.addEventListener( 'click', function(ev) {
-    //   var target = ev.target;
-    //   if( isOpen && target !== openbtn ) {
-    //     toggleMenu();
-    //   }
-    // } );
   }
 
   function toggleMenu() {

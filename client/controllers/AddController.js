@@ -48,7 +48,6 @@ angular.module('fomo.addEvent', [])
   };
 
   $scope.submitEvent = function(){
-    //console.log("$scope.event", $scope.event);
     AddEventService.postEvent($scope.event);
     $state.go('user');
   };
