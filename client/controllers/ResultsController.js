@@ -20,5 +20,6 @@ angular.module('fomo.results', ['customFilters'])
           $scope.events = data;
       });
     };
+    
     $scope.genPopularEvent();
 }]);

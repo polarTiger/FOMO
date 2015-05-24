@@ -26,7 +26,6 @@ angular.module('fomo', ['ui.router', 'fomo.event',
           $rootScope.changing["name"] = null;
         }
       });
-
       return deferred.promise;
     }];
 
