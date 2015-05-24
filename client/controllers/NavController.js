@@ -1,13 +1,3 @@
-/**
- * main.js
- * http://www.codrops.com
- *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- *
- * Copyright 2014, Codrops
- * http://www.codrops.com
- */
 angular.module('fomo.navcontroller', [])
 
 .controller('NavController', ['$scope', '$http', '$state', 'LoggedInService', function($scope, $http, $state, LoggedInService) {
@@ -29,16 +19,14 @@ angular.module('fomo.navcontroller', [])
   $scope.getUsername = function() {
     $scope.username = LoggedInService.getUserName();
   };
-  //$scope.user = $rootScope.root.user;
   $scope.getLoggedIn();
 
-  console.log('NavController initialized');
   var bodyEl = document.body,
-    content = document.querySelector('.content-wrap'),
-    openbtn = document.getElementById('open-button'),
-    closebtn = document.getElementById('close-button'),
-    isOpen = false;
-    console.log('openbtn: ', openbtn);
+      content = document.querySelector('.content-wrap'),
+      openbtn = document.getElementById('open-button'),
+      closebtn = document.getElementById('close-button'),
+      isOpen = false;
+
   function init() {
     initEvents();
   }
@@ -48,21 +36,12 @@ angular.module('fomo.navcontroller', [])
     if(closebtn) {
       closebtn.addEventListener( 'click', toggleMenu );
     }
-
-    // close the menu element if anywhere on the page is clicked
-    // content.addEventListener( 'click', function(ev) {
-    //   var target = ev.target;
-    //   if( isOpen && target !== openbtn ) {
-    //     toggleMenu();
-    //   }
-    // } );
   }
 
   function toggleMenu() {
     if(isOpen) {
       classie.remove( bodyEl, 'show-menu' );
-    }
-    else {
+    } else {
       classie.add( bodyEl, 'show-menu' );
     }
     isOpen = !isOpen;

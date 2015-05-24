@@ -9,18 +9,17 @@ angular.module('fomo.results', ['customFilters'])
       SearchService.searchPopular()
       .success(function(data,status){
         $scope.popularEvents = data;
-        console.log('popularEvents are ',$scope.popularEvents );
       });
     };
 
     $scope.orderVariable = 'event_title';
-    
+
     $scope.submit = function() {
       SearchService.searchWithQuery($scope.query)
         .success(function(data, status) {
-          $log.log(data);
           $scope.events = data;
       });
     };
+    
     $scope.genPopularEvent();
 }]);

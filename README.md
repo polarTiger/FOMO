@@ -39,9 +39,24 @@ Angular, Node/Express, PostgreSQL, Mocha/Chai, Bookshelf
 
 ## Screenshots
 
-Event View:
-![Image of Event View]
-(http://gdurl.com/2erH)
+Sign-In:
+![Image of Sign-in]
+(http://gdurl.com/u2kL)
+
+
+Homepage:
+![Image of Homepage]
+(http://gdurl.com/yIeO)
+
+
+Add Event:
+![Image of Add Event Page]
+(http://gdurl.com/HBA6)
+
+
+Event Page:
+![Image of Event Page]
+(http://gdurl.com/IGyy)
 
 ## Team
 

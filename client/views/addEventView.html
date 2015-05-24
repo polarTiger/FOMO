@@ -1,38 +1,31 @@
 
-<div class="grad1"></div>
-<div class="containerAddEvent"></div>
-
-<div class="headerAddEvent">
-  <div>Add Event</div>
-</div>
-
 <div class="addevent">
-
+  <div class="containerAddEvent"></div>
+  <div id="addeventtitle">Add Event</div>
   <form novalidate name="eventForm" class="form-block" role="form" id="addEventForm">
 
     <div class="form-group">
-      <input ng-focus="toggleEventText()" type="text" placeholder="Event name*" name="name" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()"
+      <input maxLength="50" ng-focus="toggleEventText()" type="text" placeholder="Event name*" name="name" ng-model="event.name" ng-required="true" ng-change="liveSearchEventTitle()"
       ng-class="{'invalidTxtBox': queryresult.length > 0 || event.name.length === 0 }" />
       <span ng-show='eventText'>Begin by filling in your event name [*required].</span>
       <span ng-show="queryresult.length > 0 && eventIsInQuery()" id="dupevent">Event already exists - choose another name!</span>
     </div>
 
     <div class="form-group">
-      <textarea ng-focus="toggleEventInfo();toggleEventText()" ng-blur="toggleEventInfo()"name="info" ng-model="event.info" ng-minlength="2" ng-required="true" placeholder="Info*"></textarea>
+      <textarea maxlength="1000" ng-focus="toggleEventInfo();toggleEventText()" ng-blur="toggleEventInfo()"name="info" ng-model="event.info" ng-minlength="2" ng-required="true" placeholder="Info*"></textarea>
       <span ng-show='eventInfo'>Say more about your event [*required].</span>
     </div>
 
     <div class="form-group">
-      <input ng-focus="toggleEventLink();toggleEventText()" ng-blur="toggleEventLink()" type="text" placeholder="Link" ng-model="event.link"/>
+      <input maxlength="200" ng-focus="toggleEventLink();toggleEventText()" ng-blur="toggleEventLink()" type="text" placeholder="Link" ng-model="event.link"/>
       <span ng-show='eventLink'>[Optional] Include an information link.</span>
     </div>
 
     <div class="form-group">
-      <input ng-focus="toggleEventUrl();toggleEventText()" ng-blur="toggleEventUrl()" type="text" placeholder="Image Url" ng-model="event.imgUrl"/>
+      <input maxlength="200" ng-focus="toggleEventUrl();toggleEventText()" ng-blur="toggleEventUrl()" type="text" placeholder="Image Url" ng-model="event.imgUrl"/>
       <span ng-show='eventUrl'>[Optional] Have an image url link?</span>
     </div>
 
-    <!-- conditional validation: http://stackoverflow.com/questions/13466133/how-can-i-conditionally-require-form-inputs-with-angularjs -->
     <label for="dateInfo" class="addEventFieldTitle">Date & Time</label>
     <div class="form-group">
       <input ng-focus="toggleEventDate();toggleEventText()" ng-blur="toggleEventDate()" type="date" id="add-event-date" name="input" ng-model="event.notifydate" ng-required='event.notifytime'/>

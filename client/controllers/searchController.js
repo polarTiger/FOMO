@@ -10,22 +10,17 @@ angular.module('fomo.search', ['customFilters'])
     $scope.event = {
       categories: categories,
       category: categories[0]
-      // https://docs.angularjs.org/api/ng/input/input%5Bdatetime-local%5D
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
     };
 
     $scope.submit = function() {
-      $log.log($scope);
       var normalizedCategcory = $scope.event.category === "all" ? null : $scope.event.category;
       SearchService.searchWithQuery($scope.query, normalizedCategcory)
         .success(function(data, status) {
-          $log.log(data);
           $scope.events = data;
       });
     };
 
     $scope.liveSearchEventTitle = function(){
-      $log.log($scope);
       var normalizedCategcory = $scope.event.category === "all" ? null : $scope.event.category;
       SearchService.searchWithQuery($scope.event.name, normalizedCategcory)
         .success(function(data, status) {
@@ -35,7 +30,6 @@ angular.module('fomo.search', ['customFilters'])
           } else {
             $scope.searched = false;
           }
-          //$scope.events = data;
       });
     };
 
@@ -55,14 +49,13 @@ angular.module('fomo.search', ['customFilters'])
         var dbDayNotify = date.slice(8,10);
         var dbHourNotify = time ? parseInt(time.slice(0,2)) : 0;
         var dbMinNotify = time ? parseInt(time.slice(3,5)) : 1;
-      
+
         time = new Date(Date.UTC(dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify));
         date = new Date(Date.UTC(dbYearNotify, dbMonthNotify, dbDayNotify, dbHourNotify, dbMinNotify));
-        console.log(date);
         return date;
       }
       else {
         return "";
       }
-    }
+    };
 }]);

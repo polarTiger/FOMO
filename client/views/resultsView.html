@@ -4,9 +4,9 @@
 
 
 <div class="row column-headings top10Heading">
-  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-6 col-xs-6" style="color:white;">EVENT</span></a>
-  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3" style="color:white;">CATEGORY</span></a>
-  <span class="col-md-3 col-xs-3" style="color:white;"> LINK</span>
+  <a href="#" ng-click="orderVariable='event_title'"><span class="col-md-6 col-xs-6" style="color:white;"><label class="titleFont">EVENT</label></span></a>
+  <a href="#" ng-click="orderVariable='event_category'"><span class="col-md-3 col-xs-3" style="color:white;"><label class="titleFont">CATEGORY </label></span></a>
+  <span class="col-md-3 col-xs-3" style="color:white;"> <label class="titleFont">   LINK</label></span>
 </div>
 
 <div class="row top10Style" ng-repeat="event in popularEvents | orderBy:orderVariable" ng-click="selection(event)" ng-class="{'top10Odd': $odd , 'top10Even': $even}">
@@ -18,5 +18,3 @@
     <span class="col-md-3 col-xs-3" ng-show="event.event_link !== null"><a href="{{event.event_link | linkFormat}}" target="_blank"><span class="displayResult">More Info</span></a></span>
   </div>
 </div>
-
-

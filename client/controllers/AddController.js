@@ -6,6 +6,10 @@ angular.module('fomo.addEvent', [])
     $state.go('signin');
     return;
   }
+
+  $scope.MAX_TITLE = 50;
+  $scope.MAX_INFO = 1000;
+  $scope.MAX_LINK = 200;
   var categories = ['music', 'sports', 'outdoors', 'food', 'tech', 'travel', 'business', 'health', 'other'];
   $scope.queryresult = [];
   $scope.eventText = true;
@@ -39,12 +43,9 @@ angular.module('fomo.addEvent', [])
   $scope.event = {
     categories: categories,
     category: categories[0]
-    // https://docs.angularjs.org/api/ng/input/input%5Bdatetime-local%5D
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   };
 
   $scope.submitEvent = function(){
-    //console.log("$scope.event", $scope.event);
     AddEventService.postEvent($scope.event);
     $state.go('user');
   };

@@ -2,7 +2,7 @@ var pg = require('pg');
 var dbUrl = process.env.DATABASE_URL || require('../dbConfig/dbConfig');
 var nodemailer = require('nodemailer');
 
-if (process.env.EMAILADDRESS){
+if (process.env.EMAILADDRESS) {
   var emailInfo = {user: process.env.EMAILADDRESS,
                    pass:  process.env.EMAILPASSWORD};
 } else {
@@ -15,14 +15,20 @@ var eventfulKey = process.env.EVENTFULKEY || require('./eventfulAPIKey');
 var eventfulClient = new eventful.Client(eventfulKey);
 var fetchedEvent = false;
 
+var MAX_TITLE = 50;
+var MAX_INFO = 1000;
+var MAX_LINK = 200;
 
-//This function takes params from the triggerEvent function and sends the actual email
+
+// This function takes params from the triggerEvent function and sends the actual email
 var sendEmail = function(emails, image, link, title, eventInfo, res) {
   image = image || "http://wfive.files.wordpress.com/2012/11/keep-calm-and-say-no-to-fomo2.png"; //Change url when deployed
+
   var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: emailInfo
   });
+
   var mailOptions = {
     from: 'FOMO <tryfomo@gmail.com>',
     to: '' + emails,
@@ -31,22 +37,20 @@ var sendEmail = function(emails, image, link, title, eventInfo, res) {
     html: '<h2><b>'+ title + '</b></h2> <br> <img src='+ image + ' height="200"> <br> <p>Event Info: '+ eventInfo + '</p> <br> <p>' + link + '</p>',
   };
 
-  transporter.sendMail(mailOptions, function(error, info){
+  transporter.sendMail(mailOptions, function(error, info) {
     if(error) {
       if(res) {
         res.send(500);
-        console.log(error);
       }
     } else {
       if(res) {
         res.send(200);
-        console.log('Message sent: ' + info.response);
       }
     }
   });
 };
 
-var testTrigger = function(data, i){
+var testTrigger = function(data, i) {
   // if the notification date and time are both not null
   if (data[i].notification_date !== null && data[i].notification_time !== null) {
 
@@ -69,14 +73,19 @@ var testTrigger = function(data, i){
       serverDate: serverDate,
       serverTime: serverTime
     };
+
     /* if the server UTC time and date matches the db stored UTC notification date/time, and
       if that event has not been triggered, then trigger it. */
     if (serverDate === dbDate) {
       if (serverTime === dbTime && data[i].fired === null) {
-        db.setNotificationToFired(data[i].event_id, date, function(){
-          var idObj = {query: {
-            event_id: data[i].event_id
-          }};
+        db.setNotificationToFired(data[i].event_id, date, function() {
+
+          var idObj = {
+                        query:  {
+                                  event_id: data[i].event_id
+                                }
+                      };
+
           module.exports.triggerEvent(idObj);
         });
       }
@@ -85,46 +94,47 @@ var testTrigger = function(data, i){
 };
 
 var fetchEventfulEvents = function(keyword, startTimeStr, endTimeStr) {
-  eventfulClient.searchEvents({page_size: 5, // number of results
-    keywords: keyword,
-    location: 'San Francisco',
-    within: 10, // distance
-    mature: 'safe', // set content to be safe PG content
-    date: startTimeStr + '-' + endTimeStr}, function(err, data){
-    if(err){
-      return console.error(err);
-    }
-    console.log('Recieved ' + data.search.total_items + ' events');
+  eventfulClient.searchEvents(
+    {
+      page_size: 5, // number of results
+      keywords: keyword,
+      location: 'San Francisco',
+      within: 10, // distance
+      mature: 'safe', // set content to be safe PG content
+      date: startTimeStr + '-' + endTimeStr
+    }, 
+    function(err, data) {
+      if(err) {
+                return console.error(err);
+              }
 
-    // iterate through each events obj 
-    for (var i = 0; i < data.search.events.event.length; i++) {
-      // construct an event object with info to be written to db
-      var eventfulObj = {
-        name: data.search.events.event[i].title,
-        info: data.search.events.event[i].description,
-        category: keyword, 
-        link: data.search.events.event[i].url,
-        imgUrl: data.search.events.event[i].image.medium ? data.search.events.event[i].image.medium.url : data.search.events.event[i].image.url,
-        notifydate: data.search.events.event[i].start_time.slice(0,10),
-        notifytime: data.search.events.event[i].start_time.slice(11,16)
-       };
-      // write the event to db
-      db.putEventFromWebToDB(eventfulObj, function(){
-        console.log('write to db...');
-      });
-    }
-  });
+      // iterate through each events obj 
+      for (var i = 0; i < data.search.events.event.length; i++) {
+        // construct an event object with info to be written to db
+        var eventfulObj = {
+          name: data.search.events.event[i].title,
+          info: data.search.events.event[i].description,
+          category: keyword, 
+          link: data.search.events.event[i].url,
+          imgUrl: data.search.events.event[i].image.medium ? data.search.events.event[i].image.medium.url : data.search.events.event[i].image.url,
+          notifydate: data.search.events.event[i].start_time.slice(0,10),
+          notifytime: data.search.events.event[i].start_time.slice(11,16)
+         };
+        // write the event to db
+        db.putEventFromWebToDB(eventfulObj, function() {});
+      }
+   });
 }
 
 //Checks the current time against times in the database in order to automatically trigger events
-setInterval(function(){
+setInterval(function() {
   var serverDateLocal = new Date(); // generate the local date/time of the server
   var serverDate = serverDateLocal.toJSON(); // convert the server local time to UTC time
   var serverTime = serverDate.slice(11,16); // extract the UTC time string
   /* get the time as milliseconds since 1970,
     and then add 1 day of worth of milliseconds to construct end time
   */
-  var endTime = serverDateLocal.getTime()+ 24*60*60*1000;
+  var endTime = serverDateLocal.getTime() + 24*60*60*1000;
 
   serverDate = serverDate.slice(0,10);
   // eventful date formate is: YYYYMMDD00, the '00' on the end is to be appended and doesn't have real meaning
@@ -132,26 +142,26 @@ setInterval(function(){
   endTime = new Date(endTime).toJSON();
   var endTimeStr = endTime.slice(0,10).replace(/-/g, '') + '00';
 
-  if (serverTime === '17:39') { // let server do fetch the eventful API every day at 19:00 UTC time
-
+  if (serverTime === '19:00') { // let server do fetch the eventful API every day at 19:00 UTC time
     if ( fetchedEvent === false) { // if the server haven't been triggered that day to fetch eventful API yet
       // then trigger to fetch event
       fetchedEvent = true;
-
       var keywords = ['music', 'sports', 'outdoors', 'food', 'tech', 'travel', 'business', 'health'];
+
       for (var i = 0; i < keywords.length; i++) {
         fetchEventfulEvents(keywords[i], startTimeStr, endTimeStr);
       }
     }
   } else {
-    /* else, if the event has already been triggered, and has past the time '19:00'
-       say it's 19:01, then reset the trigger back to false so it can be ready to fire again
-       the next day
-    */
+    /*  else, if the event has already been triggered, and has past the time '19:00'
+     *  say it's 19:01, then reset the trigger back to false so it can be ready to fire again
+     *  the next day
+     */
     fetchedEvent = false;
   }
+
   // get all the notifications and check if the trigger time is up, if so trigger the email
-  db.getAllNotifications(function(data){
+  db.getAllNotifications(function(data) {
     notificationData = data;
     for (var i = 0; i < data.length; i++) {
       testTrigger(data, i);
@@ -165,16 +175,22 @@ module.exports = {
     var id = req.url.match(/\d+/)[0];
     var user_id = req.session.passport.user ? req.session.passport.user.id : 0;
     db.getEvent(id, user_id, function(rows) {
-      console.log(rows[0]);
       res.end(JSON.stringify(rows[0]));
     });
   },
 
   //Calls the  addEvent function in the eventsModel file with the event information from the req.body and user id
   addEvent: function(req, res) {
-    db.addEvent(req.body, req.session.passport.user.id, function(){
-      res.end();
-    });
+    if (String(req.body.name).length > MAX_TITLE || 
+        String(req.body.info).length > MAX_INFO || 
+        String(req.body.link).length > MAX_LINK ||
+        String(req.body.imgUrl).length > MAX_LINK) {
+      res.send(400);
+    } else {
+      db.addEvent(req.body, req.session.passport.user.id, function(){
+        res.end();
+      });
+    }
   },
 
   // Prepares data and passes it to the send email function
@@ -191,37 +207,33 @@ module.exports = {
         sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info, res);
       });
     });
-   },
+  },
 
-   triggerSingle: function(req, res) {
-     var eventId = req.query.event_id;
+  triggerSingle: function(req, res) {
+   var eventId = req.query.event_id;
 
-     db.getJustEventData(eventId, function(data) {
-       db.findEmailsForEvent(eventId, function(emails) {
-         emailList = [];
-         for (var i = 0; i < emails.length; i++) {
-           emailList.push(emails[i].email);
-         }
-         emailList.join(',');
-         sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info, res);
+   db.getJustEventData(eventId, function(data) {
+     db.findEmailsForEvent(eventId, function(emails) {
+       emailList = [];
+       for (var i = 0; i < emails.length; i++) {
+         emailList.push(emails[i].email);
+       }
+       emailList.join(',');
+       sendEmail(emailList, data[0].event_image, data[0].event_link, data[0].event_title, data[0].event_info, res);
 
-         var serverDate = new Date().toJSON(); // date in UTC
-         var serverTime = serverDate.slice(11,16); // formatted YYYY-MM-DD in UTC
-         serverDate = serverDate.slice(0,10); // formatted HH:MM in UTC
+       var serverDate = new Date().toJSON(); // date in UTC
+       var serverTime = serverDate.slice(11,16); // formatted YYYY-MM-DD in UTC
+       serverDate = serverDate.slice(0,10); // formatted HH:MM in UTC
 
-         console.log("serverDate: ", serverDate);
-         console.log("serverTime", serverTime);
+       var date = {
+         serverDate: serverDate,
+         serverTime: serverTime
+       };
 
-         var date = {
-           serverDate: serverDate,
-           serverTime: serverTime
-         };
-
-         db.setNotificationToFired(eventId, date, function() {
-         });
-       });
+       db.setNotificationToFired(eventId, date, function() {});
      });
-    },
+   });
+  },
 
   //Calls the searchEvents function in the eventsModel file with the query string included from the req
   searchEvents: function(req, res) {
@@ -239,7 +251,7 @@ module.exports = {
 
   //Calls the getPopularEvents function in the eventsModel file to select the most subscribed events
   getPopularEvents: function(req, res) {
-    db.getPopularEvents(function(rows){
+    db.getPopularEvents(function(rows) {
       res.end(JSON.stringify(rows));
     });
   },
@@ -247,7 +259,7 @@ module.exports = {
   //Calls the myEvents function in the evensModel file with the user id from the req
   myEvents: function(req, res) {
     var id = req.session.passport.user.id;
-    db.myEvents(id, function(rows){
+    db.myEvents(id, function(rows) {
       res.end(JSON.stringify(rows));
     });
   },
@@ -261,7 +273,7 @@ module.exports = {
 
   //Calls the editNotification function in the eventsModel file with the new values from the req
   editNotification: function(req, res) {
-    db.editNotification(req.body, req.params.id, function(){
+    db.editNotification(req.body, req.params.id, function() {
       res.end();
     });
   },
@@ -275,7 +287,6 @@ module.exports = {
       db.changeSubscriberCount(event_id, 1, function() {
         res.end();
       });
-      //res.end();
     });
   },
 
@@ -288,8 +299,6 @@ module.exports = {
       db.changeSubscriberCount(event_id, -1, function() {
         res.end();
       });
-      //res.end();
     });
   }
 };
-

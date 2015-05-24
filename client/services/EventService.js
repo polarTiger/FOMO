@@ -2,7 +2,6 @@ angular.module('fomo.eventservice', [])
 
 .factory('EventService', ['$http', '$stateParams', '$log', '$state', function($http, $stateParams, $log, $state) {
   var getEvent = function(eventId) {
-    console.log('SERVICE: GET_EVENTS');
     return $http.get('api/events/event/' + eventId)
       .success(function(resp) {
         return resp;
@@ -38,11 +37,8 @@ angular.module('fomo.eventservice', [])
 
     return $http.post('/api/events/editnotification/'+$stateParams.eventID, sendObject)
       .success(function(data, status, headers, config) {
-        console.log('success update event date');
-        // $state.go('user');
       })
       .error(function(data, status, headers, config) {
-        $log.log('fail');
       });
   };
 
@@ -50,10 +46,8 @@ angular.module('fomo.eventservice', [])
 
     return $http.get('/api/events/triggerevent/', {params: {event_id: $stateParams.eventID}})
     .success(function() {
-        $log.log('successfully triggered');
     })
     .error(function() {
-      $log.log('fail');
     });
   };
 
