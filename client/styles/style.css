@@ -291,7 +291,7 @@ body {
 
 .explore2 {
   position: absolute;
-  top: calc(49% - 0px);
+  top: calc(55% - 45px);
   left: calc(50% - 235px);
   height: 150px;
   width: 225px;
