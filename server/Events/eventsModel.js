@@ -34,7 +34,7 @@ module.exports = {
     var categoryString = (searchQuery.category==="undefined" || !searchQuery.category)  ? "": escape(" AND LOWER(events.event_category) like LOWER(%L)", '%'+searchQuery.category+'%');
     var queryStart = selectColumnsFromTablesAsExcept(['events', 'notifications'], {'notifications.id':'notificationsId'});
     var queryString = queryStart + escape(" FROM events LEFT OUTER JOIN notifications ON events.id=notifications.event_id WHERE LOWER(events.event_title) "+
-                      "like LOWER(%L)" + categoryString + ";", '%'+searchQuery.query+'%' );
+                      "like LOWER(%L)", "%"+searchQuery.query+"%")+ categoryString;
     queryDB(queryString, cb);
   },
 
